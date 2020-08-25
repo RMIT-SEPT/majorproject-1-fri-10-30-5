@@ -1,33 +1,41 @@
 package com.rmit.sept.turtorial.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import com.fasterxml.jackson.annotation.*;
 import java.util.Date;
-import com.rmit.sept.turtorial.demo.model.Customer;
-
-
 
 @Entity
-public class User {
-//    @OneToOne(mappedBy = "user")
-//    private Customer customer;
+public class Customer {
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(unique = true)
+//    private User user;
+//
+//    public Customer(User user){
+//        this.user = user;
+//        this.user.setCustomer(this);
+//    }
 
     @Id
     @NotBlank(message = "Username is required")
     private String userName;
-    @NotBlank(message = "Password is required")
-    @Size(min=4, message = "Please enter at least 4 characters")
+    @Size(min=4,max =5, message = "Please enter 4 to 5 characters")
     private String password;
-    @NotBlank(message = "Usertype is required")
-    private String userType;
+    @NotBlank(message = "name is required")
+    private String name;
+    @NotBlank(message = "address is required")
+    private String address;
+    @NotBlank(message = "phone is required")
+    private String phone;
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date created_At;
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date updated_At;
 
-    public User() {
+    public Customer() {
     }
 
     public String getUserName() {
@@ -46,12 +54,28 @@ public class User {
         this.password = password;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getName() {
+        return name;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Date getCreated_At() {
@@ -80,11 +104,4 @@ public class User {
         this.updated_At = new Date();
     }
 
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
-//
-//    public Customer getCustomer() {
-//        return this.customer;
-//    }
 }

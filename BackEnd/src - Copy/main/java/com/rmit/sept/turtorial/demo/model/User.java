@@ -5,23 +5,20 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.*;
 import java.util.Date;
-import com.rmit.sept.turtorial.demo.model.Customer;
 
 
 
 @Entity
 public class User {
-//    @OneToOne(mappedBy = "user")
-//    private Customer customer;
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotBlank(message = "Username is required")
-    private String userName;
-    @NotBlank(message = "Password is required")
-    @Size(min=4, message = "Please enter at least 4 characters")
-    private String password;
-    @NotBlank(message = "Usertype is required")
-    private String userType;
+    private String name;
+    @Size(min=4,max =5, message = "Please enter 4 to 5 characters")
+    private String userID;
+    @NotBlank(message = "desc is required")
+    private String desc;
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date created_At;
     @JsonFormat(pattern ="yyyy-mm-dd")
@@ -30,28 +27,36 @@ public class User {
     public User() {
     }
 
-    public String getUserName() {
-        return userName;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getName() {
+        return name;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getBookIdentifier() {
+        return userID;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setBookIdentifier(String bookIdentifier) {
+        this.userID = bookIdentifier;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public Date getCreated_At() {
@@ -80,11 +85,5 @@ public class User {
         this.updated_At = new Date();
     }
 
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
-//
-//    public Customer getCustomer() {
-//        return this.customer;
-//    }
+
 }
