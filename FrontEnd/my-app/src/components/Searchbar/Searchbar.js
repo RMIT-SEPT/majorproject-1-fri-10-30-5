@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import './Searchbar.css'
 
 class Searchbar extends Component {
@@ -63,7 +62,7 @@ class Searchbar extends Component {
         return (
             <React.Fragment>
                 <p id='search-label'>Service Booking Availability</p>
-                <form method='get' action='' onSubmit={this.onSubmit}>
+                <form method='get' action='' onSubmit={ this.onSubmit }>
                     <input 
                     value = { this.state.service }
                     onChange= { this.onChangeService }
