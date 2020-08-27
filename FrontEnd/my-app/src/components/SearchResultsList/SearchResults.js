@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import './SearchResults.css'
 import SearchResultsItem from '../SearchResultsItem/SearchResultsItem'
 
-class SearchResults extends Component {
+class SearchResultsList extends Component {
     render() {
         return (
             <div>
@@ -21,4 +20,4 @@ class SearchResults extends Component {
     }
 }
 
-export default SearchResults;
+export default SearchResultsList;
