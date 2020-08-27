@@ -11,6 +11,7 @@ import java.util.Date;
 @Entity
 public class Employee {
     @Id
+    @NotBlank(message = "Username is required")
     private String username;
     @Size(min=4,max =5, message = "Please enter 4 to 5 characters")
     private String password;
