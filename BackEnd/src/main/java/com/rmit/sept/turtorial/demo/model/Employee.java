@@ -12,14 +12,13 @@ import java.util.Date;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String username;
     @Size(min=4,max =5, message = "Please enter 4 to 5 characters")
     private String password;
     @Size(min=2,max =20, message = "Please enter 2 to 20 characters")
     @NotBlank(message = "Admin is required")
     private String admin;
-    @NotBlank(message = "Employee first name is required")
+    @NotBlank(message = "Employee name is required")
     private String name;
     @NotBlank(message = "Address is required")
     private String address;
