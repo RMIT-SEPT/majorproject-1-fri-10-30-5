@@ -1,8 +1,7 @@
-package main.java.com.rmit.sept.turtorial.demo.web;
+package com.rmit.sept.turtorial.demo.web;
 
-import com.rmit.sept.turtorial.demo.services.BookingService;
-import main.java.com.rmit.sept.turtorial.demo.model.WorkingHours;
-import main.java.com.rmit.sept.turtorial.demo.services.WorkingHoursService;
+import com.rmit.sept.turtorial.demo.model.WorkingHours;
+import com.rmit.sept.turtorial.demo.services.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,7 @@ public class WorkingHoursController
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Working_Hours Object", HttpStatus.BAD_REQUEST);
         }
-        WorkingHours workingHours1 = wHService.addWorkingHours(workingHours);
+        WorkingHours workingHours1 = wHService.addWH(workingHours);
         return new ResponseEntity<WorkingHours>(workingHours1, HttpStatus.CREATED);
     }
 
@@ -30,7 +29,7 @@ public class WorkingHoursController
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Working_Hours Object", HttpStatus.BAD_REQUEST);
         }
-        WorkingHours workingHours1 = wHService.updateBooking(workingHours);
+        WorkingHours workingHours1 = wHService.updateWH(workingHours);
         return new ResponseEntity<WorkingHours>(workingHours1, HttpStatus.CREATED);
     }
 

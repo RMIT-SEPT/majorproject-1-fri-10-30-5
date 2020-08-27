@@ -1,7 +1,13 @@
-package main.java.com.rmit.sept.turtorial.demo.model;
+package com.rmit.sept.turtorial.demo.model;
 
 import java.util.Date;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public class WorkingHours
 {

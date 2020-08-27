@@ -1,11 +1,11 @@
-package main.java.com.rmit.sept.turtorial.demo.services;
+package com.rmit.sept.turtorial.demo.services;
 
-import main.java.com.rmit.sept.turtorial.demo.Repositories.WorkingHoursRepository;
-import main.java.com.rmit.sept.turtorial.demo.model.WorkingHours;
+import com.rmit.sept.turtorial.demo.Repositories.WorkingHoursRepository;
+import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
+
 
 @Service
 public class WorkingHoursService
