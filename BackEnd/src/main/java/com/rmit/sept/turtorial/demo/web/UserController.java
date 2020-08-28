@@ -2,7 +2,7 @@ package com.rmit.sept.turtorial.demo.web;
 
 import com.rmit.sept.turtorial.demo.model.User;
 import com.rmit.sept.turtorial.demo.services.UserService;
-import org.mindrot.jbcrypt.BCrypt;
+//import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
