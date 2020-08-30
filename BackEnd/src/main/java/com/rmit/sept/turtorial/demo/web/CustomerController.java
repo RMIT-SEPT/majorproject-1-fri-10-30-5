@@ -42,10 +42,10 @@ public class CustomerController {
     }
 
     @GetMapping("/{userName}")
-    public ResponseEntity<?> findCustomer(@Valid @PathVariable String userName, BindingResult result) {
-        if (result.hasErrors()){
-            return new ResponseEntity<String>("Invalid Customer Object", HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> findCustomer(@Valid @PathVariable String userName) {
+//        if (result.hasErrors()){
+//            return new ResponseEntity<String>("Invalid Customer Object", HttpStatus.BAD_REQUEST);
+//        }
         Customer customer1 = customerService.getCustomerByUserName(userName);
         return new ResponseEntity<Customer>(customer1, HttpStatus.CREATED);
     }
