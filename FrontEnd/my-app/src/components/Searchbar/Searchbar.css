@@ -1,0 +1,40 @@
+input {
+    height: 2em;
+    width: 15%;
+    float: left;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+#searchbar-radio {
+    float: left;
+    clear: both;
+    padding: 6px;
+    border: none;
+    margin: 8px;
+    font-size: .8em;
+}
+
+#search-label {
+    float: left;
+    margin:1em;
+}
+
+form {
+    clear: both;
+    margin: 1em;
+}
+
+button {
+    height: 2.7em;
+    float: none;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
