@@ -12,7 +12,6 @@ class WeekCalendar extends Component {
       
       // Object returned by querying
       // WorkerID + all shifts for the next 7 days
-      
       res: [{
         startTime: "13:00",
         endTime: "14:00",
@@ -31,7 +30,6 @@ class WeekCalendar extends Component {
     };
 
     this.convertData(this.state.res)
-  
   }
 
   // Convert the database result into an 
