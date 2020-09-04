@@ -9,40 +9,34 @@ class WeekCalendar extends Component {
     super();
 
     this.state = {
-      data: ['test'],
-
-      /*
-      Object returned by querying
-      WorkerID + all shifts for the next 7 days
-      */
+      
+      // Object returned by querying
+      // WorkerID + all shifts for the next 7 days
+      
       res: [{
         startTime: "13:00",
         endTime: "14:00",
-        date: "8/3/2020"
+        date: "9/9/2020"
       },
       {
         startTime: "15:00",
         endTime: "16:00",
-        date: "8/5/2020"
+        date: "9/5/2020"
       },
       {
         startTime: "14:00",
         endTime: "15:00",
-        date: "8/16/2020"
+        date: "9/11/2020"
       }]
     };
 
-    // Convert the database result into an interpretable 
-    // object for the data table
-    // console.log(this.state.res)
     this.convertData(this.state.res)
-    
   
   }
 
+  // Convert the database result into an 
+  // interpretable object for the data table
   convertData(dataSet) {
-
-    // console.log(dataSet)
 
     let newData = [];
   
@@ -57,12 +51,10 @@ class WeekCalendar extends Component {
         tmp = moment(dataSet[i]["date"]).format("D/M/YYYY").substr(0,3);
       }
   
-      newData.push(tmp);
+      newData.push({[tmp]: moment(dataSet[i]["startTime"], "HH:mm").format("h:mm A")});
     }
-  
-    // console.log(newData)
-    this.setState({data: newData})
-    
+
+    this.state.data = newData
   };
 
   render() {
@@ -72,20 +64,18 @@ class WeekCalendar extends Component {
     const columns = [
       {
         name: "Today",
-        selector: String(moment().date() + 0 + "/" + moment().month()),
+        selector: String(moment().date() + "/" + (moment().month()+1)),
         sortable: false,
       },
     ];
 
     for(let i = 1; i < 8; i++) {
       columns.push({
-        name: moment().date() + i + "/" + moment().month(),
-        selector: String(moment().date() + i + "/" + moment().month()),
+        name: moment().date() + i + "/" + (moment().month()+1),
+        selector: String(moment().date() + i + "/" + (moment().month()+1)),
         sortable: false,
       },);
     }
-
-    console.log(this.state.data)
 
     return (
       <DataTable
