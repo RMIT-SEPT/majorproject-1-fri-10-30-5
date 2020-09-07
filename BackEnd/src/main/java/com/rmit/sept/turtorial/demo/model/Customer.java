@@ -26,7 +26,7 @@ public class Customer {
     @Min(value=4,message = "Please enter at least 4 characters")
     private String userName;
     @NotBlank(message = "Password is required")
-    @Size(min=4,max =8, message = "Please enter 4 to 8 characters")
+    @Size(min=4,max =25, message = "Please enter 4 to 25 characters")
     private String password;
     @Pattern(regexp = "^[a-zA-Z]*$", message = "Please enter only alphabetical characters")
     @NotBlank(message = "Name is required")

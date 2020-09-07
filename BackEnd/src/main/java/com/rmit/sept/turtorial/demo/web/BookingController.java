@@ -2,6 +2,7 @@ package com.rmit.sept.turtorial.demo.web;
 
 import com.rmit.sept.turtorial.demo.model.Booking;
 import com.rmit.sept.turtorial.demo.model.Customer;
+import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import com.rmit.sept.turtorial.demo.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/booking")
 public class BookingController {
@@ -37,11 +40,20 @@ public class BookingController {
     }
 
     @GetMapping("/{custID}")
-    public ResponseEntity<?> findCustomer(@Valid @PathVariable String custID, BindingResult result) {
-        if (result.hasErrors()){
-            return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> findCustomer(@Valid @PathVariable String custID) {
+//        if (result.hasErrors()){
+//            return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
+//        }
         Booking booking1 = bookingService.getBookingByCustomerUserName(custID);
         return new ResponseEntity<Booking>(booking1, HttpStatus.CREATED);
+    }
+
+    @GetMapping("list/{custID}")
+    public ResponseEntity<?> findAllByEmployee(@Valid @PathVariable String custID) {
+//        if (result.hasErrors()){
+//            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
+//        }
+        List<Booking> bookings = bookingService.findAllBookingsByCustID(custID);
+        return new ResponseEntity<List<Booking>>(bookings, HttpStatus.CREATED);
     }
 }
