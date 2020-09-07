@@ -3,7 +3,9 @@ package com.rmit.sept.turtorial.demo.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -21,14 +23,19 @@ public class Customer {
 
     @Id
     @NotBlank(message = "Username is required")
+    @Min(value=4,message = "Please enter at least 4 characters")
     private String userName;
-    @Size(min=4,max =5, message = "Please enter 4 to 5 characters")
+    @NotBlank(message = "Password is required")
+    @Size(min=4,max =8, message = "Please enter 4 to 8 characters")
     private String password;
-    @NotBlank(message = "name is required")
+    @Pattern(regexp = "^[a-zA-Z]*$", message = "Please enter only alphabetical characters")
+    @NotBlank(message = "Name is required")
     private String name;
-    @NotBlank(message = "address is required")
+    @NotBlank(message = "Address is required")
     private String address;
-    @NotBlank(message = "phone is required")
+    @NotBlank(message = "Phone is required")
+    @Pattern(regexp = "^[0-9]*$", message = "Please enter only numerical characters")
+    @Size(min=10,max =10, message = "Please enter a 10 digit number")
     private String phone;
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date created_At;
