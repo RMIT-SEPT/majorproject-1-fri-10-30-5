@@ -1,8 +1,8 @@
 import React from "react";
 import SearchPageButton from './SearchPage/SearchPageButton';
-import ProfileButton from './Profile/ProfileButton';
-import PastBookingsButton from './Bookings/PastBookingsButton';
-import UpcomingBookingsButton from './Bookings/UpcomingBookingsButton';
+import ProfileButton from '../components/Profile/ProfileButton';
+import PastBookingsButton from '../components/Bookings/PastBookingsButton';
+import UpcomingBookingsButton from '../components/Bookings/UpcomingBookingsButton';
 import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";

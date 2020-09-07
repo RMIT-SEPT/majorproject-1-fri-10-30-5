@@ -1,22 +1,46 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import '../../css/Form.css'
+import PropTypes from 'prop-types';
 
-class RegisterForm extends Component {
+class ProfileEditPage extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props)
 
         this.state = {
-            //customerDetails: []
+            uname: 'cust5',
+            profile: {
             fname: '',
             lname:'',
+            name:'',
             address:'',
             phone:'',
-            uname:'',
-            pw:''
-        };
-    }
+            userName:'',
+            password:'',
+            status:'',
+            data: {}
+            }
+        }
+      }
+      
+      componentDidMount(){
+        // const authorization = "Some Name" + cookie.load('token').replace("JWT","")
+          const uname = this.state.uname
+          const url = 'http://localhost:8080/api/customer/' + uname
+          axios.get(url, {
+            
+            // headers: { 'Authorization': authorization }
+          })
+          .then(res => {
+            this.setState({
+              profile: res.data
+            })
+          })
+          .catch((error) => {
+            console.log("error",error)
+          })
+      }
 
     mySubmitHandler = event => {
         event.preventDefault();
@@ -32,7 +56,7 @@ class RegisterForm extends Component {
         }
         console.log(customer);
     
-        axios.post('http://localhost:8080/api/customer/add', 
+        axios.put('http://localhost:8080/api/customer/update', 
             customer
           )
           .then(res => //showOutput(res))
@@ -42,42 +66,37 @@ class RegisterForm extends Component {
     }
     
     myChangeHandler = event => {
-        this.setState({[event.target.name]: event.target.value})
+        this.setState({profile: {[event.target.name]: event.target.value}})
     };
 
     render() {
         return (
             <div id="register_form">
-                <h1>Register New Customer Form</h1>
+                <h1>Update Details Form</h1>
                 <form onSubmit={this.mySubmitHandler}>
                     <div className='form-group'>
-                    <label htmlFor="fname">First Name:</label>
-                    <input name="fname" type='text' onChange={this.myChangeHandler} value={this.state.fname}/>
-                    </div>
-                    <br></br>
-                    <div className='form-group'>
-                    <label htmlFor="lname">Last Name</label>
-                    <input name="lname" type='text' onChange={this.myChangeHandler} value={this.state.lname}/>
+                    <label htmlFor="name">Name</label>
+                    <input name="name" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.name}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
                     <label htmlFor="address">Address</label>
-                    <input name="address" type='text' onChange={this.myChangeHandler} value={this.state.address}/>
+                    <input name="address" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.address}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
                     <label htmlFor="phone">Phone</label>
-                    <input name="phone" type='Phone' onChange={this.myChangeHandler} value={this.state.phone}/>
+                    <input name="phone" type='Phone' onChange={this.myChangeHandler} placeholder={this.state.profile.phone}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
                     <label htmlFor="uname">Username</label>
-                    <input name="uname" type='text' onChange={this.myChangeHandler} value={this.state.uname}/>
+                    <input name="uname" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.userName}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
                     <label htmlFor="pw">Password</label>
-                    <input name="pw" type='password' onChange={this.myChangeHandler} value={this.state.pw}/>
+                    <input name="pw" type='password' onChange={this.myChangeHandler} placeholder={this.state.profile.password}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
@@ -95,4 +114,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default RegisterForm;
+export default ProfileEditPage;

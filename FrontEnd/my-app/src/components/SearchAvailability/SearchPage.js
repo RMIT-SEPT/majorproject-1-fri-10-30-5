@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ResultsList from '../ResultsList/ResultsList'
+import ResultsList from './ResultsList'
 
 class SearchPage extends Component {
 
