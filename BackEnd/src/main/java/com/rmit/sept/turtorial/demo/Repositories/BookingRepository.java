@@ -1,10 +1,8 @@
 package com.rmit.sept.turtorial.demo.Repositories;
 
 import com.rmit.sept.turtorial.demo.model.Booking;
-import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

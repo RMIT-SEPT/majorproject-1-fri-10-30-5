@@ -1,8 +1,6 @@
 package com.rmit.sept.turtorial.demo.web;
 
 import com.rmit.sept.turtorial.demo.model.Booking;
-import com.rmit.sept.turtorial.demo.model.Customer;
-import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import com.rmit.sept.turtorial.demo.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
