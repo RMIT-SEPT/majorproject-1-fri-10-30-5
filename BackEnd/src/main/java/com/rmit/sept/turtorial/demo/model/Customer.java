@@ -22,7 +22,7 @@ public class Customer {
     @Id
     @NotBlank(message = "Username is required")
     private String userName;
-    @Size(min=4,max =5, message = "Please enter 4 to 5 characters")
+    @Size(min=4,max =25, message = "Please enter 4 to 5 characters")
     private String password;
     @NotBlank(message = "name is required")
     private String name;

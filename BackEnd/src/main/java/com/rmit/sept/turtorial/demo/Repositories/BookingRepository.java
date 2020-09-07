@@ -1,6 +1,7 @@
 package com.rmit.sept.turtorial.demo.Repositories;
 
 import com.rmit.sept.turtorial.demo.model.Booking;
+import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,6 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
     Iterable<Booking> findAllById(Iterable<Long> iterable);
 
     Booking findBookingByCustIDEquals(String custID);
+
+    List<Booking> findAllByCustIDEquals(String custID);
 }
