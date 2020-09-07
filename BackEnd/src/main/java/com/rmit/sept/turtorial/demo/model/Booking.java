@@ -18,12 +18,10 @@ public class Booking {
     @NotBlank(message = "empID is required")
     @Size(min=1,max =25, message = "Please enter 1 to 25 characters")
     private String empID;
-    @NotBlank(message = "Booking time is required")
-    @Pattern(regexp = "^[0-9]*$", message = "Please enter only numerical characters")
     @Min(value=0000, message="must be at least 0000")
     @Max(value=2399, message="must be less than 2400")
     private int bookingTime;
-    @Future
+   // @Future
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date bookingDate;
     @JsonFormat(pattern ="yyyy-mm-dd")

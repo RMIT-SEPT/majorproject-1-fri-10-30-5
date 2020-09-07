@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -76,7 +75,7 @@ public class WorkingHoursController
     }
 
     @GetMapping("list/{empID}/{service}/{date}")
-    public ResponseEntity<?> findTimesByEIDAndServiceAndDateTime(@Valid @PathVariable String empID, @PathVariable String service, @PathVariable String date){
+    public ResponseEntity<?> findTimesByEIDAndServiceAndDate(@Valid @PathVariable String empID, @PathVariable String service, @PathVariable String date){
 //        if (result.hasErrors()){
 //            return new ResponseEntity<String>("Invalid Service Object", HttpStatus.BAD_REQUEST);
 //        }

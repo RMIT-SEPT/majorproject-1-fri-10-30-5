@@ -3,10 +3,8 @@ package com.rmit.sept.turtorial.demo.services;
 
 import com.rmit.sept.turtorial.demo.Repositories.BookingRepository;
 import com.rmit.sept.turtorial.demo.model.Booking;
-import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 
