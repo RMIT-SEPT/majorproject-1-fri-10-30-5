@@ -3,7 +3,9 @@ package com.rmit.sept.turtorial.demo.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -12,17 +14,21 @@ import java.util.Date;
 public class Employee {
     @Id
     @NotBlank(message = "Username is required")
-    private String username;
-    @Size(min=4,max =5, message = "Please enter 4 to 5 characters")
+    private String userName;
+    @NotBlank(message = "Password is required")
+    @Size(min=4,max =25, message = "Please enter 4 to 25 characters")
     private String password;
     @Size(min=2,max =20, message = "Please enter 2 to 20 characters")
     @NotBlank(message = "Admin is required")
     private String admin;
+    @Pattern(regexp = "^[a-zA-Z]*$", message = "Please enter only alphabetical characters")
     @NotBlank(message = "Employee name is required")
     private String name;
     @NotBlank(message = "Address is required")
     private String address;
     @NotBlank(message = "Phone is required")
+    @Pattern(regexp = "^[0-9]*$", message = "Please enter only numerical characters")
+    @Size(min=10,max =10, message = "Please enter a 10 digit number")
     private String phone;
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date created_At;
@@ -31,9 +37,9 @@ public class Employee {
     public Employee() {
     }
 
-    public String getUserName() { return username; }
+    public String getUserName() { return userName; }
 
-    public void setUserName(String username) {this.username = username; }
+    public void setUserName(String username) {this.userName = username; }
 
     public String getAdmin() { return admin; }
 

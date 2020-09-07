@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PastBookingsButton from './Bookings/PastBookingsButton';
 import UpcomingBookingsButton from './Bookings/UpcomingBookingsButton';
 import ProfileButton from './Profile/ProfileButton';
-import SearchPageButton from './SearchPage/SearchPageButton';
+import SearchPageButton from './SearchAvailability/SearchPageButton';
 
 class Dashboard extends Component {
     render() {

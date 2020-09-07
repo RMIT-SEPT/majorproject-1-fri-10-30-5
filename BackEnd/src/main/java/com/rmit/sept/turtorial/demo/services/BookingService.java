@@ -5,8 +5,8 @@ import com.rmit.sept.turtorial.demo.Repositories.BookingRepository;
 import com.rmit.sept.turtorial.demo.model.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BookingService {
@@ -25,6 +25,13 @@ public class BookingService {
 
         //logic
         return bookingRepository.findBookingByCustIDEquals(userName);
+    }
+
+    //get all bookings by custID
+    public List<Booking> findAllBookingsByCustID(String custID) {
+
+        //logic
+        return bookingRepository.findAllByCustIDEquals(custID);
     }
 
     //put services

@@ -1,5 +1,5 @@
 import React from "react";
-import SearchPageButton from './SearchPage/SearchPageButton';
+import SearchPageButton from '../components/SearchAvailability/SearchPageButton';
 import ProfileButton from '../components/Profile/ProfileButton';
 import PastBookingsButton from '../components/Bookings/PastBookingsButton';
 import UpcomingBookingsButton from '../components/Bookings/UpcomingBookingsButton';

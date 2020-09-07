@@ -3,10 +3,7 @@ package com.rmit.sept.turtorial.demo.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -24,6 +21,7 @@ public class Booking {
     @Min(value=0000, message="must be at least 0000")
     @Max(value=2399, message="must be less than 2400")
     private int bookingTime;
+   // @Future
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date bookingDate;
     @JsonFormat(pattern ="yyyy-mm-dd")
