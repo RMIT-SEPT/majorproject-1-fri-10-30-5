@@ -6,7 +6,7 @@ import {link, Link} from "react-router-dom";
         <React.Fragment>
         <Link to="profile/edit"
         className="btn btn-lg btn-info">
-        Edit details
+        Edit Details
         </Link>
         </React.Fragment>
     )

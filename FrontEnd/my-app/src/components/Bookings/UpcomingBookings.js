@@ -11,33 +11,19 @@ export default class UpcomingBookings extends Component {
             <div>
             <h5 className="display-4 text-center">Upcoming Bookings</h5>  
             {              
-                bookings.map((booking) => {
+                bookings.map((bookings) => {
                     return (
-                        <table>                              
-                            <tr>
-                                <th>Employee ID:</th>
-                                    <td>{booking.empID}</td>                                                         
-                             </tr>
-                            <tr>
-                                <th>Date:</th>
-                                <td>{booking.date}</td>
-                            </tr>
-                            <tr>
-                                <th>Time:</th>
-                                <td>{booking.time}</td>
- 
-                            </tr>
-                            <tr>
-                                <th>Service ID:</th>
-                                <td>{booking.serviceID}</td>
-     
-                            </tr>
-                            <tr>
-                                <th>Satus:</th>
-                                <td>{booking.status}</td>
-                            </tr>
-                            <hr/>
-                      </table>
+                        <ul> 
+                            <li>
+                                <p id = 'empID'><b>Employee ID: </b>{bookings.empID}</p>
+                                <p id='serviceID'><b>Service ID: </b>{bookings.serviceID}</p>
+                                <p id='date'><b>Date: </b>{bookings.date}</p>
+                                <p id='time'><b>Time:</b>{bookings.time}</p>
+                                <p id='status'><b>Status: </b>{bookings.status}</p>
+                            </li>
+                            <br/>
+                        </ul>
+
                     );
                 })
             }

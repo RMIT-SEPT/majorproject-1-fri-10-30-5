@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
-import PropTypes from 'prop-types';
 import Profile from './Profile'
-
-const custDetails = [{"userName":"jsmith", "password" : "123456", "name" : "John Smith", 
-    "address" : "22 Bay St.", "phone" : "88881", "created_At": "25/08/20", "updated_At" : "null"}]; 
 
 class ProfilePage extends Component {
 
@@ -49,20 +45,12 @@ class ProfilePage extends Component {
         return (
             <div id="profile_page">
             {
-                // this.customer.map((c) => {
-                // return(
                     <Profile
-                    // username={c.userName}
-                    // name={c.name}
-                    // address={c.address}
-                    // phone={c.phone}
                     username={this.state.profile.userName}
                     name={this.state.profile.name}
                     address={this.state.profile.address}
                     phone={this.state.profile.phone}
                     />
-                // );
-                // })
             }
             </div>            
         );
