@@ -14,7 +14,7 @@ public class WorkingHours
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long shift_No;
+    private Long shiftNo;
     @NotBlank(message = "empID is required")
     @Size(min=1,max =25, message = "Please enter 1 to 25 characters")
     private String empID;
@@ -35,9 +35,9 @@ public class WorkingHours
 
     public WorkingHours(){}
 
-    public Long getShift_No() { return shift_No;}
+    public Long getShift_No() { return shiftNo;}
 
-    public void setShift_No(Long shift_No) { this.shift_No = shift_No;}
+    public void setShift_No(Long shift_No) { this.shiftNo = shift_No;}
 
     public String getEmpID() { return empID; }
 
