@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     
-    working_directory: ~/RMIT-SEPT/majorproject-1-fri-10-30-5/BackEnd
+    working_directory: ~/majorproject-1-fri-10-30-5/BackEnd
 
     docker:
       - image: circleci/openjdk:8-jdk-stretch
@@ -14,17 +14,17 @@ jobs:
     steps:
 
       - checkout:
-            path: ~/RMIT-SEPT
+            path: ~/majorproject-1-fri-10-30-5
 
       - restore_cache:
-          key: RMIT-SEPT--majorproject-1-fri-10-30-5-BackEnd-{{ checksum "pom.xml" }}
+          key: majorproject-1-fri-10-30-5-BackEnd-{{ checksum "pom.xml" }}
       
       - run: mvn dependency:go-offline
       
       - save_cache:
           paths:
             - ~/.m2
-          key: RMIT-SEPT--majorproject-1-fri-10-30-5-BackEnd-{{ checksum "pom.xml" }}
+          key: majorproject-1-fri-10-30-5-BackEnd-{{ checksum "pom.xml" }}
       
       - run: mvn package
       
