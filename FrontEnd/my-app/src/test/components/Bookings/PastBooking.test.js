@@ -2,7 +2,7 @@ import React from "react";
 import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import PastBooking from '../../../src/components/Bookings/PastBookings.js';
+import PastBooking from '../../../components/Bookings/PastBookings.js';
 
 Enzyme.configure({adapter: new Adapter()});
 

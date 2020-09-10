@@ -3,15 +3,15 @@ import {shallow} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import Searchbar from '../components/SearchAvailability/Searchbar'
+import Homepage from '../../../components/Homepage/Homepage'
 
 Enzyme.configure({adapter: new Adapter()});
 
 
-describe('Render <Searchbar /> component', () => {
+describe('Render <Homepage /> component', () => {
   
-    it("Should render a single <Searchbar /> component", ()=>{
-        const component = shallow(<Searchbar />);
+    it("Should render a single <Homepage /> component", ()=>{
+        const component = shallow(<Homepage />);
         expect(component).toHaveLength(1);
     });
 })
