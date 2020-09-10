@@ -1,6 +1,6 @@
 import React from "react";
 import {shallow, mount} from "enzyme";
-import ResultsItem from '../components/SearchAvailability/ResultsItem'
+import ResultsItem from '../../../components/SearchAvailability/ResultsItem'
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 

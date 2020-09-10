@@ -1,9 +1,9 @@
 import React from "react";
-import SearchPageButton from '../components/SearchAvailability/SearchPageButton';
-import ProfileButton from '../components/Profile/ProfileButton';
-import PastBookingsButton from '../components/Bookings/PastBookingsButton';
-import UpcomingBookingsButton from '../components/Bookings/UpcomingBookingsButton';
-import Dashboard from '../components/Dashboard';
+import SearchPageButton from '../../components/SearchAvailability/SearchPageButton';
+import ProfileButton from '../../components/Profile/ProfileButton';
+import PastBookingsButton from '../../components/Bookings/PastBookingsButton';
+import UpcomingBookingsButton from '../../components/Bookings/UpcomingBookingsButton';
+import Dashboard from '../../components/Dashboard';
 import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";

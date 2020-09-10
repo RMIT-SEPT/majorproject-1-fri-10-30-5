@@ -8,7 +8,7 @@ class ProfilePage extends Component {
         super(props)
 
         this.state = {
-            uname:'cust5',
+            uname:'cus6',
             profile: {
             fname: '',
             lname:'',

@@ -7,7 +7,8 @@ import SearchPage from './components/SearchAvailability/SearchPage';
 import Dashboard from './components/Dashboard';
 import Header from './components/Layout/Header';
 import PastBookings from './components/Bookings/PastBookings';
-import Profile from "./components/Profile/Profile";
+import Profile from "./components/Profile/ProfilePage";
+import ProfileEdit from "./components/Profile/ProfileEditPage";
 import UpcomingBookings from "./components/Bookings/UpcomingBookings";
 import {Provider} from "react-redux";
 import store from './store';
@@ -25,7 +26,8 @@ function App() {
         <Header/>
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/pastBookings" component={PastBookings} />
-        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/profile/:id" component={Profile} />
+        <Route exact path="/profile/:id/edit" component={ProfileEdit} />
         <Route exact path="/upcomingBookings" component = {UpcomingBookings} />
         <Route exact path="/search" component={ Searchbar } />
         <Route exact path="/searchResults" component={ SearchPage } />
@@ -42,4 +44,3 @@ function App() {
 }
 
 export default App;
- 

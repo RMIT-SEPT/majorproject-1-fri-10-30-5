@@ -2,8 +2,8 @@ import React from "react";
 import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Profile from '../components/Profile/Profile';
-import ProfileEditButton from "../components/Profile/ProfileEditButton";
+import Profile from '../../../components/Profile/Profile';
+import ProfileEditButton from "../../../components/Profile/ProfileEditButton";
 
 Enzyme.configure({adapter: new Adapter()});
 
