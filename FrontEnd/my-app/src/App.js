@@ -14,6 +14,8 @@ import store from './store';
 import Login from './components/Login/LoginForm';
 import Register from './components/Register/RegisterForm';
 import Homepage from './components/Homepage/Homepage'
+import WorkerPage from './components/Worker/WorkerPage'
+import WorkerBooking from './components/Bookings/WorkerBooking'
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route exact path="/upcomingBookings" component = {UpcomingBookings} />
         <Route exact path="/search" component={ Searchbar } />
         <Route exact path="/searchResults" component={ SearchPage } />
+        <Route exact path="/worker" component={WorkerPage} />
+        <Route exact path="/workerBooking" component={WorkerBooking} />
 
         <Route exact path="/homepage" component={Homepage} />
         <Route exact path="/login" component={Login} />
