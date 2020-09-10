@@ -1,0 +1,10 @@
+form {
+    clear: both;
+    margin: 1em;
+}
+
+input {
+    margin-left: 20px;
+    float: none;
+    border: inset;
+}
