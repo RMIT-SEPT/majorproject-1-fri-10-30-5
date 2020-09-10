@@ -67,6 +67,9 @@ class WeekCalendar extends Component {
       bookingTime: this.state.time,
       bookingDate: this.state.date,
       created_at: moment().format("yyyy-MM-DD"),
+      updated_at: moment().format("yyyy-MM-DD"),
+      bookingStatus: ""
+
     }
 
     console.log(booking);
