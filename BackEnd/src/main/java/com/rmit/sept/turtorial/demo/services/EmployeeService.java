@@ -39,7 +39,8 @@ public class EmployeeService {
         Employee employee1 = employeeRepository.findById(employee.getUserName()).orElse(null);
 
         if (employee1 != null) {
-            employee1.setName(employee.getName());
+            employee1.setFirstName(employee.getFirstName());
+            employee1.setLastName(employee.getLastName());
             employee1.setPassword(employee.getPassword());
             employee1.setPhone(employee.getPhone());
             employee1.setAdmin(employee.getAdmin());

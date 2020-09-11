@@ -21,13 +21,16 @@ public class Employee {
     @Size(min=2,max =20, message = "Please enter 2 to 20 characters")
     @NotBlank(message = "Admin is required")
     private String admin;
-    @Pattern(regexp = "^[a-zA-Z]*$", message = "Please enter only alphabetical characters")
-    @NotBlank(message = "Employee name is required")
-    private String name;
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+    @NotBlank(message = "First name is required")
+    private String firstName;
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+    @NotBlank(message = "Last name is required")
+    private String lastName;
     @NotBlank(message = "Address is required")
     private String address;
     @NotBlank(message = "Phone is required")
-    @Pattern(regexp = "^[0-9]*$", message = "Please enter only numerical characters")
+    @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters")
     @Size(min=10,max =10, message = "Please enter a 10 digit number")
     private String phone;
     @JsonFormat(pattern ="yyyy-mm-dd")
@@ -45,13 +48,13 @@ public class Employee {
 
     public void setAdmin(String admin) { this.admin = admin; }
 
-    public String getName() {
-        return name;
-    }
+    public String getFirstName() { return firstName; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
     public String getPassword() { return password; }
 

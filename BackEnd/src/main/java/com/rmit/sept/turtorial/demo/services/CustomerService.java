@@ -36,7 +36,8 @@ public class CustomerService {
     public Customer updateCustomer(Customer customer) {
         Customer customer1 = customerRepository.findById(customer.getUserName()).orElse(null);
         if (customer1 != null){
-            customer1.setName(customer.getName());
+            customer1.setFirstName(customer.getFirstName());
+            customer1.setLastName(customer.getLastName());
             customer1.setPassword(customer.getPassword());
             customer1.setPhone(customer.getPhone());
             customer1.setAddress(customer.getAddress());

@@ -27,13 +27,16 @@ public class Customer {
     @NotBlank(message = "Password is required")
     @Size(min=4,max =25, message = "Please enter 4 to 25 characters")
     private String password;
-//    @Pattern(regexp = "^[a-zA-Z]*$", message = "Please enter only alphabetical characters")
-    @NotBlank(message = "Name is required")
-    private String name;
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+    @NotBlank(message = "First name is required")
+    private String firstName;
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+    @NotBlank(message = "Last name is required")
+    private String lastName;
     @NotBlank(message = "Address is required")
     private String address;
     @NotBlank(message = "Phone is required")
-    @Pattern(regexp = "^[0-9]*$", message = "Please enter only numerical characters")
+    @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters")
     @Size(min=10,max =10, message = "Please enter a 10 digit number")
     private String phone;
     @JsonFormat(pattern ="yyyy-mm-dd")
@@ -60,14 +63,15 @@ public class Customer {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getFirstName() { return firstName; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
     public String getAddress() {
         return address;
     }

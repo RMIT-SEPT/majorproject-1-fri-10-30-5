@@ -54,6 +54,6 @@ public class AdminControllerTest {
         mvc.perform(post("/api/admin/add/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(admin1)))
                 .andExpect(status().isCreated());
-        //  .andExpect(jsonPath("$.username",is(admin1.getUserName())));
+                //.andExpect(jsonPath("$.userName",is(admin1.getUserName())));
     }
 }

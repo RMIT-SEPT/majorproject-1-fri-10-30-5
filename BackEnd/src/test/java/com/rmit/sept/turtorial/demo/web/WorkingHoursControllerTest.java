@@ -22,8 +22,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
-//shorthand for springJunit4 class runner
+//needed for springboot features in junit
 @RunWith(SpringRunner.class)
+//auto configures mockmvc
 @WebMvcTest(WorkingHoursController.class)
 public class WorkingHoursControllerTest {
 
@@ -42,12 +43,13 @@ public class WorkingHoursControllerTest {
 
     @Test
     public void givenWorkingHours_whenPostWorkingHours_thenSuccessfullyPost() throws Exception {
+       //mocks the data from user
         WorkingHours workHour = new WorkingHours(0L, "1",1200,1600,"2020-12-12","Hair");
-
+        //mock https request
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
                 .andExpect(status().isCreated());
-        //      .andExpect(jsonPath("$.shiftNo",is(workHour.getShift_No())));
+       //         .andExpect(MockMvcResultMatchers.jsonPath("$.shiftNo").exists());
     }
 
     @Test
@@ -56,8 +58,8 @@ public class WorkingHoursControllerTest {
         String nullWork = "Invalid Working_Hours Object";
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
-                .andExpect(jsonPath("$",is(nullWork)));
-        //      .andExpect(status().isCreated())
+                .andExpect(jsonPath("$",is(nullWork)))
+                .andExpect(status().isBadRequest());
     }
 
 
@@ -70,8 +72,10 @@ public class WorkingHoursControllerTest {
 
         mvc.perform(get("/api/workinghours/list/{empID}","1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$",hasSize(1)))
-                .andExpect(jsonPath("$[0].empID",is(workHour.getEmpID())));
-        //      .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].empID",is(workHour.getEmpID())))
+                .andExpect(jsonPath("$[0].startTime",is(workHour.getStartTime())))
+                .andExpect(jsonPath("$[0].workDate",is(workHour.getWorkDate())))
+                .andExpect(status().isCreated());
     }
 
 
