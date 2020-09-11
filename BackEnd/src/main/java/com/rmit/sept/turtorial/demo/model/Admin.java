@@ -2,24 +2,17 @@ package com.rmit.sept.turtorial.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class Customer {
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(unique = true)
-//    private User user;
-//
-//    public Customer(User user){
-//        this.user = user;
-//        this.user.setCustomer(this);
-//    }
+public class Admin {
 
     @Id
     @NotBlank(message = "Username is required")
@@ -27,7 +20,7 @@ public class Customer {
     @NotBlank(message = "Password is required")
     @Size(min=4,max =25, message = "Please enter 4 to 25 characters")
     private String password;
-    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+    @Pattern(regexp = "^[a-zA-Z]*$", message = "Please enter only alphabetical characters")
     @NotBlank(message = "Name is required")
     private String name;
     @NotBlank(message = "Address is required")
@@ -41,7 +34,19 @@ public class Customer {
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date updated_At;
 
-    public Customer() {
+    public Admin() {
+    }
+
+    public Admin(@NotBlank(message = "Username is required") String userName, @NotBlank(message = "Password is required")
+    @Size(min = 4, max = 25, message = "Please enter 4 to 25 characters") String password, @Pattern(regexp = "^[a-zA-Z]*$",
+            message = "Please enter only alphabetical characters") @NotBlank(message = "Name is required") String name,
+                 @NotBlank(message = "Address is required") String address, @NotBlank(message = "Phone is required")
+                 @Pattern(regexp = "^[0-9]*$", message = "Please enter only numerical characters") @Size(min = 10, max = 10, message = "Please enter a 10 digit number") String phone) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
     }
 
     public String getUserName() {
