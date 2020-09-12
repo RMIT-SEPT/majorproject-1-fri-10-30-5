@@ -49,7 +49,7 @@ public class AdminControllerTest {
 
     @Test
     public void addAdmin() throws Exception {
-        Admin admin1 = new Admin("username","password","name","address","0123456789");
+        Admin admin1 = new Admin("admin304","password","Admin","AdminLast","13 Fitz Street","0123456789");
 
         mvc.perform(post("/api/admin/add/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(admin1)))

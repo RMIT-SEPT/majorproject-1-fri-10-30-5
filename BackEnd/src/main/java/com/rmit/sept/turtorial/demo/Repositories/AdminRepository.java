@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdminRepository extends CrudRepository<Admin, String> {
 
-    Admin findAdminByName(String name);
+    Admin findAdminByFirstName(String firstName);
+    Admin findAdminByLastName(String lastName);
 
 }

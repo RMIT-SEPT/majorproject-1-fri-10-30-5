@@ -37,7 +37,8 @@ public class AdminService {
     public Admin updateAdmin(Admin admin) {
         Admin admin1 = adminRepository.findById(admin.getUserName()).orElse(null);
         if (admin1 != null){
-            admin1.setName(admin.getName());
+            admin1.setFirstName(admin.getFirstName());
+            admin1.setLastName(admin.getLastName());
             admin1.setPassword(admin.getPassword());
             admin1.setPhone(admin.getPhone());
             admin1.setAddress(admin.getAddress());
