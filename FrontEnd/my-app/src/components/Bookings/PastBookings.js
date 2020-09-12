@@ -5,7 +5,6 @@ const bookings =[{"custID":"1", "empID":"1", "date":"21/01/19", "time":"1100 hrs
     {"custID":"1", "empID":"1", "date":"03/06/20", "time":"1500 hrs", "serviceID":"3", "status": "Completed"}];
 
 
-
 export default class PastBookings extends Component {
     render() {
         return (
@@ -14,30 +13,16 @@ export default class PastBookings extends Component {
             {              
                 bookings.map((booking) => {
                     return (
-                        <table>                              
-                            <tr>
-                                <th>Employee ID:</th>
-                                    <td>{booking.empID}</td>                                                         
-                             </tr>
-                            <tr>
-                                <th>Date:</th>
-                                <td>{booking.date}</td>
-                            </tr>
-                            <tr>
-                                <th>Time:</th>
-                                <td>{booking.time}</td>
-                            </tr>
-                            <tr>
-                                <th>Service ID:</th>
-                                <td>{booking.serviceID}</td>
-     
-                            </tr>
-                            <tr>
-                                <th>Satus:</th>
-                                <td>{booking.status}</td>
-                            </tr>
-                            <hr/>
-                      </table>
+                        <ul> 
+                            <li>
+                                <p id = 'empID'><b>Employee ID: </b>{booking.empID}</p>
+                                <p id='serviceID'><b>Service ID: </b>{booking.serviceID}</p>
+                                <p id='date'><b>Date: </b>{booking.date}</p>
+                                <p id='time'><b>Time:</b>{booking.time}</p>
+                                <p id='status'><b>Status: </b>{booking.status}</p>
+                            </li>
+                            <br/>
+                        </ul>
                     );
                 })
             }

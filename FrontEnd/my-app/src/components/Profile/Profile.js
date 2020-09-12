@@ -1,41 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import ProfileEditButton from './ProfileEditButton';
 
-const custDetails = [{"userName":"jsmith", "password" : "123456", "name" : "John Smith", 
-    "address" : "22 Bay St.", "phone" : "88881", "created_At": "25/08/20", "updated_At" : "null"}]; 
+const Profile = (props) => {
+  return (
+    <div>
+      <h1>Profile for {props.username}</h1>
+      <hr/>
+      <ul >
+        <li key="name">Name: {props.name}</li>
+        <li key="phone">Phone: {props.phone}</li>
+        <li key="address">Address: {props.address}</li>
+      </ul>
+      <hr/>
+      <br />
+      <ProfileEditButton />
+      <br />
+    </div>
+  )
+};
 
-class Profile extends Component {
-    render() {
-        return (
-            <div>
-            <h5 className="display-4 text-center">Profile</h5>                
-                {
-                    custDetails.map((c) => {
-                        return (
-                            <table>                              
-                                <tr>
-                                    <th>Username:</th>
-                                    <td>{c.userName}</td>
-                                </tr>
-                                <tr>
-                                    <th>Name:</th>
-                                    <td>{c.name}</td>
-                                </tr>
-                                <tr>
-                                    <th>Address:</th>
-                                    <td>{c.address}</td>
-                                </tr>
-                                <tr>
-                                    <th>Phone:</th>
-                                    <td>{c.userName}</td>
-                                </tr>
-                          </table>
-
-                        );
-                    })
-                }
-            </div>
-        );
-    }
-}
+Profile.propTypes = {
+  username: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired
+};
 
 export default Profile;
