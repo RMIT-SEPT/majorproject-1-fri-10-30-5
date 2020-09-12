@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, String> {
 
-    Customer findCustomerByName(String name);
+    Customer findCustomerByFirstName(String firstName);
+    Customer findCustomerByLastName(String LastName);
 
 }
