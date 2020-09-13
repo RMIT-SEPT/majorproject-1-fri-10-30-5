@@ -14,11 +14,20 @@ public class BookingService {
     private BookingRepository bookingRepository;
 
     //post services
-    public Booking addBooking(Booking booking) {
-
-        //logic
+    public Booking addBooking(Booking booking){
+    //logic
+        List<Booking>bookings=bookingRepository.findAllByCustIDEquals(booking.getCustID());
+        if(!bookings.isEmpty()){
+            for(Booking prevBooking:bookings){
+                if(booking.getBookingDate().equals(prevBooking.getBookingDate())){
+                    if(!(booking.getBookingTime()<=prevBooking.getBookingTime()-60||booking.getBookingTime()>=prevBooking.getBookingTime()+60))
+                        return null;
+                }
+            }
+        }
         return bookingRepository.save(booking);
     }
+
 
     //get services
     public Booking getBookingByCustomerUserName(String userName) {
