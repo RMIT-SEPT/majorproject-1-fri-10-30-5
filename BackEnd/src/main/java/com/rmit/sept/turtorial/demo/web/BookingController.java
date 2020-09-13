@@ -37,17 +37,17 @@ public class BookingController {
         return new ResponseEntity<Booking>(booking1, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{custID}")
-    public ResponseEntity<?> findCustomer(@Valid @PathVariable String custID) {
+    @GetMapping("/{custID}/{bID}")
+    public ResponseEntity<?> findBookingByCustIDAndBID(@Valid @PathVariable String custID, @PathVariable Long bID) {
 //        if (result.hasErrors()){
 //            return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
 //        }
-        Booking booking1 = bookingService.getBookingByCustomerUserName(custID);
+        Booking booking1 = bookingService.findBookingByCustIDAndBID(custID, bID);
         return new ResponseEntity<Booking>(booking1, HttpStatus.CREATED);
     }
 
     @GetMapping("list/{custID}")
-    public ResponseEntity<?> findAllByEmployee(@Valid @PathVariable String custID) {
+    public ResponseEntity<?> findAllBookingsByCustID(@Valid @PathVariable String custID) {
 //        if (result.hasErrors()){
 //            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
 //        }

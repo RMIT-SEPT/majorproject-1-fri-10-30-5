@@ -18,12 +18,12 @@ public class Booking {
     @NotBlank(message = "empID is required")
     @Size(min=1,max =25, message = "Please enter 1 to 25 characters")
     private String empID;
-    @Min(value=0000, message="must be at least 0000")
+    @Min(value=0, message="must be at least 0000")
     @Max(value=2399, message="must be less than 2400")
     private int bookingTime;
    // @Future
     @JsonFormat(pattern ="yyyy-mm-dd")
-    private Date bookingDate;
+    private String bookingDate;
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date created_At;
     @JsonFormat(pattern ="yyyy-mm-dd")
@@ -31,6 +31,15 @@ public class Booking {
     private String bookingStatus;
 
     public Booking() {
+    }
+
+    public Booking(long id, String custID, String empID, int time, String date, String status) {
+        this.id = id;
+        this.custID = custID;
+        this.empID = empID;
+        this.bookingTime = time;
+        this.bookingDate = date;
+        this.bookingStatus= status;
     }
 
     public Long getId() {
@@ -65,11 +74,11 @@ public class Booking {
         this.bookingTime = bookingTime;
     }
 
-    public Date getBookingDate() {
+    public String getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
+    public void setBookingDate(String bookingDate) {
         this.bookingDate = bookingDate;
     }
 

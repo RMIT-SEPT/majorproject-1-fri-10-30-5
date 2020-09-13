@@ -34,13 +34,23 @@ public class BookingService {
         return bookingRepository.findAllByCustIDEquals(custID);
     }
 
+    //get a booking by custID and bID
+    public Booking findBookingByCustIDAndBID(String custID, Long bID) {
+
+        //logic
+        return bookingRepository.findBookingByCustIDEqualsAndIdEquals(custID, bID);
+    }
+
+
     //put services
     public Booking updateBooking(Booking booking) {
         Booking booking1 = bookingRepository.findBookingByCustIDEquals(booking.getCustID());
         if (booking1 != null){
             booking1.setBookingStatus(booking.getBookingStatus());
             booking1.setUpdated_At(new Date());
+            return bookingRepository.save(booking1);
+        }else{
+            return null;
         }
-        return bookingRepository.save(booking1);
     }
 }
