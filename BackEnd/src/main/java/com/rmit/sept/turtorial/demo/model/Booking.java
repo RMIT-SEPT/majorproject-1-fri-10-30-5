@@ -42,6 +42,13 @@ public class Booking {
         this.bookingStatus= status;
     }
 
+    public Booking(String custID, String empID, int time, String date) {
+        this.custID = custID;
+        this.empID = empID;
+        this.bookingTime = time;
+        this.bookingDate = date;
+    }
+
     public Long getId() {
         return id;
     }

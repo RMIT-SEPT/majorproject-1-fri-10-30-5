@@ -25,7 +25,11 @@ public class BookingController {
             return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
         }
         Booking booking1 = bookingService.addBooking(booking);
-        return new ResponseEntity<Booking>(booking1, HttpStatus.CREATED);
+        if (booking1 != null){
+            return new ResponseEntity<Booking>(booking1, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<String>("Booking Object Could Not Be Created", HttpStatus.CONFLICT);
+        }
     }
 
     @PutMapping("/update")
@@ -34,7 +38,11 @@ public class BookingController {
             return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
         }
         Booking booking1 = bookingService.updateBooking(booking);
-        return new ResponseEntity<Booking>(booking1, HttpStatus.CREATED);
+        if (booking1 != null){
+            return new ResponseEntity<Booking>(booking1, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Booking Object Could Not Be Updated", HttpStatus.CONFLICT);
+        }
     }
 
     @GetMapping("/{custID}/{bID}")
@@ -43,7 +51,12 @@ public class BookingController {
 //            return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
 //        }
         Booking booking1 = bookingService.findBookingByCustIDAndBID(custID, bID);
-        return new ResponseEntity<Booking>(booking1, HttpStatus.CREATED);
+        if (booking1 != null){
+            return new ResponseEntity<Booking>(booking1, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Booking Object", HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping("list/{custID}")
@@ -52,6 +65,10 @@ public class BookingController {
 //            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
 //        }
         List<Booking> bookings = bookingService.findAllBookingsByCustID(custID);
-        return new ResponseEntity<List<Booking>>(bookings, HttpStatus.CREATED);
+        if (bookings.size() != 0){
+            return new ResponseEntity<List<Booking>>(bookings, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
+        }
     }
 }
