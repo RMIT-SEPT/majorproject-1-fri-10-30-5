@@ -3,7 +3,7 @@ import {shallow} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import Homepage from '../../../components/Homepage/Homepage'
+import Homepage from '../../components/Homepage/Homepage'
 
 Enzyme.configure({adapter: new Adapter()});
 

@@ -2,19 +2,19 @@ import React from "react";
 import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import PastBooking from '../../../components/Bookings/PastBookings.js';
+import UpcomingBookings from "../../components/Bookings/UpcomingBookings.js";
 
 Enzyme.configure({adapter: new Adapter()});
 
-describe('Past Booking Testing', () => {
+describe('Upcoming Booking Testing', () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = shallow(<PastBooking/>);
+        wrapper = shallow(<UpcomingBookings/>);
 
     })
 
     it('should render page title', () => {
-        const title = "Past Bookings";
+        const title = "Upcoming Bookings";
         const pageHeading = wrapper.find('h5').text();
         expect(pageHeading).toEqual(title);
     });

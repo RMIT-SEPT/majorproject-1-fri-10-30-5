@@ -1,19 +1,25 @@
 import React from "react";
-import SearchPageButton from '../../components/SearchAvailability/SearchPageButton';
-import ProfileButton from '../../components/Profile/ProfileButton';
-import PastBookingsButton from '../../components/Bookings/PastBookingsButton';
-import UpcomingBookingsButton from '../../components/Bookings/UpcomingBookingsButton';
-import Dashboard from '../../components/Dashboard';
+import SearchPageButton from '../components/SearchAvailability/SearchPageButton';
+import PastBookingsButton from '../components/Bookings/PastBookingsButton';
+import UpcomingBookingsButton from '../components/Bookings/UpcomingBookingsButton';
+import Dashboard from '../components/Dashboard';
 import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+import AddEmployeeButton from "../components/AddEmployee/AddEmployeeButton";
 
 Enzyme.configure({adapter: new Adapter()});
 
 
 describe('Dashboard testing', () => {
     it("should render title", () => {
-        const wrapper = shallow(<Dashboard/>);
+        const dashboardProps = {
+            user: {
+                username: 'cus6',
+                userType: 'customer'
+            }
+        }
+        const wrapper = shallow(<Dashboard {...dashboardProps} />);
         const title = "Dashboard";
         const heading = wrapper.find('h1').text();
         expect(heading).toEqual(title);
@@ -26,15 +32,15 @@ describe('Dashboard testing', () => {
     });
 
     it("should render button as View Profile", ()=>{
-        const wrapper = shallow(<ProfileButton/>);
+        const dashboardProps = {
+            user: {
+                username: 'cus6',
+                userType: 'customer'
+            }
+        }
+        const wrapper = shallow(<Dashboard {...dashboardProps}/>);
         const buttonName = wrapper.find('Link').first().text();
-        expect(buttonName).toEqual('View Profile');
-    });
-
-    it("should render button as View Profile", ()=>{
-        const wrapper = shallow(<ProfileButton/>);
-        const buttonName = wrapper.find('Link').first().text();
-        expect(buttonName).toEqual('View Profile');
+        expect(buttonName).toEqual('Profile');
     });
 
     it("should render button as View Past Bookings", ()=>{
@@ -47,6 +53,18 @@ describe('Dashboard testing', () => {
         const wrapper = shallow(<UpcomingBookingsButton/>);
         const buttonName = wrapper.find('Link').first().text();
         expect(buttonName).toEqual('View Upcoming Bookings');
-    })
+    });
+
+    it("should render Add Employee Button", ()=> {
+
+        const wrapper = shallow(<AddEmployeeButton/>);
+        const buttonName = wrapper.find('Link').first().text();
+        expect(buttonName).toEqual('Add Employee');
+
+    });
+
+
+
+
 })
 

@@ -2,7 +2,7 @@ import React from "react";
 import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import LoginForm from'../../../components/Login/LoginForm';
+import LoginForm from'../../components/Login/LoginForm';
 import { unstable_batchedUpdates } from "react-dom";
 
 Enzyme.configure({adapter: new Adapter()});
