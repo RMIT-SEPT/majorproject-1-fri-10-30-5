@@ -99,10 +99,11 @@ public class BookingService {
 
     // Convert date "yyyy-MM-dd" to int yyyyMMdd
     private int dateToInt(String dateString){
-        String year = dateString.substring(0,3);
-        String month = dateString.substring(5,6);
-        String day = dateString.substring(8,9);
+        String year = dateString.substring(0,4);
+        String month = dateString.substring(5,7);
+        String day = dateString.substring(8,10);
         String date = year + month + day;
+
         return Integer.parseInt(date);
     }
 }

@@ -29,11 +29,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b7c6f03a-727d-4cb6-ac6d-37cbacb5365a" name="Default Changelist" comment="Added some tests for BookingController and changed get method in BookingController to include booking id in search">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/DemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/DemoApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/services/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/web/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/services/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/services/BookingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/Bookings/UpcomingBookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/Bookings/UpcomingBookings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,6 +70,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3954023" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -270,26 +267,26 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="82" y="84" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599903187872" />
-    <state width="716" height="294" key="GridCell.Tab.0.bottom" timestamp="1600101222627">
+    <state width="1110" height="401" key="GridCell.Tab.0.bottom" timestamp="1600146296641">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666915" />
-    <state width="716" height="294" key="GridCell.Tab.0.bottom/62.0.1858.1080@62.0.1858.1080" timestamp="1600101222627" />
-    <state width="716" height="294" key="GridCell.Tab.0.center" timestamp="1600101222627">
+    <state width="1110" height="401" key="GridCell.Tab.0.bottom/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296641" />
+    <state width="1110" height="401" key="GridCell.Tab.0.center" timestamp="1600146296641">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666914" />
-    <state width="716" height="294" key="GridCell.Tab.0.center/62.0.1858.1080@62.0.1858.1080" timestamp="1600101222627" />
-    <state width="716" height="294" key="GridCell.Tab.0.left" timestamp="1600101222627">
+    <state width="1110" height="401" key="GridCell.Tab.0.center/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296641" />
+    <state width="1110" height="401" key="GridCell.Tab.0.left" timestamp="1600146296640">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666914" />
-    <state width="716" height="294" key="GridCell.Tab.0.left/62.0.1858.1080@62.0.1858.1080" timestamp="1600101222627" />
-    <state width="716" height="294" key="GridCell.Tab.0.right" timestamp="1600101222627">
+    <state width="1110" height="401" key="GridCell.Tab.0.left/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296640" />
+    <state width="1110" height="401" key="GridCell.Tab.0.right" timestamp="1600146296641">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666915" />
-    <state width="716" height="294" key="GridCell.Tab.0.right/62.0.1858.1080@62.0.1858.1080" timestamp="1600101222627" />
+    <state width="1110" height="401" key="GridCell.Tab.0.right/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296641" />
     <state width="1877" height="213" key="GridCell.Tab.1.bottom" timestamp="1599969219664">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

@@ -26,3 +26,6 @@ tmp/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/BackEnd/.idea/
+BackEnd/.idea/

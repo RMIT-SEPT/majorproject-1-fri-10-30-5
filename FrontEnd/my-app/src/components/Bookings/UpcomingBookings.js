@@ -15,7 +15,7 @@ export default class UpcomingBookings extends Component {
 
     getBookings = e => {
         const custId = 'cust5'
-        const url = 'http://localhost:8080/api/booking/list/' + custId
+        const url = 'http://localhost:8080/api/booking/upcomingBookings/list/' + custId
         this.setState({ loading: true });
         axios.get(url, {
         // headers: { 'Authorization': authorization }
