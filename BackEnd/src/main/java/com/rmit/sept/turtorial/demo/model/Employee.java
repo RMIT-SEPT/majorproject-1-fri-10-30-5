@@ -40,6 +40,23 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(@NotBlank(message = "Username is required") String userName,
+                    @NotBlank(message = "Password is required") @Size(min=4,max =25, message = "Please enter 4 to 25 characters") String password,
+                    @Size(min=2,max =20, message = "Please enter 2 to 20 characters") @NotBlank(message = "Admin is required") String admin,
+                    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters") @NotBlank(message = "First name is required") String firstName,
+                    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters") @NotBlank(message = "Last name is required") String lastName,
+                    @NotBlank(message = "Address is required") String address,
+                    @NotBlank(message = "Phone is required") @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters") @Size(min=10,max =10, message = "Please enter a 10 digit number") String phone)
+    {
+        this.userName = userName;
+        this.password = password;
+        this.admin = admin;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phone = phone;
+    }
+
     public String getUserName() { return userName; }
 
     public void setUserName(String username) {this.userName = username; }
