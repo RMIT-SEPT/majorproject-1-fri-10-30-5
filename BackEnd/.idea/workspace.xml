@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="ALL" />
   </component>
   <component name="BranchesTreeState">
     <expand>
@@ -23,6 +23,7 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:registerUser" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
@@ -30,6 +31,10 @@
     <list default="true" id="b7c6f03a-727d-4cb6-ac6d-37cbacb5365a" name="Default Changelist" comment="Added some tests for BookingController and changed get method in BookingController to include booking id in search">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/services/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/services/BookingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/web/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/web/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/rmit/sept/turtorial/demo/web/BookingControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/rmit/sept/turtorial/demo/web/BookingControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/AddEmployee/AddEmployee.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/AddEmployee/AddEmployee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/Bookings/UpcomingBookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/Bookings/UpcomingBookings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,11 +50,6 @@
       <MavenGeneralSettings>
         <option name="mavenHome" value="C:\Users\lNapIStopH\.m2\wrapper\dists\apache-maven-3.6.3-bin\1iopthnavndlasol9gbrbg6bf2\apache-maven-3.6.3" />
       </MavenGeneralSettings>
-    </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectId" id="1fqEkbz4cRki1vqf27EAepyGF8d" />
@@ -67,6 +67,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3954023" />
@@ -78,15 +80,15 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.DemoApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+    <configuration name="DemoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.rmit.sept.turtorial.demo.DemoApplication" />
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rmit.sept.turtorial.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -100,6 +102,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -194,7 +209,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -233,13 +248,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="removed h2 db from app.properties" />
@@ -254,6 +268,7 @@
     <state x="583" y="198" key="#Project_Structure" timestamp="1600096950184">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
+    n
     <state x="583" y="198" key="#Project_Structure/62.0.1858.1080@62.0.1858.1080" timestamp="1600096950184" />
     <state x="811" y="454" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1599790352454">
       <screen x="62" y="0" width="1858" height="1080" />
@@ -270,22 +285,39 @@
     <state width="1110" height="401" key="GridCell.Tab.0.bottom" timestamp="1600146296641">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
+    <state width="1398" height="309" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600151154360" />
     <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666915" />
     <state width="1110" height="401" key="GridCell.Tab.0.bottom/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296641" />
-    <state width="1110" height="401" key="GridCell.Tab.0.center" timestamp="1600146296641">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state width="1110" height="401" key="GridCell.Tab.0.center" timestamp="1600146296641" />
+    <screen x="62" y="0" width="1858" height="1080" />
+    <state width="1398" height="309" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1600151618002" />
+    <state width="1110" height="401" key="GridCell.Tab.0.bottom/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296641" />
+    <state width="1398" height="309" key="GridCell.Tab.0.center" timestamp="1600151617997">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
+    <state width="1398" height="309" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1600151154357" />
     <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666914" />
     <state width="1110" height="401" key="GridCell.Tab.0.center/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296641" />
-    <state width="1110" height="401" key="GridCell.Tab.0.left" timestamp="1600146296640">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state width="1110" height="401" key="GridCell.Tab.0.left" timestamp="1600146296640" />
+    <screen x="62" y="0" width="1858" height="1080" />
+    <state width="1398" height="309" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1600151617997" />
+    <state width="1110" height="401" key="GridCell.Tab.0.center/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296641" />
+    <state width="1398" height="309" key="GridCell.Tab.0.left" timestamp="1600151617996">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
+    <state width="1398" height="309" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1600151154355" />
     <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666914" />
     <state width="1110" height="401" key="GridCell.Tab.0.left/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296640" />
-    <state width="1110" height="401" key="GridCell.Tab.0.right" timestamp="1600146296641">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state width="1110" height="401" key="GridCell.Tab.0.right" timestamp="1600146296641" />
+    <screen x="62" y="0" width="1858" height="1080" />
+    <state width="1398" height="309" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1600151617996" />
+    <state width="1110" height="401" key="GridCell.Tab.0.left/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296640" />
+    <state width="1398" height="309" key="GridCell.Tab.0.right" timestamp="1600151618001">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
+    <state width="1398" height="309" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1600151154359" />
     <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666915" />
+    <state width="1398" height="309" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1600151618001" />
     <state width="1110" height="401" key="GridCell.Tab.0.right/62.0.1858.1080@62.0.1858.1080" timestamp="1600146296641" />
     <state width="1877" height="213" key="GridCell.Tab.1.bottom" timestamp="1599969219664">
       <screen x="0" y="0" width="1920" height="1080" />

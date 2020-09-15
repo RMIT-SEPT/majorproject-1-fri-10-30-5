@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router,Route } from 'react-router-dom';
@@ -16,31 +16,45 @@ import Login from './components/Login/LoginForm';
 import Register from './components/Register/RegisterForm';
 import Homepage from './components/Homepage/Homepage'
 import WorkerPage from './components/Worker/WorkerPage'
-import WorkerBooking from './components/Bookings/WorkerBooking'
+import WorkerBooking from './components/Bookings/WorkerBooking';
+import AddEmployee from './components/AddEmployee/AddEmployee';
 
-function App() {
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+        user: {
+          username: 'cus6',
+          userType: 'admin'
+        }
+    }
+  }
+
+render() {
+
   return (
     <Provider store={store}>
-    <Router>
-      <div className="App">
-        <Header/>
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/pastBookings" component={PastBookings} />
-        <Route exact path="/profile/:id" component={Profile} />
-        <Route exact path="/profile/:id/edit" component={ProfileEdit} />
-        <Route exact path="/upcomingBookings" component = {UpcomingBookings} />
-        <Route exact path="/search" component={ Searchbar } />
-        <Route exact path="/searchResults" component={ SearchPage } />
-        <Route exact path="/worker" component={WorkerPage} />
-        <Route exact path="/workerBooking" component={WorkerBooking} />
-
-        <Route exact path="/homepage" component={Homepage} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-      </div>
-    </Router>
+      <Router>
+        <div className="App">
+          <Header />
+          <Route exact path="/dashboard" component={() => <Dashboard user= {this.state.user}/>}  />
+          <Route exact path="/pastBookings" component={() => <PastBookings user = {this.state.user}/>} />
+          <Route exact path="/profile/:id" component={() => <Profile user= {this.state.user}/>} />
+          <Route exact path="/profile/:id/edit" component={ProfileEdit} />
+          <Route exact path="/upcomingBookings" component={UpcomingBookings} />
+          <Route exact path="/search" component={Searchbar} />
+          <Route exact path="/searchResults" component={SearchPage} />
+          <Route exact path="/worker" component={WorkerPage} />
+          <Route exact path="/workerBooking" component={WorkerBooking} />
+          <Route exact path="/addEmployee" component={() => <AddEmployee user = {this.state.user} />} />
+          <Route exact path="/homepage" component={Homepage} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+        </div>
+      </Router>
     </Provider>
   );
+  }
 }
-
 export default App;

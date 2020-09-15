@@ -26,7 +26,7 @@ class ProfilePage extends Component {
       componentDidMount(){
         // const authorization = "Some Name" + cookie.load('token').replace("JWT","")
           // var id = props.match.params.id;
-          const uname = this.state.uname
+          const uname = this.props.user.username;
           const url = 'http://localhost:8080/api/customer/' + uname
           axios.get(url, {
             // headers: { 'Authorization': authorization }
@@ -56,10 +56,5 @@ class ProfilePage extends Component {
         );
     }
 }
-
-ProfilePage.propTypes = {
-    // dispatch: PropTypes.func.isRequired,
-    // pageState: PropTypes.object.isRequired
-};
 
 export default ProfilePage;

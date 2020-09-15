@@ -1,14 +1,14 @@
 import React from 'react'
 import {link, Link} from "react-router-dom";
 
- const ProfileEditButton=() => {
+ const AddEmployeeButton=() => {
     return (
         <React.Fragment>
-        <Link to="profile/edit"
+        <Link to="/addEmployee"
         className="btn btn-lg btn-info">
-        Edit Details
+        Add Employee
         </Link>
         </React.Fragment>
     )
 };
-export default ProfileEditButton;
+export default AddEmployeeButton;

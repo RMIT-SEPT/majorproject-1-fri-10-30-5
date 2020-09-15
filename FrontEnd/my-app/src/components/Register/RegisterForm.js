@@ -22,9 +22,8 @@ class RegisterForm extends Component {
         event.preventDefault();
     
         const customer = {
-            fname: this.state.fname,
-            lname:this.state.lname,
-            name: this.state.fname + " " + this.state.lname,
+            firstName: this.state.fname,
+            lastName:this.state.lname,
             address:this.state.address,
             phone:this.state.phone,
             userName:this.state.uname,

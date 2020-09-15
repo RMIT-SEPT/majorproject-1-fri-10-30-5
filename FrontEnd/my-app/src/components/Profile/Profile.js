@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ProfileEditButton from './ProfileEditButton';
+import {link, Link} from "react-router-dom";
 
 const Profile = (props) => {
   return (
@@ -14,7 +14,12 @@ const Profile = (props) => {
       </ul>
       <hr/>
       <br />
-      <ProfileEditButton />
+      <Link to={{
+        pathname: `/profile/${props.username}/edit`
+      }} 
+        className="btn btn-lg btn-info" >
+      Edit Details
+     </Link>
       <br />
     </div>
   )
