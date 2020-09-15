@@ -13,7 +13,7 @@ export default class AddEmployee extends Component {
             address:'',
             phone:'',
             userName:'',
-            password:''
+            pw:''
         };
     }
 
@@ -25,11 +25,12 @@ export default class AddEmployee extends Component {
         event.preventDefault();
     
         const employee = {
-            name: this.state.firstName + " " + this.state.lastName,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
             address:this.state.address,
             phone:this.state.phone,
             userName:this.state.userName,
-            password:this.state.password,
+            password:this.state.pw,
             admin: this.state.admin
         }
         console.log(employee);
@@ -78,7 +79,7 @@ export default class AddEmployee extends Component {
 
                     <div className='form-group'>
                     <label htmlFor="pw">Password</label>
-                    <input name="pw" type='password' onChange={this.myChangeHandler} placeholder={this.state.password}/>
+                    <input name="pw" type='password' onChange={this.myChangeHandler} placeholder={this.state.pw}/>
                     </div>
                     <br></br>
                     <br></br>

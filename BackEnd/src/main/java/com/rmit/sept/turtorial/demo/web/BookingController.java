@@ -71,4 +71,30 @@ public class BookingController {
             return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("pastBookings/list/{custID}")
+    public ResponseEntity<?> findAllPastBookingsByCustID(@Valid @PathVariable String custID) {
+//        if (result.hasErrors()){
+//            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
+//        }
+        List<Booking> bookings = bookingService.findAllPastOrUpcomingBookingsByCustID(custID, true);
+        if (bookings.size() != 0){
+            return new ResponseEntity<List<Booking>>(bookings, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("upcomingBookings/list/{custID}")
+    public ResponseEntity<?> findAllUpcomingBookingsByCustID(@Valid @PathVariable String custID) {
+//        if (result.hasErrors()){
+//            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
+//        }
+        List<Booking> bookings = bookingService.findAllPastOrUpcomingBookingsByCustID(custID, false);
+        if (bookings.size() != 0){
+            return new ResponseEntity<List<Booking>>(bookings, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
+        }
+    }
 }
