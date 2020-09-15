@@ -27,12 +27,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7c6f03a-727d-4cb6-ac6d-37cbacb5365a" name="Default Changelist" comment="Added some tests for BookingController and changed get method in BookingController to include booking id in search">
+    <list default="true" id="b7c6f03a-727d-4cb6-ac6d-37cbacb5365a" name="Default Changelist" comment="services and controller changes added for past and upcoming bookings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/model/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/services/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/services/BookingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/web/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rmit/sept/turtorial/demo/web/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/rmit/sept/turtorial/demo/web/BookingControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/rmit/sept/turtorial/demo/web/BookingControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/rmit/sept/turtorial/demo/DemoApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/rmit/sept/turtorial/demo/DemoApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,19 +73,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Maven.demo [test]">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BookingControllerTest.givenEmptyBooking_whenBookingPost_thenError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo" />
       <extension name="coverage">
@@ -189,6 +175,7 @@
       <updated>1596937371281</updated>
       <workItem from="1596937373197" duration="2430000" />
       <workItem from="1599903512686" duration="688000" />
+      <workItem from="1600129713421" duration="3676000" />
     </task>
     <task id="LOCAL-00001" summary="removed h2 db from app.properties">
       <created>1599906196168</created>
@@ -204,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599972695144</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added more tests for BookingController and changed all methods in BookingController to handle negative response from BookingService">
+      <created>1599983854309</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1599983854309</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,7 +219,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="removed h2 db from app.properties" />
     <MESSAGE value="Added some tests for BookingController and changed get method in BookingController to include booking id in search" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added some tests for BookingController and changed get method in BookingController to include booking id in search" />
+    <MESSAGE value="Added more tests for BookingController and changed all methods in BookingController to handle negative response from BookingService" />
+    <MESSAGE value="services and controller changes added for past and upcoming bookings" />
+    <option name="LAST_COMMIT_MESSAGE" value="services and controller changes added for past and upcoming bookings" />
   </component>
   <component name="WindowStateProjectService">
     <state x="711" y="364" key="#Notifications" timestamp="1599903225905">
@@ -240,42 +236,42 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="509" y="22" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1596937523833" />
-    <state x="82" y="84" width="1736" height="896" key="DiffContextDialog" timestamp="1599903187872">
+    <state x="82" y="84" width="1736" height="896" key="DiffContextDialog" timestamp="1600130459571">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="82" y="84" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599903187872" />
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1599983666915">
+    <state x="82" y="84" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600130459571" />
+    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1600046016105">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666915" />
-    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1599983666914">
+    <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1600046016105" />
+    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1600046016105">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666914" />
-    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1599983666914">
+    <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1600046016105" />
+    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1600046016105">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666914" />
-    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1599983666915">
+    <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1600046016105" />
+    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1600046016105">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1599983666915" />
-    <state width="1877" height="213" key="GridCell.Tab.1.bottom" timestamp="1599969219664">
+    <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600046016105" />
+    <state width="1877" height="213" key="GridCell.Tab.1.bottom" timestamp="1600046015655">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1599969219664" />
-    <state width="1877" height="213" key="GridCell.Tab.1.center" timestamp="1599969219663">
+    <state width="1877" height="213" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1600046015655" />
+    <state width="1877" height="213" key="GridCell.Tab.1.center" timestamp="1600046015655">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1599969219663" />
-    <state width="1877" height="213" key="GridCell.Tab.1.left" timestamp="1599969219663">
+    <state width="1877" height="213" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1600046015655" />
+    <state width="1877" height="213" key="GridCell.Tab.1.left" timestamp="1600046015655">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1599969219663" />
-    <state width="1877" height="213" key="GridCell.Tab.1.right" timestamp="1599969219664">
+    <state width="1877" height="213" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1600046015655" />
+    <state width="1877" height="213" key="GridCell.Tab.1.right" timestamp="1600046015655">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1599969219664" />
+    <state width="1877" height="213" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600046015655" />
     <state x="540" y="283" key="IDE.errors.dialog" timestamp="1596937806276">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -288,14 +284,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="114" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1599908666685" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1599972705593">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1599983858761">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599972705593" />
-    <state x="777" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599983444954">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599983858761" />
+    <state x="777" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600130128270">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="777" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599983444954" />
+    <state x="777" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1600130128270" />
     <state x="660" y="287" key="refactoring.ChangeSignatureDialog" timestamp="1599915537464">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
