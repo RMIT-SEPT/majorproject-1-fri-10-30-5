@@ -25,8 +25,8 @@ class App extends Component {
     super();
     this.state = {
         user: {
-          username: 'admin1',
-          userType: 'admin'
+          username: 'cus6',
+          userType: 'customer'
         }
     }
   }
@@ -39,7 +39,7 @@ render() {
         <div className="App">
           <Header />
           <Route exact path="/dashboard" component={() => <Dashboard user= {this.state.user}/>}  />
-          <Route exact path="/pastBookings" component={PastBookings} />
+          <Route exact path="/pastBookings" component={() => <PastBookings user = {this.state.user}/>} />
           <Route exact path="/profile/:id" component={() => <Profile user= {this.state.user}/>} />
           <Route exact path="/profile/:id/edit" component={ProfileEdit} />
           <Route exact path="/upcomingBookings" component={UpcomingBookings} />

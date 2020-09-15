@@ -3,8 +3,6 @@ import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Profile from '../../components/Profile/Profile';
-import ProfileEditButton from "../../components/Profile/ProfileEditButton";
-
 Enzyme.configure({adapter: new Adapter()});
 
 describe('Profile Testing', () => {
@@ -36,7 +34,14 @@ describe('Profile Testing', () => {
     });
 
     it('should render Profile Edit button', () => {
-        wrapper = shallow(<ProfileEditButton/>);
-        expect(wrapper.find('Link').text()).toEqual("Edit Details");
+        const userProps = {
+            user: {
+                username: 'cus6',
+                userType: 'customer'
+            }
+        }
+        wrapper = shallow(<Profile {...userProps}/>);
+        const buttonName = wrapper.find('Link').first().text();
+        expect(buttonName).toEqual('Edit Details');
     });
 })

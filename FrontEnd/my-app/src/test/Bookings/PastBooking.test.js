@@ -9,7 +9,13 @@ Enzyme.configure({adapter: new Adapter()});
 describe('Past Booking Testing', () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = shallow(<PastBooking/>);
+        const userProps = {
+            user: {
+                username: 'cus6',
+                userType: 'customer'
+            }
+        }
+        wrapper = shallow(<PastBooking {... userProps} />);
 
     })
 
@@ -19,23 +25,15 @@ describe('Past Booking Testing', () => {
         expect(pageHeading).toEqual(title);
     });
 
-    it('should render booking employee field', () => {
-        expect(wrapper.find("#empID").first().text()).toContain("Employee ID:");
-    });
 
-    it('should render booking service field', () => {
-        expect(wrapper.find("#serviceID").first().text()).toContain("Service ID:");
-    });
-
-    it('should render booking date field', () => {
-        expect(wrapper.find("#serviceID").first().text()).toContain("Service ID:");
-    });
-
-    it('should render booking time field', () => {
-        expect(wrapper.find("#time").first().text()).toContain("Time:");
-    });
-
-    it('should render booking status field', () => {
-        expect(wrapper.find("#status").first().text()).toContain("Status:");
+    it('should render message if no bookings', () => {
+        const userProps = {
+            user: {
+                username: 'cus5',
+                userType: 'customer'
+            }
+        }
+        wrapper = shallow(<PastBooking {... userProps} />);
+        expect(wrapper.find('h1').text()).toEqual("You have no past bookings");
     });
 })
