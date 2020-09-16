@@ -1,6 +1,7 @@
 package com.rmit.sept.turtorial.demo.web;
 
 import com.rmit.sept.turtorial.demo.model.Customer;
+import com.rmit.sept.turtorial.demo.model.Employee;
 import com.rmit.sept.turtorial.demo.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,8 +24,16 @@ public class CustomerController {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Customer Object", HttpStatus.BAD_REQUEST);
         }
+
         String customer1 = customerService.addCustomer(customer);
-        return new ResponseEntity<String>(customer1, HttpStatus.CREATED);
+
+        if (customer1 != null)
+        {
+            return new ResponseEntity<String>(customer1, HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<String>("Customer Object Could Not Be Created", HttpStatus.CONFLICT);
+        }
     }
 
     @PutMapping("/update")
@@ -33,13 +42,26 @@ public class CustomerController {
             return new ResponseEntity<String>("Invalid Customer Object", HttpStatus.BAD_REQUEST);
         }
         Customer customer1 = customerService.updateCustomer(customer);
-        return new ResponseEntity<Customer>(customer1, HttpStatus.CREATED);
+        if (customer1 != null)
+        {
+            return new ResponseEntity<Customer>(customer1, HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<String>("Customer Object Could Not Be Created", HttpStatus.CONFLICT);
+        }
     }
 
     @DeleteMapping("/delete/{userName}")
-    public ResponseEntity<?> deleteCustomer(@Valid @PathVariable String userName) {
+    public ResponseEntity<?> deleteCustomer(@Valid @PathVariable String userName)
+    {
         String customer1 = customerService.deleteCustomer(userName);
-        return new ResponseEntity<String>(customer1, HttpStatus.CREATED);
+
+        if (customer1 != null){
+            return new ResponseEntity<String>(customer1, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No Customer Object", HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/{userName}")
@@ -48,7 +70,12 @@ public class CustomerController {
 //            return new ResponseEntity<String>("Invalid Customer Object", HttpStatus.BAD_REQUEST);
 //        }
         Customer customer1 = customerService.getCustomerByUserName(userName);
-        return new ResponseEntity<Customer>(customer1, HttpStatus.CREATED);
+        if (customer1 != null){
+            return new ResponseEntity<Customer>(customer1, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No Customer Object", HttpStatus.NOT_FOUND);
+        }
     }
 }
 

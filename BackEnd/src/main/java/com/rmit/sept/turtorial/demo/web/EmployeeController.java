@@ -1,5 +1,6 @@
 package com.rmit.sept.turtorial.demo.web;
 
+import com.rmit.sept.turtorial.demo.model.Booking;
 import com.rmit.sept.turtorial.demo.model.Employee;
 import com.rmit.sept.turtorial.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,16 @@ public class EmployeeController {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Employee Object", HttpStatus.BAD_REQUEST);
         }
+
         String employee1 = employeeService.addEmployee(employee);
-        return new ResponseEntity<String>(employee1, HttpStatus.CREATED);
+
+        if (employee1 != null)
+        {
+            return new ResponseEntity<String>(employee1, HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<String>("Employee Object Could Not Be Created", HttpStatus.CONFLICT);
+        }
     }
 
     @PutMapping("/update")
@@ -31,14 +40,29 @@ public class EmployeeController {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Employee Object", HttpStatus.BAD_REQUEST);
         }
+
         Employee employee1 = employeeService.updateEmployee(employee);
-        return new ResponseEntity<Employee>(employee1, HttpStatus.CREATED);
+
+        if (employee1 != null)
+        {
+            return new ResponseEntity<Employee>(employee1, HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<String>("Employee Object Could Not Be Created", HttpStatus.CONFLICT);
+        }
     }
 
     @DeleteMapping("/delete/{userName}")
-    public ResponseEntity<?> deleteEmployee(@Valid @PathVariable String userName) {
+    public ResponseEntity<?> deleteEmployee(@Valid @PathVariable String userName)
+    {
         String employee1 = employeeService.deleteEmployee(userName);
-        return new ResponseEntity<String>(employee1, HttpStatus.CREATED);
+
+        if (employee1 != null){
+            return new ResponseEntity<String>(employee1, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No Employee Object", HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/{userName}")
@@ -46,6 +70,13 @@ public class EmployeeController {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Employee Object", HttpStatus.BAD_REQUEST);
         }
+
         Employee employee1 = employeeService.getEmployeeByUserName(userName);
-        return new ResponseEntity<Employee>(employee1, HttpStatus.CREATED);
+
+        if (employee1 != null){
+            return new ResponseEntity<Employee>(employee1, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No Employee Object", HttpStatus.NOT_FOUND);
+        }
     }}
