@@ -59,7 +59,7 @@ public class BookingController {
 
     }
 
-    @GetMapping("list/{custID}")
+    @GetMapping("/list/{custID}")
     public ResponseEntity<?> findAllBookingsByCustID(@Valid @PathVariable String custID) {
 //        if (result.hasErrors()){
 //            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
@@ -72,7 +72,7 @@ public class BookingController {
         }
     }
 
-    @GetMapping("pastBookings/list/{custID}")
+    @GetMapping("/pastBookings/list/{custID}")
     public ResponseEntity<?> findAllPastBookingsByCustID(@Valid @PathVariable String custID) {
 //        if (result.hasErrors()){
 //            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
@@ -85,7 +85,7 @@ public class BookingController {
         }
     }
 
-    @GetMapping("upcomingBookings/list/{custID}")
+    @GetMapping("/upcomingBookings/list/{custID}")
     public ResponseEntity<?> findAllUpcomingBookingsByCustID(@Valid @PathVariable String custID) {
 //        if (result.hasErrors()){
 //            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);

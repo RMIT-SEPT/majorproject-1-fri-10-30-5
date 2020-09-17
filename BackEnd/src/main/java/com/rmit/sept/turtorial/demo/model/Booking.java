@@ -19,14 +19,14 @@ public class Booking {
     @Size(min=1,max =25, message = "Please enter 1 to 25 characters")
     private String empID;
     @Min(value=0, message="must be at least 0000")
-    @Max(value=2399, message="must be less than 2400")
+    @Max(value=2359, message="must be less than 2400")
     private int bookingTime;
    // @Future
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private String bookingDate;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date created_At;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
     private String bookingStatus;
 
