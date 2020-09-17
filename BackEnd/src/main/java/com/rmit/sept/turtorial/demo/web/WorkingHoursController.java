@@ -105,6 +105,10 @@ public class WorkingHoursController
 //            return new ResponseEntity<String>("Invalid Service Object", HttpStatus.BAD_REQUEST);
 //        }
         List<WorkingHours> workingHours = wHService.getWHByEIDServiceDate(empID, service, date);
-        return new ResponseEntity<List<WorkingHours>>(workingHours, HttpStatus.CREATED);
+        if (workingHours.size() != 0){
+            return new ResponseEntity<List<WorkingHours>>(workingHours, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Working Hours Objects", HttpStatus.NOT_FOUND);
+        }
     }
 }
