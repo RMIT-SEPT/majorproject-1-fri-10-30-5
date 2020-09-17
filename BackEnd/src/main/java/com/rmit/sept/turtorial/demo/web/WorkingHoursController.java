@@ -1,5 +1,6 @@
 package com.rmit.sept.turtorial.demo.web;
 
+import com.rmit.sept.turtorial.demo.model.Booking;
 import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import com.rmit.sept.turtorial.demo.services.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,12 @@ public class WorkingHoursController
             return new ResponseEntity<String>("Invalid Working_Hours Object", HttpStatus.BAD_REQUEST);
         }
         WorkingHours workingHours1 = wHService.addWH(workingHours);
-        return new ResponseEntity<WorkingHours>(workingHours1, HttpStatus.CREATED);
+        if (workingHours1 != null){
+            return new ResponseEntity<WorkingHours>(workingHours1, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<String>("Working Hours Object Could Not Be Created", HttpStatus.CONFLICT);
+        }
+
     }
 
     @PutMapping("/update")
@@ -34,7 +40,12 @@ public class WorkingHoursController
             return new ResponseEntity<String>("Invalid Working_Hours Object", HttpStatus.BAD_REQUEST);
         }
         WorkingHours workingHours1 = wHService.updateWH(workingHours);
-        return new ResponseEntity<WorkingHours>(workingHours1, HttpStatus.CREATED);
+        if (workingHours1 != null){
+            return new ResponseEntity<WorkingHours>(workingHours1, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Working Hours Object Could Not Be Updated", HttpStatus.CONFLICT);
+        }
+
     }
 
     @GetMapping("list/{empID}")
@@ -43,7 +54,11 @@ public class WorkingHoursController
 //            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
 //        }
         List<WorkingHours> workingHours = wHService.findAllByEmpIDEquals(empID);
-        return new ResponseEntity<List<WorkingHours>>(workingHours, HttpStatus.CREATED);
+        if (workingHours.size() != 0){
+            return new ResponseEntity<List<WorkingHours>>(workingHours, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Working Hours Objects", HttpStatus.NOT_FOUND);
+        }
     }
 
 //    @GetMapping("/{empID}")
@@ -60,8 +75,13 @@ public class WorkingHoursController
 //        if (result.hasErrors()){
 //            return new ResponseEntity<String>("Invalid Service Object", HttpStatus.BAD_REQUEST);
 //        }
+
         List<WorkingHours> workingHours = wHService.getWHByEmpIDandService(empID, service);
-        return new ResponseEntity<List<WorkingHours>>(workingHours, HttpStatus.CREATED);
+        if (workingHours.size() != 0){
+            return new ResponseEntity<List<WorkingHours>>(workingHours, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Working Hours Objects", HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("list/{empID}/{service}/{date}/{startTime}/{endTime}")
@@ -71,7 +91,12 @@ public class WorkingHoursController
 //            return new ResponseEntity<String>("Invalid Service Object", HttpStatus.BAD_REQUEST);
 //        }
         List<WorkingHours> workingHours = wHService.getWHByEIDServiceDateTime(empID, service, date, startTime, endTime);
-        return new ResponseEntity<List<WorkingHours>>(workingHours, HttpStatus.CREATED);
+        if (workingHours.size() != 0){
+            return new ResponseEntity<List<WorkingHours>>(workingHours, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Working Hours Objects", HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping("list/{empID}/{service}/{date}")
