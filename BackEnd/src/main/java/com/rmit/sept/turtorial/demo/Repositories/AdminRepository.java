@@ -9,5 +9,7 @@ public interface AdminRepository extends CrudRepository<Admin, String> {
 
     Admin findAdminByFirstName(String firstName);
     Admin findAdminByLastName(String lastName);
+    Admin findAdminByUserName(String userName);
+
 
 }

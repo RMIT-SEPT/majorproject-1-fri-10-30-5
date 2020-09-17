@@ -14,16 +14,12 @@ public class AdminService {
     private AdminRepository adminRepository;
 
     //post services
-    public String addAdmin(Admin admin) {
-        String message;
+    public Admin addAdmin(Admin admin) {
         Admin admin1 = adminRepository.findById(admin.getUserName()).orElse(null);
         if (admin1 == null){
-            adminRepository.save(admin);
-            message = admin.getUserName() + " added successfully";
-        }else{
-            message = admin.getUserName() + " already exists";
-        }
-        return message;
+            return adminRepository.save(admin);}
+
+        return null;
     }
 
     //get services
@@ -35,7 +31,7 @@ public class AdminService {
 
     //put services
     public Admin updateAdmin(Admin admin) {
-        Admin admin1 = adminRepository.findById(admin.getUserName()).orElse(null);
+        Admin admin1 = adminRepository.findAdminByUserName(admin.getUserName());
         if (admin1 != null){
             admin1.setFirstName(admin.getFirstName());
             admin1.setLastName(admin.getLastName());
@@ -43,8 +39,12 @@ public class AdminService {
             admin1.setPhone(admin.getPhone());
             admin1.setAddress(admin.getAddress());
             admin1.setUpdated_At(new Date());
+            return adminRepository.save(admin1);
         }
-        return adminRepository.save(admin1);
+        else{
+             return null;
+    }
+
     }
 
     //delete services

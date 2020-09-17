@@ -25,42 +25,47 @@ public class AdminController {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Admin Object", HttpStatus.BAD_REQUEST);
         }
-        String admin1 = adminService.addAdmin(admin);
-        return new ResponseEntity<String>(admin1, HttpStatus.CREATED);
+        Admin admin1 = adminService.addAdmin(admin);
+        if (admin1 != null){
+            return new ResponseEntity<Admin>(admin1, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<String>("Admin Object Could Not Be Created", HttpStatus.CONFLICT);
+        }
+
     }
 
-    @PutMapping("/update/{userName}")
+    @PutMapping("/update")
     public ResponseEntity<?> updateAdmin(@Valid @RequestBody Admin admin, BindingResult result) {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Admin Object", HttpStatus.BAD_REQUEST);
         }
         Admin admin1 = adminService.updateAdmin(admin);
-      //  if (admin1 != null){
+        if (admin1 != null){
             return new ResponseEntity<Admin>(admin1, HttpStatus.OK);
-      //  }else{
-     //       return new ResponseEntity<String>("Booking Object Could Not Be Updated", HttpStatus.CONFLICT);
-     //   }
+        }else{
+            return new ResponseEntity<String>("Admin Object Could Not Be Updated", HttpStatus.CONFLICT);
+        }
     }
 
     @DeleteMapping("/delete/{userName}")
     public ResponseEntity<?> deleteAdmin(@Valid @PathVariable String userName) {
         String admin1 = adminService.deleteAdmin(userName);
-    //    if (admin1 != null){
+        if (admin1 != null){
             return new ResponseEntity<String>(admin1, HttpStatus.ACCEPTED);
-    //    }else{
-    //        return new ResponseEntity<String>("No Admin Object", HttpStatus.NOT_FOUND);
-    //    }
+        }else{
+            return new ResponseEntity<String>("No Admin Object", HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/{userName}")
     public ResponseEntity<?> findAdmin(@Valid @PathVariable String userName) {
 
         Admin admin1 = adminService.getAdminByUserName(userName);
-      //  if (admin1 != null){
+        if (admin1 != null){
             return new ResponseEntity<Admin>(admin1, HttpStatus.OK);
-     //   }else{
-     //       return new ResponseEntity<String>("No Admin Object", HttpStatus.NOT_FOUND);
-     //   }
+        }else{
+            return new ResponseEntity<String>("No Admin Object", HttpStatus.NOT_FOUND);
+        }
     }
 }
 
