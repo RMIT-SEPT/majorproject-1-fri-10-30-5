@@ -48,10 +48,9 @@ public class EmployeeControllerTest {
         Employee mockEmployee = new Employee("emp", "password", "admin",
                 "Emp", "Loyee", "123 Joke Street", "0412345678");
 
-//        when(employeeService.addEmployee(mockEmployee)).thenReturn(mockEmployee);
         when(employeeService.addEmployee(any(Employee.class))).thenReturn(mockEmployee);
 
-        //Mock request
+        //Mock request for valid employee
         mockMvc.perform(MockMvcRequestBuilders.post("/api/employee/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockEmployee)))
@@ -68,7 +67,7 @@ public class EmployeeControllerTest {
 
         when(employeeService.addEmployee(any(Employee.class))).thenReturn(mockEmployee);
 
-        //Mock request
+        //Mock request for valid employee
         mockMvc.perform(MockMvcRequestBuilders.post("/api/employee/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockEmployee)))
@@ -85,7 +84,7 @@ public class EmployeeControllerTest {
 
         when(employeeService.addEmployee(any(Employee.class))).thenReturn(mockEmployee);
 
-        //Mock request
+        //Mock request for valid employee
         mockMvc.perform(MockMvcRequestBuilders.post("/api/employee/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockEmployee)))
@@ -109,9 +108,9 @@ public class EmployeeControllerTest {
                 .andExpect(status().isCreated());
     }
 
-    //Tests that an employee with an admin that has 10 characters can log in
+    //Tests that an employee with an admin that has 20 characters can log in
     @Test
-    public void given10CharAdmin_whenPostEmployee_thenSuccessfullyPost() throws Exception
+    public void given20CharAdmin_whenPostEmployee_thenSuccessfullyPost() throws Exception
     {
         //Mock Employee object to mock correct user entry with a 20 character admin
         Employee mockEmployee = new Employee("emp", "password",
@@ -120,7 +119,7 @@ public class EmployeeControllerTest {
 
         when(employeeService.addEmployee(any(Employee.class))).thenReturn(mockEmployee);
 
-        //Mock request
+        //Mock request for valid employee
         mockMvc.perform(MockMvcRequestBuilders.post("/api/employee/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockEmployee)))
@@ -359,9 +358,9 @@ public class EmployeeControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    //Tests that an employee with a 25 character password cannot log in
+    //Tests that an employee with a 26 character password cannot log in
     @Test
-    public void given21CharPassword_whenPostEmployee_thenReturnError() throws Exception
+    public void given26CharPassword_whenPostEmployee_thenReturnError() throws Exception
     {
         //Invalid Mock Employee object to mock user entry with 25 character password
         Employee mockEmployee = new Employee("emp", "passssssssssssssssssssword", "admin",
@@ -440,7 +439,7 @@ public class EmployeeControllerTest {
     {
         //Invalid Mock Employee object to mock firstname entry with non-alphabetical characters
         Employee mockEmployee = new Employee("emp", "password", "admin",
-                "Emp", "192$%", "123 Joke Street", "0412345678");
+                "192$%", "Loyee", "123 Joke Street", "0412345678");
 
         //Mock request for invalid employee
         mockMvc.perform(MockMvcRequestBuilders.post("/api/employee/add")
@@ -455,7 +454,7 @@ public class EmployeeControllerTest {
     {
         //Invalid Mock Employee object to mock lastname entry with non-alphabetical characters
         Employee mockEmployee = new Employee("emp", "password", "admin",
-                "192$%", "Loyee", "123 Joke Street", "0412345678");
+                "Emp", "192$%", "123 Joke Street", "0412345678");
 
         //Mock request for invalid employee
         mockMvc.perform(MockMvcRequestBuilders.post("/api/employee/add")
@@ -479,25 +478,6 @@ public class EmployeeControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    //Tests that an employee that exists can be update appropriately
-//    @Test
-//    public void givenValidEmployee_whenUpdateEmployee_thenSuccessfullyPut() throws Exception
-//    {
-//        //Mock Employee objects with different addresses
-//        Employee mockEmployee = new Employee("emp", "password", "admin",
-//                "Emp", "Loyee", "45 Joke Street", "0412345678");
-//        Employee updMockEmployee = new Employee("emp", "password", "admin",
-//                "Emp", "Loyee", "123 Joke Street", "0412345678");
-//
-//        when(employeeService.updateEmployee(updMockEmployee)).thenReturn(updMockEmployee);
-//
-//        //Mock request for null employee
-//        mockMvc.perform(put("/api/employee/update/", mockEmployee.getUserName()).contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .content(objectMap.writeValueAsString(updMockEmployee)))
-//                .andExpect(status().isOk());
-//    }
-
     //Tests that an employee that exists can't be updated with inappropriate data
     @Test
     public void givenInvalidEmployee_whenUpdateEmployee_thenReturnError() throws Exception
@@ -510,7 +490,7 @@ public class EmployeeControllerTest {
 
         when(employeeService.updateEmployee(updMockEmployee)).thenReturn(updMockEmployee);
 
-        //Mock request for null employee
+        //Mock request for invalid employee
         mockMvc.perform(put("/api/employee/update/", mockEmployee.getUserName()).contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(updMockEmployee)))

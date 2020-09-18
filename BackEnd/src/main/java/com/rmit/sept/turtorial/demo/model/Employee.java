@@ -33,9 +33,9 @@ public class Employee {
     @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters")
     @Size(min=10,max =10, message = "Please enter a 10 digit number")
     private String phone;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date created_At;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
     public Employee() {
     }

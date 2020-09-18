@@ -13,16 +13,13 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     //post services
-    public String addCustomer(Customer customer) {
-        String message;
+    public Customer addCustomer(Customer customer)
+    {
         Customer customer1 = customerRepository.findById(customer.getUserName()).orElse(null);
-        if (customer1 == null){
+        if (customer1 == null) {
             customerRepository.save(customer);
-            message = customer.getUserName() + " added successfully";
-        }else{
-            message = customer.getUserName() + " already exists";
         }
-        return message;
+        return null;
     }
 
     //get services

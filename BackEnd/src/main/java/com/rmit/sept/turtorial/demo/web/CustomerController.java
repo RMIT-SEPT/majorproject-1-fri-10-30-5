@@ -25,11 +25,11 @@ public class CustomerController {
             return new ResponseEntity<String>("Invalid Customer Object", HttpStatus.BAD_REQUEST);
         }
 
-        String customer1 = customerService.addCustomer(customer);
+        Customer customer1 = customerService.addCustomer(customer);
 
         if (customer1 != null)
         {
-            return new ResponseEntity<String>(customer1, HttpStatus.CREATED);
+            return new ResponseEntity<Customer>(customer1, HttpStatus.CREATED);
         }
         else{
             return new ResponseEntity<String>("Customer Object Could Not Be Created", HttpStatus.CONFLICT);
@@ -57,7 +57,7 @@ public class CustomerController {
         String customer1 = customerService.deleteCustomer(userName);
 
         if (customer1 != null){
-            return new ResponseEntity<String>(customer1, HttpStatus.OK);
+            return new ResponseEntity<String>(customer1, HttpStatus.ACCEPTED);
         }
         else{
             return new ResponseEntity<String>("No Customer Object", HttpStatus.NOT_FOUND);
