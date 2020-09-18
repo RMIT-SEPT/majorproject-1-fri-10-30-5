@@ -16,11 +16,11 @@ describe('Render <SearchPageButton /> component', () => {
         expect(component).toHaveLength(1);
     });
 
-    it("simulate click event", ()=>{
-        const onButtonClick = Sinon.spy();
-        const component = shallow(<SearchPageButton onButtonClick={onButtonClick} />);
-        component.simulate('click');
-        expect(onButtonClick).toHaveProperty('callCount', 1);
-    });
+    // it("simulate click event", ()=>{
+    //     const onButtonClick = Sinon.spy();
+    //     const component = shallow(<SearchPageButton onButtonClick={onButtonClick} />);
+    //     component.simulate('click');
+    //     expect(onButtonClick).toHaveProperty('callCount', 1);
+    // });
 })
 
