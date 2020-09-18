@@ -1,12 +1,17 @@
 import React from "react";
+import { createMemoryHistory } from 'history'
+import { render, fireEvent } from '@testing-library/react'
+import { Router } from 'react-router-dom'
+import '@testing-library/jest-dom/extend-expect'
 import SearchPageButton from '../components/SearchAvailability/SearchPageButton';
 import PastBookingsButton from '../components/Bookings/PastBookingsButton';
 import UpcomingBookingsButton from '../components/Bookings/UpcomingBookingsButton';
 import Dashboard from '../components/Dashboard';
-import {shallow, mount} from "enzyme";
+import {shallow} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import AddEmployeeButton from "../components/AddEmployee/AddEmployeeButton";
+import App from "../App";
 
 Enzyme.configure({adapter: new Adapter()});
 

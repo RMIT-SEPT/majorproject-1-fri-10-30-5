@@ -1,8 +1,10 @@
 import React from "react";
 import {shallow, mount} from "enzyme";
+import { Route } from 'react-router';
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Profile from '../../components/Profile/Profile';
+import App from '../../App';
 Enzyme.configure({adapter: new Adapter()});
 
 describe('Profile Testing', () => {
@@ -10,6 +12,23 @@ describe('Profile Testing', () => {
     beforeEach(() => {
         wrapper = shallow(<Profile/>);
 
+    });
+
+    it(' should render path containing username', () => {
+        wrapper = shallow(<App/>);
+        wrapper.setState({ username: 'cus6'});
+        const pathMap = wrapper.find(Route).reduce((pathMap, route) => {
+            const routeProps = route.props();
+            if (routeProps.component) {
+                pathMap[routeProps.path] = routeProps.component;
+            } else if (routeProps.render) {
+                pathMap[routeProps.path] = routeProps.render({}).type;
+            }
+
+            return pathMap;
+        }, {});
+
+        expect(pathMap['profile/cus6']).toBe(Profile.path);
     });
 
     it('should render title with username', () => {
