@@ -14,7 +14,7 @@ class PastBookings extends Component {
     componentDidMount() {
         const uname = this.props.user.username;
         //change to /pastBooking later
-        const url = 'http://localhost:8080/api/booking/list/' + uname;
+        const url = 'http://localhost:8080/api/booking/pastBookings/list/' + uname;
         axios.get(url, {
             // headers: { 'Authorization': authorization }
           })

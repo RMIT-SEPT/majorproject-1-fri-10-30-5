@@ -28,19 +28,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7c6f03a-727d-4cb6-ac6d-37cbacb5365a" name="Default Changelist" comment="Added some tests for BookingController and changed get method in BookingController to include booking id in search">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="0e7d9065-0275-48f0-812f-a1ccbafce60c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/DemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/DemoApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/services/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rmit/sept/turtorial/demo/web/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/test/SearchAvailability/ResultsList.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/test/SearchAvailability/ResultsList.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/test/SearchAvailability/SearchPage.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/test/SearchAvailability/SearchPage.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/test/SearchAvailability/SearchPageButton.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/test/SearchAvailability/SearchPageButton.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/Bookings/PastBookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/Bookings/PastBookings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/SearchAvailability/ResultsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/SearchAvailability/ResultsList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/WeekCalendar/WeekCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/my-app/src/components/WeekCalendar/WeekCalendar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

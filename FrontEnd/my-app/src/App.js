@@ -46,7 +46,7 @@ render() {
           <Route exact path="/search" component={Searchbar} />
           <Route exact path="/searchResults" component={SearchPage} />
           <Route exact path="/worker" component={WorkerPage} />
-          <Route exact path="/workerBooking" component={WorkerBooking} />
+          <Route exact path="/:empId/workinghours" component={WorkerBooking} />
           <Route exact path="/addEmployee" component={() => <AddEmployee user = {this.state.user} />} />
           <Route exact path="/homepage" component={Homepage} />
           <Route exact path="/login" component={Login} />

@@ -16,17 +16,17 @@ class WeekCalendar extends Component {
       res: [{
         startTime: "13:00",
         endTime: "14:00",
-        date: "9/15/2020"
+        date: "9/18/2020"
       },
       {
         startTime: "15:00",
         endTime: "16:00",
-        date: "9/13/2020"
+        date: "9/21/2020"
       },
       {
         startTime: "14:00",
         endTime: "15:00",
-        date: "9/11/2020"
+        date: "9/23/2020"
       }]
     };
 
