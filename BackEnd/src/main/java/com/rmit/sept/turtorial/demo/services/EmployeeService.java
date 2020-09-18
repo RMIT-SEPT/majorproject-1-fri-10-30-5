@@ -15,16 +15,13 @@ public class EmployeeService {
 
 
     //post services
-    public String addEmployee(Employee employee) {
-        String message;
+    public Employee addEmployee(Employee employee) {
         Employee employee1 = employeeRepository.findById(employee.getUserName()).orElse(null);
         if (employee1 == null) {
             employeeRepository.save(employee);
-            message = employee.getUserName() + " added successfully";
-        } else {
-            message = employee.getUserName() + " already exists";
         }
-        return message;
+
+        return null;
     }
 
     //get services
@@ -46,8 +43,10 @@ public class EmployeeService {
             employee1.setAdmin(employee.getAdmin());
             employee1.setAddress(employee.getAddress());
             employee1.setUpdated_At(new Date());
+            return employeeRepository.save(employee1);
         }
-        return employeeRepository.save(employee1);
+
+        return null;
     }
 
     //delete services
