@@ -1,6 +1,4 @@
 package com.rmit.sept.turtorial.demo.web;
-
-import com.rmit.sept.turtorial.demo.model.Booking;
 import com.rmit.sept.turtorial.demo.model.Employee;
 import com.rmit.sept.turtorial.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +22,11 @@ public class EmployeeController {
             return new ResponseEntity<String>("Invalid Employee Object", HttpStatus.BAD_REQUEST);
         }
 
-        String employee1 = employeeService.addEmployee(employee);
+        Employee employee1 = employeeService.addEmployee(employee);
 
         if (employee1 != null)
         {
-            return new ResponseEntity<String>(employee1, HttpStatus.CREATED);
+            return new ResponseEntity<Employee>(employee1, HttpStatus.CREATED);
         }
         else{
             return new ResponseEntity<String>("Employee Object Could Not Be Created", HttpStatus.CONFLICT);
@@ -58,7 +56,7 @@ public class EmployeeController {
         String employee1 = employeeService.deleteEmployee(userName);
 
         if (employee1 != null){
-            return new ResponseEntity<String>(employee1, HttpStatus.OK);
+            return new ResponseEntity<String>(employee1, HttpStatus.ACCEPTED);
         }
         else{
             return new ResponseEntity<String>("No Employee Object", HttpStatus.NOT_FOUND);
@@ -66,10 +64,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{userName}")
-    public ResponseEntity<?> findEmployee(@Valid @PathVariable String userName, BindingResult result) {
-        if (result.hasErrors()){
-            return new ResponseEntity<String>("Invalid Employee Object", HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> findEmployee(@Valid @PathVariable String userName) {
 
         Employee employee1 = employeeService.getEmployeeByUserName(userName);
 

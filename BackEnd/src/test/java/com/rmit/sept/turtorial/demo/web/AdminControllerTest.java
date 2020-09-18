@@ -42,8 +42,7 @@ public class AdminControllerTest {
     public void givenValidAdmin_whenPostAdmin_thenSuccessfullyCreated() throws Exception {
         Admin admin1 = new Admin("admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
 
-        //given(this.adminService.addAdmin(admin1)).willReturn(admin1);
-        when(adminService.addAdmin(admin1)).thenReturn(admin1);
+        when(adminService.addAdmin(any(Admin.class))).thenReturn(admin1);
         mvc.perform(post("/api/admin/add/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(admin1)))
                 .andDo(MockMvcResultHandlers.print())
@@ -65,7 +64,6 @@ public class AdminControllerTest {
         String invalidAdmin = "Invalid Admin Object";
 
         when(adminService.addAdmin(admin1)).thenReturn(null);
-
         mvc.perform(post("/api/admin/add/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(admin1)))
                 .andExpect(jsonPath("$",is(invalidAdmin)))
@@ -80,11 +78,31 @@ public class AdminControllerTest {
         String invalidAdmin = "Invalid Admin Object";
 
         when(adminService.addAdmin(admin1)).thenReturn(null);
-
         mvc.perform(post("/api/admin/add/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(admin1)))
                 .andExpect(jsonPath("$",is(invalidAdmin)))
                 .andExpect(status().isBadRequest());
+    }
+
+
+    //return ok status, when updated admin is valid
+    @Test
+    public void givenValidAdmin_whenUpdateAdmin_thenSuccessfullyOk() throws Exception {
+     //   Admin admin1 = new Admin("admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
+        Admin newAdmin = new Admin("admin304", "password123", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
+
+        when(adminService.updateAdmin(any(Admin.class))).thenReturn(newAdmin);
+
+        mvc.perform(put("/api/admin/update").contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMap.writeValueAsString(newAdmin)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.userName",is("admin304")))
+                .andExpect(jsonPath("$.password",is("password123")))
+                .andExpect(jsonPath("$.firstName",is("Admin")))
+                .andExpect(jsonPath("$.lastName",is("AdminLast")))
+                .andExpect(jsonPath("$.address",is("13 Fitz Street")))
+                .andExpect(jsonPath("$.phone",is("0123456789")));
     }
 
 
@@ -96,7 +114,6 @@ public class AdminControllerTest {
         String invalidAdmin = "Invalid Admin Object";
 
         when(adminService.updateAdmin(newAdmin)).thenReturn(newAdmin);
-
         mvc.perform(put("/api/admin/update").contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(newAdmin)))
@@ -104,20 +121,6 @@ public class AdminControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    //return conflict when attempting to update admin that doesn't exist
-    @Test
-    public void givenInvalidAdmin_whenUpdateAdmin_thenConflict() throws Exception {
-        Admin newAdmin = new Admin("admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
-        String invalidAdmin = "Admin Object Could Not Be Updated";
-
-        when(adminService.updateAdmin(newAdmin)).thenReturn(newAdmin);
-
-        mvc.perform(put("/api/admin/update").contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(objectMap.writeValueAsString(newAdmin)))
-                .andExpect(jsonPath("$",is(invalidAdmin)))
-                .andExpect(status().isConflict());
-    }
 
     //return accepted status, when deleting an existing admin
     @Test
@@ -126,7 +129,6 @@ public class AdminControllerTest {
         String message = "Admin " + admin1.getUserName() + " has been successfully removed";
 
         when(adminService.deleteAdmin(admin1.getUserName())).thenReturn(message);
-
         mvc.perform(delete("/api/admin/delete/{userName}", "admin30").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(admin1)))
                 .andExpect(jsonPath("$",is(message)))
@@ -137,8 +139,8 @@ public class AdminControllerTest {
     @Test
     public void givenInvalidAdmin_whenDeleteAdmin_thenReturnNotFound() throws Exception {
         String message = "No Admin Object";
-        when(adminService.deleteAdmin("admin30")).thenReturn(null);
 
+        when(adminService.deleteAdmin("admin30")).thenReturn(null);
         mvc.perform(delete("/api/admin/delete/{userName}", "admin30").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$",is(message)))
                 .andExpect(status().isNotFound());
@@ -151,7 +153,6 @@ public class AdminControllerTest {
         Admin admin1 = new Admin("admin30", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
 
         when(adminService.getAdminByUserName(admin1.getUserName())).thenReturn(admin1);
-
         mvc.perform(get("/api/admin/{userName}", "admin30").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(admin1)))
                 .andExpect(status().isOk())
@@ -168,8 +169,8 @@ public class AdminControllerTest {
     @Test
     public void givenInvalidAdminUserName_whenGetAdmin_thenReturnNotFound() throws Exception {
         String message = "No Admin Object";
-        when(adminService.getAdminByUserName("admin30")).thenReturn(null);
 
+        when(adminService.getAdminByUserName("admin30")).thenReturn(null);
         mvc.perform(get("/api/admin/{userName}", "admin30").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$",is(message)))
                 .andExpect(status().isNotFound());
@@ -183,22 +184,23 @@ public class AdminControllerTest {
 
 }
 
-
-
-//
-//    //return ok status, when updated admin is valid
+//    //return conflict when attempting to update admin that doesn't exist
 //    @Test
-//    public void givenValidAdmin_whenUpdateAdmin_thenSuccessfullyOk() throws Exception {
-//        Admin admin1 = new Admin("admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
-//        Admin newAdmin = new Admin("admin304", "password123", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
+//    public void givenInvalidAdmin_whenUpdateAdmin_thenConflict() throws Exception {
+//        Admin newAdmin = new Admin("admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
+//        String invalidAdmin = "Admin Object Could Not Be Updated";
 //
 //        when(adminService.updateAdmin(newAdmin)).thenReturn(newAdmin);
-//
 //        mvc.perform(put("/api/admin/update").contentType(MediaType.APPLICATION_JSON)
 //                .accept(MediaType.APPLICATION_JSON)
 //                .content(objectMap.writeValueAsString(newAdmin)))
-//                .andExpect(status().isOk());
+//                .andExpect(jsonPath("$",is(invalidAdmin)))
+//                .andExpect(status().isConflict());
 //    }
+
+
+
+
 
 
 
