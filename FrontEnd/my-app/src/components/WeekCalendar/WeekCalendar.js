@@ -10,27 +10,32 @@ class WeekCalendar extends Component {
     super();
 
     this.state = {
-      
-      // EXAMPLE Object returned by querying
-      // WorkerID + all shifts for the next 7 days
-      res: [{
-        startTime: "13:00",
-        endTime: "14:00",
-        date: "9/18/2020"
-      },
-      {
-        startTime: "15:00",
-        endTime: "16:00",
-        date: "9/21/2020"
-      },
-      {
-        startTime: "14:00",
-        endTime: "15:00",
-        date: "9/23/2020"
-      }]
+      empId: "emp5",
+      workingHours: [],
     };
 
-    this.convertData(this.state.res)
+    this.setState({empId: window.location.pathname.substr(1, window.location.pathname.length-14)})
+  }
+
+  componentDidMount(){
+    // const authorization = "Some Name" + cookie.load('token').replace("JWT","")
+      // var id = props.match.params.id;
+      const empId = this.state.empId;
+      const url = 'http://localhost:8080/api/workinghours/list/' + empId
+      axios.get(url, {
+        // headers: { 'Authorization': authorization }
+      })
+      .then(res => {
+        this.setState({
+          workingHours: res.data
+        }, () => {
+          console.log(this.state.workingHours)
+          this.convertData(this.state.workingHours)
+        })
+      })
+      .catch((error) => {
+        console.log("error",error)
+      })
   }
 
   // Convert the database result into an 
@@ -38,22 +43,27 @@ class WeekCalendar extends Component {
   convertData(dataSet) {
 
     let newData = [];
-  
+
     for(let i = 0; i < dataSet.length; i++) {
   
-      let tmp = moment(dataSet[i]["date"]).format("D/M/YYYY").substr(0,2);
+      let day = moment(dataSet[i]["workDate"]).format("D/M/YYYY").substr(0,2);
+      let date;
+
+      // console.log(day)
   
-      if(parseInt(tmp) > 10) {
-        tmp = moment(dataSet[i]["date"]).format("D/M/YYYY").substr(0,4);
+      if(parseInt(day) > 10) {
+        date = moment(dataSet[i]["workDate"]).format("D/M/YYYY").substr(0,4);
       }
       else {
-        tmp = moment(dataSet[i]["date"]).format("D/M/YYYY").substr(0,3);
+        date = moment(dataSet[i]["workDate"]).format("D/M/YYYY").substr(0,3);
       }
   
-      newData.push({[tmp]: moment(dataSet[i]["startTime"], "HH:mm").format("h:mm A")});
+      newData.push({[date]: moment(dataSet[i]["startTime"], "HH:mm").format("h:mm A")});
+      
     }
 
-    this.state.data = newData
+    
+    this.setState({data: newData})
   };
 
   onSubmit = e => {
@@ -63,15 +73,14 @@ class WeekCalendar extends Component {
     
     const booking = {
       custID: 1,
-      empID: 1,
+      empID: this.state.empId,
       bookingTime: this.state.time,
       bookingDate: this.state.date,
-      created_at: moment().format("yyyy-MM-DD"),
     }
 
-    console.log(booking);
+    console.log("booking: ", booking);
 
-    axios.put('http://localhost:8080/api/booking/add', 
+    axios.post('http://localhost:8080/api/booking/add', 
             booking
           )
           .then(res => //showOutput(res))
@@ -130,8 +139,8 @@ class WeekCalendar extends Component {
           onSelectedRowsChange={handleSelection}
         />
 
-        <form>
-          <button type='submit' onSubmit={this.onSubmit}>Book Now</button>
+        <form onSubmit={this.onSubmit}>
+          <button type='submit' >Book Now</button>
         </form>
       </div>
     )
