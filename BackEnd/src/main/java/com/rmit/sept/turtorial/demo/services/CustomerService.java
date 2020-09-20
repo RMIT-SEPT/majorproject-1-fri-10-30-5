@@ -15,11 +15,7 @@ public class CustomerService {
     //post services
     public Customer addCustomer(Customer customer)
     {
-        Customer customer1 = customerRepository.findById(customer.getUserName()).orElse(null);
-        if (customer1 == null) {
-            customerRepository.save(customer);
-        }
-        return null;
+        return customerRepository.save(customer);
     }
 
     //get services

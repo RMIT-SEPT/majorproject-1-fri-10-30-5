@@ -25,7 +25,7 @@ class App extends Component {
     super();
     this.state = {
         user: {
-          username: 'admin1',
+          username: 'cust5',
           userType: 'admin'
         }
     }

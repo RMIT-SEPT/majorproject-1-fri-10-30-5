@@ -78,7 +78,7 @@ class WeekCalendar extends Component {
       bookingDate: this.state.date,
     }
 
-    console.log("booking: ", booking);
+    // console.log("booking: ", booking);
 
     axios.post('http://localhost:8080/api/booking/add', 
             booking

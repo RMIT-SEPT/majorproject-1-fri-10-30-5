@@ -1,6 +1,7 @@
 package com.rmit.sept.turtorial.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

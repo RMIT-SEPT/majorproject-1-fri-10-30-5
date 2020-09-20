@@ -16,12 +16,7 @@ public class EmployeeService {
 
     //post services
     public Employee addEmployee(Employee employee) {
-        Employee employee1 = employeeRepository.findById(employee.getUserName()).orElse(null);
-        if (employee1 == null) {
-            employeeRepository.save(employee);
-        }
-
-        return null;
+        return employeeRepository.save(employee);
     }
 
     //get services
