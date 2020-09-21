@@ -6,8 +6,8 @@ import axios from 'axios'
 
 class WeekCalendar extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       time:'',
@@ -16,7 +16,7 @@ class WeekCalendar extends Component {
       selectedRows: [],
       toggledClearRows: false,
       data: [],
-      empId: "",
+      empId:this.props.empID,
       workingHours: [],
     };
 
@@ -26,8 +26,9 @@ class WeekCalendar extends Component {
   componentDidMount(){
     // const authorization = "Some Name" + cookie.load('token').replace("JWT","")
       // var id = props.match.params.id;
-      const empId = window.location.pathname.substr(1, window.location.pathname.length-14)
-      // const empId = this.state.empId;
+      // const empId = {this.props.name}
+      // const empId = window.location.pathname.substr(1, window.location.pathname.length-14)
+      const empId = this.state.empId;
       const url = 'http://localhost:8080/api/workinghours/list/' + empId
       axios.get(url, {
         // headers: { 'Authorization': authorization }
@@ -112,8 +113,6 @@ class WeekCalendar extends Component {
     const handleSelection = (state) => {
 
       let booking, date;
-      // let selected = state.selectedRows[0]
-      // console.log("selected", state.selectedRows)
 
       if(state.selectedRows[0] !== undefined) {
         date = Object.keys(state.selectedRows[0]);
@@ -151,6 +150,7 @@ class WeekCalendar extends Component {
 
     return (
       <div>
+      <h1 id="empID" style={{display:'none'}}>{this.props.empID}</h1>
         <DataTable
           title="This Week"
           columns={columns}
