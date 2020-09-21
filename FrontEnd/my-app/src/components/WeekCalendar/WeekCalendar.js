@@ -65,12 +65,13 @@ class WeekCalendar extends Component {
         date = moment(dataSet[i]["workDate"]).format("D/M/YYYY").substr(0,3);
       }
   
-      newData.push({[date]: moment(dataSet[i]["startTime"], "HH:mm").format("h:mm A"),
-    service: dataSet[i]["service"]});
+      newData.push({[date]: moment(dataSet[i]["startTime"], "HH:mm").format("h:mm A") +
+      ":" + dataSet[i]["service"],
+      service: dataSet[i]["service"]});
       
     }
     this.setState({data: newData})
-    console.log(newData)
+    // console.log(newData)
   };
 
   onSubmit = e => {
@@ -135,9 +136,9 @@ class WeekCalendar extends Component {
     }
 
     const onClick = (e) => {
-
+      // console.log("data", this.state.data)
       // e.preventDefault();
-      console.log("event", e)
+      // console.log("event", e)
       if (e.selectedCount <= 1){
         this.setState({ toggledClearRows: false })
         handleSelection(this.state)
