@@ -14,7 +14,7 @@ export default class UpcomingBookings extends Component {
     }
 
     getBookings = e => {
-        const custId = 'cust5'
+        const custId = 'cus5'
         const url = 'http://localhost:8080/api/booking/upcomingBookings/list/' + custId
         this.setState({ loading: true });
         axios.get(url, {
@@ -30,7 +30,6 @@ export default class UpcomingBookings extends Component {
                 console.log("Got bookings:", this.state.results)
                 this.forceUpdate()
             })
-
             
         })
         .catch((error) => {
@@ -45,9 +44,9 @@ export default class UpcomingBookings extends Component {
             <div>
             <h5 className="display-4 text-center">Upcoming Bookings</h5>  
             {              
-                this.state.results.map((booking) => (
+                this.state.results.map((booking, index) => (
                     <ul> 
-                        <li>
+                        <li key={index}>
                             <p id = 'empID'><b>Employee ID: </b>{booking['empID']}</p>
                             <p id='serviceID'><b>Service ID: </b>{booking['id']}</p>
                             <p id='date'><b>Date: </b>{booking['bookingDate']}</p>

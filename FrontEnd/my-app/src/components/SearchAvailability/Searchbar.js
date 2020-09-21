@@ -16,6 +16,7 @@ class Searchbar extends Component {
             time: '',
             date: '',
             loading: false,
+            searched: false,
             results: null,
             value:''
         };

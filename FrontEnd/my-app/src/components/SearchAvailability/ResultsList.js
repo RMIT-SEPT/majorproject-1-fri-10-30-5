@@ -14,16 +14,17 @@ class SearchResultsList extends Component {
         super(props);
         this.onBook = this.onBook.bind(this)
 
-        // state = { 
-        //     redirect: false
-        // }
+        this.state = {
+            count: 0 
+            // redirect: false
+        }
     }
     onBook(item) {
     
         // need to validate !!!!!!!!
         
         const booking = {
-          custID: "cust5",
+          custID: "cus5",
           empID: item.empID,
           bookingTime: item.startTime,
           bookingDate: item.workDate
@@ -50,27 +51,33 @@ class SearchResultsList extends Component {
         let pathUrl = window.location.href;
         window.location.href = pathUrl;  
     }
+    
+    listCount(){
+        console.log("map", this.props.list.map);
+        let newCount = this.state.count + 1
+        this.setState({
+            count: newCount
+        });
+
+        return this.state.count;
+    }
 
     render() {
         return (
-            <div>
-                <ul>
-                    {
-                        this.props.list.map(item => (
-                           <div>
-                               <React.Fragment>
-                                   <Link onClick={() => {this.onBook(item)}} className="btn btn-lg btn-info">
-                                        <SearchResultsItem name={item.empID}
-                                        desc={item.service}
-                                        date={item.workDate}
-                                        start={item.startTime}
-                                        end={item.endTime}/>
-                                    </Link>
-                                </React.Fragment>
-                            </div>
-                        ))
-                    }
-                </ul>
+            <div className="resultsList">
+                <React.Fragment>
+                {this.props.list.map((item, index) => (
+                        <Link key={index} onClick={() => {this.onBook(item)}} to="/" className="btn btn-lg btn-info">
+                            <SearchResultsItem name={item.empID}
+                            key={this.listCount}
+                            desc={item.service}
+                            date={item.workDate}
+                            start={item.startTime}
+                            end={item.endTime}/>
+                        </Link>
+                    
+                ))}
+                </React.Fragment>
             </div>
         )
     }

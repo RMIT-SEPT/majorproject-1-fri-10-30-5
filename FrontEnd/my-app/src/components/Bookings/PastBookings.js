@@ -45,8 +45,8 @@ class PastBookings extends Component {
                     </thead>
                     <tbody>
                     {                     
-                        this.state.bookings.map((result) => (
-                            <PastBookingsItem empId = {result.empID}
+                        this.state.bookings.map((result, index) => (
+                            <PastBookingsItem key= {index} empId = {result.empID }
                             date = {result.bookingDate}
                             time = {result.bookingTime}
                             //no service for now

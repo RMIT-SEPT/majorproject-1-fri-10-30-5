@@ -10,17 +10,19 @@ class WeekCalendar extends Component {
     super();
 
     this.state = {
-      empId: "emp5",
+      data: [],
+      empId: "",
       workingHours: [],
     };
 
-    this.setState({empId: window.location.pathname.substr(1, window.location.pathname.length-14)})
+    // this.setState({empId: window.location.pathname.substr(1, window.location.pathname.length-14)})
   }
 
   componentDidMount(){
     // const authorization = "Some Name" + cookie.load('token').replace("JWT","")
       // var id = props.match.params.id;
-      const empId = this.state.empId;
+      const empId = window.location.pathname.substr(1, window.location.pathname.length-14)
+      // const empId = this.state.empId;
       const url = 'http://localhost:8080/api/workinghours/list/' + empId
       axios.get(url, {
         // headers: { 'Authorization': authorization }
@@ -36,19 +38,18 @@ class WeekCalendar extends Component {
       .catch((error) => {
         console.log("error",error)
       })
+      this.setState({empId: empId})
   }
 
   // Convert the database result into an 
   // interpretable object for the data table
   convertData(dataSet) {
-
     let newData = [];
 
     for(let i = 0; i < dataSet.length; i++) {
   
       let day = moment(dataSet[i]["workDate"]).format("D/M/YYYY").substr(0,2);
       let date;
-
       // console.log(day)
   
       if(parseInt(day) > 10) {

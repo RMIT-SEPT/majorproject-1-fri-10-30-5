@@ -9,10 +9,10 @@ class ProfileEditPage extends Component {
         super(props)
 
         this.state = {
-            uname: 'cust5',
+            uname: 'cus5',
             profile: {
-            fname: '',
-            lname:'',
+            firstName: '',
+            lastName:'',
             name:'',
             address:'',
             phone:'',
@@ -22,6 +22,8 @@ class ProfileEditPage extends Component {
             data: {}
             }
         }
+        this.myChangeHandler = this.myChangeHandler.bind(this);
+        this.mySubmitHandler = this.mySubmitHandler.bind(this);
       }
       
       componentDidMount(){
@@ -33,9 +35,13 @@ class ProfileEditPage extends Component {
             // headers: { 'Authorization': authorization }
           })
           .then(res => {
+            // this.setState({
+            //   profile: res.data
+            // })
             this.setState({
-              profile: res.data
-            })
+              profile: Object.assign({}, this.state.profile, res.data),
+            });
+            console.log("profile",res.data)
           })
           .catch((error) => {
             console.log("error",error)
@@ -46,13 +52,13 @@ class ProfileEditPage extends Component {
         event.preventDefault();
     
         const customer = {
-            fname: this.state.fname,
-            lname:this.state.lname,
-            name: this.state.fname + " " + this.state.lname,
-            address:this.state.address,
-            phone:this.state.phone,
-            userName:this.state.uname,
-            password:this.state.pw
+            firstName: this.state.profile.firstName,
+            lastName:this.state.profile.lastName,
+            name: this.state.profile.firstName + " " + this.state.profile.lastName,
+            address:this.state.profile.address,
+            phone:this.state.profile.phone,
+            userName:this.state.profile.userName,
+            password:this.state.profile.password
         }
         console.log(customer);
     
@@ -66,7 +72,14 @@ class ProfileEditPage extends Component {
     }
     
     myChangeHandler = event => {
-        this.setState({profile: {[event.target.name]: event.target.value}})
+      this.setState({
+        profile: Object.assign({}, this.state.profile, {
+        [event.target.name]: event.target.value,
+        }),
+      });
+      // this.setState({profile: {[event.target.name]: event.target.value}})
+      // console.log("event", event)
+      // console.log("profile", this.state.profile)
     };
 
     render() {
@@ -75,33 +88,44 @@ class ProfileEditPage extends Component {
                 <h1>Update Details Form</h1>
                 <form onSubmit={this.mySubmitHandler}>
                     <div className='form-group'>
-                    <label htmlFor="name">Name</label>
-                    <input name="name" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.name}/>
+                    <label htmlFor="firstName">First Name</label>
+                    <input name="firstName" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.firstName}
+                    value={this.state.profile.firstName}/>
+                    </div>
+                    <br></br>
+                    <div className='form-group'>
+                    <label htmlFor="lastName">Last Name</label>
+                    <input name="lastName" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.lastName}
+                    value={this.state.profile.lastName}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
                     <label htmlFor="address">Address</label>
-                    <input name="address" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.address}/>
+                    <input name="address" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.address}
+                    value={this.state.profile.address}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
                     <label htmlFor="phone">Phone</label>
-                    <input name="phone" type='Phone' onChange={this.myChangeHandler} placeholder={this.state.profile.phone}/>
+                    <input name="phone" type='Phone' onChange={this.myChangeHandler} placeholder={this.state.profile.phone}
+                    value={this.state.profile.phone}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
-                    <label htmlFor="uname">Username</label>
-                    <input name="uname" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.userName}/>
+                    <label htmlFor="userName">Username</label>
+                    <input name="userName" type='text' onChange={this.myChangeHandler} placeholder={this.state.profile.userName}
+                    value={this.state.profile.userName}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
                     <label htmlFor="pw">Password</label>
-                    <input name="pw" type='password' onChange={this.myChangeHandler} placeholder={this.state.profile.password}/>
+                    <input name="pw" type='password' onChange={this.myChangeHandler} placeholder={this.state.profile.password}
+                    value={this.state.profile.password}/>
                     </div>
                     <br></br>
                     <div className='form-group'>
                     <label htmlFor="pwConfirm">Confirm Password</label>
-                    <input name="pwConfirm" type='password' onChange={this.myChangeHandler} />
+                    <input name="pwConfirm" type='password' onChange={this.myChangeHandler} value={this.state.profile.password}/>
                     </div>
                     <br></br>
                     <br></br>
