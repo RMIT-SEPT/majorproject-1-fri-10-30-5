@@ -10,6 +10,11 @@ class WeekCalendar extends Component {
     super();
 
     this.state = {
+      time:'',
+      date:'',
+      rows:'',
+      selectedRows: [],
+      toggledClearRows: false,
       data: [],
       empId: "",
       workingHours: [],
@@ -59,12 +64,12 @@ class WeekCalendar extends Component {
         date = moment(dataSet[i]["workDate"]).format("D/M/YYYY").substr(0,3);
       }
   
-      newData.push({[date]: moment(dataSet[i]["startTime"], "HH:mm").format("h:mm A")});
+      newData.push({[date]: moment(dataSet[i]["startTime"], "HH:mm").format("h:mm A"),
+    service: dataSet[i]["service"]});
       
     }
-
-    
     this.setState({data: newData})
+    console.log(newData)
   };
 
   onSubmit = e => {
@@ -107,6 +112,8 @@ class WeekCalendar extends Component {
     const handleSelection = (state) => {
 
       let booking, date;
+      // let selected = state.selectedRows[0]
+      // console.log("selected", state.selectedRows)
 
       if(state.selectedRows[0] !== undefined) {
         date = Object.keys(state.selectedRows[0]);
@@ -128,6 +135,20 @@ class WeekCalendar extends Component {
       },);
     }
 
+    const onClick = (e) => {
+
+      // e.preventDefault();
+      console.log("event", e)
+      if (e.selectedCount <= 1){
+        this.setState({ toggledClearRows: false })
+        handleSelection(this.state)
+      }else{
+        this.setState({ toggledClearRows: true }); 
+        // alert("Unselect previous booking before selecting another time")
+      }
+      
+    }
+
     return (
       <div>
         <DataTable
@@ -137,7 +158,8 @@ class WeekCalendar extends Component {
           selectableRows
           selectableRowsNoSelectAll
           selectableRowsHighlight
-          onSelectedRowsChange={handleSelection}
+          onSelectedRowsChange={onClick}
+          clearSelectedRows={this.state.toggledClearRows}
         />
 
         <form onSubmit={this.onSubmit}>
