@@ -8,7 +8,8 @@ const Profile = (props) => {
       <h1>Profile for {props.username}</h1>
       <hr/>
       <ul >
-        <li key="name">Name: {props.name}</li>
+        <li key="fname">First Name: {props.fname}</li>
+        <li key="lname">Last Name: {props.lname}</li>
         <li key="phone">Phone: {props.phone}</li>
         <li key="address">Address: {props.address}</li>
       </ul>

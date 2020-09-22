@@ -8,10 +8,10 @@ class ProfilePage extends Component {
         super(props)
 
         this.state = {
-            uname:'cus6',
+            uname:'cus5',
             profile: {
-            fname: '',
-            lname:'',
+            firstName: '',
+            lastName:'',
             name:'',
             address:'',
             phone:'',
@@ -47,7 +47,8 @@ class ProfilePage extends Component {
             {
                     <Profile
                     username={this.state.profile.userName}
-                    name={this.state.profile.name}
+                    fname={this.state.profile.firstName}
+                    lname={this.state.profile.lastName}
                     address={this.state.profile.address}
                     phone={this.state.profile.phone}
                     />

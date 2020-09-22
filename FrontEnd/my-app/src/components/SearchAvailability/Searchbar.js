@@ -9,7 +9,7 @@ class Searchbar extends Component {
         super();
 
         this.state = {
-            custID: 'cust5',
+            custID: 'cus5',
             service: '',
             location: '',
             worker: '',
