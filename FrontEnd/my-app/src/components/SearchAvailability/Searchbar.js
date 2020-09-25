@@ -9,6 +9,9 @@ class Searchbar extends Component {
         super();
 
         this.state = {
+            searchType: 'service',
+            
+
             custID: 'cus5',
             service: '',
             location: '',
@@ -20,6 +23,8 @@ class Searchbar extends Component {
             results: null,
             value:''
         };
+
+        this.onChangeRadio = this.onChangeRadio.bind(this)
     }
 
 
@@ -87,39 +92,44 @@ class Searchbar extends Component {
         return results;
     }
 
+    onChangeRadio = e => {
+
+        this.setState({searchType: e.target.value}, () => {
+            console.log(this.state.searchType)
+        })
+    }
+
     render() {
         return (
             <div>
                 <p id='search-label'>Service Booking Availability</p>
                 <form action='' onSubmit={ this.onSubmit }>
-                    <input 
-                    name= "service"
-                    value = { this.state.service }
+
+                <input 
+                    id='service' 
+                    type='radio' 
+                    name='search' 
+                    value='service' 
+                    onClick={this.onChangeRadio}
+                />
+                <label for='service'>Service</label><br/>
+                <input 
+                    id='worker' 
+                    type='radio' 
+                    name='search' 
+                    value='worker'
+                    onClick={this.onChangeRadio}
+                />
+                <label for='worker'>Worker</label><br/>
+
+                <input 
+                    name= "search"
+                    value = { this.state.search }
                     onChange={this.myChangeHandler}
                     type='text' 
-                    placeholder='Service' 
+                    placeholder='Search' 
                     pattern='[A-Za-z]+' 
                     required='required'
-                    title='Alphabetical characters only'/>
-
-                    <input 
-                    name= "location"
-                    value = { this.state.location }
-                    onChange={this.myChangeHandler}
-                    type='text' 
-                    placeholder='Location' 
-                    pattern='[A-Za-z]+' 
-                    required='required'
-                    title='Alphabetical characters only'/>
-
-                    <input 
-                    name= "worker"
-                    value = { this.state.worker }
-                    onChange={this.myChangeHandler}
-                    type='text' 
-                    placeholder='Worker' 
-                    required='required'
-                    //pattern='[A-Za-z]+' 
                     title='Alphabetical characters only'/>
 
                     <button type='submit'>Search</button>
