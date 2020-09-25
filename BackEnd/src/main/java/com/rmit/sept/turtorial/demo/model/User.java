@@ -4,22 +4,26 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.*;
-import java.util.Date;
-import com.rmit.sept.turtorial.demo.model.Customer;
 
+import java.util.Collection;
+import java.util.Date;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
-public class User {
-//    @OneToOne(mappedBy = "user")
-//    private Customer customer;
+public class User implements UserDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotBlank(message = "Username is required")
     private String userName;
     @NotBlank(message = "Password is required")
     @Size(min=4, message = "Please enter at least 4 characters")
     private String password;
+    @Transient
+    private String confirmPassword;
     @NotBlank(message = "Usertype is required")
     private String userType;
     @JsonFormat(pattern ="yyyy-mm-dd")
@@ -28,6 +32,13 @@ public class User {
     private Date updated_At;
 
     public User() {
+    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -42,8 +53,21 @@ public class User {
         return password;
     }
 
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getUserType() {
@@ -80,11 +104,37 @@ public class User {
         this.updated_At = new Date();
     }
 
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
-//
-//    public Customer getCustomer() {
-//        return this.customer;
-//    }
+/*
+    UserDetails interface methods
+     */
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
+    }
 }
