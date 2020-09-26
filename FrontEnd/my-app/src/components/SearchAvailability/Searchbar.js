@@ -101,37 +101,39 @@ class Searchbar extends Component {
 
     render() {
         return (
-            <div>
-                <p id='search-label'>Service Booking Availability</p>
+            <div id='search'>
+                <h1 className="display-4 text-center">Make a Booking</h1>
+                <p>Bookings can be made through a simple search of service, or through the timetable of a preferred, available worker.</p>
                 <form action='' onSubmit={ this.onSubmit }>
-
-                <input 
-                    id='service' 
-                    type='radio' 
-                    name='search' 
-                    value='service' 
-                    onClick={this.onChangeRadio}
-                />
-                <label for='service'>Service</label><br/>
-                <input 
-                    id='worker' 
-                    type='radio' 
-                    name='search' 
-                    value='worker'
-                    onClick={this.onChangeRadio}
-                />
-                <label for='worker'>Worker</label><br/>
-
-                <input 
-                    name= "search"
-                    value = { this.state.search }
-                    onChange={this.myChangeHandler}
-                    type='text' 
-                    placeholder='Search' 
-                    pattern='[A-Za-z]+' 
-                    required='required'
-                    title='Alphabetical characters only'/>
-
+                    <div id='radio-group'>
+                        <input 
+                            id='service' 
+                            type='radio' 
+                            name='search' 
+                            value='service' 
+                            onClick={this.onChangeRadio}
+                        />
+                        <label for='service'>Service</label><br/>
+                        <input 
+                            id='worker' 
+                            type='radio' 
+                            name='search' 
+                            value='worker'
+                            onClick={this.onChangeRadio}
+                        />
+                        <label for='worker'>Worker</label><br/>
+                        <input 
+                            id='search-bar'
+                            name= "search"
+                            value = { this.state.search }
+                            onChange={this.myChangeHandler}
+                            type='text' 
+                            placeholder='Search' 
+                            pattern='[A-Za-z]+' 
+                            required='required'
+                            title='Alphabetical characters only'
+                        />
+                    </div>
                     <button type='submit'>Search</button>
                 </form>
                 {this.results}
