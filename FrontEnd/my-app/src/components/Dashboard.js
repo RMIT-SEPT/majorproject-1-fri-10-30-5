@@ -3,6 +3,7 @@ import PastBookingsButton from './Bookings/PastBookingsButton';
 import UpcomingBookingsButton from './Bookings/UpcomingBookingsButton';
 import SearchPageButton from './SearchAvailability/SearchPageButton';
 import AddEmployeeButton from './AddEmployee/AddEmployeeButton';
+import AddWorkHoursButton from './AddWorkHours/AddWorkHoursButton';
 import {link, Link} from "react-router-dom";
 
 class Dashboard extends Component {
@@ -10,6 +11,7 @@ class Dashboard extends Component {
         var button;
         if(this.props.user.userType === 'admin') {
             button = <AddEmployeeButton />;
+            button = <AddWorkHoursButton />;
         }
         return (
             <div className="Dashboard">
