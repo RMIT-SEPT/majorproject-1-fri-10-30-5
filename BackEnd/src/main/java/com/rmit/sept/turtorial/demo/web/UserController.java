@@ -1,15 +1,26 @@
 package com.rmit.sept.turtorial.demo.web;
 
 import com.rmit.sept.turtorial.demo.model.User;
+import com.rmit.sept.turtorial.demo.payload.JWTLoginSucessReponse;
+import com.rmit.sept.turtorial.demo.payload.LoginRequest;
+import com.rmit.sept.turtorial.demo.security.JwtTokenProvider;
+import com.rmit.sept.turtorial.demo.services.MapValidationErrorService;
 import com.rmit.sept.turtorial.demo.services.UserService;
 //import org.mindrot.jbcrypt.BCrypt;
+import com.rmit.sept.turtorial.demo.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import static com.rmit.sept.turtorial.demo.security.SecurityConstant.TOKEN_PREFIX;
 
 @CrossOrigin
 @RestController
@@ -21,7 +32,49 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/add")
+    @Autowired
+    private MapValidationErrorService mapValidationErrorService;
+
+    @Autowired
+    private UserValidator userValidator;
+
+    @Autowired
+    private JwtTokenProvider tokenProvider;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result) {
+        // Validate passwords match
+        userValidator.validate(user, result);
+
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if (errorMap != null) return errorMap;
+
+        User newUser = userService.saveUser(user);
+        return  new ResponseEntity<User>(newUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap != null) return errorMap;
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
+
+        return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt));
+    }
+
+        @PostMapping("/add")
     public ResponseEntity<?> createNewUser(@Valid @RequestBody User user, BindingResult result) {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid User Object", HttpStatus.BAD_REQUEST);
