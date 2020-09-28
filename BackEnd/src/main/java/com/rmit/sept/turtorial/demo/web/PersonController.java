@@ -180,7 +180,7 @@ public class PersonController {
         }
     }
 
-    @GetMapping("admin/upcoming-Bookings")
+    @PutMapping("admin/upcoming-Bookings")
     public ResponseEntity<?> getUpcomingBookings()
     {
         List<Booking> bookings = bookingService.findAllPastOrUpcomingBookings(false);
