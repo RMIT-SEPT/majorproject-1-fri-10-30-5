@@ -1,8 +1,6 @@
 package com.rmit.sept.turtorial.demo.web;
 
-import com.rmit.sept.turtorial.demo.model.Booking;
 import com.rmit.sept.turtorial.demo.model.Person;
-import com.rmit.sept.turtorial.demo.services.BookingService;
 import com.rmit.sept.turtorial.demo.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -20,9 +17,6 @@ public class PersonController {
 
     @Autowired
     private PersonService personService;
-
-    @Autowired
-    private BookingService bookingService;
 
     @PostMapping("/employee/add")
     public ResponseEntity<?> createNewEmployee(@RequestBody @Valid Person employee, BindingResult result) {
@@ -168,28 +162,5 @@ public class PersonController {
             return new ResponseEntity<String>("No Person Object", HttpStatus.NOT_FOUND);
         }
     }
-
-    @GetMapping("admin/past-Bookings")
-    public ResponseEntity<?> getPastBookings()
-    {
-        List<Booking> bookings = bookingService.findAllPastOrUpcomingBookings(true);
-        if (bookings.size() != 0){
-            return new ResponseEntity<List<Booking>>(bookings, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PutMapping("admin/upcoming-Bookings")
-    public ResponseEntity<?> getUpcomingBookings()
-    {
-        List<Booking> bookings = bookingService.findAllPastOrUpcomingBookings(false);
-        if (bookings.size() != 0){
-            return new ResponseEntity<List<Booking>>(bookings, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
-        }
-    }
-
 }
 

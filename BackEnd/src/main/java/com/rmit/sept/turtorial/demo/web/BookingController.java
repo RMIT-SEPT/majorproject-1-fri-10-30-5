@@ -100,4 +100,26 @@ public class BookingController {
             return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("admin/past-Bookings")
+    public ResponseEntity<?> getPastBookings()
+    {
+        List<Booking> bookings = bookingService.findAllPastOrUpcomingBookings(true);
+        if (bookings.size() != 0){
+            return new ResponseEntity<List<Booking>>(bookings, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("admin/upcoming-Bookings")
+    public ResponseEntity<?> getUpcomingBookings()
+    {
+        List<Booking> bookings = bookingService.findAllPastOrUpcomingBookings(false);
+        if (bookings.size() != 0){
+            return new ResponseEntity<List<Booking>>(bookings, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Booking Objects", HttpStatus.NOT_FOUND);
+        }
+    }
 }
