@@ -6,6 +6,7 @@ import com.rmit.sept.turtorial.demo.model.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -105,5 +106,38 @@ public class BookingService {
         String date = year + month + day;
 
         return Integer.parseInt(date);
+    }
+
+    public List<Booking> findAllPastOrUpcomingBookings(boolean past)
+    {
+        List<Booking> pastBookings = new ArrayList<Booking>();
+        List<Booking> upcomingBookings = new ArrayList<Booking>();
+        String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        int dateInt = Integer.parseInt(date);
+        String time = new SimpleDateFormat("HHmm").format(new Date());
+        int timeInt = Integer.parseInt(time);
+        List<Booking> allBookings = bookingRepository.findAll();
+        if(!allBookings.isEmpty()) {
+            for (Booking booking : allBookings) {
+                int getDateInt = dateToInt(booking.getBookingDate());
+                if(getDateInt < dateInt){
+                    pastBookings.add(booking);
+                }
+                else if (getDateInt == dateInt) {
+                    if(booking.getBookingTime() <= timeInt) {
+                        pastBookings.add(booking);
+                    }else{
+                        upcomingBookings.add(booking);
+                    }
+                }else{
+                    upcomingBookings.add(booking);
+                }
+            }
+        }
+        if(past){
+            return pastBookings;
+        }else{
+            return upcomingBookings;
+        }
     }
 }
