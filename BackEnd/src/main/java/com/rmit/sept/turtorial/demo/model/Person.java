@@ -32,9 +32,9 @@ public class Person {
     @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters")
     @Size(min=10,max =10, message = "Please enter a 10 digit number")
     private String phone;
-    private Boolean emplChecked = false;
-    private Boolean adminChecked = false;
-    private Boolean custChecked = false;
+    private Boolean employeeCheck = false;
+    private Boolean adminCheck = false;
+    private Boolean customerCheck = false;
     @JsonFormat(pattern ="yyyy-mm-dd")
     private Date created_At;
     @JsonFormat(pattern ="yyyy-mm-dd")
@@ -106,17 +106,17 @@ public class Person {
         this.phone = phone;
     }
 
-    public Boolean getEmplChecked() { return emplChecked; }
+    public Boolean getEmployeeCheck() { return employeeCheck; }
 
-    public void setEmplChecked(Boolean workerChecked) { this.emplChecked = workerChecked; }
+    public void setEmployeeCheck(Boolean workerChecked) { this.employeeCheck = workerChecked; }
 
-    public Boolean getAdminChecked() { return adminChecked; }
+    public Boolean getAdminCheck() { return adminCheck; }
 
-    public void setAdminChecked(Boolean adminChecked) { this.adminChecked = adminChecked; }
+    public void setAdminCheck(Boolean adminChecked) { this.adminCheck = adminChecked; }
 
-    public Boolean getCustChecked() { return custChecked; }
+    public Boolean getCustomerCheck() { return customerCheck; }
 
-    public void setCustChecked(Boolean custChecked) { this.custChecked = custChecked; }
+    public void setCustomerCheck(Boolean custChecked) { this.customerCheck = custChecked; }
 
     public Date getCreated_At() {
         return created_At;

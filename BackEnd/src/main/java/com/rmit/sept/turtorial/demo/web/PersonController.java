@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -20,7 +21,7 @@ public class PersonController {
 
     @PostMapping("/employee/add")
     public ResponseEntity<?> createNewEmployee(@RequestBody @Valid Person employee, BindingResult result) {
-        if (result.hasErrors() || employee.getEmplChecked() != true) {
+        if (result.hasErrors() || employee.getEmployeeCheck() != true) {
             return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
         }
         Person person = personService.addPerson(employee);
@@ -33,7 +34,7 @@ public class PersonController {
 
     @PostMapping("/admin/add")
     public ResponseEntity<?> createNewAdmin(@RequestBody @Valid Person admin, BindingResult result) {
-        if (result.hasErrors() || admin.getAdminChecked() != true) {
+        if (result.hasErrors() || admin.getAdminCheck() != true) {
             return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
         }
         Person person = personService.addPerson(admin);
@@ -46,7 +47,7 @@ public class PersonController {
 
     @PostMapping("/customer/add")
     public ResponseEntity<?> createNewCustomer(@RequestBody @Valid Person customer, BindingResult result) {
-        if (result.hasErrors() || customer.getCustChecked() != true) {
+        if (result.hasErrors() || customer.getCustomerCheck() != true) {
             return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
         }
         Person person = personService.addPerson(customer);
@@ -59,7 +60,7 @@ public class PersonController {
 
     @PutMapping("/employee/update")
     public ResponseEntity<?> updateCustomer(@Valid @RequestBody Person employee, BindingResult result) {
-        if (result.hasErrors() || employee.getEmplChecked() != true) {
+        if (result.hasErrors() || employee.getEmployeeCheck() != true) {
             return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
         }
         Person employee1 = personService.updatePerson(employee);
@@ -72,7 +73,7 @@ public class PersonController {
 
     @PutMapping("/admin/update")
     public ResponseEntity<?> updateAdmin(@Valid @RequestBody Person admin, BindingResult result) {
-        if (result.hasErrors() || admin.getAdminChecked() != true) {
+        if (result.hasErrors() || admin.getAdminCheck() != true) {
             return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
         }
         Person admin1 = personService.updatePerson(admin);
@@ -86,7 +87,7 @@ public class PersonController {
 
     @PutMapping("/customer/update")
     public ResponseEntity<?> updateEmployee(@Valid @RequestBody Person customer, BindingResult result) {
-        if (result.hasErrors() || customer.getCustChecked() != true) {
+        if (result.hasErrors() || customer.getCustomerCheck() != true) {
             return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
         }
         Person customer1 = personService.updatePerson(customer);
@@ -100,8 +101,8 @@ public class PersonController {
     @DeleteMapping("employee/delete/{userName}")
     public ResponseEntity<?> deleteEmployee(@Valid @PathVariable String userName) {
         String person1 = personService.deletePerson(userName);
-        Boolean isEmpl = personService.getPersonByUserName(userName).getEmplChecked();
-        if (person1 != null && isEmpl == true) {
+        Boolean isEmpl = personService.getPersonByUserName(userName).getEmployeeCheck();
+        if (person1 != null && isEmpl) {
             return new ResponseEntity<String>(person1, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<String>("No Person Object", HttpStatus.NOT_FOUND);
@@ -111,7 +112,7 @@ public class PersonController {
     @DeleteMapping("admin/delete/{userName}")
     public ResponseEntity<?> deleteAdmin(@Valid @PathVariable String userName) {
         String person1 = personService.deletePerson(userName);
-        Boolean isAdmin = personService.getPersonByUserName(userName).getAdminChecked();
+        Boolean isAdmin = personService.getPersonByUserName(userName).getAdminCheck();
         if (person1 != null && isAdmin) {
             return new ResponseEntity<String>(person1, HttpStatus.ACCEPTED);
         } else {
@@ -122,7 +123,7 @@ public class PersonController {
     @DeleteMapping("customer/delete/{userName}")
     public ResponseEntity<?> deleteCustomer(@Valid @PathVariable String userName) {
         String person1 = personService.deletePerson(userName);
-        Boolean isCust = personService.getPersonByUserName(userName).getCustChecked();
+        Boolean isCust = personService.getPersonByUserName(userName).getCustomerCheck();
         if (person1 != null && isCust) {
             return new ResponseEntity<String>(person1, HttpStatus.ACCEPTED);
         } else {
@@ -134,7 +135,7 @@ public class PersonController {
     public ResponseEntity<?> findEmployee(@Valid @PathVariable String userName) {
 
         Person user = personService.getPersonByUserName(userName);
-        if (user != null && user.getEmplChecked()) {
+        if (user != null && user.getEmployeeCheck()) {
             return new ResponseEntity<Person>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<String>("No Person Object", HttpStatus.NOT_FOUND);
@@ -145,7 +146,7 @@ public class PersonController {
     public ResponseEntity<?> findAdmin(@Valid @PathVariable String userName) {
 
         Person user = personService.getPersonByUserName(userName);
-        if (user != null && user.getAdminChecked()) {
+        if (user != null && user.getAdminCheck()) {
             return new ResponseEntity<Person>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<String>("No Person Object", HttpStatus.NOT_FOUND);
@@ -156,11 +157,26 @@ public class PersonController {
     public ResponseEntity<?> findCustomer(@Valid @PathVariable String userName) {
 
         Person user = personService.getPersonByUserName(userName);
-        if (user != null && user.getCustChecked()) {
+        if (user != null && user.getCustomerCheck()) {
             return new ResponseEntity<Person>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<String>("No Person Object", HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("employee/list/")
+    public ResponseEntity<?> findAllEmployees() {
+//        if (result.hasErrors()){
+//            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
+//        }
+        List<Person> employees = personService.getEmployees();
+        if (employees.size() != 0){
+            return new ResponseEntity<List<Person>>(employees, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Person Objects", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //Fix update logic
 }
 

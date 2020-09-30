@@ -8,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PersonService {
     @Autowired
     private PersonRepository personRepository;
-
-
-
 
     public Person addPerson(Person person) {
 
@@ -50,5 +48,11 @@ public class PersonService {
     public String deletePerson(String userName){
         personRepository.deleteByUserName(userName);
         return "Person " + userName + " has been successfully removed";
+    }
+
+    //Get employees list
+    public List<Person> getEmployees()
+    {
+        return personRepository.findAllByEmployeeCheckIsTrue();
     }
 }
