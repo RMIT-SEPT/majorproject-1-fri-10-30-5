@@ -16,7 +16,7 @@ class Searchbar extends Component {
             testServiceRes: ["emp5", "emp6"],
 
             // results listed when searching for a worker
-            testWorkerRes: ["emp10"],
+            testWorkerRes: ["emp10", "emp5", "emp6"],
             
             custID: 'cus5',
             service: '',
@@ -65,6 +65,28 @@ class Searchbar extends Component {
     runWorkerQuery = e => {
 
       // query the database to check if a worker exists
+      // if(this.validate()) {
+      //   console.log(this.state.search)
+      //   const url = 'http://localhost:8080/api/user/' + this.state.search
+      //   this.setState({ loading: true });
+      //   axios.get(url, {
+      //   // headers: { 'Authorization': authorization }
+      //   })
+      //   .then(res => {
+      //     console.log(res.data)
+      //     this.setState({
+      //     results: res.data,
+      //     loading: false,
+      //     searched: true
+      //     })
+      //   })
+      //   .catch((error) => {
+      //     console.log("error",error)
+      //   })
+      // }
+      // else {
+      //   alert("Invalid search");
+      // }
 
       let found = false;
 
@@ -86,15 +108,6 @@ class Searchbar extends Component {
     runServiceQuery = e => {
 
       // query the database to retrieve all workers that do the service
-
-      // const searchQuery = {
-      //   service: this.state.service,
-      //   location: this.state.location,
-      //   worker: this.state.worker,
-      //   time: this.state.time,
-      //   date:this.state.date
-      // }
-
       // if(this.validate()) {
       //   const empID = this.state.worker
       //   const service = this.state.service
@@ -142,7 +155,7 @@ class Searchbar extends Component {
 
       else  if(this.state.searchType === "worker") {
 
-        if(this.state.results) {
+        if(this.state.results !== null) {
           results = <WorkerResultsItem name={this.state.results}/>
         } else {
           return (<p>Sorry! We couldn't find a worker by that name</p>)
@@ -154,7 +167,7 @@ class Searchbar extends Component {
 
     onChangeSearchType = e => {
 
-      this.setState({searchType: e.target.value})
+      this.setState({searchType: e.target.value, results: null})
     }
 
     render() {
