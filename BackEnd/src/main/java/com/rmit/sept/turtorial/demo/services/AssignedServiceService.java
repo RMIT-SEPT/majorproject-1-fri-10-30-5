@@ -12,7 +12,7 @@ public class AssignedServiceService
 {
     @Autowired
     AssignedServiceRepository assignedServiceRepository;
-    
+
     //Post assigned service
     public AssignedService addAssignedService(AssignedService assignedService)
     {
