@@ -1,7 +1,7 @@
 package com.rmit.sept.turtorial.demo.web;
 
-import com.rmit.sept.turtorial.demo.model.EmpService;
-import com.rmit.sept.turtorial.demo.services.EmpServiceService;
+import com.rmit.sept.turtorial.demo.model.Service;
+import com.rmit.sept.turtorial.demo.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,33 +14,32 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/service")
-public class EmpServiceController
+public class ServiceController
 {
     @Autowired
-    EmpServiceService empServiceService;
+    ServiceService serviceService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> createService(@Valid @RequestBody EmpService service, BindingResult result) {
+    public ResponseEntity<?> createService(@Valid @RequestBody Service service, BindingResult result) {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Service Object", HttpStatus.BAD_REQUEST);
         }
-        EmpService service1 = empServiceService.addService(service);
+        Service service1 = serviceService.addService(service);
         if (service1 != null) {
-            return new ResponseEntity<EmpService>(service1, HttpStatus.CREATED);
+            return new ResponseEntity<Service>(service1, HttpStatus.CREATED);
         }else{
             return new ResponseEntity<String>("Service Object Could Not Be Created", HttpStatus.CONFLICT);
         }
-
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateService(@Valid @RequestBody EmpService service, BindingResult result) {
+    public ResponseEntity<?> updateService(@Valid @RequestBody Service service, BindingResult result) {
         if (result.hasErrors()){
             return new ResponseEntity<String>("Invalid Service Object", HttpStatus.BAD_REQUEST);
         }
-        EmpService service1 = empServiceService.updateService(service);
+        Service service1 = serviceService.updateService(service);
         if (service1 != null){
-            return new ResponseEntity<EmpService>(service1, HttpStatus.OK);
+            return new ResponseEntity<Service>(service1, HttpStatus.OK);
         }else{
             return new ResponseEntity<String>("Service Object Could Not Be Updated", HttpStatus.CONFLICT);
         }
@@ -49,9 +48,9 @@ public class EmpServiceController
     @GetMapping("/list")
     public ResponseEntity<?> findAllServices()
     {
-        List<EmpService> services = empServiceService.getService();
+        List<Service> services = serviceService.getService();
         if (services.size() != 0){
-            return new ResponseEntity<List<EmpService>>(services, HttpStatus.OK);
+            return new ResponseEntity<List<Service>>(services, HttpStatus.OK);
         }else{
             return new ResponseEntity<String>("No Service Objects", HttpStatus.NOT_FOUND);
         }

@@ -47,7 +47,7 @@ public class AssignedServiceController
     @GetMapping("/list/{userName}")
     public ResponseEntity<?> getAssignedServiceByEmployee(@Valid@PathVariable String userName)
     {
-        List<AssignedService> assignedServices = assignedServiceService.getAssignedServicesByServiceId(userName);
+        List<AssignedService> assignedServices = assignedServiceService.getAssignedServicesByUserName(userName);
         if (assignedServices.size() != 0){
             return new ResponseEntity<List<AssignedService>>(assignedServices, HttpStatus.OK);
         }else{
