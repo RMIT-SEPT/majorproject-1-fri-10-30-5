@@ -2,14 +2,14 @@ package com.rmit.sept.turtorial.demo.Repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import com.rmit.sept.turtorial.demo.model.EmpService;
+import com.rmit.sept.turtorial.demo.model.Service;
 
 import java.util.List;
 
 @Repository
-public interface EmpServiceRepository extends CrudRepository<EmpService, Long>
+public interface ServiceRepository extends CrudRepository<Service, Long>
 {
-    EmpService findByiD(long iD);
+    Service findByiD(long iD);
 
-    List<EmpService> findAll();
+    List<Service> findAll();
 }

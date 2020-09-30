@@ -10,8 +10,11 @@ import java.util.List;
 public interface PersonRepository extends CrudRepository<Person, String> {
 
     Person findPersonByUserName(String userName);
+
     Person deleteByUserName(String userName);
+
 //    Person findAllByAdminCheckIsTrue();
 //    List<Person> findAllByCustomerCheckIsTrue();
+
     List<Person> findAllByEmployeeCheckIsTrue();
 }

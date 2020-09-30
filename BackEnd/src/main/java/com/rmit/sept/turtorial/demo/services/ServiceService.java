@@ -1,30 +1,30 @@
 package com.rmit.sept.turtorial.demo.services;
 
-import com.rmit.sept.turtorial.demo.Repositories.EmpServiceRepository;
+import com.rmit.sept.turtorial.demo.Repositories.ServiceRepository;
+import com.rmit.sept.turtorial.demo.model.AssignedService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.rmit.sept.turtorial.demo.model.EmpService;
+import com.rmit.sept.turtorial.demo.model.Service;
 
 import java.util.Date;
 import java.util.List;
 
 
-@Service
-public class EmpServiceService
+@org.springframework.stereotype.Service
+public class ServiceService
 {
     @Autowired
-    EmpServiceRepository empServiceRepository;
+    ServiceRepository serviceRepository;
 
     //Post service
-    public EmpService addService(EmpService service) { return empServiceRepository.save(service); }
+    public Service addService(Service service) { return serviceRepository.save(service); }
 
     //Get list of services
-    public List<EmpService> getService() { return empServiceRepository.findAll(); }
+    public List<Service> getService() { return serviceRepository.findAll(); }
 
     //Update a service
-    public EmpService updateService(EmpService service)
+    public Service updateService(Service service)
     {
-        EmpService service1 = empServiceRepository.findByiD(service.getiD());
+        Service service1 = serviceRepository.findByiD(service.getiD());
         if (service1 != null)
         {
             service1.setServiceId(service.getServiceId());
@@ -32,7 +32,7 @@ public class EmpServiceService
             service1.setDescription(service.getDescription());
             service1.setDuration(service.getDuration());
             service1.setUpdated_At(new Date());
-            return empServiceRepository.save(service1);
+            return serviceRepository.save(service1);
         }
 
         return null;

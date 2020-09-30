@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
-public class EmpService
+public class Service
 {
     @Id
     @Min(value = 1, message = "must be atleast 1 character")
@@ -33,6 +33,8 @@ public class EmpService
     public void setServiceId(long serviceId) { this.serviceId = serviceId; }
 
     public long getiD() { return iD; }
+
+    public void setiD(long iD){this.iD = iD;}
 
     public String getName() { return name; }
 

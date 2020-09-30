@@ -35,9 +35,9 @@ public class Person {
     private Boolean employeeCheck = false;
     private Boolean adminCheck = false;
     private Boolean customerCheck = false;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date created_At;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
 
 

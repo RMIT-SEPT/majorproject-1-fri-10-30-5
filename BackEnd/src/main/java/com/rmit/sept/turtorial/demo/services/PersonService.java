@@ -3,7 +3,6 @@ package com.rmit.sept.turtorial.demo.services;
 
 import com.rmit.sept.turtorial.demo.Repositories.PersonRepository;
 import com.rmit.sept.turtorial.demo.model.Person;
-import com.rmit.sept.turtorial.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
