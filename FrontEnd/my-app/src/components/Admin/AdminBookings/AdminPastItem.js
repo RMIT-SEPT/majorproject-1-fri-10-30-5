@@ -8,11 +8,6 @@ function PastBookingRow(props) {
       <td id = 'empID'>{data.empID}</td>
       <td id = 'date'>{Moment(data.bookingDate).format("DD/MM/YYYY")}</td>
       <td id = 'time'>{(data.bookingTime)}</td>
-      <td>
-    </td>
-      <td>
-
-      </td>
     </tr>
   ));
 }

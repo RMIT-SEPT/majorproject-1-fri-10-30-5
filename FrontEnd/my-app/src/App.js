@@ -33,7 +33,7 @@ class App extends Component {
     this.state = {
         user: {
           username: "cus6",
-          userType: "customer"
+          userType: "admin"
         }
     }
   }

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import BookingRow from "./AdminUpcomingItem";
-//import '../src/css/AdminBookings.css';
+import '../../../css/Table.css'
 import React, { useState, useEffect } from "react";
 
     function AdminUpcomingBooking() {
@@ -65,14 +65,11 @@ import React, { useState, useEffect } from "react";
             window.location.reload(false);
             
           }
-
-
-    
         return (
             <div>
-             
-              <table className="table" key={stateBooking.id}>
-                <thead>
+            <h5 className="display-4 text-center">Upcoming Bookings</h5>            
+              <table className="table table-striped" key={stateBooking.id}>
+                <thead className = "thead">
                   <tr>
               
                    <th scope="col">Customer ID</th>
@@ -82,7 +79,7 @@ import React, { useState, useEffect } from "react";
                     <th scope="col">Status</th>
                     <th>
                     
-                    <input
+                    <input className = "admin-checkbox"
                       type="checkbox"
                       onChange={e => {
                         let value = e.target.checked;

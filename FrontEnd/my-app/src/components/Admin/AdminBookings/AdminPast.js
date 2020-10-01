@@ -1,6 +1,7 @@
 import axios from 'axios'
 import BookingRow from "./AdminPastItem";
 import React, { useState, useEffect } from "react";
+import "../../../css/Table.css"
 
     function AdminPastBooking() {
         
@@ -40,19 +41,15 @@ import React, { useState, useEffect } from "react";
     
         return (
             <div>
-             
-              <table className="table" key={stateBooking.id}>
-                <thead>
+            <h5 className="display-4 text-center">Past Bookings</h5> 
+              <table className="table table-striped" key={stateBooking.id}>
+                <thead className = "thead">
                   <tr>
               
                    <th scope="col">Customer ID</th>
                     <th scope="col">Employee ID</th>
                     <th scope="col">Booking Date</th>
                     <th scope="col">Booking Time</th>
-                    <th>
-                    
-      
-                  </th>
                   </tr>
                 </thead>
                 <tbody>

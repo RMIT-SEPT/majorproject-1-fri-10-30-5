@@ -1,5 +1,6 @@
 import React from "react";
 import Moment from 'moment';
+import '../../../css/Table.css'
 
 function UpcomingBookingRow(props) {
   return props.stateBooking.map((data,index) => (
@@ -10,7 +11,7 @@ function UpcomingBookingRow(props) {
       <td id = 'time'>{(data.bookingTime)}</td>
       <td id = 'status'>{data.bookingStatus}</td>
       <td>
-      <input
+      <input className = "admin-checkbox"
         type="checkbox"
         checked={data.select}
         onChange={e => {
@@ -26,9 +27,6 @@ function UpcomingBookingRow(props) {
         }}
       />
     </td>
-      <td>
-
-      </td>
     </tr>
   ));
 }
