@@ -56,12 +56,13 @@ myChangeHandler = event => {
 render(){
   return (
     <div className="drop-down">
-        <p>Employee User</p>
+        <h5>Employee User:</h5>
             <select name = "userName"  onChange = {this.myChangeHandler}>{
               this.state.employees.map((employee,index) => <option key={index} value={employee.userName} >{employee.userName}  </option>)}
             </select>
             <br></br>
-        <p>Service Name</p>
+            <br></br>
+            <h5>Service Name:</h5>
               <select  name = "serviceId"   onChange = {this.myChangeHandler}>{
                 this.state.services.map((service,index) => <option key={index} value= {service.serviceId} >{service.name}</option>) }
               </select>
