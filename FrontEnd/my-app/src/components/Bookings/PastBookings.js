@@ -1,6 +1,7 @@
 import PastBookingsItem from '../../components/Bookings/PastBookingsItem'
 import axios from "axios";
 import React, { Component } from 'react'
+import "../../css/Table.css"
 
 
 class PastBookings extends Component {
@@ -34,13 +35,13 @@ class PastBookings extends Component {
         let hasBookings = this.state.bookings;
         const results = () => {
             if(hasBookings !== null) {
-                return  <table className = "table">
-                    <thead>
+                return  <table className = "table table-striped">
+                    <thead className = "thead">
                         <tr>
-                            <th>Worker</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Status</th>
+                            <th scope = "col">Worker</th>
+                            <th scope = "col">Date</th>
+                            <th scope = "col">Time</th>
+                            <th scope = "col">Status</th>
                         </tr> 
                     </thead>
                     <tbody>

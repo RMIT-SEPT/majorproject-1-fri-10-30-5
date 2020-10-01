@@ -30,7 +30,11 @@ import static com.rmit.sept.turtorial.demo.security.SecurityConstant.SIGN_UP_URL
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+<<<<<<< HEAD
     JwtAuthenticationEntryPoint unauthorizedHandler;
+=======
+    private JwtAuthenticationEntryPoint unauthorizedHandler;
+>>>>>>> registerUser
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;

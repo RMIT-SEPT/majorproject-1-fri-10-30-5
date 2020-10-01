@@ -1,0 +1,9 @@
+.profile-items {
+    display: block;
+    grid-gap: 10px;
+    list-style-type: none;
+    text-align: center;
+    width: 70vw;
+    justify-content: end;
+    margin-right: -20%
+}
