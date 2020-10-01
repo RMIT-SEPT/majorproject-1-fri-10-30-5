@@ -12,10 +12,10 @@ import java.util.Date;
 public class Service
 {
     @Id
-    @Min(value = 1, message = "must be atleast 1 character")
-    private long serviceId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long iD;
+    @Min(value = 1, message = "must be atleast 1 character")
+    private long serviceId;
     @NotBlank(message = "Name is required")
     private String name;
     @NotBlank(message = "Description is required")
