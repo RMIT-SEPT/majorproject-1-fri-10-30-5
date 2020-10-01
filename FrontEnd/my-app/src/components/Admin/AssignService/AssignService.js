@@ -68,7 +68,7 @@ render(){
               </select>
         <br></br>
         <br></br>
-        <button className="btn btn-primary btn-sm m-2"
+        <button className="btn btn-primary btn-sm m-2" style = {{backgroundColor: "#341930",border: "1px solid #341930"}}
           onClick={() => {
             this.mySubmitHandler();
         }}

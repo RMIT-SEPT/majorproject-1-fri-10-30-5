@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -14,8 +15,8 @@ public class Service
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long iD;
-    @Min(value = 1, message = "must be atleast 1 character")
-    private long serviceId;
+    @Size(min=1, message = "Please enter a 10 digit number")
+    private String serviceId;
     @NotBlank(message = "Name is required")
     private String name;
     @NotBlank(message = "Description is required")
@@ -28,9 +29,9 @@ public class Service
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
 
-    public long getServiceId() { return serviceId; }
+    public String getServiceId() { return serviceId; }
 
-    public void setServiceId(long serviceId) { this.serviceId = serviceId; }
+    public void setServiceId(String serviceId) { this.serviceId = serviceId; }
 
     public long getiD() { return iD; }
 

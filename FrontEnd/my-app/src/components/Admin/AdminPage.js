@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import AddEmployeeButton from './AddEmployee/AddEmployeeButton';
 import AddServiceButton from './AddService/AddServiceButton';
 import AddWorkHoursButton from './AddWorkHours/AddWorkHoursButton';
+import AdminUpcomingButton from './AdminBookings/AdminUpcomingButton';
+import AdminPastButton from './AdminBookings/AdminPastButton';
+import AssignServiceButton from './AssignService/AssignServiceButton';
 
 class AdminPage extends Component {
     render() {
@@ -16,6 +19,16 @@ class AdminPage extends Component {
                 <br/>
                 <br/>
                 <AddWorkHoursButton />
+                <br/>
+                <br/>
+                <AdminPastButton />
+                <br/>
+                <br/>
+                <AdminUpcomingButton />
+                <br/>
+                <br/>
+                <AssignServiceButton />
+             
             </div>
 
         )

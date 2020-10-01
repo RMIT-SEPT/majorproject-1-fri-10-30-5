@@ -2,35 +2,43 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export default class AddService extends Component {
-//   constructor(props) {
+  constructor(props) {
 
-
-//     this.state = {
-//     };
-//   }
+    super(props);
+    this.state = {
+      serviceId: "",
+      name:"",
+      description:"",
+      duration:""
+    };
+  }
 
   myChangeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   mySubmitHandler = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
 
-    // const service = {
-    // };
-    // console.log(employee);
+    const service = {
+      serviceId:this.state.serviceId,
+      name:this.state.name,
+      description:this.state.description,
+      duration:this.state.duration
+    };
+    console.log(service);
 
-    // axios
-    //   .post("http://localhost:8080/api/employee/add", employee)
-    //   .then(
-    //     (
-    //       res //showOutput(res))
-    //     ) => {
-    //       console.log(res);
-    //       console.log(res.data);
-    //     }
-    //   )
-    //   .catch((err) => console.error(err));
+    axios
+      .post("http://localhost:8080/api/service/add", service)
+      .then(
+        (
+          res //showOutput(res))
+        ) => {
+          console.log(res);
+          console.log(res.data);
+        }
+      )
+      .catch((err) => console.error(err));
   };
 
   render() {
@@ -42,9 +50,19 @@ export default class AddService extends Component {
           <form id="addServiceForm" onSubmit={this.mySubmitHandler}>
             <h3>Add Service</h3>
             <div className="form-group">
-              <label htmlFor="serviceName">Service name</label>
+            <label htmlFor="serviceId">Service Id</label>
+            <input
+              name="serviceId"
+              type="text"
+              className="form-control"
+              onChange={this.myChangeHandler}
+              placeholder="Service Id"
+            />
+          </div>
+            <div className="form-group">
+              <label htmlFor="name">Service name</label>
               <input
-                name="serviceName"
+                name="name"
                 type="text"
                 className="form-control"
                 onChange={this.myChangeHandler}
@@ -52,9 +70,9 @@ export default class AddService extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="desc">Description</label>
+              <label htmlFor="description">Description</label>
               <textarea
-                name="desc"
+                name="description"
                 className="form-control"
                 type="textarea"
                 rows="3"

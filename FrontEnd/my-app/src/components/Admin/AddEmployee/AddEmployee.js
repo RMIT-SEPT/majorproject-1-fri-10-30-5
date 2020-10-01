@@ -14,9 +14,6 @@ export default class AddEmployee extends Component {
       phone: "",
       userName: "",
       pw: "",
-      employeeCheck: "",
-      adminCheck: "",
-      customerCheck: ""
     };
   }
 
@@ -36,14 +33,12 @@ export default class AddEmployee extends Component {
       userName: this.state.userName,
       password: this.state.pw,
       admin: this.state.admin,
-      employeeCheck: this.state.employeeCheck,
-      adminCheck: this.state.adminCheck,
-      customerCheck: this.state.customerCheck
+      employeeCheck: true,
     };
     console.log(employee);
     
     axios
-      .post("http://localhost:8080/api/employee/add", employee)
+      .post("http://localhost:8080/api/person/add", employee)
       .then(
         (
           res //showOutput(res))

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import BookingRow from "./AdminUpcomingItem";
+//import '../src/css/AdminBookings.css';
 import React, { useState, useEffect } from "react";
 
     function AdminUpcomingBooking() {
@@ -104,7 +105,7 @@ import React, { useState, useEffect } from "react";
                 </tbody> 
               </table>
               <button
-             className="btn btn-primary btn-sm m-2"
+             className="btn btn-primary btn-sm m-2" style = {{backgroundColor: "#341930",border: "1px solid #341930"}}
               onClick={() => {
                   cancelBooking();
               }}
