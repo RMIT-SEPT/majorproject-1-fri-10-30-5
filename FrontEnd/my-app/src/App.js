@@ -19,6 +19,9 @@ import WorkerPage from './components/Worker/WorkerPage'
 import WorkerBooking from './components/Bookings/WorkerBooking';
 import AddEmployee from './components/AddEmployee/AddEmployee';
 import AddWorkHours from './components/AddWorkHours/AddWorkHours';
+import AddService from './components/AddService/AddService';
+import AssignService from './components/AssignService/AssignService';
+import AdminUpcoming from './components/AdminBookings/AdminUpcoming';
 
 
 class App extends Component {
@@ -50,9 +53,12 @@ render() {
           <Route exact path="/:empId/workinghours" component={WorkerBooking} />
           <Route exact path="/addEmployee" component={() => <AddEmployee user = {this.state.user} />} />
           <Route exact path="/addWorkhours" component={AddWorkHours} />
+          <Route exact path="/addService" component={AddService} />
+          <Route exact path="/assignService" component={AssignService} />
           <Route exact path="/homepage" component={Homepage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/admin/upcoming" component={AdminUpcoming} />
         </div>
       </Router>
     </Provider>

@@ -55,7 +55,7 @@ public class BookingService {
 
     //put services
     public Booking updateBooking(Booking booking) {
-        Booking booking1 = bookingRepository.findBookingByCustIDEquals(booking.getCustID());
+        Booking booking1 = bookingRepository.findBookingById(booking.getId());
         if (booking1 != null){
             booking1.setBookingStatus(booking.getBookingStatus());
             booking1.setUpdated_At(new Date());

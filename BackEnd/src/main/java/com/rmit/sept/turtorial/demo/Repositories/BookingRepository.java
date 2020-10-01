@@ -14,6 +14,7 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
     Booking findBookingByCustIDEquals(String custID);
 
     Booking findBookingByCustIDEqualsAndIdEquals(String custID, Long bID);
+    Booking findBookingById(Long bID);
 
     List<Booking> findAllByCustIDEquals(String custID);
 

@@ -164,7 +164,7 @@ public class PersonController {
         }
     }
 
-    @GetMapping("employee/list/")
+    @GetMapping("employee/list")
     public ResponseEntity<?> findAllEmployees() {
 //        if (result.hasErrors()){
 //            return new ResponseEntity<String>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
