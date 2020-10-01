@@ -28,13 +28,18 @@ public class PersonService {
     //put services
     public Person updatePerson(Person person) {
         Person person1 = personRepository.findPersonByUserName(person.getUserName());
-        if (person1 != null){
+        if (person1 != null)
+        {
+            //person1.setUserName(person.getUserName());
             person1.setFirstName(person.getFirstName());
             person1.setLastName(person.getLastName());
             person1.setPassword(person.getPassword());
             person1.setPhone(person.getPhone());
             person1.setAddress(person.getAddress());
             person1.setUpdated_At(new Date());
+            person1.setEmployeeCheck(person.getEmployeeCheck());
+            person1.setCustomerCheck(person.getCustomerCheck());
+            person1.setAdminCheck(person.getAdminCheck());
             return personRepository.save(person1);
         }
         else{
@@ -53,5 +58,11 @@ public class PersonService {
     public List<Person> getEmployees()
     {
         return personRepository.findAllByEmployeeCheckIsTrue();
+    }
+
+    //Get employees list
+    public List<Person> getCustomers()
+    {
+        return personRepository.findAllByCustomerCheckIsTrue();
     }
 }

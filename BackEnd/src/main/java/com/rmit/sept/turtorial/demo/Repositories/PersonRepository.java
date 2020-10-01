@@ -17,4 +17,6 @@ public interface PersonRepository extends CrudRepository<Person, String> {
 //    List<Person> findAllByCustomerCheckIsTrue();
 
     List<Person> findAllByEmployeeCheckIsTrue();
+
+    List<Person> findAllByCustomerCheckIsTrue();
 }

@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.*;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+
 import java.util.Date;
 
 
@@ -16,6 +18,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "Username is required")
+    @Column(unique = true)
     private String userName;
     @NotBlank(message = "Password is required")
     @Size(min=4,max =25, message = "Please enter 4 to 25 characters")

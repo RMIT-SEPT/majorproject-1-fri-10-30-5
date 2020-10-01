@@ -474,7 +474,7 @@ public class PersonControllerTest
         Person admin1 = new Person(1L,"admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
 
         when(personService.getPersonByUserName(admin1.getUserName())).thenReturn(admin1);
-        mvc.perform(get("/api/person/admin/{userName}", "admin30").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(get("/api/person/admin/{userName}", "admin304").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(admin1)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1L)))
@@ -530,7 +530,7 @@ public class PersonControllerTest
 
         given(this.personService.deletePerson(mockCustomer.getUserName())).willReturn(delPerson);
 
-        mvc.perform(delete("/api/person/customer/delete/{userName}", 1)
+        mvc.perform(delete("/api/person/customer/delete/{userName}", "cust1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockCustomer)))
                 .andExpect(jsonPath("$",is(delPerson)))
@@ -546,7 +546,7 @@ public class PersonControllerTest
 
         given(personService.getPersonByUserName("cust1")).willReturn(mockPerson);
 
-        mvc.perform(get("/api/person/customer/{userName}", 1)
+        mvc.perform(get("/api/person/customer/{userName}", "cust1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockPerson)))
                 .andExpect(status().isOk());
@@ -582,7 +582,7 @@ public class PersonControllerTest
 
         given(this.personService.deletePerson(mockEmployee.getUserName())).willReturn(delEmployee);
 
-        mvc.perform(delete("/api/person/employee/delete/{userName}", 1L).contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(delete("/api/person/employee/delete/{userName}", "emp").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockEmployee)))
                 .andExpect(jsonPath("$",is(delEmployee)))
                 .andExpect(status().isAccepted());
@@ -597,7 +597,7 @@ public class PersonControllerTest
 
         given(personService.getPersonByUserName("emp")).willReturn(mockEmployee);
 
-        mvc.perform(get("/api/person/employee/{userName}", 1L).contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(get("/api/person/employee/{userName}", "emp").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockEmployee)))
                 .andExpect(status().isOk());
     }
