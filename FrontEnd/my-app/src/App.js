@@ -21,7 +21,7 @@ import WorkerBooking from './components/Bookings/WorkerBooking';
 import AddEmployee from './components/Admin/AddEmployee/AddEmployee';
 import Admin from './components/Admin/AdminPage';
 import AddService from './components/Admin/AddService/AddService';
-import AddWorkHours from './components/Worker/AddWorkHours/AddWorkHours';
+import AddWorkHours from './components/Admin/AddWorkHours/AddWorkHours';
 import WorkerNavPage from './components/Worker/WorkerNavPage';
 
 

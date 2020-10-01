@@ -18,7 +18,7 @@ class Navbar extends Component {
             }
         }
 
-        const bla =() => {
+        const user =() => {
             var string;
             if(hasUser !== null) {
                 if(userType === 'customer') {
@@ -39,7 +39,7 @@ class Navbar extends Component {
                     <a className="navbar-logo" href={logoLink()}></a>
                     <ul className = "navbar-items">
                                 <li><Link to={{pathname: `/profile/${this.props.user.username}`}} className = "nav-link">Profile </Link></li>
-                                {bla().map((item, index) => {
+                                {user().map((item, index) => {
                                     return (
                                         <li key = {index}>
                                             <a className = {item.cName} href = {item.url}>
