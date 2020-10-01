@@ -2,6 +2,7 @@ package com.rmit.sept.turtorial.demo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.*;
 import java.util.Date;
@@ -10,27 +11,51 @@ import java.util.Date;
 
 @Entity
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Person name is required")
-    private String name;
-    @NotBlank(message ="Project Identifier is required")
-    @Size(min=4,max =5, message = "please enter 4 to 5 characters")
-    @Column(updatable = false, unique = true)
-    private String personIdentifier;
-    @NotBlank(message = "desc is required")
-    private String desc;
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date start_date;
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date end_date;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @NotBlank(message = "Username is required")
+    private String userName;
+    @NotBlank(message = "Password is required")
+    @Size(min=4,max =25, message = "Please enter 4 to 25 characters")
+    private String password;
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+    @NotBlank(message = "First name is required")
+    private String firstName;
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+    @NotBlank(message = "Last name is required")
+    private String lastName;
+    @NotBlank(message = "Address is required")
+    private String address;
+    @NotBlank(message = "Phone is required")
+    @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters")
+    @Size(min=10,max =10, message = "Please enter a 10 digit number")
+    private String phone;
+    private Boolean employeeCheck = false;
+    private Boolean adminCheck = false;
+    private Boolean customerCheck = false;
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date created_At;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
 
+
     public Person() {
+    }
+
+    public Person(Long id, @NotBlank(message = "Username is required") String userName, @NotBlank(message = "Password is required")
+    @Size(min = 4, max = 25, message = "Please enter 4 to 25 characters") String password, @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+                @NotBlank(message = "First name is required") String firstName, @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+                @NotBlank(message = "Last name is required") String lastName, @NotBlank(message = "Address is required") String address, @NotBlank(message = "Phone is required")
+                @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters") @Size(min = 10, max = 10, message = "Please enter a 10 digit number") String phone) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phone = phone;
     }
 
     public Long getId() {
@@ -41,45 +66,57 @@ public class Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getPersonIdentifier() {
-        return personIdentifier;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPersonIdentifier(String personIdentifier) {
-        this.personIdentifier = personIdentifier;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getFirstName() { return firstName; }
+
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public Date getEnd_date() {
-        return end_date;
-    }
+    public Boolean getEmployeeCheck() { return employeeCheck; }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
-    }
+    public void setEmployeeCheck(Boolean workerChecked) { this.employeeCheck = workerChecked; }
+
+    public Boolean getAdminCheck() { return adminCheck; }
+
+    public void setAdminCheck(Boolean adminChecked) { this.adminCheck = adminChecked; }
+
+    public Boolean getCustomerCheck() { return customerCheck; }
+
+    public void setCustomerCheck(Boolean custChecked) { this.customerCheck = custChecked; }
 
     public Date getCreated_At() {
         return created_At;
