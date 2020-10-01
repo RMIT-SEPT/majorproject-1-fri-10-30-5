@@ -21,7 +21,8 @@ import WorkerBooking from './components/Bookings/WorkerBooking';
 import AddEmployee from './components/Admin/AddEmployee/AddEmployee';
 import Admin from './components/Admin/AdminPage';
 import AddService from './components/Admin/AddService/AddService';
-import AddWorkHours from './components/AddWorkHours/AddWorkHours';
+import AddWorkHours from './components/Worker/AddWorkHours/AddWorkHours';
+import WorkerNavPage from './components/Worker/WorkerNavPage';
 
 
 class App extends Component {
@@ -30,7 +31,7 @@ class App extends Component {
     this.state = {
         user: {
           username: "cus6",
-          userType: "customer"
+          userType: "admin"
         }
     }
   }
@@ -58,7 +59,8 @@ render() {
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/addEmployee" component={() => <AddEmployee user = {this.state.user} />} /> 
             <Route exact path="/addWorkhours" component={AddWorkHours} />  
-            <Route exact path="/addService" component={AddService} />                                  
+            <Route exact path="/addService" component={AddService} />     
+            <Route exact path="/workerPage" component = {WorkerNavPage} />                             
           </div>
         </div>
       </Router>

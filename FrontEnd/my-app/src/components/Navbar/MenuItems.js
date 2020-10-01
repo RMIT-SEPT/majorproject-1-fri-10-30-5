@@ -48,6 +48,33 @@
                 cName: 'nav-link-logging'
             }
         ],
+        SignedInWorker:  [
+            {
+                title: 'Dashboard',
+                url: '/dashboard',
+                cName: 'nav-link'
+            },
+            {
+                title: 'Worker',
+                url: '/workerPage',
+                cName: 'nav-link'
+            },
+            {
+                title: 'About Us',
+                url: 'homepage',
+                cName: 'nav-link'
+            }, 
+            {
+                title: 'Contact Us',
+                url: 'homepage',
+                cName: 'nav-link'
+            },
+            {
+                title: 'Log Out',
+                url: '/',
+                cName: 'nav-link-logging'
+            }
+        ],
         "NoUser": [
             {
                 title: 'About Us',
