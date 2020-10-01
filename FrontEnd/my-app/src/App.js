@@ -21,6 +21,7 @@ import WorkerBooking from './components/Bookings/WorkerBooking';
 import AddEmployee from './components/Admin/AddEmployee/AddEmployee';
 import Admin from './components/Admin/AdminPage';
 import AddService from './components/Admin/AddService/AddService';
+import AddWorkHours from './components/AddWorkHours/AddWorkHours';
 
 
 class App extends Component {
@@ -55,9 +56,9 @@ render() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/admin" component={Admin} />
-            <Route exact path="/addEmployee" component={() => <AddEmployee user = {this.state.user} />} />   
-            <Route exact path="/addService" component={AddService} />                         
-            
+            <Route exact path="/addEmployee" component={() => <AddEmployee user = {this.state.user} />} /> 
+            <Route exact path="/addWorkhours" component={AddWorkHours} />  
+            <Route exact path="/addService" component={AddService} />                                  
           </div>
         </div>
       </Router>

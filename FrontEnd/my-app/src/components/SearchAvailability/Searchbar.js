@@ -122,24 +122,6 @@ class Searchbar extends Component {
                     //pattern='[A-Za-z]+' 
                     title='Alphabetical characters only'/>
 
-                    <input
-                    name= "time" 
-                    value = { this.state.time }
-                    onChange={this.myChangeHandler}
-                    type='time' 
-                    placeholder='Time' 
-                    required='required'/>
-
-                    <input 
-                    name= "date"
-                    value = { this.state.date }
-                    onChange={this.myChangeHandler}
-                    type='date' 
-                    placeholder='Time' 
-                    required='required'
-                    ref={this.dateRef}
-                    // onChange={validateDate}
-                    />
                     <button type='submit'>Search</button>
                 </form>
                 {this.results}
