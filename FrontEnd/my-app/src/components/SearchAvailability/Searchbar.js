@@ -18,16 +18,7 @@ class Searchbar extends Component {
             // results listed when searching for a worker
             testWorkerRes: ["emp10", "emp5", "emp6"],
             
-            custID: 'cus5',
-            service: '',
-            location: '',
-            worker: '',
-            time: '',
-            date: '',
-            loading: false,
-            searched: false,
             results: null,
-            value:''
         };
 
         this.onChangeSearchType = this.onChangeSearchType.bind(this)
@@ -41,23 +32,15 @@ class Searchbar extends Component {
     onSubmit = e => {
 
         e.preventDefault();
-        this.state.searched = true;
-        
-        console.log("searchType: ", this.state.searchType, "\nsearch: ", this.state.search)
 
         // service query
-        // should return the list of employees offering the service
         if(this.state.searchType === 'service') {
-            
-            this.runServiceQuery()
+          this.runServiceQuery()
        }
 
         // worker query
-        // should return the worker's timetable
         else if(this.state.searchType === 'worker') {
-
-            this.runWorkerQuery()
-
+          this.runWorkerQuery()
         }
        
     }
@@ -65,63 +48,54 @@ class Searchbar extends Component {
     runWorkerQuery = e => {
 
       // query the database to check if a worker exists
-      // if(this.validate()) {
-      //   console.log(this.state.search)
-      //   const url = 'http://localhost:8080/api/user/' + this.state.search
-      //   this.setState({ loading: true });
-      //   axios.get(url, {
-      //   // headers: { 'Authorization': authorization }
-      //   })
-      //   .then(res => {
-      //     console.log(res.data)
-      //     this.setState({
-      //     results: res.data,
-      //     loading: false,
-      //     searched: true
-      //     })
-      //   })
-      //   .catch((error) => {
-      //     console.log("error",error)
-      //   })
-      // }
-      // else {
-      //   alert("Invalid search");
-      // }
-
       let found = false;
 
-      this.state.testWorkerRes.map((emp) => {
-        console.log(emp)
-        if (emp.localeCompare(this.state.search) == 0 && !found) {
-          this.setState({results: emp})
+      if(this.validate()) {
+        console.log(this.state.search)
+        const url = 'http://localhost:8080/api/employee/' + this.state.search
+        axios.get(url, {
+        // headers: { 'Authorization': authorization }
+        })
+        .then(res => {
+          console.log("found! ", res.data)
           found = true;
-          console.log("found")
-        }
-      })
+          this.setState({
+          results: res.data["userName"]
+          })
+        })
+        .catch((error) => {
+          console.log("error",error)
+        })
+      }
+      else {
+        alert("Invalid search");
+      }
 
-      // test result
-      if(!found)
+      // remove stored results 
+      if(!found) {
         this.setState({results: null})
-
+      }
     }
 
     runServiceQuery = e => {
 
       // query the database to retrieve all workers that do the service
+      /*
+          get list of workers
+          for each worker get their assigned services
+          add that to list X
+          results = list X
+      */
       // if(this.validate()) {
-      //   const empID = this.state.worker
-      //   const service = this.state.service
-      //   const url = 'http://localhost:8080/api/workinghours/list/' + empID + '/' + service
-      //   this.setState({ loading: true });
+      //   console.log(this.state.search)
+      //   const url = 'http://localhost:8080/api/employee/' + this.state.search
       //   axios.get(url, {
       //   // headers: { 'Authorization': authorization }
       //   })
       //   .then(res => {
-      //     console.log(res.data)
+      //     console.log("found! ", res.data)
       //     this.setState({
-      //     results: res.data,
-      //     loading: false,
-      //     searched: true
+      //     results: res.data["userName"]
       //     })
       //   })
       //   .catch((error) => {

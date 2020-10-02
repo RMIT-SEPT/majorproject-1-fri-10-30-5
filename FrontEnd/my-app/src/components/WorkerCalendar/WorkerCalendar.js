@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { ScheduleComponent, Week, Inject, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
+import BookingContent from './Templates/BookingContent'
+import BookingHeader from './Templates/BookingHeader'
+import Event from './Templates/Event'
+import Tooltip from './Templates/Tooltip'
 import moment from 'moment'
+
 import '../../css/WorkerCalendar.css'
 import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
 import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
@@ -13,7 +18,6 @@ import "../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
 import "../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 import "../../../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
 
-const createHistory = require("history").createBrowserHistory;
 
 class WorkerCalendar extends Component {
 
@@ -22,12 +26,33 @@ class WorkerCalendar extends Component {
         super()
 
         this.state = {
-            data: []
+            data: [],
+            empName: window.location.pathname.split('/')[1],
+            customerName: 'cus5',
+            booking: null
         }
     }
 
     componentDidMount() {
         this.parseData()
+    }
+
+    eventTemplate(props) {
+        return (<Event event={props}/>);
+    }
+
+    tooltipTemplate(props) {
+        return (<Tooltip event={props} />);
+    }
+
+    bookingHeaderTemplate() {
+        return (<BookingHeader />);
+    }
+
+    // The booking object is created in here
+    bookingContentTemplate(props) {
+
+        return (<BookingContent booking={this.state.booking}/>);
     }
 
     // parse data from the backend into data that
@@ -70,58 +95,28 @@ class WorkerCalendar extends Component {
 
     }
 
-    eventTemplate(props) {
-        return (
-            <div className="template-wrap">
-                <div className="time">
-                {moment(props.StartTime).format("h:mm A")} - {moment(props.EndTime).format("h:mm A")}</div>
-                <div className="heading">{props.Subject}</div>
-            </div>)
-        ;
-    }
+    onEventClick(args) {
+        let event = this.scheduleObj.getEventDetails(args.element);
 
-    tooltipTemplate(props) {
-        return (
-            <div>
-                <div>{props.heading}</div>
-            </div>
-        );
-    }
-
-    header(props) {
-        return (<div></div>);
-    }
-
-    onBook = e => {
-
-        e.preventDefault()
-
-        console.log("booking!")
-
-        // book this timeslot
-
-        // redirect 
-        let history = createHistory();
-        history.push("../upcomingBookings");
-        let pathUrl = window.location.href;
-        window.location.href = pathUrl;  
-    }
-
-    content(props) {
-        return (
-            <form onSubmit={this.onBook}>
-                <button type='submit'>Book now</button>
-            </form>
-        );
+        this.setState({
+            booking: {
+                custID: this.state.customerName,
+                empID: this.state.empName,
+                bookingTime: moment(event.StartTime).format("hhmm"),
+                bookingDate: moment(event.StartTime).format("yyyy-MM-DD")
+            }
+        })
     }
 
     render() {
 
         return (
             <div>
-                <h2>{window.location.pathname.split('/')[1]}</h2>
+                <h2>{this.state.empName}</h2>
                 <p>Select any available time slot to confirm and create a booking with this worker.</p>
                 <ScheduleComponent 
+                ref={t => this.scheduleObj = t}
+                eventClick={this.onEventClick.bind(this)}
                 height='550px' 
                 selectedDate={new Date()} 
                 firstDayOfWeek={new Date().getDay()}
@@ -130,7 +125,10 @@ class WorkerCalendar extends Component {
                 startHour='08:00'
                 endHour='21:00'
                 readonly={true}
-                quickInfoTemplates={{ header: this.header.bind(this), content: this.content.bind(this)}}
+                quickInfoTemplates={{ 
+                    header: this.bookingHeaderTemplate.bind(this), 
+                    content: this.bookingContentTemplate.bind(this)
+                }}
                 eventSettings={{
                     dataSource: this.state.data, 
                     template: this.eventTemplate.bind(this),

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import WorkerCalendar from '../WeekCalendar/WorkerCalendar'
+import WorkerCalendar from '../WorkerCalendar/WorkerCalendar'
 
 export default class WorkerPage extends Component {
 
