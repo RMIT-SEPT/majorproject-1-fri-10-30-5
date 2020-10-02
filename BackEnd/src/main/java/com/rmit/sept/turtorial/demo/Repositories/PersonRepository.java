@@ -13,6 +13,8 @@ public interface PersonRepository extends CrudRepository<Person, String> {
 
     Person deleteByUserName(String userName);
 
+    Person findPersonByUserNameAndEmployeeCheckIsTrue(String userName);
+
 //    Person findAllByAdminCheckIsTrue();
 //    List<Person> findAllByCustomerCheckIsTrue();
 

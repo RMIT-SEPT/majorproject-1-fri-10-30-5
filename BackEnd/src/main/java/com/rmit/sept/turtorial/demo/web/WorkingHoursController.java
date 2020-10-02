@@ -20,6 +20,7 @@ public class WorkingHoursController
     @Autowired
     private WorkingHoursService wHService;
 
+    //Update this
     @PostMapping("/add")
     public ResponseEntity<?> addNewWH(@Valid @RequestBody WorkingHours workingHours, BindingResult result) {
         if (result.hasErrors()){

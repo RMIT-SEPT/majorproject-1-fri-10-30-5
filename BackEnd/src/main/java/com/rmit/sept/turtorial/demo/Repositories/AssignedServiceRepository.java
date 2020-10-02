@@ -11,5 +11,7 @@ public interface AssignedServiceRepository extends CrudRepository<AssignedServic
 {
     List<AssignedService> findAllByUserNameEquals(String userName);
 
+    List<AssignedService> findAllByServiceIdEquals(long serviceId);
+
     List<AssignedService> findAll();
 }

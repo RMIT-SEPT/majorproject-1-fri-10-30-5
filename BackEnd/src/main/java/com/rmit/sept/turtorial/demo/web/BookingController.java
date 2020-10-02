@@ -19,6 +19,7 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    //Check if start time has already been added
     @PostMapping("/add")
     public ResponseEntity<?> createNewBooking(@Valid @RequestBody Booking booking, BindingResult result) {
         if (result.hasErrors()){

@@ -1,6 +1,7 @@
 package com.rmit.sept.turtorial.demo.web;
 
 import com.rmit.sept.turtorial.demo.model.AssignedService;
+import com.rmit.sept.turtorial.demo.model.Person;
 import com.rmit.sept.turtorial.demo.services.AssignedServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,12 +45,23 @@ public class AssignedServiceController
         }
     }
 
-    @GetMapping("/list/{userName}")
+    @GetMapping("/service-list/{userName}")
     public ResponseEntity<?> getAssignedServiceByEmployee(@Valid@PathVariable String userName)
     {
         List<AssignedService> assignedServices = assignedServiceService.getAssignedServicesByUserName(userName);
         if (assignedServices.size() != 0){
             return new ResponseEntity<List<AssignedService>>(assignedServices, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("No Assigned Service Objects", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/employee-list/{serviceId}")
+    public ResponseEntity<?> getEmployeesByAssignedService(@Valid@PathVariable long serviceId)
+    {
+        List<Person> employees = assignedServiceService.getAllEmployeesByAssignedService(serviceId);
+        if (employees.size() != 0){
+            return new ResponseEntity<List<Person>>(employees, HttpStatus.OK);
         }else{
             return new ResponseEntity<String>("No Assigned Service Objects", HttpStatus.NOT_FOUND);
         }
