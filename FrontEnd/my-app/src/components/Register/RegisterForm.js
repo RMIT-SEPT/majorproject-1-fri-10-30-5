@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 import axios from "axios";
 import '../../css/Form.css'
+import classnames from "classnames"
 
 class RegisterForm extends Component {
 
@@ -10,37 +11,51 @@ class RegisterForm extends Component {
         this.state = {
             //customerDetails: []
             fname: '',
-            lname: '',
-            address: '',
-            phone: '',
-            uname: '',
-            pw: ''
+            lname:'',
+            address:'',
+            phone:'',
+            uname:'',
+            uType: '',
+            pw:''
         };
+        this.myChangeHandler = this.myChangeHandler.bind(this);
     }
 
-    mySubmitHandler = event => {
-        event.preventDefault();
-        //cnange to user
-        const customer = {
-            firstName: this.state.fname,
-            lastName: this.state.lname,
-            address: this.state.address,
-            phone: this.state.phone,
-            userName: this.state.uname,
-            password: this.state.pw
+    componentWillReceiveProps   (nextProps){
+        if(nextProps.errors){
+            this.setState({
+                erros: nextProps.errors
+            });
         }
-        console.log(customer);
+    }
 
-        //change to person object
-        axios.post('http://localhost:8080/api/customer/add',
-            customer
+     mySubmitHandler = event => {
+        event.preventDefault();
+    
+        const newUser = {
+            // firstName: this.state.fname,
+            // lastName:this.state.lname,
+            // address:this.state.address,
+            // phone:this.state.phone,
+            userName:this.state.uname,
+            userType:"admin",
+            // userType:this.state.uType,
+            password:this.state.pw,
+            confirmPassword:this.state.pw
+        }
+        console.log(newUser);
+    
+        // const baseurl = 'http://ec2-52-203-27-92.compute-1.amazonaws.com:8080'
+        const baseurl = 'http://localhost:8080'
+        axios.post(baseurl + '/api/user/register', 
+            newUser
         )
-            .then(res => //showOutput(res))
-            {
-                console.log(res);
-                console.log(res.data);
-            })
-            .catch(err => console.error(err));
+        .then(res => //showOutput(res))
+        {console.log(res);
+        console.log(res.data);})
+        .catch(err => console.error(err));
+        
+        // this.props.createNewUser(newUser, this.props.history);
     }
 
     myChangeHandler = event => {
