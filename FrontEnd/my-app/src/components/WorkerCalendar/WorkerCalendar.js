@@ -5,6 +5,7 @@ import BookingHeader from './Templates/BookingHeader'
 import Event from './Templates/Event'
 import Tooltip from './Templates/Tooltip'
 import moment from 'moment'
+import axios from 'axios'
 
 import '../../css/WorkerCalendar.css'
 import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
@@ -29,12 +30,14 @@ class WorkerCalendar extends Component {
             data: [],
             empName: window.location.pathname.split('/')[1],
             customerName: 'cus5',
-            booking: null
+            booking: null,
+            results: null
         }
     }
 
     componentDidMount() {
-        this.parseData()
+
+        this.getHours()
     }
 
     eventTemplate(props) {
@@ -55,43 +58,54 @@ class WorkerCalendar extends Component {
         return (<BookingContent booking={this.state.booking}/>);
     }
 
+    getHours() {
+
+        const url = 'http://localhost:8080/api/workinghours/list/' + this.state.empName
+        axios.get(url, {})
+        .then(res => {
+            this.setState({ results: res.data }, () => {
+                this.parseData()
+            })
+        })
+        .catch((error) => {
+            console.log("error",error)
+        })
+    }
+
     // parse data from the backend into data that
     // can be represented and injected into the worker calendar
     parseData() {
 
         let data = [];
 
-        // parse data here
+        let date, year, month, day, startTime, endTime
+        for(let i = 0; i < Object.keys(this.state.results).length; i++) {
+
+            date = moment(this.state.results[i]["workDate"], "YYYY-MM-DD")
+            year = parseInt(date.format("YYYY"))
+            month = parseInt(date.format("MM")) - 1
+            day = parseInt(date.format("DD"))
+
+            if(this.state.results[i]["startTime"] < 1000) {
+                startTime = moment(this.state.results[i]["startTime"], "Hmm")
+                endTime = moment(this.state.results[i]["endTime"], "Hmm")
+
+            } else {
+                startTime = moment(this.state.results[i]["startTime"], "HHmm")
+                endTime = moment(this.state.results[i]["endTime"], "HHmm")
+            }
+            
+            data.push({
+                    id: i,
+                    heading: 'Available',
+                    Subject: this.state.results[i]["service"],
+                    StartTime: new Date(year, month, day, parseInt(startTime.format('HH')), parseInt(startTime.format('mm'))),
+                    EndTime: new Date(year, month, day, parseInt(endTime.format('HH')), parseInt(endTime.format('mm'))),
+            })
+        }
         
         // test results
-        this.setState({
-            data: [
-                {
-                    id: 1,
-                    heading: 'Available',
-                    Subject: 'wash',
-                    StartTime: new Date(2020, 9, 6, 10, 0),
-                    EndTime: new Date(2020, 9, 6, 12, 0),
-                },
-                {
-                    id: 2,
-                    heading: 'Available',
-                    Subject: 'wash',
-                    StartTime: new Date(2020, 9, 4, 15, 0),
-                    EndTime: new Date(2020, 9, 4, 17, 0),
-                },
-                {
-                    id: 3,
-                    heading: 'Available',
-                    Subject: 'wash',
-                    StartTime: new Date(2020, 9, 3, 11, 0),
-                    EndTime: new Date(2020, 9, 3, 13, 0),
-                },
-            ]   
-        }, 
-        () => {
-            console.log("data: ", this.state.data)
-        })
+        this.setState({ data: data }, () => { console.log(this.state.data) })
 
     }
 

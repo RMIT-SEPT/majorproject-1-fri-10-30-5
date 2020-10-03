@@ -53,9 +53,7 @@ class Searchbar extends Component {
       if(this.validate()) {
         console.log(this.state.search)
         const url = 'http://localhost:8080/api/employee/' + this.state.search
-        axios.get(url, {
-        // headers: { 'Authorization': authorization }
-        })
+        axios.get(url, {})
         .then(res => {
           console.log("found! ", res.data)
           found = true;
@@ -80,34 +78,57 @@ class Searchbar extends Component {
     runServiceQuery = e => {
 
       // query the database to retrieve all workers that do the service
-      /*
-          get list of workers
-          for each worker get their assigned services
-          add that to list X
-          results = list X
-      */
-      // if(this.validate()) {
-      //   console.log(this.state.search)
-      //   const url = 'http://localhost:8080/api/employee/' + this.state.search
-      //   axios.get(url, {
-      //   // headers: { 'Authorization': authorization }
-      //   })
-      //   .then(res => {
-      //     console.log("found! ", res.data)
-      //     this.setState({
-      //     results: res.data["userName"]
-      //     })
-      //   })
-      //   .catch((error) => {
-      //     console.log("error",error)
-      //   })
-      // }
-      // else {
-      //   alert("Invalid search");
-      // }
+      let found = false;
+      if(this.validate()) {
 
-      // test result
-      this.setState({results: this.state.testServiceRes});
+        console.log(this.state.search)
+    
+        // get service id
+        let url = 'http://localhost:8080/api/service/list'
+        axios.get(url, {})
+        .then(res => {
+
+          for(let i = 0; i < Object.keys(res.data).length; i++) {
+            if(res.data[i]["name"] === this.state.search) {
+
+              this.setState({serviceId: res.data[i]["serviceId"]}, () => {
+
+                // get list of employees from service id
+                url = 'http://localhost:8080/api/assignService/employee-list/' + this.state.serviceId
+                axios.get(url, {})
+                .then(res => {
+                  found = true
+                  console.log("found! ", res.data)
+
+                    let usernames = []
+                    for(let i = 0; i < Object.keys(res.data).length; i++) {
+                      usernames.push(res.data[i]["userName"])
+                    }
+
+                  this.setState({
+                    results: usernames
+                  })
+                })
+                .catch((error) => {
+                  console.log("error",error)
+                })
+              })
+
+              console.log(res.data[i])
+              console.log("found service!: ", res.data[i]["name"] + " with id " + this.state.serviceId)
+            }
+          }
+        })
+        .catch((error) => {
+          console.log("error",error)
+        })
+      }
+
+      // remove stored results 
+      if(!found) {
+        this.setState({results: null})
+      }
+
     }
 
     onChangeRadioButtonState = event => {
