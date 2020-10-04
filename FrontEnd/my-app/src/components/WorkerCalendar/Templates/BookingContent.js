@@ -36,7 +36,7 @@ export default class BookingContent extends Component {
                     <h1>Confirm Booking</h1>
                     <p>Service: {this.props.service}</p>
                     <p>Worker: {this.props.booking.empID}</p>
-                    <p>Time: {moment(this.props.booking.bookingTime, "HHmm").format("H:mm A")}</p>
+                    <p>Time: {moment(this.props.booking.bookingTime, "hhmm A").format("h:mm A")}</p>
                     <p>Date: {moment(this.props.booking.bookingDate, "YYYY-MM-DD").format("DD MMM YYYY")}</p>
                     <button type='submit'>Book now</button>
                 </form>

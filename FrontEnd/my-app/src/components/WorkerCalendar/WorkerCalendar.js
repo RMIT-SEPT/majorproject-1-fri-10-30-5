@@ -119,7 +119,7 @@ class WorkerCalendar extends Component {
             booking: {
                 custID: this.state.customerName,
                 empID: this.state.empName,
-                bookingTime: moment(event.StartTime).format("hhmm"),
+                bookingTime: moment(event.StartTime).format("hhmm A"),
                 bookingDate: moment(event.StartTime).format("yyyy-MM-DD")
             },
 
