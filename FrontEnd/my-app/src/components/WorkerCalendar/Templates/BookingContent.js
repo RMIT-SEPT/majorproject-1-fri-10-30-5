@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import moment from 'moment'
 
 const createHistory = require("history").createBrowserHistory;
 
@@ -32,6 +33,11 @@ export default class BookingContent extends Component {
             <div>
                 <p>{this.props.booking["Subject"]}</p>
                 <form onSubmit={this.onBook}>
+                    <h1>Confirm Booking</h1>
+                    <p>Service: {this.props.service}</p>
+                    <p>Worker: {this.props.booking.empID}</p>
+                    <p>Time: {moment(this.props.booking.bookingTime, "HHmm").format("H:mm A")}</p>
+                    <p>Date: {moment(this.props.booking.bookingDate, "YYYY-MM-DD").format("DD MMM YYYY")}</p>
                     <button type='submit'>Book now</button>
                 </form>
             </div>

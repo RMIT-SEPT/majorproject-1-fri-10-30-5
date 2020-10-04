@@ -55,7 +55,10 @@ class WorkerCalendar extends Component {
     // The booking object is created in here
     bookingContentTemplate(props) {
 
-        return (<BookingContent booking={this.state.booking}/>);
+        return (<BookingContent 
+            booking={this.state.booking}
+            service={this.state.service}
+            />);
     }
 
     getHours() {
@@ -118,7 +121,9 @@ class WorkerCalendar extends Component {
                 empID: this.state.empName,
                 bookingTime: moment(event.StartTime).format("hhmm"),
                 bookingDate: moment(event.StartTime).format("yyyy-MM-DD")
-            }
+            },
+
+            service: event.Subject
         })
     }
 
@@ -131,7 +136,7 @@ class WorkerCalendar extends Component {
                 <ScheduleComponent 
                 ref={t => this.scheduleObj = t}
                 eventClick={this.onEventClick.bind(this)}
-                height='550px' 
+                height='650px' 
                 selectedDate={new Date()} 
                 firstDayOfWeek={new Date().getDay()}
                 showHeaderBar={false}
