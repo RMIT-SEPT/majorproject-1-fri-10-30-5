@@ -19,41 +19,42 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    //Check if start time has already been added
+    //Check if start time has already been added and time is within working hours range
     @PostMapping("/add")
     public ResponseEntity<?> createNewBooking(@Valid @RequestBody Booking booking, BindingResult result) {
         if (result.hasErrors()){
-            return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
         }
 
         booking.setBookingStatus("booked");
 
-        Booking booking1 = bookingService.addBooking(booking);
-        if (booking1 != null){
-            return new ResponseEntity<Booking>(booking1, HttpStatus.CREATED);
+        Booking booking1 = booking;
+        if (booking1 != null && bookingService.addBooking(booking1) != null)
+        {
+            return new ResponseEntity<>(booking1, HttpStatus.CREATED);
         }else{
-            return new ResponseEntity<String>("Booking Object Could Not Be Created", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Booking Object Could Not Be Created", HttpStatus.CONFLICT);
         }
     }
 
+    //Check if time is within working hours range and booking doesn't clash with others
     @PutMapping("/update")
     public ResponseEntity<?> updateBooking(@Valid @RequestBody Booking booking, BindingResult result) {
         if (result.hasErrors()){
-            return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
         }
-        Booking booking1 = bookingService.updateBooking(booking);
-        if (booking1 != null){
-            return new ResponseEntity<Booking>(booking1, HttpStatus.OK);
+        Booking booking1 = booking;
+        if (booking1 != null && bookingService.updateBooking(booking) != null){
+            return new ResponseEntity<>(booking1, HttpStatus.OK);
         }else{
-            return new ResponseEntity<String>("Booking Object Could Not Be Updated", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Booking Object Could Not Be Updated", HttpStatus.CONFLICT);
         }
     }
 
     @GetMapping("/{custID}/{bID}")
-    public ResponseEntity<?> findBookingByCustIDAndBID(@Valid @PathVariable String custID, @PathVariable Long bID) {
-//        if (result.hasErrors()){
-//            return new ResponseEntity<String>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
-//        }
+    public ResponseEntity<?> findBookingByCustIDAndBID(@Valid @PathVariable String custID, @PathVariable Long bID)
+    {
+
         Booking booking1 = bookingService.findBookingByCustIDAndBID(custID, bID);
         if (booking1 != null){
             return new ResponseEntity<Booking>(booking1, HttpStatus.OK);

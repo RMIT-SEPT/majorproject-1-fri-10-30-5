@@ -20,4 +20,6 @@ public interface WorkingHoursRepository extends CrudRepository<WorkingHours, Lon
      List<WorkingHours> findAllByEmpIDEqualsAndServiceEqualsAndWorkDateEquals(String empID, String service, String date);
 
      List<WorkingHours> findAllByEmpIDEqualsAndServiceEqualsAndWorkDateEqualsAndStartTimeIsLessThanEqualAndEndTimeIsLessThanEqual(String empID, String service, String date, int start, int end);
+
+     WorkingHours findWorkingHoursByEmpIDEqualsAndWorkDateEquals(String empID, String date);
 }

@@ -24,11 +24,11 @@ public class WorkingHours
     @Min(value= 0, message="must be at least 0000")
     @Max(value=2359, message="must be 2359 or less")
     private int endTime;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private String workDate;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date created_At;
-    @JsonFormat(pattern ="yyyy-mm-dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
     @NotBlank(message = "service is required")
     private String service;
