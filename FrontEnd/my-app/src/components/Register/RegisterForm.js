@@ -10,9 +10,7 @@ const addPerson = (props) => {
         phone: props.phone,
         userName: props.uname,
         password: props.pw,
-        adminCheck: props.uType === "admin" ? true : false,
-        employeeCheck: props.uType === "employee" ? true : false,
-        customerCheck: props.uType === "customer" ? true : false
+        userType: props.uType
     }
     console.log(newPerson);
 

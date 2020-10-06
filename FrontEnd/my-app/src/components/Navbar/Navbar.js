@@ -23,7 +23,7 @@ class Navbar extends Component {
             if(hasUser) {
                 if(userType === 'customer') {
                     string =  MenuItems.SignedInCustomer
-                } else if(userType === 'worker') {
+                } else if(userType === 'employee') {
                     string =  MenuItems.SignedInWorker
                 } else if(userType === 'admin') {
                     string = MenuItems.SignedInAdmin

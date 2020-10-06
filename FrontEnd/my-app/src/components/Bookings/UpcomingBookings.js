@@ -76,7 +76,20 @@ function UpcomingBookings(props) {
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
                             <th scope="col">Status</th>
-                            <th></th>
+                            <th>
+                                <input className="admin-checkbox"
+                                    type="checkbox"
+                                    onChange={e => {
+                                        let value = e.target.checked;
+                                        setBookingState(
+                                            bookingState.map((d) => {
+                                                d.selected = value;
+                                                return d;
+                                            })
+                                        );
+                                    }}
+                                />
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
