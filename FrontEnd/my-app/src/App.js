@@ -4,7 +4,6 @@ import './css/Form.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 import Searchbar from './components/SearchAvailability/Searchbar';
-import SearchPage from './components/SearchAvailability/SearchPage';
 import Dashboard from './components/Dashboard';
 import Header from './components/Navbar/Navbar';
 import PastBookings from './components/Bookings/PastBookings';
@@ -17,7 +16,8 @@ import Login from './components/Login/LoginForm';
 import Register from './components/Register/RegisterForm';
 import Homepage from './components/Homepage/Homepage'
 import WorkerPage from './components/Worker/WorkerPage'
-import WorkerBooking from './components/Bookings/WorkerBooking';
+import WorkerBooking from './components/Bookings/Booking';
+import WorkerHours from './components/Worker/WorkerHours'
 import AddEmployee from './components/Admin/AddEmployee/AddEmployee';
 import Admin from './components/Admin/AdminPage';
 import AddService from './components/Admin/AddService/AddService';
@@ -52,9 +52,8 @@ render() {
             <Route exact path="/profile/:id/edit" component={ProfileEdit} />
             <Route exact path="/upcomingBookings" component={UpcomingBookings} />
             <Route exact path="/search" component={Searchbar} />
-            <Route exact path="/searchResults" component={SearchPage} />
             <Route exact path="/worker" component={WorkerPage} />
-            <Route exact path="/:empId/workinghours" component={WorkerBooking} />
+            <Route exact path="/:empId/booking" component={WorkerBooking} />
             <Route exact path="/homepage" component={Homepage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
@@ -65,7 +64,8 @@ render() {
             <Route exact path="/workerPage" component = {WorkerNavPage} />          
             <Route exact path="/assignService" component = {AssignService} />  
             <Route exact path="/admin/upcoming" component = {AdminUpcoming} />     
-            <Route exact path="/admin/past" component = {AdminPast} />                  
+            <Route exact path="/admin/past" component = {AdminPast} />   
+            <Route exact path="/:empId/roster" component = {WorkerHours} />               
           </div>
         </div>
       </Router>

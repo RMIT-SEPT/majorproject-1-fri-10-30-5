@@ -14,7 +14,7 @@ class ServiceResultsList extends Component {
         <div className="resultsList">
           <React.Fragment>
             {this.props.list.map((item, index) => (
-              <Link key={"index"} to={"/"+item+"/workingHours"} className="btn btn-lg btn-info">
+              <Link key={"index"} to={"/"+item+"/booking"} className="btn btn-lg btn-info">
                 <ServiceResultsItem 
                 name={item}
                 />

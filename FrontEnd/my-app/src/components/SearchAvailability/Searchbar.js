@@ -11,13 +11,6 @@ class Searchbar extends Component {
 
         this.state = {
             searchType: 'service',
-
-            // results listed when searching for a service
-            testServiceRes: ["emp5", "emp6"],
-
-            // results listed when searching for a worker
-            testWorkerRes: ["emp10", "emp5", "emp6"],
-            
             results: null,
         };
 
@@ -52,7 +45,7 @@ class Searchbar extends Component {
 
       if(this.validate()) {
         console.log(this.state.search)
-        const url = 'http://localhost:8080/api/employee/' + this.state.search
+        const url = 'http://localhost:8080/api/person/employee/' + this.state.search
         axios.get(url, {})
         .then(res => {
           console.log("found! ", res.data)

@@ -29,13 +29,55 @@ class WorkerCalendar extends Component {
         this.state = {
             data: [],
             empName: window.location.pathname.split('/')[1],
-            customerName: 'cus5',
             booking: null,
-            results: null
+            results: null,
+            customers: [],
+            existingBookings: [],
+            
+            user: {
+                username: "cus6",
+                userType: "admin"
+            },
+
+            admin: {
+                customer: null
+            }
         }
     }
 
     componentDidMount() {
+
+        axios.get('http://localhost:8080/api/person/customer/list/')
+        .then(res => {
+          this.setState({
+            customers: res.data,
+            userName: res.data[0].userName
+          })
+        })
+        .catch((error) => {
+          console.log("error",error)
+        })  
+
+        let url
+        if(this.state.userType !== "admin") {
+            url = 'http://localhost:8080/api/booking/list/' + this.state.user.username
+        }
+        else {
+            url = 'http://localhost:8080/api/booking/admin/upcoming-Bookings'
+        }
+
+        axios.get(url)
+        .then(res => {
+          this.setState({
+            existingBookings: res.data
+          }, () => {
+              console.log("existing bookings: ", this.state.existingBookings)
+          })
+        })
+        .catch((error) => {
+          console.log("error",error)
+        })  
+
 
         this.getHours()
     }
@@ -58,7 +100,7 @@ class WorkerCalendar extends Component {
         return (<BookingContent 
             booking={this.state.booking}
             service={this.state.service}
-            />);
+        />);
     }
 
     getHours() {
@@ -97,6 +139,19 @@ class WorkerCalendar extends Component {
                 startTime = moment(this.state.results[i]["startTime"], "HHmm")
                 endTime = moment(this.state.results[i]["endTime"], "HHmm")
             }
+
+            // check if this booking is an existing booking
+            let booked = false
+            for(let i = 0; i < this.state.existingBookings.length; i++) {
+
+                // check if same customer
+
+                // check if same emp
+
+                // check if same date
+
+                // check if same time
+            }
             
             data.push({
                     id: i,
@@ -104,6 +159,7 @@ class WorkerCalendar extends Component {
                     Subject: this.state.results[i]["service"],
                     StartTime: new Date(year, month, day, parseInt(startTime.format('HH')), parseInt(startTime.format('mm'))),
                     EndTime: new Date(year, month, day, parseInt(endTime.format('HH')), parseInt(endTime.format('mm'))),
+                    IsBlock: booked
             })
         }
         
@@ -115,24 +171,75 @@ class WorkerCalendar extends Component {
     onEventClick(args) {
         let event = this.scheduleObj.getEventDetails(args.element);
 
+        let custID
+        let booked = false
+
+        if(this.state.user.userType === "admin") {
+            custID = this.state.admin.customer
+        }
+        else {
+            custID = this.state.user.username
+        }        
+
         this.setState({
             booking: {
-                custID: this.state.customerName,
+                custID: custID,
                 empID: this.state.empName,
-                bookingTime: moment(event.StartTime).format("hhmm A"),
+                bookingTime: moment(event.StartTime).format("hhmm"),
                 bookingDate: moment(event.StartTime).format("yyyy-MM-DD")
             },
 
             service: event.Subject
+        }, () => {
+            console.log("Booking: ", this.state.booking)
         })
+    }
+
+    onSelectCustomer = event => {
+        this.setState({admin: {
+            customer: event.target.value
+        }})
+      };
+
+    get renderAdminPanel() {
+
+        let res
+        
+        if(this.state.user.userType === "admin") {
+            
+            res = (
+                <div>
+                    <h2>{this.state.empName}</h2>
+                    <p>Select a customer, and any available time slot to confirm and create a booking with this worker.</p>
+                    <div className="drop-down">
+                        <h5>Customer:</h5>
+                        <select name = "userName"  onChange = {this.onSelectCustomer}>{
+                            this.state.customers.map((cust,index) => <option key={index} value={cust.userName} >{cust.userName}  </option>)}
+                        </select>
+                        <br></br>
+                        <br></br>
+                    </div>
+                </div>
+            )
+        }
+        else {
+
+            res = (
+                <div>
+                    <h2>{this.state.empName}</h2>
+                    <p>Select any available time slot to confirm and create a booking with this worker.</p>
+                </div>
+            )
+        }
+
+        return res
     }
 
     render() {
 
         return (
             <div>
-                <h2>{this.state.empName}</h2>
-                <p>Select any available time slot to confirm and create a booking with this worker.</p>
+                {this.renderAdminPanel}
                 <ScheduleComponent 
                 ref={t => this.scheduleObj = t}
                 eventClick={this.onEventClick.bind(this)}

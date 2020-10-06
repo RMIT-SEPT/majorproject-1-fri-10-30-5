@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import WorkerCalendar from '../WorkerCalendar/WorkerCalendar'
+import BookingCalendar from '../Calendar/BookingCalendar'
 
 export default class WorkerPage extends Component {
   render() {
     return (
       <div>
-        <WorkerCalendar />
+        <BookingCalendar />
       </div>
     )
   }
