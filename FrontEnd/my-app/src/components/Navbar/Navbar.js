@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 class Navbar extends Component {
 
     render() {
-        let  hasUser = this.props.user.username;
+        const  hasUser = this.props.user.username !== null;
         let userType = this.props.user.userType;
         
         const logoLink = () => {
-            if(hasUser !== null) {
+            if(hasUser) {
                 return "/dashboard"
             } else {
                 return "/"
@@ -20,7 +20,7 @@ class Navbar extends Component {
 
         const user =() => {
             var string;
-            if(hasUser !== null) {
+            if(hasUser) {
                 if(userType === 'customer') {
                     string =  MenuItems.SignedInCustomer
                 } else if(userType === 'worker') {
@@ -35,10 +35,13 @@ class Navbar extends Component {
         }
         
         return (
-            <nav className = "Navbar">
+            <nav className = "Navbar sticky-top">
                     <a className="navbar-logo" href={logoLink()}></a>
                     <ul className = "navbar-items">
-                                <li><Link to={{pathname: `/profile/${this.props.user.username}`}} className = "nav-link">Profile </Link></li>
+                            {
+                                hasUser &&  <li><Link to={{pathname: `/profile/${this.props.user.username}`}} className = "nav-link">Profile </Link></li>
+                            }
+
                                 {user().map((item, index) => {
                                     return (
                                         <li key = {index}>

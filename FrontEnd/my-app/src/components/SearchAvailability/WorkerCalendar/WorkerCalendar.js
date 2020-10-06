@@ -6,17 +6,17 @@ import Event from './Templates/Event'
 import Tooltip from './Templates/Tooltip'
 import moment from 'moment'
 
-import '../../css/WorkerCalendar.css'
-import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-lists/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
+import '../../../css/WorkerCalendar.css'
+import "../../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
 
 
 class WorkerCalendar extends Component {
@@ -70,22 +70,22 @@ class WorkerCalendar extends Component {
                     id: 1,
                     heading: 'Available',
                     Subject: 'wash',
-                    StartTime: new Date(2020, 9, 6, 10, 0),
-                    EndTime: new Date(2020, 9, 6, 12, 0),
+                    StartTime: new Date(2020, 9, 6, 12, 0),
+                    EndTime: new Date(2020, 9, 6, 14, 0),
                 },
                 {
                     id: 2,
                     heading: 'Available',
                     Subject: 'wash',
-                    StartTime: new Date(2020, 9, 4, 15, 0),
-                    EndTime: new Date(2020, 9, 4, 17, 0),
+                    StartTime: new Date(2020, 10, 5, 15, 0),
+                    EndTime: new Date(2020, 10, 5, 17, 0),
                 },
                 {
                     id: 3,
                     heading: 'Available',
                     Subject: 'wash',
-                    StartTime: new Date(2020, 9, 3, 11, 0),
-                    EndTime: new Date(2020, 9, 3, 13, 0),
+                    StartTime: new Date(2020, 10, 5, 11, 0),
+                    EndTime: new Date(2020, 10, 5, 13, 0),
                 },
             ]   
         }, 

@@ -46,7 +46,7 @@ import React, { useState, useEffect } from "react";
                   custID: data.custID,
                   empID: data.empID,
                   bookingDate: data.bookingDate,
-                  bookingStatus: "cancel",
+                  bookingStatus: "cancelled",
                   bookingTime: data.bookingTime
                 
                 }

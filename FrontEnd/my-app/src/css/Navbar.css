@@ -1,6 +1,5 @@
 
 .Navbar {
-    position: sticky;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,7 +30,7 @@
     grid-template-columns: repeat(6, auto);
     grid-gap: 10px;
     list-style-type: none;
-    text-align: center;
+    text-align: end;
     width: 70vw;
     justify-content: end;
     margin-right: -20%;

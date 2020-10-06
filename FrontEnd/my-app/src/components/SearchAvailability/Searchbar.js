@@ -147,7 +147,7 @@ class Searchbar extends Component {
     render() {
       return (
       <div id='search'>
-        <h1 className="display-4 text-center">Make a Booking</h1>
+        <h1 className="display-4 text-center title">Make a Booking</h1>
         <p>Bookings can be made through a simple search of service, or through the timetable of a preferred, available worker.</p>
         <form action='' onSubmit={ this.onSubmit }>
           <div id='radio-group'>
@@ -168,7 +168,7 @@ class Searchbar extends Component {
               onClick={this.onChangeSearchType}
             />
             <label for='worker'>Worker</label><br/>
-            <input 
+            <input className = "search-bar"
               id='search-bar'
               name= "search"
               value = { this.state.search }
@@ -179,7 +179,7 @@ class Searchbar extends Component {
               title='Alphabetical characters only'
             />
           </div>
-            <button type='submit'>Search</button>
+            <button className = "buttons" type='submit'>Search</button>
         </form>
         {this.results}
       </div>
