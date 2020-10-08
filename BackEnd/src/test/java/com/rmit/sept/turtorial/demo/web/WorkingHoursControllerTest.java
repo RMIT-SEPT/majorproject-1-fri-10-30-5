@@ -120,7 +120,7 @@ public class WorkingHoursControllerTest {
     }
 
     @Test
-    public void givenInvalidEmployeesAndService_whenGetWorkingHours_thenNotFound() throws Exception {
+    public void givenInvalidEmployees_whenGetWorkingHours_thenNotFound() throws Exception {
         String message = "No Working Hours Objects";
         mvc.perform(get("/api/workinghours/list/{empID}","30","Hair Cut")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -129,7 +129,7 @@ public class WorkingHoursControllerTest {
     }
 
     @Test
-    public void givenEmployeesAndServiceAndDate_whenGetWorkingHours_thenReturnArray() throws Exception {
+    public void givenEmployeesAndDate_whenGetWorkingHours_thenReturnArray() throws Exception {
         WorkingHours workHour = new WorkingHours(0L, "1",1200,
                 1600,"2020-12-12");
         List<WorkingHours> allWorkingHours = Arrays.asList(workHour);
@@ -147,7 +147,7 @@ public class WorkingHoursControllerTest {
     }
 
     @Test
-    public void givenInvalidEmployeesAndServiceAndDate_whenGetWorkingHours_thenNotFound() throws Exception {
+    public void givenInvalidEmployeesAndDate_whenGetWorkingHours_thenNotFound() throws Exception {
         //String message = "No Working Hours Objects";
         mvc.perform(get("/api/workinghours/list/{empID}/{date}/{startTime}/{endTime}","1","Hair Cut","2020-12-12",1200,1600)
                 .contentType(MediaType.APPLICATION_JSON))
