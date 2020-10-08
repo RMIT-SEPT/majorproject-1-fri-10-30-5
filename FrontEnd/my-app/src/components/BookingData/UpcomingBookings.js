@@ -1,4 +1,4 @@
-import UpcomingBookingsItem from '../../components/Bookings/UpcomingBookingsItem'
+import UpcomingBookingsItem from '../../components/BookingData/UpcomingBookingsItem'
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "../../css/Table.css"

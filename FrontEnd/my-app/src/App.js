@@ -6,10 +6,10 @@ import { BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 import Searchbar from './components/Search/Searchbar';
 import Dashboard from './components/Dashboard';
 import Header from './components/Navbar/Navbar';
-import PastBookings from './components/Bookings/PastBookings';
+import PastBookings from './components/BookingData/PastBookings';
 import Profile from "./components/Profile/ProfilePage";
 import ProfileEdit from "./components/Profile/ProfileEditPage";
-import UpcomingBookings from "./components/Bookings/UpcomingBookings";
+import UpcomingBookings from "./components/BookingData/UpcomingBookings";
 import {Provider} from "react-redux";
 import store from './store';
 import Login from './components/Login/LoginForm';
@@ -39,6 +39,23 @@ class App extends Component {
           userType: "admin"
         }
     }
+  }
+
+  componentDidMount() {
+    const user = localStorage.getItem("AGMEuser")
+    const userType = localStorage.getItem("userType")
+    const jwtToken = localStorage.getItem("jwtToken")
+    this.state.user.username = user
+    this.state.user.userType = userType
+    this.state.token = jwtToken
+    // this.setState({token:jwtToken})
+    // this.setState({user:{username: user, userType: userType}})
+    // this.setState({user:{userType: userType}})
+    // console.log("user", localStorage.getItem("AGMEuser"))
+    // console.log("user", localStorage.getItem("userType"))
+    console.log("user", this.state.user)
+    console.log("token", this.state.token)
+    // this.setState({user: user})   
   }
 
 render() {

@@ -1,4 +1,4 @@
-import PastBookingsItem from '../../components/Bookings/PastBookingsItem'
+import PastBookingsItem from '../../components/BookingData/PastBookingsItem'
 import axios from "axios";
 import React, { Component } from 'react'
 import "../../css/Table.css"
