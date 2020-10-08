@@ -3,14 +3,14 @@ import React, { Component } from 'react'
 
 class AssignService extends Component {
 
-  state ={
-    services:[],
-    employees:[],
-    serviceId:'',
-    userName:''
+  state = {
+    services: [],
+    employees: [],
+    serviceId: '',
+    userName: ''
   }
 
-  componentDidMount(){
+  componentDidMount() {
     axios.get('http://localhost:8080/api/person/employee/list/')
       .then(res => {
         this.setState({
@@ -19,65 +19,74 @@ class AssignService extends Component {
         })
       })
       .catch((error) => {
-        console.log("error",error)
-      })  
-      
-      axios.get('http://localhost:8080/api/service/list/')
-        .then(res => {
-          this.setState({
-            services: res.data,
-            serviceId: res.data[0].serviceId
-          })
-        })
-        .catch((error) => {
-          console.log("error",error)
-        }) 
-}
+        console.log("error", error)
+      })
 
-mySubmitHandler = event => {
-  const assignService = {
-      serviceId: this.state.serviceId,
-      userName: this.state.userName
+    axios.get('http://localhost:8080/api/service/list/')
+      .then(res => {
+        this.setState({
+          services: res.data,
+          serviceId: res.data[0].serviceId
+        })
+      })
+      .catch((error) => {
+        console.log("error", error)
+      })
   }
 
-  axios.post('http://localhost:8080/api/assignService/add', 
-  assignService
+  mySubmitHandler = event => {
+    const assignService = {
+      serviceId: this.state.serviceId,
+      userName: this.state.userName
+    }
+
+    axios.post('http://localhost:8080/api/assignService/add',
+      assignService
     )
-    .then(res => 
-    {console.log(res.data);
-   })
-    .catch(err => console.error(err));
-}
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.error(err));
+  }
 
-myChangeHandler = event => {
-  this.setState({[event.target.name]: event.target.value})
-};
+  myChangeHandler = event => {
+    this.setState({ [event.target.name]: event.target.value })
+  };
 
-render(){
-  return (
-    <div className="drop-down">
-        <h5>Employee User:</h5>
-            <select name = "userName"  onChange = {this.myChangeHandler}>{
-              this.state.employees.map((employee,index) => <option key={index} value={employee.userName} >{employee.userName}  </option>)}
+  render() {
+    return (
+      <div className="forms-wrapper">
+        <div className="forms-inner">
+          <form id="assignServiceForm">
+            <h3>Assign Service</h3>
+            <div className="form-group">
+            <label htmlFor="userName">Employee:</label>
+            <select name="userName" className="form-control"
+              onChange={this.myChangeHandler}>{
+                this.state.employees.map((employee, index) => <option key={index} value={employee.userName} >{employee.userName}  </option>)}
             </select>
-            <br></br>
-            <br></br>
-            <h5>Service Name:</h5>
-              <select  name = "serviceId"   onChange = {this.myChangeHandler}>{
-                this.state.services.map((service,index) => <option key={index} value= {service.serviceId} >{service.name}</option>) }
-              </select>
-        <br></br>
-        <br></br>
-        <button className="btn btn-primary btn-sm m-2" style = {{backgroundColor: "#341930",border: "1px solid #341930"}}
-          onClick={() => {
-            this.mySubmitHandler();
-        }}
-      >
-        Assign Service
-      </button>
+            </div>
+            <div className="form-group">
+            <label htmlFor="serviceId">Service name:</label>
+            <select name="serviceId" className="form-control" onChange={this.myChangeHandler}>{
+              this.state.services.map((service, index) => <option key={index} value={service.serviceId} >{service.name}</option>)}
+            </select>
+            </div>
+            <button className="btn btn-primary btn-block" style={{ backgroundColor: "#341930", border: "1px solid #341930" }}
+              onClick={() => {
+                this.mySubmitHandler();
+              }}
+            >
+              Assign Service
+</button>
+
+          </form>
+
         </div>
-  )
-}
+      </div>
+
+    )
+  }
 
 }
 

@@ -27,7 +27,8 @@ class ProfilePage extends Component {
         // const authorization = "Some Name" + cookie.load('token').replace("JWT","")
           // var id = props.match.params.id;
           const uname = this.props.user.username;
-          const url = 'http://localhost:8080/api/customer/' + uname
+          const uType = this.props.user.userType
+          const url = 'http://localhost:8080/api/person/' + uType + '/' + uname
           axios.get(url, {
             // headers: { 'Authorization': authorization }
           })

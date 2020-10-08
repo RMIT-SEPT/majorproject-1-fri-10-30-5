@@ -50,7 +50,7 @@ export default class AddService extends Component {
           <form id="addServiceForm" onSubmit={this.mySubmitHandler}>
             <h3>Add Service</h3>
             <div className="form-group">
-            <label htmlFor="serviceId">Service Id</label>
+            <label htmlFor="serviceId">Service ID</label>
             <input
               name="serviceId"
               type="text"

@@ -35,8 +35,8 @@ class App extends Component {
     super();
     this.state = {
         user: {
-          username: "cus6",
-          userType: "admin"
+          username: "cust1",
+          userType: "customer"
         }
     }
   }

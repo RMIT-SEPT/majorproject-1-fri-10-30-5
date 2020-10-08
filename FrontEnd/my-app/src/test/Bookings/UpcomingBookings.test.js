@@ -13,9 +13,13 @@ describe('Upcoming Booking Testing', () => {
 
     })
 
+    it("Should render a single <Dashboard /> component", ()=>{
+        expect(wrapper).toHaveLength(1);
+    });
+
     it('should render page title', () => {
         const title = "Upcoming Bookings";
-        const pageHeading = wrapper.find('h5').text();
+        const pageHeading = wrapper.find('h5').at(0).text();
         expect(pageHeading).toEqual(title);
     });
 })
