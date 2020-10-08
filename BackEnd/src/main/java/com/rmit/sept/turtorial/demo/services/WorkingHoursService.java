@@ -7,59 +7,63 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-
+/*
+    This class is the service which will be used by the Working Hours Controller
+    to retrieve data stored in the database through the use of the Working Hours
+    Repository. This class also contains the majority of the business logic.
+ */
 @Service
 public class WorkingHoursService
 {
+    //An instance of the Working Hours Repository
     @Autowired
     private WorkingHoursRepository workingHoursRepository;
 
-    //add Working Hours
-    public WorkingHours addWH(WorkingHours workingHours) {
+    //This method adds a Working Hours object if it doesn't already exist
+    public WorkingHours addWH(WorkingHours workingHours)
+    {
+        if (workingHoursRepository.existsById(workingHours.getId()))
+            return null;
 
-        //logic
         return workingHoursRepository.save(workingHours);
     }
 
-    //get all Working Hours
-    public List<WorkingHours> findAllByEmpIDEquals(String empID) {
+    //This method returns all Working Hours an employee has
+    public List<WorkingHours> findAllByEmpIDEquals(String empID)
+    {
+        if (!workingHoursRepository.existsByEmpIDEquals(empID))
+            return null;
 
-        //logic
         return workingHoursRepository.findAllByEmpIDEquals(empID);
     }
 
-    //get Working Hours
-    public WorkingHours getWHByEmpID(String empID) {
+    //This method gets a list of Working Hours by Service empID and Date
+    public WorkingHours getWHByEIDServiceDate(String empID, String date) {
 
-        //logic
-        return workingHoursRepository.findWorkingHoursByEmpIDEquals(empID);
+        if (!workingHoursRepository.existsByEmpIDEqualsAndWorkDateEquals(empID, date))
+            return null;
+
+        return workingHoursRepository.findWorkingHoursByEmpIDEqualsAndWorkDateEquals(empID, date);
     }
 
-    //get Working Hours by Service and empID
-    public List<WorkingHours> getWHByEmpIDandService(String empID, String service) {
+    //**
+    //This method gets a list of Working Hours by Service empID, Date and Time
+    public List<WorkingHours> getWHByEIDDateTime(String empID, String date, int start, int end)
+    {
 
         //logic
-        return workingHoursRepository.findAllByEmpIDEqualsAndServiceEquals(empID, service);
+        return workingHoursRepository.findAllByEmpIDEqualsAndWorkDateEqualsAndStartTimeIsLessThanEqualAndEndTimeIsLessThanEqual(empID, date, start, end);
     }
 
-    //get Working Hours by Service empID and Date
-    public List<WorkingHours> getWHByEIDServiceDate(String empID, String service, String date) {
+    //This method updates an existing Working Hours object
+    public WorkingHours updateWH(WorkingHours workingHours)
+    {
+        if (workingHoursRepository.existsByIdEquals(workingHours.getId()))
+            return null;
 
-        //logic
-        return workingHoursRepository.findAllByEmpIDEqualsAndServiceEqualsAndWorkDateEquals(empID, service, date);
-    }
-    //get Working Hours by Service empID and Date Time
-    public List<WorkingHours> getWHByEIDServiceDateTime(String empID, String service, String date, int start, int end) {
-
-        //logic
-        return workingHoursRepository.findAllByEmpIDEqualsAndServiceEqualsAndWorkDateEqualsAndStartTimeIsLessThanEqualAndEndTimeIsLessThanEqual(empID, service, date, start, end);
-    }
-
-    //update Working Hours
-    public WorkingHours updateWH(WorkingHours workingHours) {
-        WorkingHours workingHours1 = workingHoursRepository.findWorkingHoursByEmpIDEquals
-                (workingHours.getEmpID());
-        if (workingHours1 != null){
+        WorkingHours workingHours1 = workingHoursRepository.findByIdEquals(workingHours.getId());
+        if (workingHours1 != null)
+        {
             workingHours1.setStartTime(workingHours.getStartTime());
             workingHours1.setEndTime(workingHours.getEndTime());
             workingHours1.setUpdated_At(new Date());
