@@ -7,38 +7,69 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
+
+//This class represents a service that an employee has been assigned by their admin
 @Entity
 public class AssignedService
 {
+    //Assigned Service's ID number
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long iD;
+    private long id;
+
+    //The Service ID of service being assigned
     @Min(value = 1, message = "Enter at least one character")
-    private long serviceId;
+    private long serviceID;
+
+    //The employee's username of employee being assigned service
     @NotBlank(message = "Employee ID is required")
     private String userName;
+
+    //The date this object was created at
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date created_At;
+
+    //The date this object was last updated at
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
 
-    public long getiD() { return iD; }
+    //Getter for ID
+    public long getId() { return id; }
 
-    public void setiD(long iD) { this.iD = iD; }
+    //Setter for ID
+    public void setId(long iD) { this.id = iD; }
 
-    public long getServiceId() { return serviceId; }
+    //Getter for Service ID
+    public long getServiceID() { return serviceID; }
 
-    public void setServiceId(long serviceId) { this.serviceId = serviceId; }
+    //Setter for  Service ID
+    public void setServiceID(long serviceId) { this.serviceID = serviceId; }
 
+    //Getter for Username
     public String getUserName() { return userName; }
 
+    //Setter for Username
     public void setUserName(String userName) { this.userName = userName; }
 
+    //Getter for created at
+    public Date getCreated_At() { return created_At; }
+
+    //Setter for created at
+    public void setCreated_At(Date created_At) { this.created_At = created_At; }
+
+    //Getter for updated at
+    public Date getUpdated_At() { return updated_At; }
+
+    //Setter for updated at
+    public void setUpdated_At(Date updated_At) { this.updated_At = updated_At; }
+
+    //Creates and sets current date when assigned service object is created
     @PrePersist
     protected void onCreate() {
         this.created_At = new Date();
     }
 
+    //Creates and sets current date when assigned service object is updated
     @PreUpdate
     protected void onUpdate() {
         this.updated_At = new Date();

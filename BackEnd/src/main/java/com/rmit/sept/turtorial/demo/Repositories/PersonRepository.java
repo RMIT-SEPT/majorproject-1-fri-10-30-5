@@ -6,19 +6,23 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/*
+    This interface contains all queries that will be executed
+    on the Person table in the database
+ */
 @Repository
-public interface PersonRepository extends CrudRepository<Person, String> {
+public interface PersonRepository extends CrudRepository<Person, Long>
+{
 
+    //This query finds a person based on the userName passed in
     Person findPersonByUserName(String userName);
 
-    Person deleteByUserName(String userName);
+    //This query finds an employee based on the username and userType passed in
+    Person findPersonByUserNameAndUserTypeEquals(String userName, String userType);
 
-    Person findPersonByUserNameAndEmployeeCheckIsTrue(String userName);
+    //This query finds all employees stored in the database
+    List<Person> findAllByUserTypeEquals(String userType);
 
-//    Person findAllByAdminCheckIsTrue();
-//    List<Person> findAllByCustomerCheckIsTrue();
-
-    List<Person> findAllByEmployeeCheckIsTrue();
-
-    List<Person> findAllByCustomerCheckIsTrue();
+    //This query determines if person exists by the username passed in
+    Boolean existsByUserNameEquals(String userName);
 }
