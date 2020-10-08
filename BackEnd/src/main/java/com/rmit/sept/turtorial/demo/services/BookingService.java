@@ -205,8 +205,7 @@ public class BookingService
     private boolean validateBookingStatus(String status)
     {
         String bStatus = status.toLowerCase();
-        if (!bStatus.matches("admin") || !bStatus.matches("employee") ||
-                !bStatus.matches("customer") || !bStatus.matches("[a-zA-Z ]*$"))
+        if (!bStatus.matches("[a-zA-Z ]*$"))
             return false;
 
         return true;

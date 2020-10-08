@@ -24,7 +24,7 @@ class Navbar extends Component {
         }
 
         const user =() => {
-            return MenuItems.NoUser;
+            // return MenuItems.NoUser;
             var string;
             if(hasUser) {
                 if(userType === 'customer') {
