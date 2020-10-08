@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from "axios";
 import '../../css/Searchbar.css'
 import ServiceResultsList from './ServiceSearch/ServiceResultsList'
-import WorkerResultsItem from './WorkerResultsItem';
+import WorkerResultsItem from '../Worker/WorkerResultsItem';
 
 class Searchbar extends Component {
     

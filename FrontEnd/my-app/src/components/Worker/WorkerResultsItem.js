@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ServiceResultsItem from './ServiceSearch/ServiceResultsItem'
+import ServiceResultsItem from '../Search/ServiceSearch/ServiceResultsItem'
 import {Link} from 'react-router-dom'
 
 class WorkerResultsItem extends Component {

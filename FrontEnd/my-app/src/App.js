@@ -3,7 +3,7 @@ import './App.css';
 import './css/Form.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router,Route, Switch } from 'react-router-dom';
-import Searchbar from './components/SearchAvailability/Searchbar';
+import Searchbar from './components/Search/Searchbar';
 import Dashboard from './components/Dashboard';
 import Header from './components/Navbar/Navbar';
 import PastBookings from './components/Bookings/PastBookings';
@@ -16,9 +16,9 @@ import Login from './components/Login/LoginForm';
 import Register from './components/Register/RegisterForm';
 import ContactUs from './components/Homepage/ContactUs'
 import AboutUs from './components/Homepage/AboutUs'
-import WorkerPage from './components/SearchAvailability/WorkerPage'
-import WorkerBooking from './components/SearchAvailability/WorkerBooking';
-import WorkerHours from './components/SearchAvailability/WorkerCalendar/WorkerCalendar'
+import WorkerPage from './components/Worker/WorkerPage'
+import Booking from './components/Worker/Calendar/Booking';
+import Roster from './components/Worker/Calendar/Roster'
 import AddEmployee from './components/Admin/AddEmployee/AddEmployee';
 import Admin from './components/Admin/AdminPage';
 import AddService from './components/Admin/AddService/AddService';
@@ -27,8 +27,8 @@ import WorkerNavPage from './components/Worker/WorkerNavPage';
 import AssignService from './components/Admin/AssignService/AssignService';
 import AdminUpcoming from './components/Admin/AdminBookings/AdminUpcoming';
 import AdminPast from './components/Admin/AdminBookings/AdminPast';
-import BookingSuccess from './components/SearchAvailability/BookingLanding/BookingSuccess';
-import BookingFailure from './components/SearchAvailability/BookingLanding/BookingFailure';
+import BookingSuccess from './components/Search/BookingLanding/BookingSuccess';
+import BookingFailure from './components/Search/BookingLanding/BookingFailure';
 
 class App extends Component {
   constructor() {
@@ -56,7 +56,7 @@ render() {
             <Route exact path="/upcomingBookings" component={() => <UpcomingBookings user= {this.state.user}/>} />
             <Route exact path="/search" component={Searchbar} />
             <Route exact path="/worker" component={WorkerPage} />
-            <Route exact path="/:empId/booking" component={WorkerBooking} />
+            <Route exact path="/:empId/booking" component={Booking} />
             <Route exact path="/contact-us" component={ContactUs} />
             <Route exact path="/about-us" component={AboutUs} />
             <Route exact path="/login" component={Login} />
@@ -68,7 +68,7 @@ render() {
             <Route exact path="/workerPage" component = {WorkerNavPage} />          
             <Route exact path="/assignService" component = {AssignService} />  
             <Route exact path="/admin/upcoming" component = {AdminUpcoming} />     
-            <Route exact path="/:empId/roster" component = {WorkerHours} />               
+            <Route exact path="/:empId/roster" component = {Roster} />               
             <Route exact path="/admin/past" component = {AdminPast} /> 
             <Route exact path="/bookingSuccess" component = {BookingSuccess} /> 
             <Route exact path="/bookingFailed" component = {BookingFailure} /> 

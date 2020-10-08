@@ -1,5 +1,5 @@
 import React from "react";
-import {shallow, mount} from "enzyme";
+import {shallow} from "enzyme";
 import { Route } from 'react-router';
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
@@ -12,7 +12,7 @@ describe('Profile Testing', () => {
     beforeEach(() => {
         wrapper = shallow(<Profile/>);
 
-    });
+    }); 
 
     it(' should render path containing username', () => {
         wrapper = shallow(<App/>);
@@ -37,19 +37,25 @@ describe('Profile Testing', () => {
         expect(heading).toEqual("Profile for mary09");
     });
 
-    it('should render name field', () => {
-        wrapper.setProps({ name: 'Mary Jones' })
-        expect(wrapper.find('li').at(0).text()).toEqual("Name: Mary Jones");
+    it('should render first name field', () => {
+        wrapper.setProps({fname: 'Mary' })
+        expect(wrapper.find('li').at(0).text()).toEqual("First Name: Mary");
     });
 
+    it('should render last name field', () => {
+        wrapper.setProps({lname: 'Jones' })
+        expect(wrapper.find('li').at(1).text()).toEqual("Last Name: Jones");
+    });
+
+
     it('should render phone field', () => {
-        wrapper.setProps({ phone: '0123456' })
-        expect(wrapper.find('li').at(1).text()).toEqual("Phone: 0123456");
+        wrapper.setProps({phone: '0123456' })
+        expect(wrapper.find('li').at(2).text()).toEqual("Phone: 0123456");
     });
 
     it('should render address field', () => {
-        wrapper.setProps({ address: '9 Hollow Drive' })
-        expect(wrapper.find('li').at(2).text()).toEqual("Address: 9 Hollow Drive");
+        wrapper.setProps({address: '9 Hollow Drive' })
+        expect(wrapper.find('li').at(3).text()).toEqual("Address: 9 Hollow Drive");
     });
 
     it('should render Profile Edit button', () => {

@@ -7,17 +7,17 @@ import Tooltip from './Templates/Tooltip'
 import moment from 'moment'
 import axios from 'axios'
 
-import '../../css/WorkerCalendar.css'
-import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-lists/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
-import "../../../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
+import '../../../css/WorkerCalendar.css'
+import "../../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+import "../../../../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
 
 
 class WorkerCalendar extends Component {
@@ -33,10 +33,11 @@ class WorkerCalendar extends Component {
             results: null,
             customers: [],
             existingBookings: [],
+            service: 'wash',
             
             user: {
                 username: "cus6",
-                userType: "admin"
+                userType: "customer"
             },
 
             admin: {
@@ -51,7 +52,10 @@ class WorkerCalendar extends Component {
         .then(res => {
           this.setState({
             customers: res.data,
-            userName: res.data[0].userName
+
+            admin: {
+                customer: res.data[0].userName
+            }
           })
         })
         .catch((error) => {
@@ -100,6 +104,7 @@ class WorkerCalendar extends Component {
         return (<BookingContent 
             booking={this.state.booking}
             service={this.state.service}
+            userType={this.state.user.userType}
         />);
     }
 
@@ -156,7 +161,7 @@ class WorkerCalendar extends Component {
             data.push({
                     id: i,
                     heading: 'Available',
-                    Subject: this.state.results[i]["service"],
+                    Subject: this.state.service,
                     StartTime: new Date(year, month, day, parseInt(startTime.format('HH')), parseInt(startTime.format('mm'))),
                     EndTime: new Date(year, month, day, parseInt(endTime.format('HH')), parseInt(endTime.format('mm'))),
                     IsBlock: booked
@@ -185,7 +190,7 @@ class WorkerCalendar extends Component {
             booking: {
                 custID: custID,
                 empID: this.state.empName,
-                bookingTime: moment(event.StartTime).format("hhmm"),
+                bookingTime: moment(event.StartTime).format("HHmm"),
                 bookingDate: moment(event.StartTime).format("yyyy-MM-DD")
             },
 

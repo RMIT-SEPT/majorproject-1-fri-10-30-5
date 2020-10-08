@@ -89,7 +89,7 @@ class RegisterForm extends Component {
                     <form id="register_form" onSubmit={this.mySubmitHandler}>
                         <h3>Sign Up</h3>
                         <div className='form-group'>
-                            <label htmlFor="userType">Account Type: </label>
+                            <label htmlFor="userType">Account Type:</label>
                             <select name="uType" className="form-control" id="userType" value={this.state.uType} onChange={this.myChangeHandler} required>
                                 <option value=""> </option>
                                 <option value="customer">Customer</option>

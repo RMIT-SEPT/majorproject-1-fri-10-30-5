@@ -13,6 +13,7 @@ export default class BookingContent extends Component {
         // validate here
       
         console.log("booking: ", this.props.booking);
+        let history = createHistory();
     
         axios.post('http://localhost:8080/api/booking/add', 
           this.props.booking
@@ -20,10 +21,19 @@ export default class BookingContent extends Component {
         .then(res => {
             console.log("data:", res.data);
         })
-        .catch(err => console.error("error: ", err));
+        .catch(err => {
+            console.error("error: ", err)
+
+            history.push("../bookingFailed");
+        });
     
-        let history = createHistory();
-        history.push("../admin/upcoming");
+        if(this.props.userType === 'admin') {
+            history.push("../admin/upcoming");
+        }
+        else {
+            history.push("../bookingSuccess");
+        }
+
         let pathUrl = window.location.href;
         window.location.href = pathUrl;  
       }

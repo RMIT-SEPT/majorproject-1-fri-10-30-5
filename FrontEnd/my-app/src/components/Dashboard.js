@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/Dashboard.css";
 import PastBookingsButton from "./Bookings/PastBookingsButton";
 import UpcomingBookingsButton from "./Bookings/UpcomingBookingsButton";
-import SearchPageButton from "./SearchAvailability/SearchPageButton";
+import SearchPageButton from "./Search/SearchPageButton";
 import { Link } from "react-router-dom";
 
 class Dashboard extends Component {

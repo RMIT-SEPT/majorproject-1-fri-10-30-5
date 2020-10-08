@@ -57,7 +57,7 @@ class PastBookings extends Component {
                     </tbody>
                 </table>
             } else {
-                return <h1>You have no past bookings</h1>
+                return <h5>You have no past bookings.</h5>
             }
         
         }
