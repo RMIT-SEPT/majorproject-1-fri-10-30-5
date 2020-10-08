@@ -62,7 +62,7 @@ public class WorkingHoursControllerTest {
     @Test
     public void givenNullWorkingHours_whenPostWorkingHours_thenBadRequest() throws Exception {
         WorkingHours workHour = new WorkingHours(null, null,1200,1600,"2020-12-12");
-        String nullWork = "Invalid Working_Hours Object";
+        String nullWork = "Invalid Working Hours Object";
 
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
@@ -73,7 +73,7 @@ public class WorkingHoursControllerTest {
     @Test
     public void givenEndTimeOutOfBounds_whenPostWorkingHours_thenBadRequest() throws Exception {
         WorkingHours workHour = new WorkingHours(0L, "1",1200,2500,"2020-12-12");
-        String nullWork = "Invalid Working_Hours Object";
+        String nullWork = "Invalid Working Hours Object";
 
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
@@ -86,7 +86,7 @@ public class WorkingHoursControllerTest {
     @Test
     public void givenInvalidWorkingHours_whenUpdateWorkingHour_thenBadRequest() throws Exception {
         WorkingHours workHour = new WorkingHours(0L, null,1200,1600,"2020-12-12");
-        String message = "Invalid Working_Hours Object";
+        String message = "Invalid Working Hours Object";
 
         mvc.perform(put("/api/workinghours/update").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
@@ -122,7 +122,7 @@ public class WorkingHoursControllerTest {
     @Test
     public void givenInvalidEmployeesAndService_whenGetWorkingHours_thenNotFound() throws Exception {
         String message = "No Working Hours Objects";
-        mvc.perform(get("/api/workinghours/list/{empID}/{service}","30","Hair Cut")
+        mvc.perform(get("/api/workinghours/list/{empID}","30","Hair Cut")
                 .contentType(MediaType.APPLICATION_JSON))
                    .andExpect(jsonPath("$", is(message)))
                 .andExpect(status().isNotFound());
@@ -152,10 +152,8 @@ public class WorkingHoursControllerTest {
         mvc.perform(get("/api/workinghours/list/{empID}/{date}/{startTime}/{endTime}","1","Hair Cut","2020-12-12",1200,1600)
                 .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(jsonPath("$", is(message)))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
-
-
 }
 
 

@@ -15,9 +15,6 @@ import java.util.*;
     This class is the service which will be used by the Booking Controller
     to retrieve data stored in the database through the use of the Booking
     Repository. This class also contains the majority of the business logic.
-
-    TO DO:
-    Restrict booking services to 7 days in the future
  */
 @Service
 public class BookingService
