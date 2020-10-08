@@ -4,7 +4,6 @@ import './css/Form.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 import Searchbar from './components/SearchAvailability/Searchbar';
-import SearchPage from './components/SearchAvailability/SearchPage';
 import Dashboard from './components/Dashboard';
 import Header from './components/Navbar/Navbar';
 import PastBookings from './components/Bookings/PastBookings';
@@ -55,11 +54,15 @@ render() {
             <Route exact path="/profile/:id/edit" component={ProfileEdit} />
             <Route exact path="/upcomingBookings" component={() => <UpcomingBookings user= {this.state.user}/>} />
             <Route exact path="/search" component={Searchbar} />
-            <Route exact path="/searchResults" component={SearchPage} />
             <Route exact path="/worker" component={WorkerPage} />
+<<<<<<< HEAD
+            <Route exact path="/:empId/booking" component={WorkerBooking} />
+            <Route exact path="/homepage" component={Homepage} />
+=======
             <Route exact path="/:empId/workinghours" component={WorkerBooking} />
             <Route exact path="/contact-us" component={ContactUs} />
             <Route exact path="/about-us" component={AboutUs} />
+>>>>>>> registerUser
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/admin" component={Admin} />
@@ -69,10 +72,15 @@ render() {
             <Route exact path="/workerPage" component = {WorkerNavPage} />          
             <Route exact path="/assignService" component = {AssignService} />  
             <Route exact path="/admin/upcoming" component = {AdminUpcoming} />     
+<<<<<<< HEAD
+            <Route exact path="/admin/past" component = {AdminPast} />   
+            <Route exact path="/:empId/roster" component = {WorkerHours} />               
+=======
             <Route exact path="/admin/past" component = {AdminPast} /> 
             <Route exact path="/bookingSuccess" component = {BookingSuccess} /> 
             <Route exact path="/bookingFailed" component = {BookingFailure} /> 
 
+>>>>>>> registerUser
           </div>
         </div>
       </Router>

@@ -7,7 +7,7 @@ class WorkerResultsItem extends Component {
         return (
             <div>
             <React.Fragment>
-              <Link key={"index"} to={"/"+this.props.name+"/workingHours"} className="btn btn-lg btn-info">
+              <Link key={"index"} to={"/"+this.props.name+"/booking"} className="btn btn-lg btn-info">
                 <ServiceResultsItem 
                     name={this.props.name}
                 />
