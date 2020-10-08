@@ -6,7 +6,7 @@ import {link, Link} from "react-router-dom";
         <React.Fragment>
         <Link to="/admin/past"
         className="btn btn-lg btn-info" style = {{backgroundColor: "#341930",border: "1px solid #341930"}}>
-        View Past Bookings
+        View All Past Bookings
         </Link>
         </React.Fragment>
     )

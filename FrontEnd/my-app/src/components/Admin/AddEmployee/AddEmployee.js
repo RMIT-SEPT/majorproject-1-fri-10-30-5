@@ -33,7 +33,7 @@ export default class AddEmployee extends Component {
       userName: this.state.userName,
       password: this.state.pw,
       admin: this.state.admin,
-      employeeCheck: true,
+      userType: "employee"
     };
     console.log(employee);
     

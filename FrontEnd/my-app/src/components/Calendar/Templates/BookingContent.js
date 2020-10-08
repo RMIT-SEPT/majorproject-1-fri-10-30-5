@@ -23,7 +23,7 @@ export default class BookingContent extends Component {
         .catch(err => console.error("error: ", err));
     
         let history = createHistory();
-        history.push("../upcomingBookings");
+        history.push("../admin/upcoming");
         let pathUrl = window.location.href;
         window.location.href = pathUrl;  
       }

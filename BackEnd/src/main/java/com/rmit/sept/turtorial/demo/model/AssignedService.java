@@ -18,7 +18,7 @@ public class AssignedService
     private long id;
 
     //The Service ID of service being assigned
-    @Min(value = 1, message = "Enter at least one character")
+//    @Min(value = 1, message = "Enter at least one character")
     private long serviceID;
 
     //The employee's username of employee being assigned service

@@ -6,7 +6,7 @@ import {link, Link} from "react-router-dom";
         <React.Fragment>
         <Link to="/admin/upcoming"
         className="btn btn-lg btn-info" style = {{backgroundColor: "#341930",border: "1px solid #341930"}}>
-        View Upcoming Bookings
+        View All Upcoming Bookings
         </Link>
         </React.Fragment>
     )

@@ -19,7 +19,7 @@ public class Service
 
     //Service's ID number
     @Id
-    @Size(min=1, message = "Please enter a 10 digit number")
+//    @Size(min=1, message = "Please enter a 10 digit number")
     private long serviceId;
 
     //Service's name

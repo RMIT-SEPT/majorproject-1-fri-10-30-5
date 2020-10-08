@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScheduleComponent, Week, Inject, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
-import Event from './../Calendar/Templates/Event'
+import Event from './Templates/Event'
 import moment from 'moment'
 import axios from 'axios'
 
@@ -96,38 +96,7 @@ class WorkerCalendar extends Component {
         }
         
         // test results
-<<<<<<< HEAD:FrontEnd/my-app/src/components/Worker/WorkerHours.js
         this.setState({ data: data }, () => { console.log(this.state.data) })
-=======
-        this.setState({
-            data: [
-                {
-                    id: 1,
-                    heading: 'Available',
-                    Subject: 'wash',
-                    StartTime: new Date(2020, 9, 6, 12, 0),
-                    EndTime: new Date(2020, 9, 6, 14, 0),
-                },
-                {
-                    id: 2,
-                    heading: 'Available',
-                    Subject: 'wash',
-                    StartTime: new Date(2020, 10, 5, 15, 0),
-                    EndTime: new Date(2020, 10, 5, 17, 0),
-                },
-                {
-                    id: 3,
-                    heading: 'Available',
-                    Subject: 'wash',
-                    StartTime: new Date(2020, 10, 5, 11, 0),
-                    EndTime: new Date(2020, 10, 5, 13, 0),
-                },
-            ]   
-        }, 
-        () => {
-            console.log("data: ", this.state.data)
-        })
->>>>>>> registerUser:FrontEnd/my-app/src/components/SearchAvailability/WorkerCalendar/WorkerCalendar.js
 
     }
 

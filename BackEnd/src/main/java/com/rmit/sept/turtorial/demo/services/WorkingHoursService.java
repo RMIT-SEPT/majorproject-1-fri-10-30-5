@@ -22,8 +22,6 @@ public class WorkingHoursService
     //This method adds a Working Hours object if it doesn't already exist
     public WorkingHours addWH(WorkingHours workingHours)
     {
-        if (workingHoursRepository.existsById(workingHours.getId()))
-            return null;
 
         return workingHoursRepository.save(workingHours);
     }
