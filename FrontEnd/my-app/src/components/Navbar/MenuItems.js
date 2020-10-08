@@ -7,12 +7,12 @@
             },
             {
                 title: 'About Us',
-                url: 'homepage',
+                url: 'about-us',
                 cName: 'nav-link'
             }, 
             {
                 title: 'Contact Us',
-                url: 'homepage',
+                url: 'contact-us',
                 cName: 'nav-link'
             },
             {
@@ -34,12 +34,12 @@
             },
             {
                 title: 'About Us',
-                url: 'homepage',
+                url: 'about-us',
                 cName: 'nav-link'
             }, 
             {
                 title: 'Contact Us',
-                url: 'homepage',
+                url: 'contact-us',
                 cName: 'nav-link'
             },
             {
@@ -61,12 +61,12 @@
             },
             {
                 title: 'About Us',
-                url: 'homepage',
+                url: 'about-us',
                 cName: 'nav-link'
             }, 
             {
                 title: 'Contact Us',
-                url: 'homepage',
+                url: 'contact-us',
                 cName: 'nav-link'
             },
             {
@@ -78,12 +78,12 @@
         "NoUser": [
             {
                 title: 'About Us',
-                url: '/homepage',
+                url: 'about-us',
                 cName: 'nav-link'
             }, 
             {
                 title: 'Contact Us',
-                url: '/homepage',
+                url: 'contact-us',
                 cName: 'nav-link'
             },
             {

@@ -32,32 +32,6 @@ public class PersonController {
         }
     }
 
-//    @PostMapping("/admin/add")
-//    public ResponseEntity<?> createNewAdmin(@RequestBody @Valid Person admin, BindingResult result) {
-//        if (result.hasErrors() || admin.getAdminCheck() != true) {
-//            return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
-//        }
-//        Person person = personService.addPerson(admin);
-//        if (person != null) {
-//            return new ResponseEntity<Person>(person, HttpStatus.CREATED);
-//        } else {
-//            return new ResponseEntity<String>("Person Object Could Not Be Created", HttpStatus.CONFLICT);
-//        }
-//    }
-//
-//    @PostMapping("/customer/add")
-//    public ResponseEntity<?> createNewCustomer(@RequestBody @Valid Person customer, BindingResult result) {
-//        if (result.hasErrors() || customer.getCustomerCheck() != true) {
-//            return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
-//        }
-//        Person person = personService.addPerson(customer);
-//        if (person != null) {
-//            return new ResponseEntity<Person>(person, HttpStatus.CREATED);
-//        } else {
-//            return new ResponseEntity<String>("Person Object Could Not Be Created", HttpStatus.CONFLICT);
-//        }
-//    }
-
     //
     @PutMapping("/update")
     public ResponseEntity<?> updatePerson(@Valid @RequestBody Person person, BindingResult result) {
@@ -71,66 +45,6 @@ public class PersonController {
             return new ResponseEntity<String>("Person Object Could Not Be Updated", HttpStatus.CONFLICT);
         }
     }
-
-//    @PutMapping("/admin/update")
-//    public ResponseEntity<?> updateAdmin(@Valid @RequestBody Person admin, BindingResult result) {
-//        if (result.hasErrors() || admin.getAdminCheck() != true) {
-//            return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
-//        }
-//        Person admin1 = personService.updatePerson(admin);
-//        if (admin1 != null) {
-//            return new ResponseEntity<Person>(admin1, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<String>("Person Object Could Not Be Updated", HttpStatus.CONFLICT);
-//        }
-//    }
-//
-//
-//    @PutMapping("/employee/update")
-//    public ResponseEntity<?> updateEmployee(@Valid @RequestBody Person customer, BindingResult result) {
-//        if (result.hasErrors() || customer.getCustomerCheck() != true) {
-//            return new ResponseEntity<String>("Invalid Person Object", HttpStatus.BAD_REQUEST);
-//        }
-//        Person customer1 = personService.updatePerson(customer);
-//        if (customer1 != null) {
-//            return new ResponseEntity<Person>(customer1, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<String>("Person Object Could Not Be Updated", HttpStatus.CONFLICT);
-//        }
-//    }
-
-//    @DeleteMapping("/delete/{userName}")
-//    public ResponseEntity<?> deleteEmployee(@Valid @PathVariable String userName) {
-//        String person1 = personService.deletePerson(userName);
-//        Boolean isEmpl = personService.getPersonByUserName(userName).getEmployeeCheck();
-//        if (person1 != null && isEmpl) {
-//            return new ResponseEntity<String>(person1, HttpStatus.ACCEPTED);
-//        } else {
-//            return new ResponseEntity<String>("No Person Object", HttpStatus.NOT_FOUND);
-//        }
-//    }
-//
-//    @DeleteMapping("admin/delete/{userName}")
-//    public ResponseEntity<?> deleteAdmin(@Valid @PathVariable String userName) {
-//        String person1 = personService.deletePerson(userName);
-//        Boolean isAdmin = personService.getPersonByUserName(userName).getAdminCheck();
-//        if (person1 != null && isAdmin) {
-//            return new ResponseEntity<String>(person1, HttpStatus.ACCEPTED);
-//        } else {
-//            return new ResponseEntity<String>("No Person Object", HttpStatus.NOT_FOUND);
-//        }
-//    }
-//
-//    @DeleteMapping("customer/delete/{userName}")
-//    public ResponseEntity<?> deleteCustomer(@Valid @PathVariable String userName) {
-//        String person1 = personService.deletePerson(userName);
-//        Boolean isCust = personService.getPersonByUserName(userName).getCustomerCheck();
-//        if (person1 != null && isCust) {
-//            return new ResponseEntity<String>(person1, HttpStatus.ACCEPTED);
-//        } else {
-//            return new ResponseEntity<String>("No Person Object", HttpStatus.NOT_FOUND);
-//        }
-//    }
 
     @GetMapping("employee/{userName}")
     public ResponseEntity<?> findEmployee(@Valid @PathVariable String userName) {
@@ -191,7 +105,4 @@ public class PersonController {
             return new ResponseEntity<String>("No Person Objects", HttpStatus.NOT_FOUND);
         }
     }
-
-    //Fix update logic
 }
-
