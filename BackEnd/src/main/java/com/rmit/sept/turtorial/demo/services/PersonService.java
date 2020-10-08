@@ -27,7 +27,7 @@ public class PersonService
     //This method adds a person if they do not already exist
     public Person addPerson(Person person)
     {
-        if(personRepository.existsById(person.getId()) || validateFields(person))
+        if(validateFields(person))
             return null;
 
         return personRepository.save(person);

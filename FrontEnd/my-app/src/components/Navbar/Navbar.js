@@ -7,8 +7,13 @@ import { Link } from "react-router-dom";
 class Navbar extends Component {
 
     render() {
-        const  hasUser = this.props.user.username !== null;
-        let userType = this.props.user.userType;
+        const  hasUser = this.props.user !== null;
+        let userType;
+        if(hasUser){
+            userType = this.props.user.userType;
+        }else{
+            userType = "none"
+        }
         
         const logoLink = () => {
             if(hasUser) {
@@ -19,6 +24,7 @@ class Navbar extends Component {
         }
 
         const user =() => {
+            return MenuItems.NoUser;
             var string;
             if(hasUser) {
                 if(userType === 'customer') {

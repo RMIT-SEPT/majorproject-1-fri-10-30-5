@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import '../../css/Form.css'
+import { login } from "../../actions/securityActions";
+
+import {GET_ERRORS, SET_CURRENT_USER} from "../../actions/types"
+import jwt_decode from "jwt-decode"
+import setJWTToken from "../../securityUtils/setJWTToken"
 
 class LoginForm extends Component {
 
@@ -35,8 +40,27 @@ class LoginForm extends Component {
         )
         .then(res => //showOutput(res))
         {console.log(res);
-        console.log(res.data);})
-        .catch(err => console.error(err));
+        console.log(res.data);
+        const token = res.data.token;
+        console.log(res.data.token);
+        localStorage.setItem ("jwtToken", token);
+        setJWTToken(token);
+        const decoded = jwt_decode(token);
+        console.log(decoded.username);
+        localStorage.setItem ("AGMEuser", decoded.username);
+        // this.props.parentStateModifier({user:{username:"name", userType:"admin"}})
+        const userType = "admin"
+        localStorage.setItem ("userType", userType);
+        if(res.data.success === true){
+            console.log("true")
+            this.props.history.push("/dashboard");
+            // this.props.handleSuccessAuth(res.data);
+        }else{
+            console.log("false")
+        };
+    })
+    .catch(err => {
+        console.error(err);});
         
         // this.props.createNewUser(newUser, this.props.history);
     }
