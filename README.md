@@ -12,7 +12,8 @@
 ## Records
 
 * Github repository : https://github.com/RMIT-SEPT/majorproject-1-fri-10-30-5.git
-* Notion Workspace : https://www.notion.so/13eaff0dfebc4ee59c5f56a72ab305e9?v=971c09e20bcd4bdbbfbe42ca7a78436c
+* Task Board : https://www.notion.so/13eaff0dfebc4ee59c5f56a72ab305e9?v=971c09e20bcd4bdbbfbe42ca7a78436c
+* Internal Meetings :https://www.notion.so/4f6d2156050e4fb6a040d1c8fcc3065c?v=f0b0950c68ac4c0ab1a266a64528de69
 
 
 ## Code documentation
