@@ -5,7 +5,14 @@ import UpcomingBookingsButton from "./BookingData/UpcomingBookingsButton";
 import SearchPageButton from "./Search/SearchPageButton";
 
 class Dashboard extends Component {
+
+  test() {
+    console.log("props: ", this.props)
+  }
+
   render() {
+
+    this.test()
     return (
       <div className="Dashboard">
         <h1 className="display-4 text-center">Dashboard</h1>

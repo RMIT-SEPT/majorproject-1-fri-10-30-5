@@ -51,10 +51,12 @@ class LoginForm extends Component {
         // this.props.parentStateModifier({user:{username:"name", userType:"admin"}})
         const userType = "admin"
         localStorage.setItem ("userType", userType);
+
         if(res.data.success === true){
             console.log("true")
             this.props.history.push("/dashboard");
             // this.props.handleSuccessAuth(res.data);
+            // this.props.login()
         }else{
             console.log("false")
         };

@@ -29,11 +29,11 @@ import AdminUpcoming from './components/Admin/AdminBookings/AdminUpcoming';
 import AdminPast from './components/Admin/AdminBookings/AdminPast';
 import BookingSuccess from './components/Search/BookingLanding/BookingSuccess';
 import BookingFailure from './components/Search/BookingLanding/BookingFailure';
-import MainApp from './MainApp';
 
-class App extends Component {
-  constructor() {
-    super();
+class MainApp extends Component {
+  constructor(props) {
+    super(props);
+    
     this.state = {
         user: {
           username: "guest",
@@ -81,8 +81,7 @@ class App extends Component {
 
 render() {
 
-  console.log("USER: " , this.state.user)
-
+  console.log("USERR: " , this.state.user)
 
   return (
     <Provider store={store}>
@@ -90,16 +89,6 @@ render() {
         <div className="app">
           <Header user = {this.state.user}/>
           <div className = "page-container">
-{/* 
-            <Switch>
-              <Route exact path="/login" component={Login} handleSuccessAuth={this.handleSuccessAuth}/>
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/contact-us" component={ContactUs} />
-              <Route exact path="/about-us" component={AboutUs} />
-            </Switch>  */}
-
-            <Route exact path="/home" component={() => <MainApp />} />
-
             <Route exact path="/dashboard" component={() => <Dashboard user= {this.state.user}/>}  />
             <Route exact path="/pastBookings" component={() => <PastBookings user = {this.state.user}/>} />
             <Route exact path="/profile" component={() => <Profile user= {this.state.user}/>} />
@@ -131,4 +120,4 @@ render() {
   );
   }
 }
-export default App;
+export default MainApp;

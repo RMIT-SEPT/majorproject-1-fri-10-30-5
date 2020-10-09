@@ -6,17 +6,33 @@ import { Link } from "react-router-dom";
 
 class Navbar extends Component {
 
-    render() {
-        const  hasUser = this.props.user !== null;
-        let userType;
-        if(hasUser){
-            userType = this.props.user.userType;
-        }else{
-            userType = "none"
+    constructor() {
+        super();
+        this.state = {
+            user: {
+              username: 'guest',
+              userType: 'guest'
+            },
+
+            hasUser: false
         }
+
+        if(this.props) {
+            this.state.hasUser = this.props.user !== null;
+        }
+
+        if(this.state.hasUser){
+            
+            this.state.user.userType = this.props.user.userType
+            this.state.user.username = this.props.user.username
+            
+        } 
+    }
+
+    render() {
         
         const logoLink = () => {
-            if(hasUser) {
+            if(this.state.hasUser) {
                 return "/dashboard"
             } else {
                 return "/"
@@ -26,14 +42,16 @@ class Navbar extends Component {
         const user =() => {
             // return MenuItems.NoUser;
             var string;
-            if(hasUser) {
-                if(userType === 'customer') {
+            if(this.state.hasUser) {
+                if(this.user.userType === 'customer') {
                     string =  MenuItems.SignedInCustomer
-                } else if(userType === 'employee') {
+                } else if(this.user.userType === 'employee') {
                     string =  MenuItems.SignedInWorker
-                } else if(userType === 'admin') {
+                } else if(this.user.userType === 'admin') {
                     string = MenuItems.SignedInAdmin
-                }                
+                }  else if(this.user.userType === 'guest') {
+                    string = MenuItems.NoUser
+                }              
             } else {
                 string = MenuItems.NoUser
             }
@@ -45,7 +63,7 @@ class Navbar extends Component {
                     <a className="navbar-logo" href={logoLink()}></a>
                     <ul className = "navbar-items">
                             {
-                                hasUser &&  <li><Link to={{pathname: `/profile`}} className = "nav-link">Profile </Link></li>
+                                this.state.hasUser &&  <li><Link to={{pathname: `/profile`}} className = "nav-link">Profile </Link></li>
                             }
 
                                 {user().map((item, index) => {
