@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import "../css/Dashboard.css";
-import PastBookingsButton from "./Bookings/PastBookingsButton";
-import UpcomingBookingsButton from "./Bookings/UpcomingBookingsButton";
-import SearchPageButton from "./SearchAvailability/SearchPageButton";
-import { Link } from "react-router-dom";
+import PastBookingsButton from "./BookingData/PastBookingsButton";
+import UpcomingBookingsButton from "./BookingData/UpcomingBookingsButton";
+import SearchPageButton from "./Search/SearchPageButton";
 
 class Dashboard extends Component {
+
+  test() {
+    console.log("props: ", this.props)
+  }
+
   render() {
+
+    this.test()
     return (
       <div className="Dashboard">
         <h1 className="display-4 text-center">Dashboard</h1>

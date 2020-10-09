@@ -5,18 +5,18 @@
     padding: 10px;
 }
 
-input[type=text] {
+.search-bar {
     margin: 1em;
     width: 75%;
     padding: 1em;
 }
 
-button {
+.buttons {
     padding: 1em;
     margin: 1em;
 }
 
-h1 {
+.title  {
     margin: 1em;
     margin-top: 3em;
 }

@@ -8,84 +8,117 @@ import javax.validation.constraints.Size;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+/*
+    This class represents the Working Hours that an employee has been assigned for
+    a specified day.
+ */
 @Entity
 public class WorkingHours
 {
-
+    //The shift's shift number
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long shiftNo;
+    private Long id;
+
+    //The employee ID of employee being assigned this shift
     @NotBlank(message = "empID is required")
     @Size(min=1,max =25, message = "Please enter 1 to 25 characters")
     private String empID;
+
+
+    //The shift's start time
     @Min(value= 0, message="must be at least 0000")
     @Max(value=2359, message="must be 2359 or less")
     private int startTime;
+
+    //The shift's end time
     @Min(value= 0, message="must be at least 0000")
     @Max(value=2359, message="must be 2359 or less")
     private int endTime;
-    @JsonFormat(pattern ="yyyy-mm-dd")
-    private String workDate;
-    @JsonFormat(pattern ="yyyy-mm-dd")
-    private Date created_At;
-    @JsonFormat(pattern ="yyyy-mm-dd")
-    private Date updated_At;
-    @NotBlank(message = "service is required")
-    private String service;
 
+    //The date this shift is being allocated for
+    @JsonFormat(pattern ="yyyy-MM-dd")
+    private String workDate;
+
+    //The date this object was created
+    @JsonFormat(pattern ="yyyy-MM-dd")
+    private Date created_At;
+
+    //The date this object was created
+    @JsonFormat(pattern ="yyyy-MM-dd")
+    private Date updated_At;
+
+    //No argument constructor for instantiating Working Hours Object
     public WorkingHours(){}
 
-    public WorkingHours(Long shiftNo, @NotBlank(message = "empID is required") @Size(min = 1, max = 25, message = "Please enter 1 to 25 characters") String empID,
+    /*
+        6 argument constructor for instantiating Working Hours Object
+        Parameters:
+        Long shiftNo - the shift's number
+        String empID - the employee that will be assigned this shift
+        int startTime - the start time for this shift
+        int endTime - the end time for this shift
+        String workDate - the date that this shift is being allocated for
+        String service - the service being offered by the employee during the shift
+     */
+    public WorkingHours(Long id, @NotBlank(message = "empID is required") @Size(min = 1, max = 25, message = "Please enter 1 to 25 characters") String empID,
                         @Min(value = 0, message = "must be at least 0000") @Max(value = 2359, message = "must be 2359 or less") int startTime, @Min(value = 0, message = "must be at least 0000")
-                        @Max(value = 2359, message = "must be 2359 or less") int endTime, String workDate,@NotBlank(message = "service is required") String service) {
-        this.shiftNo = shiftNo;
+                        @Max(value = 2359, message = "must be 2359 or less") int endTime, String workDate) {
+        this.id = id;
         this.empID = empID;
         this.startTime = startTime;
         this.endTime = endTime;
         this.workDate = workDate;
-        this.service = service;
     }
 
+    //Getter for shiftNo
+    public Long getId() { return id;}
 
-    public Long getShift_No() { return shiftNo;}
+    //Setter for shiftNo
+    public void setId(Long shift_No) { this.id = shift_No;}
 
-    public void setShift_No(Long shift_No) { this.shiftNo = shift_No;}
-
+    //Getter for empID
     public String getEmpID() { return empID; }
 
+    //Setter for empID
     public void setEmpID(String empID) { this.empID = empID;}
 
+    //Getter for startTime
     public int getStartTime() { return startTime; }
 
+    //Setter for startTime
     public void setStartTime(int startTime) { this.startTime = startTime; }
 
+    //Getter for endTime
     public int getEndTime() { return endTime; }
 
+    //Setter for endTime
     public void setEndTime(int endTime) { this.endTime = endTime;}
 
+    //Getter for workDate
     public String getWorkDate() {return workDate;}
 
+    //Setter for workDate
     public void setWorkDate(String workDate) { this.workDate = workDate;}
 
+    //Getter for created_At
     public Date getCreated_At() { return created_At;}
 
+    //Setter for created_At
     public void setCreated_At(Date created_At) {this.created_At = created_At; }
 
+    //Getter for updated_At
     public Date getUpdated_At() {return updated_At; }
 
+    //Setter for updated_At
     public void setUpdated_At(Date updated_At) {this.updated_At = updated_At; }
 
-    public String getService() { return service; }
-
-    public void setService(String service) { this.service = service;}
-
+    //Creates and sets the current date when Working Hours object was created
     @PrePersist
-    protected void onCreate() {
-        this.created_At = new Date();
-    }
+    protected void onCreate() { this.created_At = new Date(); }
 
+    //Creates and sets the current date when Working Hours object was last updated
     @PreUpdate
-    protected void onUpdate() {
-        this.updated_At = new Date();
-    }
+    protected void onUpdate() { this.updated_At = new Date(); }
 }

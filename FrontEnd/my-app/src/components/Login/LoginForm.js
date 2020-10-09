@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import '../../css/Form.css'
+import { login } from "../../actions/securityActions";
+
+import {GET_ERRORS, SET_CURRENT_USER} from "../../actions/types"
+import jwt_decode from "jwt-decode"
+import setJWTToken from "../../securityUtils/setJWTToken"
 
 class LoginForm extends Component {
 
@@ -35,8 +40,29 @@ class LoginForm extends Component {
         )
         .then(res => //showOutput(res))
         {console.log(res);
-        console.log(res.data);})
-        .catch(err => console.error(err));
+        console.log(res.data);
+        const token = res.data.token;
+        console.log(res.data.token);
+        localStorage.setItem ("jwtToken", token);
+        setJWTToken(token);
+        const decoded = jwt_decode(token);
+        console.log(decoded.username);
+        localStorage.setItem ("AGMEuser", decoded.username);
+        // this.props.parentStateModifier({user:{username:"name", userType:"admin"}})
+        const userType = "admin"
+        localStorage.setItem ("userType", userType);
+
+        if(res.data.success === true){
+            console.log("true")
+            this.props.history.push("/dashboard");
+            // this.props.handleSuccessAuth(res.data);
+            // this.props.login()
+        }else{
+            console.log("false")
+        };
+    })
+    .catch(err => {
+        console.error(err);});
         
         // this.props.createNewUser(newUser, this.props.history);
     }
@@ -49,30 +75,16 @@ class LoginForm extends Component {
         return (
             <div className="forms-wrapper">
                 <div className="forms-inner">
-                    <h3>Login Form</h3>
+                    <h3>Login</h3>
                     <form id="login-form" onSubmit={this.mySubmitHandler}>
-                        <div>
-                            <label for="uname">Username </label>
-                            <input name="uname" type='text' className="form-control" onChange={this.myChangeHandler} placeholder="Username" />
+                        <div className = "form-group">
+                            <label for="uname" className = "control-label">Username </label>
+                            <input name="uname" id = "uname" type= "text" className="form-control" onChange={this.myChangeHandler} placeholder="Username" />
                         </div>
-                        <div>
-                            <label for="pw">Password </label>
-                            <input name="pw" className="form-control" type='password' onChange={this.myChangeHandler} placeholder="Password" />
+                        <div className = "form-group">
+                            <label for="pw" className = "control-label">Password </label>
+                            <input name="pw" id="pw" className="form-control" type="password" onChange={this.myChangeHandler} placeholder="Password" />
                         </div>
-                        <p>User Type:</p>
-                        <div className="custom-control custom-radio">
-                            <input type="radio" className="custom-control-input" id="admin" name="userType" value="admin" />
-                            <label className="custom-control-label" for="admin">Admin</label>
-                        </div>
-                        <div className="custom-control custom-radio">
-                            <input type="radio" className="custom-control-input" id="worker" name="userType" value="emp" />
-                            <label className="custom-control-label" for="worker">Worker</label>
-                        </div>
-                        <div className="custom-control custom-radio">
-                            <input type="radio" className="custom-control-input" id="customer" name="userType" value="cust"/>
-                            <label className="custom-control-label" for="customer">Customer</label>
-                        </div>   
-                        <br></br>                    
                         <button
                             type="submit"
                             className="btn btn-primary btn-block"

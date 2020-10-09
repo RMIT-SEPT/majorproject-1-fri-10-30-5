@@ -20,32 +20,36 @@ describe('Render <ProfileEditPage /> component', () => {
     });
 
     it('should render heading', () => {
-        const heading = wrapper.find('h1').text();
+        const heading = wrapper.find('h3').text();
         expect(heading).toContain("Update Details Form");
     });
 
-    it('should render name label', () => {
-        expect(wrapper.find('label').at(0).text()).toEqual("Name");
-    });
+    it('should render first name label', () => {
+        expect(wrapper.find('label').at(0).text()).toEqual("First Name");
+    }); 
+
+    it('should render last name label', () => {
+        expect(wrapper.find('label').at(1).text()).toEqual("Last Name");
+    }); 
 
     it('should render address label', () => {
-        expect(wrapper.find('label').at(1).text()).toEqual("Address");
+        expect(wrapper.find('label').at(2).text()).toEqual("Address");
     });
 
     it('should render phone label', () => {
-        expect(wrapper.find('label').at(2).text()).toEqual("Phone");
+        expect(wrapper.find('label').at(3).text()).toEqual("Phone");
     });
 
     it('should render username label', () => {
-        expect(wrapper.find('label').at(3).text()).toEqual("Username");
+        expect(wrapper.find('label').at(4).text()).toEqual("Username");
     });
 
     it('should render password label', () => {
-        expect(wrapper.find('label').at(4).text()).toEqual("Password");
+        expect(wrapper.find('label').at(5).text()).toEqual("Password");
     });
 
-    it('should render confirm passeord label', () => {
-        expect(wrapper.find('label').at(5).text()).toEqual("Confirm Password");
+    it('should render confirm password label', () => {
+        expect(wrapper.find('label').at(6).text()).toEqual("Confirm Password");
     });
 
     it('should check for submit button', () => {

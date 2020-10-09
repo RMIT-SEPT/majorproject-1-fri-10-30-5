@@ -16,9 +16,7 @@ const Profile = (props) => {
       </ul>
       <hr/>
       <br />
-      <Link to={{
-        pathname: `/profile/${props.username}/edit`
-      }} 
+      <Link key={"index"} to={"/profileEdit"} 
         className="btn btn-lg btn-info" style = {{backgroundColor: "#341930",border: "1px solid #341930"}}>
       Edit Details
      </Link>

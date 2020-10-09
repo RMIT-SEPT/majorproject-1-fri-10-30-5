@@ -10,36 +10,45 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    This class is the service which will be used by the Assigned Service
+    Controller to retrieve data stored in the database through the use of the
+    Assigned Service Repository. This class also contains the majority of the business logic.
+
+    TO DO: Update assigned service method?
+ */
 @Service
 public class AssignedServiceService
 {
+    //An instance of the Assigned Service Repository
     @Autowired
     AssignedServiceRepository assignedServiceRepository;
 
+    //An instance of the Person Repository
     @Autowired
     PersonRepository personRepository;
 
-    //Post assigned service
+    //This method adds an assigned service if it doesn't already exist
     public AssignedService addAssignedService(AssignedService assignedService)
     {
+        if(assignedServiceRepository.existsByServiceIDEqualsAndUserNameEquals
+                (assignedService.getServiceID(), assignedService.getUserName()))
+            return null;
+
         return assignedServiceRepository.save(assignedService);
     }
 
-    public List<AssignedService> getAllAssignedServices()
-    {
-        return assignedServiceRepository.findAll();
-    }
+    //This method gets a list of all assigned services from the database
+    public List<AssignedService> getAllAssignedServices() { return assignedServiceRepository.findAll(); }
 
-    //Gets a list of assigned services for an employee
-    public List<AssignedService> getAssignedServicesByUserName(String userName)
-    {
-        return assignedServiceRepository.findAllByUserNameEquals(userName);
-    }
+    //This method gets a list of assigned services for an employee
+    public List<AssignedService> getAssignedServicesByUserName(String userName) { return assignedServiceRepository.findAllByUserNameEquals(userName); }
 
-    //Gets a list of employees assigned to a particular service
-    public List<Person> getAllEmployeesByAssignedService(long serviceId){
-       List<AssignedService> services = assignedServiceRepository.findAllByServiceIdEquals(serviceId);
-       List<String> employeeUserNames = new ArrayList<>();
+    //This method gets a list of employees assigned to a particular service
+    public List<Person> getAllEmployeesByAssignedService(long serviceId)
+    {
+        List<AssignedService> services = assignedServiceRepository.findAllByServiceIDEquals(serviceId);
+        List<String> employeeUserNames = new ArrayList<>();
 
         for (AssignedService service: services)
         {
@@ -50,7 +59,8 @@ public class AssignedServiceService
 
         for (String userName: employeeUserNames)
         {
-            employees.add(personRepository.findPersonByUserNameAndEmployeeCheckIsTrue(userName));
+            employees.add(personRepository.findPersonByUserNameAndUserTypeEquals
+                    (userName, "employee"));
         }
 
         return employees;

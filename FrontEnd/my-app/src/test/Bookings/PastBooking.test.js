@@ -19,9 +19,13 @@ describe('Past Booking Testing', () => {
 
     })
 
+    it("Should render a single <PastBooking /> component", ()=>{
+        expect(wrapper).toHaveLength(1);
+    });
+
     it('should render page title', () => {
         const title = "Past Bookings";
-        const pageHeading = wrapper.find('h5').text();
+        const pageHeading = wrapper.find('h5').at(0).text();
         expect(pageHeading).toEqual(title);
     });
 
@@ -34,6 +38,6 @@ describe('Past Booking Testing', () => {
             }
         }
         wrapper = shallow(<PastBooking {... userProps} />);
-        expect(wrapper.find('h1').text()).toEqual("You have no past bookings");
+        expect(wrapper.find('h5').at(1).text()).toEqual("You have no past bookings.");
     });
 })
