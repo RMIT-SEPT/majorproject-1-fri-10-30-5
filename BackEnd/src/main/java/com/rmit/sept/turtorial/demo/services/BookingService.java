@@ -101,7 +101,7 @@ public class BookingService
         {
             booking1.setBookingStatus(booking.getBookingStatus());
             booking1.setUpdated_At(new Date());
-            if (booking1.getBookingStatus() == "cancelled")
+            if (booking1.getBookingStatus().matches("cancelled"))
                 workingHours.makeAvailable();
             return bookingRepository.save(booking1);
         }else{
