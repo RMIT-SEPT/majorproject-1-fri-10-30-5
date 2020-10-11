@@ -54,7 +54,7 @@ class WorkerCalendar extends Component {
 
     getHours() {
 
-        const url = 'http://localhost:8080/api/workinghours/list/' + this.state.empName
+        const url = 'http://localhost:8080/api/workinghours/list/' + this.state.user.username
         axios.get(url, {})
         .then(res => {
             this.setState({ results: res.data }, () => {
@@ -109,7 +109,7 @@ class WorkerCalendar extends Component {
         
         res = (
             <div>
-                <h2>Roster for {this.state.empName}</h2>
+                <h2>Roster for {this.state.user.username}</h2>
                 <br />
             </div>
         )

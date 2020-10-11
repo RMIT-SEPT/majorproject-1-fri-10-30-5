@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { authenticate } from '../../actions/auth'
-import BookingCalendar from './Calendar/Booking'
+import Roster from './Calendar/Roster'
 
 export default class WorkerPage extends Component {
 
@@ -15,7 +15,7 @@ export default class WorkerPage extends Component {
   render() {
     return (
       <div>
-        <BookingCalendar empID={this.props.match.params.empId} />
+        <Roster empID={this.props.match.params.empId} />
       </div>
     )
   }

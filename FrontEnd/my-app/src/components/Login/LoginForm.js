@@ -32,6 +32,8 @@ class LoginForm extends Component {
             localStorage.setItem ("userType", res.data.userType);
 
             this.props.history.push("/dashboard");
+            let pathUrl = window.location.href;
+            window.location.href = pathUrl; 
             
             })
         .catch((error) => {

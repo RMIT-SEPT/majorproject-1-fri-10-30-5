@@ -73,6 +73,9 @@ class RegisterForm extends Component {
                 addPerson(this.state);
                 console.log(res);
                 console.log(res.data);
+                this.props.history.push("/");
+                let pathUrl = window.location.href;
+                window.location.href = pathUrl; 
             })
             .catch(err => console.error(err));
 
