@@ -36,20 +36,21 @@ public class WorkingHoursService
     }
 
     //This method gets a list of Working Hours by Service empID and Date
-    public WorkingHours getWHByEIDServiceDate(String empID, String date) {
+    public WorkingHours getWHByEIDServiceDate(String empID, String date, int startTime) {
 
-        if (!workingHoursRepository.existsByEmpIDEqualsAndWorkDateEquals(empID, date))
+        if (!workingHoursRepository.existsByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals(empID, date, startTime))
             return null;
 
-        return workingHoursRepository.findWorkingHoursByEmpIDEqualsAndWorkDateEquals(empID, date);
+        return workingHoursRepository.findWorkingHoursByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals(empID, date, startTime);
     }
 
     //**
     //This method gets a list of Working Hours by Service empID, Date and Time
-    public List<WorkingHours> getWHByEIDDateTime(String empID, String date, int start, int end)
+    public WorkingHours getWHByEIDDateTime(String empID, String date, int start, int end)
     {
+        if (empID == null || date == null)
+            return null;
 
-        //logic
         return workingHoursRepository.findAllByEmpIDEqualsAndWorkDateEqualsAndStartTimeIsLessThanEqualAndEndTimeIsLessThanEqual(empID, date, start, end);
     }
 

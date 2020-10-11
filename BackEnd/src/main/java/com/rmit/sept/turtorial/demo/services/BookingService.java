@@ -30,9 +30,8 @@ public class BookingService
     //This methods adds a booking if it doesn't already exist, restrict to 7 days
     public Booking addBooking(Booking booking) throws ParseException
     {
-        List<Booking>bookings=bookingRepository.findAllByCustIDEquals(booking.getCustID());
-        WorkingHours workingHours = workingHoursRepository.findWorkingHoursByEmpIDEqualsAndWorkDateEquals
-                (booking.getEmpID(), booking.getBookingDate());
+        WorkingHours workingHours = workingHoursRepository.findWorkingHoursByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals
+                (booking.getEmpID(), booking.getBookingDate(), booking.getBookingTime());
 
         Date currentDate = new Date();
         Date bookingDate = new SimpleDateFormat("yyyy-MM-dd").parse(booking.getBookingDate());
@@ -49,25 +48,25 @@ public class BookingService
 
         //Checks that the booking is within the working times of the employee
         if(workingHours == null || booking.getBookingTime() < workingHours.getStartTime() ||
-                booking.getBookingTime() > workingHours.getEndTime() - 100)
+                booking.getBookingTime() > workingHours.getEndTime() - 100 || workingHours.getAvailable() == false)
         {
             return null;
         }
 
-        //Checks that the booking doesn't clash with other bookings existing
-        if(!bookings.isEmpty()){
-            for(Booking prevBooking:bookings){
-                if(booking.getBookingDate().equals(prevBooking.getBookingDate())) {
-                    if (!(booking.getBookingTime() <= prevBooking.getBookingTime() - 100
-                            || booking.getBookingTime() >= prevBooking.getBookingTime() + 100))
-                    {
-                        return null;
-                    }
-
-                }
-
-            }
-        }
+          //Checks that the booking doesn't clash with other bookings existing
+//        if(!bookings.isEmpty()){
+//            for(Booking prevBooking:bookings){
+//                if(booking.getBookingDate().equals(prevBooking.getBookingDate())) {
+//                    if (!(booking.getBookingTime() <= prevBooking.getBookingTime() - 100
+//                            || booking.getBookingTime() >= prevBooking.getBookingTime() + 100))
+//                    {
+//                        return null;
+//                    }
+//
+//                }
+//
+//            }
+//        }
 
         return bookingRepository.save(booking);
     }

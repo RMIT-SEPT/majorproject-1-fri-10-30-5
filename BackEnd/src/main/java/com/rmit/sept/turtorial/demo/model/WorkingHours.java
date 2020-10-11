@@ -122,6 +122,9 @@ public class WorkingHours
     //Sets available
     public void makeAvailable(){available = true;}
 
+    //Gets availability
+    public boolean getAvailable(){return available;}
+
     //Creates and sets the current date when Working Hours object was created
     @PrePersist
     protected void onCreate() { this.created_At = new Date(); }
