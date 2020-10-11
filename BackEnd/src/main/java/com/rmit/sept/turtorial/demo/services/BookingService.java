@@ -67,7 +67,7 @@ public class BookingService
 //
 //            }
 //        }
-
+        workingHours.makeNotAvailable();
         return bookingRepository.save(booking);
     }
 
