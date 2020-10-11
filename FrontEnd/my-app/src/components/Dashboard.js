@@ -3,21 +3,27 @@ import "../css/Dashboard.css";
 import PastBookingsButton from "./BookingData/PastBookingsButton";
 import UpcomingBookingsButton from "./BookingData/UpcomingBookingsButton";
 import SearchPageButton from "./Search/SearchPageButton";
+import axios from 'axios'
+import { withRouter } from 'react-router-dom'
+import { authenticate } from './../actions/auth'
 
 class Dashboard extends Component {
 
-  test() {
-    console.log("props: ", this.props)
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: authenticate()
+    }
   }
 
   render() {
 
-    this.test()
     return (
       <div className="Dashboard">
         <h1 className="display-4 text-center">Dashboard</h1>
         <br />
-        <h1 className="welcome">Welcome, {this.props.user.username}!</h1>
+        <h1 className="welcome">Welcome, {this.state.user.username}!</h1>
         <br />
         <UpcomingBookingsButton />
         <br />
@@ -31,4 +37,4 @@ class Dashboard extends Component {
     );
   }
 }
-export default Dashboard;
+export default withRouter(Dashboard);

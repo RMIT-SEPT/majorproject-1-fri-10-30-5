@@ -36,84 +36,82 @@ class MainApp extends Component {
     
     this.state = {
         user: {
-          username: "guest",
-          userType: "guest"
+          username: null,
+          userType: null
         }
     }
-
-    this.handleAuth()
   }
 
-  // componentDidMount() {
-  //   const user = localStorage.getItem("AGMEuser")
-  //   const userType = localStorage.getItem("userType")
-  //   const jwtToken = localStorage.getItem("jwtToken")
-  //   this.state.user.username = user
-  //   this.state.user.userType = userType
-  //   this.state.token = jwtToken
-  //   // this.setState({token:jwtToken})
-  //   // this.setState({user:{username: user, userType: userType}})
-  //   // this.setState({user:{userType: userType}})
-  //   // console.log("user", localStorage.getItem("AGMEuser"))
-  //   // console.log("user", localStorage.getItem("userType"))
-  //   console.log("user", this.state.user)
-  //   console.log("token", this.state.token)
-  //   // this.setState({user: user})   
-  // }
+  componentDidMount() {
+    // const config= {
+    //   headers: {
+    //     Authorization: "Bearer" 
+    //   }
+    // }
 
-  handleAuth() {
+    // const url = "http://localhost:8080/api/user/login"
+    // axios.get(url, {})
+    // .then(res => {
+      
 
-    const user = localStorage.getItem("AGMEuser")
+    // })
+    // .catch((error) => {
+    //   console.log("error",error)
+    // })
+
+    const token = localStorage.getItem("jwtToken")
+    const username = localStorage.getItem("AGMEuser")
     const userType = localStorage.getItem("userType")
-    const jwtToken = localStorage.getItem("jwtToken")
-    // this.state.user.username = user
-    // this.state.user.userType = userType
-    // this.state.token = jwtToken
-    this.setState({token:jwtToken})
-    this.setState({user:{username: user, userType: userType}})
-    // console.log("user", localStorage.getItem("AGMEuser"))
-    // console.log("user", localStorage.getItem("userType"))
-    console.log("user", this.state.user)
-    console.log("token", this.state.token)
-    // this.setState({user: user})   
+
+    console.log("username: ", username)
+    console.log("userType: ", userType)
+
+    if(username === null || username === undefined) {
+
+      console.log("no user")
+      this.props.history.push("/")
+    }
+
+    const user = {
+      username: username,
+      userType: userType
+    }
     
+    this.setState({user: user}, () => {
+      console.log("user: ", this.state.user)
+      this.props.history.push("/dashboard")
+    })
+  
   }
 
 render() {
 
-  console.log("USERR: " , this.state.user)
+  // console.log("USERR: " , this.state.user)
 
   return (
     <Provider store={store}>
       <Router>
-        <div className="app">
+        <div>
           <Header user = {this.state.user}/>
-          <div className = "page-container">
-            <Route exact path="/dashboard" component={() => <Dashboard user= {this.state.user}/>}  />
-            <Route exact path="/pastBookings" component={() => <PastBookings user = {this.state.user}/>} />
-            <Route exact path="/profile" component={() => <Profile user= {this.state.user}/>} />
-            <Route exact path="/profileEdit" component={ProfileEdit} />
-            <Route exact path="/upcomingBookings" component={() => <UpcomingBookings user= {this.state.user}/>} />
-            <Route exact path="/search" component={Searchbar} />
-            <Route exact path="/worker" component={WorkerPage} />
-            <Route exact path="/:empId/booking" component={Booking} />
-            <Route exact path="/contact-us" component={ContactUs} />
-            <Route exact path="/about-us" component={AboutUs} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/addEmployee" component={() => <AddEmployee user = {this.state.user} />} /> 
-            <Route exact path="/addWorkhours" component={AddWorkHours} />  
-            <Route exact path="/addService" component={AddService} />     
-            <Route exact path="/workerPage" component = {WorkerNavPage} />          
-            <Route exact path="/assignService" component = {AssignService} />  
-            <Route exact path="/admin/upcoming" component = {AdminUpcoming} />     
-            <Route exact path="/:empId/roster" component = {Roster} />               
-            <Route exact path="/admin/past" component = {AdminPast} /> 
-            <Route exact path="/bookingSuccess" component = {BookingSuccess} /> 
-            <Route exact path="/bookingFailed" component = {BookingFailure} /> 
-
-          </div>
+          <Route exact path="/dashboard" component={() => <Dashboard />}  />
+          <Route exact path="/pastBookings" component={() => <PastBookings user = {this.state.user}/>} />
+          <Route exact path="/profile" component={() => <Profile user= {this.state.user}/>} />
+          <Route exact path="/profileEdit" component={ProfileEdit} />
+          <Route exact path="/upcomingBookings" component={() => <UpcomingBookings user= {this.state.user}/>} />
+          <Route exact path="/search" component={Searchbar} />
+          <Route exact path="/worker" component={WorkerPage} />
+          <Route exact path="/:empId/booking" component={Booking} />
+          <Route exact path="/admin" component={Admin} />
+          <Route exact path="/addEmployee" component={() => <AddEmployee user = {this.state.user} />} /> 
+          <Route exact path="/addWorkhours" component={AddWorkHours} />  
+          <Route exact path="/addService" component={AddService} />     
+          <Route exact path="/workerPage" component = {WorkerNavPage} />          
+          <Route exact path="/assignService" component = {AssignService} />  
+          <Route exact path="/admin/upcoming" component = {AdminUpcoming} />     
+          <Route exact path="/:empId/roster" component = {Roster} />               
+          <Route exact path="/admin/past" component = {AdminPast} /> 
+          <Route exact path="/bookingSuccess" component = {BookingSuccess} /> 
+          <Route exact path="/bookingFailed" component = {BookingFailure} /> 
         </div>
       </Router>
     </Provider>

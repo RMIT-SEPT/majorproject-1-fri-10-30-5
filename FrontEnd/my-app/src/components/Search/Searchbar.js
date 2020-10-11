@@ -3,6 +3,7 @@ import axios from "axios";
 import '../../css/Searchbar.css'
 import ServiceResultsList from './ServiceSearch/ServiceResultsList'
 import WorkerResultsItem from '../Worker/WorkerResultsItem';
+import { authenticate } from '../../actions/auth';
 
 class Searchbar extends Component {
     
@@ -12,6 +13,7 @@ class Searchbar extends Component {
         this.state = {
             searchType: 'service',
             results: null,
+            user: authenticate()
         };
 
         this.onChangeSearchType = this.onChangeSearchType.bind(this)

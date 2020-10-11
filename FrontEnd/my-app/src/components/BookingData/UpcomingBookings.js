@@ -2,9 +2,11 @@ import UpcomingBookingsItem from '../../components/BookingData/UpcomingBookingsI
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "../../css/Table.css"
+import { authenticate } from '../../actions/auth';
 
 
 function UpcomingBookings(props) {
+    
     const [bookingState, setBookingState] = useState([]);
 
     useEffect(() => {
@@ -14,7 +16,8 @@ function UpcomingBookings(props) {
 
 
     const getBooking = () => {
-        const uname = props.user.username;
+        const user = authenticate()
+        const uname = user.username;
         const url = 'http://localhost:8080/api/booking/upcomingBookings/list/' + uname;
         axios.get(url)
             .then(res => {

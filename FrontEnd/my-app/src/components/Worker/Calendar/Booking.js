@@ -18,6 +18,7 @@ import "../../../../node_modules/@syncfusion/ej2-navigations/styles/material.css
 import "../../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
 import "../../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 import "../../../../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
+import { authenticate } from '../../../actions/auth';
 
 
 class WorkerCalendar extends Component {
@@ -35,10 +36,7 @@ class WorkerCalendar extends Component {
             existingBookings: [],
             service: 'wash',
             
-            user: {
-                username: "cus6",
-                userType: "customer"
-            },
+            user: authenticate(),
 
             admin: {
                 customer: null

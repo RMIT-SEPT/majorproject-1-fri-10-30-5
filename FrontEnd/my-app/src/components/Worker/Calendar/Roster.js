@@ -15,6 +15,7 @@ import "../../../../node_modules/@syncfusion/ej2-navigations/styles/material.css
 import "../../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
 import "../../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 import "../../../../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
+import { authenticate } from '../../../actions/auth';
 
 
 class WorkerCalendar extends Component {
@@ -27,6 +28,8 @@ class WorkerCalendar extends Component {
             data: [],
             empName: window.location.pathname.split('/')[1],
             results: null,
+
+            user: authenticate()
         }
     }
 

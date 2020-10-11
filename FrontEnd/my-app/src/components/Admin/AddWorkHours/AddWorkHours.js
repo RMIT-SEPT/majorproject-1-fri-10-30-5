@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Moment from "moment";
+import { authenticate } from "../../../actions/auth";
 
 export default class AddWorkHours extends Component {
     constructor(props) {
@@ -14,6 +15,8 @@ export default class AddWorkHours extends Component {
             endTime: "",
             workDate: "",
             service: "",
+
+            user: authenticate()
         };
     }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import Profile from './Profile'
+import { authenticate } from '../../actions/auth';
 
 class ProfilePage extends Component {
 
@@ -19,15 +20,17 @@ class ProfilePage extends Component {
             password:'',
             status:'',
             data: {}
-            }
+            },
+
+            user: authenticate()
         }
       }
 
       componentDidMount(){
         // const authorization = "Some Name" + cookie.load('token').replace("JWT","")
           // var id = props.match.params.id;
-          const uname = this.props.user.username;
-          const uType = this.props.user.userType
+          const uname = this.state.user.username;
+          const uType = this.state.user.userType
           const url = 'http://localhost:8080/api/person/' + uType + '/' + uname
           axios.get(url, {
             // headers: { 'Authorization': authorization }

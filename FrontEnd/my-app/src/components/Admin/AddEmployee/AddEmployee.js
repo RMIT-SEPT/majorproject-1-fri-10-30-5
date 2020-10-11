@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { authenticate } from "../../../actions/auth";
 
 export default class AddEmployee extends Component {
   constructor(props) {
     super(props);
-    const admin = this.props.user.username;
 
     this.state = {
-      admin: admin,
       firstName: "",
       lastName: "",
       address: "",
       phone: "",
       userName: "",
       pw: "",
+
+      user: authenticate()
     };
   }
 
@@ -32,7 +33,6 @@ export default class AddEmployee extends Component {
       phone: this.state.phone,
       userName: this.state.userName,
       password: this.state.pw,
-      admin: this.state.admin,
       userType: "employee"
     };
     console.log(employee);

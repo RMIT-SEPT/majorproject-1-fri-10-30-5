@@ -39,6 +39,7 @@ class RegisterForm extends Component {
             address: '',
             phone: '',
 
+
         };
         this.myChangeHandler = this.myChangeHandler.bind(this);
     }
@@ -84,7 +85,8 @@ class RegisterForm extends Component {
 
     render() {
         return (
-            <div className="forms-wrapper">
+            <div>
+                <div className="forms-wrapper">
                 <div className="forms-inner">
                     <form id="register_form" onSubmit={this.mySubmitHandler}>
                         <h3>Sign Up</h3>
@@ -140,6 +142,7 @@ class RegisterForm extends Component {
                         </p>
                     </form>
                 </div>
+            </div>
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import { authenticate } from '../../../actions/auth'
 
 class AssignService extends Component {
 
@@ -7,7 +8,9 @@ class AssignService extends Component {
     services: [],
     employees: [],
     serviceId: '',
-    userName: ''
+    userName: '',
+
+    user: authenticate()
   }
 
   componentDidMount() {

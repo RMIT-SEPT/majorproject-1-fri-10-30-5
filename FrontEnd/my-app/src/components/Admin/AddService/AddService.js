@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { authenticate } from "../../../actions/auth";
 
 export default class AddService extends Component {
   constructor(props) {
@@ -9,7 +10,9 @@ export default class AddService extends Component {
       serviceId: "",
       name:"",
       description:"",
-      duration:""
+      duration:"",
+
+      user: authenticate()
     };
   }
 

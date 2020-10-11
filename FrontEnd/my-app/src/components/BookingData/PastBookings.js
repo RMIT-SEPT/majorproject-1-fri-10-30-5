@@ -2,18 +2,20 @@ import PastBookingsItem from '../../components/BookingData/PastBookingsItem'
 import axios from "axios";
 import React, { Component } from 'react'
 import "../../css/Table.css"
+import { authenticate } from '../../actions/auth';
 
 
 class PastBookings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookings: null
+            bookings: null,
+            user: authenticate()
         };
     }
 
     componentDidMount() {
-        const uname = this.props.user.username;
+        const uname = this.state.user.username;
         //change to /pastBooking later
         const url = 'http://localhost:8080/api/booking/pastBookings/list/' + uname;
         axios.get(url, {

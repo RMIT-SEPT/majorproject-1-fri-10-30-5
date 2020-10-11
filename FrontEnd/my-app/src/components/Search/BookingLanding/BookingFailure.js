@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
+import { authenticate } from '../../../actions/auth'
 import '../../../css/BookingLanding.css'
 import checkmark from '../../../images/Flat_cross_icon.svg'
 
 export default class BookingSuccess extends Component {
+
+    constructor() {
+        super()
+
+        this.state = {
+            user: authenticate()
+        }
+    }
+
     render() {
         return (
             <div className = "page-wrapper">

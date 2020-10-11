@@ -5,8 +5,17 @@ import AddWorkHoursButton from './AddWorkHours/AddWorkHoursButton';
 import AdminUpcomingButton from './AdminBookings/AdminUpcomingButton';
 import AdminPastButton from './AdminBookings/AdminPastButton';
 import AssignServiceButton from './AssignService/AssignServiceButton';
+import { authenticate } from '../../actions/auth';
 
 class AdminPage extends Component {
+
+    constructor() {
+        super()
+
+        this.state = {
+            user: authenticate()
+        }
+    }
     render() {
         return (
             <div className="admin-page">

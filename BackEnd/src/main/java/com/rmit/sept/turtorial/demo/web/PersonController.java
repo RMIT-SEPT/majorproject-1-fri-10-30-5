@@ -73,17 +73,28 @@ public class PersonController {
         }
     }
 
+    @GetMapping("/{userName}")
+    public ResponseEntity<?> findPerson(@Valid @PathVariable String userName) {
+
+        Person user = personService.getPersonByUserName(userName);
+        if (user != null) {
+            return new ResponseEntity<Person>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("No Person Found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 //    //Not used
-//    @GetMapping("admin/{userName}")
-//    public ResponseEntity<?> findAdmin(@Valid @PathVariable String userName) {
-//
-//        Person user = personService.getPersonByUserName(userName);
-//        if (user != null && user.getUserType().matches("admin")) {
-//            return new ResponseEntity<Person>(user, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<String>("No Admin Found", HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @GetMapping("admin/{userName}")
+    public ResponseEntity<?> findAdmin(@Valid @PathVariable String userName) {
+
+        Person user = personService.getPersonByUserName(userName);
+        if (user != null && user.getUserType().matches("admin")) {
+            return new ResponseEntity<Person>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("No Admin Found", HttpStatus.NOT_FOUND);
+        }
+    }
 
     //This method gets a customer object
     @GetMapping("customer/{userName}")

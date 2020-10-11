@@ -15,9 +15,28 @@ class LoginForm extends Component {
         this.state = {
             //customerDetails: []
             uname:'',
-            pw:''
+            pw:'',
         };
         this.myChangeHandler = this.myChangeHandler.bind(this);
+    }
+
+    getPerson(token) {
+        
+        const uname = this.state.uname;
+        const url = 'http://localhost:8080/api/person/' + uname
+        axios.get(url, {
+            headers: { 'Authorization': token }
+        })
+        .then(res => {
+            
+            localStorage.setItem ("userType", res.data.userType);
+
+            this.props.history.push("/dashboard");
+            
+            })
+        .catch((error) => {
+            console.log("error",error)
+        })
     }
 
     mySubmitHandler = event => {
@@ -38,28 +57,27 @@ class LoginForm extends Component {
         axios.post(baseurl + '/api/user/login', 
             newUser
         )
-        .then(res => //showOutput(res))
-        {console.log(res);
-        console.log(res.data);
-        const token = res.data.token;
-        console.log(res.data.token);
-        localStorage.setItem ("jwtToken", token);
-        setJWTToken(token);
-        const decoded = jwt_decode(token);
-        console.log(decoded.username);
-        localStorage.setItem ("AGMEuser", decoded.username);
-        // this.props.parentStateModifier({user:{username:"name", userType:"admin"}})
-        const userType = "admin"
-        localStorage.setItem ("userType", userType);
+        .then(res =>  {
 
-        if(res.data.success === true){
-            console.log("true")
-            this.props.history.push("/dashboard");
-            // this.props.handleSuccessAuth(res.data);
-            // this.props.login()
-        }else{
-            console.log("false")
-        };
+            console.log(res);
+            console.log(res.data);
+            const token = res.data.token;
+            console.log(res.data.token);
+            localStorage.setItem ("jwtToken", token);
+            setJWTToken(token);
+            const decoded = jwt_decode(token);
+            console.log(decoded.username);
+            localStorage.setItem ("AGMEuser", decoded.username);
+            // this.props.parentStateModifier({user:{username:"name", userType:"admin"}})
+
+            if(res.data.success === true){
+                console.log("true")
+            }else{
+                console.log("false")
+            };
+
+            this.getPerson(decoded)
+            
     })
     .catch(err => {
         console.error(err);});
@@ -73,7 +91,8 @@ class LoginForm extends Component {
     render() {
         //axios get to user
         return (
-            <div className="forms-wrapper">
+            <div>
+                <div className="forms-wrapper">
                 <div className="forms-inner">
                     <h3>Login</h3>
                     <form id="login-form" onSubmit={this.mySubmitHandler}>
@@ -95,6 +114,7 @@ class LoginForm extends Component {
                         </button>
                     </form>
                 </div>
+            </div>
             </div>
         )
     }

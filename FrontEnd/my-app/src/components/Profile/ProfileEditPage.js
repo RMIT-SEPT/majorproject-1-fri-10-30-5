@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from "axios";
 import '../../css/Form.css'
 import PropTypes from 'prop-types';
+import { authenticate } from '../../actions/auth';
 
 class ProfileEditPage extends Component {
 
@@ -20,7 +21,8 @@ class ProfileEditPage extends Component {
         password: '',
         status: '',
         data: {}
-      }
+      },
+      user: authenticate()
     }
     this.myChangeHandler = this.myChangeHandler.bind(this);
     this.mySubmitHandler = this.mySubmitHandler.bind(this);
