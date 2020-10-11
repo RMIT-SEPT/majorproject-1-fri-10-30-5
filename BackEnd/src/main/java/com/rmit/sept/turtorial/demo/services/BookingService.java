@@ -94,11 +94,15 @@ public class BookingService
     public Booking updateBooking(Booking booking)
     {
         Booking booking1 = bookingRepository.findBookingById(booking.getId());
+        WorkingHours workingHours = workingHoursRepository.findWorkingHoursByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals
+                (booking.getEmpID(), booking.getBookingDate(), booking.getBookingTime());
 
         if (booking1 != null && validateBookingStatus(booking.getBookingStatus()))
         {
             booking1.setBookingStatus(booking.getBookingStatus());
             booking1.setUpdated_At(new Date());
+            if (booking1.getBookingStatus() == "cancelled")
+                workingHours.makeAvailable();
             return bookingRepository.save(booking1);
         }else{
             return null;
