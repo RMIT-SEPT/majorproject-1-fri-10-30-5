@@ -97,4 +97,30 @@ public class WorkingHoursController
             return new ResponseEntity<>("No Working Hours Objects", HttpStatus.NOT_FOUND);
         }
     }
+
+    //This method gets an employee's working hours for a specific day
+    @GetMapping("list/available/{empID}/{date}")
+    public ResponseEntity<?> findAvailableTimesByEIDAndServiceAndDate(@Valid @PathVariable String empID, @PathVariable String date){
+
+        List<WorkingHours> workingHours = wHService.availableWHByEIDDate(empID, date);
+        if (workingHours != null){
+            return new ResponseEntity<>(workingHours, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("No Working Hours Objects", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //This method gets an employee's working hours for a specific day
+    @GetMapping("list/unavailable/{empID}/{date}")
+    public ResponseEntity<?> findUnAvailableTimesByEIDAndServiceAndDate(@Valid @PathVariable String empID, @PathVariable String date){
+
+        List<WorkingHours> workingHours = wHService.unavailableWHByEIDDate(empID, date);
+        if (workingHours != null){
+            return new ResponseEntity<>(workingHours, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("No Working Hours Objects", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 }

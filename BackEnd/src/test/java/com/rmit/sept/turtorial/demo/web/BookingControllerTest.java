@@ -2,6 +2,7 @@ package com.rmit.sept.turtorial.demo.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rmit.sept.turtorial.demo.model.Booking;
+import com.rmit.sept.turtorial.demo.security.SecurityConfig;
 import com.rmit.sept.turtorial.demo.services.BookingService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,6 +45,7 @@ public class BookingControllerTest {
     private MockMvc mvc;
     @Autowired
     private ObjectMapper objectMap;
+
     @MockBean
     private BookingService bs;
 

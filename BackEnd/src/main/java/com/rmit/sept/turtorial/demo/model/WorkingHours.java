@@ -41,6 +41,8 @@ public class WorkingHours
     @JsonFormat(pattern ="yyyy-MM-dd")
     private String workDate;
 
+    private boolean available = true;
+
     //The date this object was created
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date created_At;
@@ -113,6 +115,12 @@ public class WorkingHours
 
     //Setter for updated_At
     public void setUpdated_At(Date updated_At) {this.updated_At = updated_At; }
+
+    //Sets available to false
+    public void makeNotAvailable(){available = false;}
+
+    //Sets available
+    public void makeAvailable(){available = true;}
 
     //Creates and sets the current date when Working Hours object was created
     @PrePersist

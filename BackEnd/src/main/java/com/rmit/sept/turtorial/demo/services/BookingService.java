@@ -84,7 +84,7 @@ public class BookingService
     //Get a booking by custID and bID
     public Booking findBookingByCustIDAndBID(String custID, Long bID)
     {
-        if (custID == null || bID == null || !bookingRepository.existsByIdEquals(bID))
+        if (custID == null || bID == null)
             return null;
 
         return bookingRepository.findBookingByCustIDEqualsAndIdEquals(custID, bID);

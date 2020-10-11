@@ -1,8 +1,7 @@
 package com.rmit.sept.turtorial.demo.web;
 
-
-
 import com.rmit.sept.turtorial.demo.model.Person;
+import com.rmit.sept.turtorial.demo.security.SecurityConfig;
 import com.rmit.sept.turtorial.demo.services.PersonService;
 import org.junit.Test;
 
@@ -17,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -32,6 +32,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+//@WebMvcTest(PersonController.class)
 public class PersonControllerTest
 {
     //Instance of MockMvc Object
