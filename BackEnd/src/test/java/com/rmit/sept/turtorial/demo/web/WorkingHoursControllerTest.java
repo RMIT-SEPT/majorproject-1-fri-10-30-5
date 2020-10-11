@@ -42,7 +42,7 @@ public class WorkingHoursControllerTest {
     private ObjectMapper objectMap;
 
     @MockBean
-    private  WorkingHoursService whs;
+    private WorkingHoursService whs;
 
 
     @Test

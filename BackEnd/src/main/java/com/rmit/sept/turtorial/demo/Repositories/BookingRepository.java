@@ -27,7 +27,4 @@ public interface BookingRepository extends CrudRepository<Booking, Long>
 
     //This query finds all Bookings in the database
     List<Booking> findAll();
-
-    //This query determines if a booking exists based on its booking ID
-    Boolean existsByIdEquals(long id);
 }
