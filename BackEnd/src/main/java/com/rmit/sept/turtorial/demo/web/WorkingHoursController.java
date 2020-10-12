@@ -33,11 +33,11 @@ public class WorkingHoursController
         if (result.hasErrors()){
             return new ResponseEntity<>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
         }
-        WorkingHours workingHours1 = wHService.addWH(workingHours);
-        if (workingHours1 != null){
+        List<WorkingHours> workingHours1 = wHService.addWH(workingHours);
+        if (workingHours1.size() != 0){
             return new ResponseEntity<>(workingHours1, HttpStatus.CREATED);
         }else{
-            return new ResponseEntity<>("Working Hours Object Could Not Be Created", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Working Hours Object Could Not Be Created", HttpStatus.BAD_REQUEST);
         }
 
     }

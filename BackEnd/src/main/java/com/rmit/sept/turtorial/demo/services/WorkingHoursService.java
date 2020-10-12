@@ -4,6 +4,8 @@ import com.rmit.sept.turtorial.demo.Repositories.WorkingHoursRepository;
 import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +22,38 @@ public class WorkingHoursService
     private WorkingHoursRepository workingHoursRepository;
 
     //This method adds a Working Hours object if it doesn't already exist
-    public WorkingHours addWH(WorkingHours workingHours)
+    public List<WorkingHours> addWH(WorkingHours workingHours)
     {
+        if (workingHours.getStartTime() >= workingHours.getEndTime())
+            return null;
+        else {
 
-        return workingHoursRepository.save(workingHours);
+            //Start and end times of the working hours passed in
+            int start = workingHours.getStartTime();
+            int end = workingHours.getEndTime();
+
+            int max = (end - start)/ 100;
+
+            //List to store each working hours object
+            List<WorkingHours> workingHoursList = new ArrayList<>();
+
+            /*
+                On each iteration of the loop create a working hours object for
+                each hour of the shift
+             */
+            for (int i = 0; i < max; ++i)
+            {
+                WorkingHours workingHours1 = new WorkingHours();
+                workingHours1.setEmpID(workingHours.getEmpID());
+                workingHours1.setWorkDate(workingHours.getWorkDate());
+                workingHours1.setStartTime(start + 100 * i);
+                workingHours1.setEndTime(workingHours1.getStartTime() + 100);
+                workingHoursList.add(workingHours1);
+                workingHoursRepository.save(workingHours1);
+            }
+
+            return workingHoursList;
+        }
     }
 
     //This method returns all Working Hours an employee has
