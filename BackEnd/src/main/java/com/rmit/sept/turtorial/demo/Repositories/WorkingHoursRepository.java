@@ -19,11 +19,14 @@ public interface WorkingHoursRepository extends CrudRepository<WorkingHours, Lon
      //This query find all working hours based on the employee ID passed in
      List<WorkingHours> findAllByEmpIDEquals(String empID);
 
-     //Finds a working hours object basd on the ID passed in
+     //This query finds a working hours object basd on the ID passed in
      WorkingHours findByIdEquals(long id);
 
-     //This query finds all working hours based on the employee ID and work date passed in
-     WorkingHours findWorkingHoursByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals(String empID, String date, int startTime);
+     //This query Finds a working hours object based on the employee, date and start time
+     WorkingHours findWorkingHoursByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals(String empID, String bookingDate, int bookingTime);
+
+     //This query finds a list of working hours for an employee after the specified start time on the specified day
+     List <WorkingHours> findAllByEmpIDEqualsAndWorkDateEqualsAndStartTimeIsGreaterThanEqual(String empID, String date, int startTime);
 
      //This query finds all working hours based on the employee ID and shift date
      WorkingHours findAllByEmpIDEqualsAndWorkDateEqualsAndStartTimeIsLessThanEqualAndEndTimeIsLessThanEqual(String empID, String date, int start, int end);
@@ -36,7 +39,4 @@ public interface WorkingHoursRepository extends CrudRepository<WorkingHours, Lon
 
      //This query determines whether or not an employee has working hours
      Boolean existsByEmpIDEquals(String empID);
-
-     //This query determines whether or not an employee has working hours for a specified day
-     Boolean existsByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals(String empID, String date, int startTime);
 }

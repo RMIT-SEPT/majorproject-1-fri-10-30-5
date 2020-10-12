@@ -86,14 +86,14 @@ public class WorkingHoursController
 
     }
 
-    //This method gets an employee's working hours for a specific day
+    //This method gets a list of working hours for an employee on a specific day, after a specific time
     @GetMapping("list/{empID}/{date}/{startTime}")
     public ResponseEntity<?> findTimesByEIDAndServiceAndDate(@Valid @PathVariable String empID, @PathVariable String date,
     @PathVariable int startTime)
     {
 
-        WorkingHours workingHours = wHService.getWHByEIDServiceDate(empID, date,startTime);
-        if (workingHours != null){
+        List<WorkingHours> workingHours = wHService.getWHByEIDServiceDate(empID, date,startTime);
+        if (workingHours.size() != 0){
             return new ResponseEntity<>(workingHours, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("No Working Hours Objects", HttpStatus.NOT_FOUND);
@@ -123,6 +123,4 @@ public class WorkingHoursController
             return new ResponseEntity<>("No Working Hours Objects", HttpStatus.NOT_FOUND);
         }
     }
-
-
 }
