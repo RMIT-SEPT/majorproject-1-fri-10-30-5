@@ -1,7 +1,6 @@
 package com.rmit.sept.turtorial.demo.web;
 
 import com.rmit.sept.turtorial.demo.model.Person;
-import com.rmit.sept.turtorial.demo.security.SecurityConfig;
 import com.rmit.sept.turtorial.demo.services.PersonService;
 import org.junit.Test;
 
@@ -16,7 +15,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -26,13 +24,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 /*
-    TO DO:
-    - Null Usertype test
+    This class contains all tests for the Person Controller class.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-//@WebMvcTest(PersonController.class)
 public class PersonControllerTest
 {
     //Instance of MockMvc Object
@@ -53,8 +49,10 @@ public class PersonControllerTest
 
     //Tests that a valid person object can be posted
     @Test
-    public void givenValidPerson_whenPostPerson_thenSuccessfullyCreated() throws Exception {
-        Person person1 = new Person(1L,"admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
+    public void givenValidPerson_whenPostPerson_thenCreated() throws Exception
+    {
+        Person person1 = new Person(1L,"admin304", "password",
+                "Admin", "AdminLast", "13 Fitz Street", "0123456789");
         person1.setUserType("admin");
 
         when(personService.addPerson(any(Person.class))).thenReturn(person1);
@@ -69,12 +67,11 @@ public class PersonControllerTest
                 .andExpect(jsonPath("$.lastName",is("AdminLast")))
                 .andExpect(jsonPath("$.address",is("13 Fitz Street")))
                 .andExpect(jsonPath("$.phone",is("0123456789")));
-
     }
 
     //Tests that a person with a 4 character password can be posted
     @Test
-    public void given4CharPassword_whenPostPerson_thenSuccessfullyCreated() throws Exception
+    public void given4CharPassword_whenPostPerson_thenCreated() throws Exception
     {
         //Mock person object to mock correct user entry
         Person mockPerson = new Person(1L,"cust1", "pass",
@@ -91,7 +88,7 @@ public class PersonControllerTest
 
     //Tests that a person with a password of 25 characters can be posted
     @Test
-    public void given25CharPassword_whenPostPerson_thenSuccessfullyCreated() throws Exception
+    public void given25CharPassword_whenPostPerson_thenCreated() throws Exception
     {
         //Mock person object to mock correct user entry
         Person mockPerson = new Person( 1L,"cust1", "passwordpasswordpasswordp",
@@ -292,8 +289,10 @@ public class PersonControllerTest
 
     //Tests that a person with a 4 character password cannot be posted
     @Test
-    public void givenInvalidPersonPassword_whenPostPerson_thenBadRequest() throws Exception {
-        Person person1 = new Person(1L,"admin304", "pas", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
+    public void givenInvalidPersonPassword_whenPostPerson_thenBadRequest() throws Exception
+    {
+        Person person1 = new Person(1L,"admin304", "pas",
+                "Admin", "AdminLast", "13 Fitz Street", "0123456789");
         String invalidPerson = "Invalid Person Object";
         person1.setUserType("admin");
 
@@ -411,8 +410,8 @@ public class PersonControllerTest
     @Test
     public void givenValidAdmin_whenUpdateAdmin_thenSuccessfullyOk() throws Exception
     {
-        //   Admin admin1 = new Admin("admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
-        Person admin1 = new Person(1L,"admin304", "password123", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
+        Person admin1 = new Person(1L,"admin304", "password123",
+                "Admin", "AdminLast", "13 Fitz Street", "0123456789");
         admin1.setUserType("admin");
 
         when(personService.updatePerson(any(Person.class))).thenReturn(admin1);
@@ -434,9 +433,12 @@ public class PersonControllerTest
 
     //Tests that when updating an admin with invalid fields returns a Bad Request
     @Test
-    public void givenNullAdminPassword_whenUpdateAdmin_thenBadRequest() throws Exception {
-        Person admin1 = new Person(1L,"admin304", "password", "Admin", "AdminLast", "13 Fitz Street", "0123456789");
-        Person newAdmin = new Person(1L,"admin304", null, "Admin", "AdminLast", "13 Fitz Street", "0123456789");
+    public void givenNullAdminPassword_whenUpdateAdmin_thenBadRequest() throws Exception
+    {
+        Person admin1 = new Person(1L,"admin304", "password", "Admin",
+                "AdminLast", "13 Fitz Street", "0123456789");
+        Person newAdmin = new Person(1L,"admin304", null, "Admin",
+                "AdminLast", "13 Fitz Street", "0123456789");
         String invalidPerson = "Invalid Person Object";
         newAdmin.setUserType("admin");
 
@@ -472,7 +474,7 @@ public class PersonControllerTest
 
     //Tests that a customer that exists can be retrieved using the GET method
     @Test
-    public void givenValidUserName_whenGetCustomer_thenSuccessfullyOk() throws Exception
+    public void givenValidUserName_whenGetCustomer_thenOk() throws Exception
     {
         Person mockPerson = new Person(1L, "cust1", "password",
                 "Cust", "Omer", "123 Joke Street", "0412345678");
@@ -509,7 +511,7 @@ public class PersonControllerTest
 
     //Tests that an employee that exists can be retrieved using the GET method
     @Test
-    public void givenValidUserName_whenGetEmp_thenSuccessfullyOk() throws Exception
+    public void givenValidUserName_whenGetEmp_thenOk() throws Exception
     {
         Person mockEmployee = new Person(1L,"emp", "password",
                 "Emp", "Loyee", "123 Joke Street", "0412345678");
