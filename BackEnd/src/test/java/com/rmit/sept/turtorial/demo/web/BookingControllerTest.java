@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /*
-    This class contains all tests for the Booking controller class.
+    This class contains all tests for the Booking Controller class.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

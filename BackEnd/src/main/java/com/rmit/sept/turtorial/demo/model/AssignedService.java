@@ -3,7 +3,6 @@ package com.rmit.sept.turtorial.demo.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
@@ -32,6 +31,23 @@ public class AssignedService
     //The date this object was last updated at
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
+
+    //No argument constructor for instantiating an Assigned Service Object
+    public AssignedService(){}
+
+    /*
+        3 argument constructor for instantiating an Assigned Service Object
+        Arguments:
+        long id : The ID number for the object
+        long serviceID: The Service ID for the service being assigned
+        String Username: The username of the employee being assigned the service
+     */
+    public AssignedService (long id, long serviceID, String userName)
+    {
+        this.id = id;
+        this.serviceID = serviceID;
+        this.userName = userName;
+    }
 
     //Getter for ID
     public long getId() { return id; }
