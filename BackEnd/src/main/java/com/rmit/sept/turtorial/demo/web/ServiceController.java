@@ -28,7 +28,8 @@ public class ServiceController
     //This method adds a new Service object
     @PostMapping("/add")
     public ResponseEntity<?> createService(@Valid @RequestBody Service service, BindingResult result) {
-        if (result.hasErrors()){
+        if (result.hasErrors())
+        {
             return new ResponseEntity<>("Invalid Service Object", HttpStatus.BAD_REQUEST);
         }
         Service service1 = serviceService.addService(service);
@@ -42,7 +43,8 @@ public class ServiceController
     //This method updates a service object
     @PutMapping("/update")
     public ResponseEntity<?> updateService(@Valid @RequestBody Service service, BindingResult result) {
-        if (result.hasErrors()){
+        if (result.hasErrors())
+        {
             return new ResponseEntity<>("Invalid Service Object", HttpStatus.BAD_REQUEST);
         }
         Service service1 = serviceService.updateService(service);
@@ -58,7 +60,8 @@ public class ServiceController
     public ResponseEntity<?> findAllServices()
     {
         List<Service> services = serviceService.getAllServices();
-        if (services.size() != 0){
+        if (services.size() != 0)
+        {
             return new ResponseEntity<>(services, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("No Service Objects", HttpStatus.NOT_FOUND);

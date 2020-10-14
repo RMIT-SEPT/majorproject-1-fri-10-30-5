@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 /*
@@ -19,7 +18,6 @@ public class Service
 
     //Service's ID number
     @Id
-//    @Size(min=1, message = "Please enter a 10 digit number")
     private long serviceId;
 
     //Service's name
@@ -42,6 +40,27 @@ public class Service
     //The date this object was created
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
+
+    /*
+        No argument constructor for instantiating Service object
+     */
+    public Service(){};
+
+    /*
+        Four Argument Constructor for Service
+        Arguments:
+        long serviceId: ID number for the Service
+        String name: Name of the Service
+        String description: Description of the Service
+        int duration: The length of time the Service takes to perform
+     */
+    public Service(long serviceId, String name, String description, int duration)
+    {
+        this.serviceId = serviceId;
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+    }
 
     //Getter for serviceId
     public Long getServiceId() { return serviceId; }
