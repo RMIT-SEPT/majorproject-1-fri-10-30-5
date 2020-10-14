@@ -24,7 +24,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -117,7 +116,8 @@ public class WorkingHoursControllerTest
     {
         WorkingHours workHour = new WorkingHours(0L, "1",1200,
                 1600,"2020-12-12");
-        List<WorkingHours> allWorkingHours = Arrays.asList(workHour);
+        List<WorkingHours> allWorkingHours = new ArrayList<>();
+        allWorkingHours.add(workHour);
 
         given(whs.findAllByEmpIDEquals("1")).willReturn(allWorkingHours);
 

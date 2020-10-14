@@ -44,7 +44,7 @@ public class Service
     /*
         No argument constructor for instantiating Service object
      */
-    public Service(){};
+    public Service(){}
 
     /*
         Four Argument Constructor for Service

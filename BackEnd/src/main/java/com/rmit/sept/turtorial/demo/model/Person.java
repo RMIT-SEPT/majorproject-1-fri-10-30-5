@@ -8,15 +8,14 @@ import com.fasterxml.jackson.annotation.*;
 
 import java.util.Date;
 
-
 /*
     This class represents a person object that will be stored in the system.
     They can be any one of the three user types (admin, customer and employee)
     and in some cases they can be a combination of all 3 user types.
  */
 @Entity
-public class Person {
-
+public class Person
+{
     //The person's ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

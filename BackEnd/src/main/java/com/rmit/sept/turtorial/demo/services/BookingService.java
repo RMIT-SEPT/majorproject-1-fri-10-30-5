@@ -48,25 +48,11 @@ public class BookingService
 
         //Checks that the booking is within the working times of the employee
         if(workingHours == null || booking.getBookingTime() < workingHours.getStartTime() ||
-                booking.getBookingTime() > workingHours.getEndTime() - 100 || workingHours.getAvailable() == false)
+                booking.getBookingTime() > workingHours.getEndTime() - 100 || !workingHours.getAvailable())
         {
             return null;
         }
 
-          //Checks that the booking doesn't clash with other bookings existing
-//        if(!bookings.isEmpty()){
-//            for(Booking prevBooking:bookings){
-//                if(booking.getBookingDate().equals(prevBooking.getBookingDate())) {
-//                    if (!(booking.getBookingTime() <= prevBooking.getBookingTime() - 100
-//                            || booking.getBookingTime() >= prevBooking.getBookingTime() + 100))
-//                    {
-//                        return null;
-//                    }
-//
-//                }
-//
-//            }
-//        }
         workingHours.makeNotAvailable();
         return bookingRepository.save(booking);
     }
@@ -116,8 +102,8 @@ public class BookingService
     public List<Booking> findAllPastOrUpcomingBookingsByCustID(String custID, boolean past)
     {
         //All lists to that will be used
-        List<Booking> pastBookings = new ArrayList<Booking>();
-        List<Booking> upcomingBookings = new ArrayList<Booking>();
+        List<Booking> pastBookings = new ArrayList<>();
+        List<Booking> upcomingBookings = new ArrayList<>();
         List<Booking> allBookings = bookingRepository.findAllByCustIDEquals(custID);
 
         //Formats date and time appropriately
@@ -167,8 +153,8 @@ public class BookingService
     public List<Booking> findAllPastOrUpcomingBookings(boolean past)
     {
         //All lists to that will be used
-        List<Booking> pastBookings = new ArrayList<Booking>();
-        List<Booking> upcomingBookings = new ArrayList<Booking>();
+        List<Booking> pastBookings = new ArrayList<>();
+        List<Booking> upcomingBookings = new ArrayList<>();
         List<Booking> allBookings = bookingRepository.findAll();
 
         //Formats date appropriately
@@ -208,9 +194,6 @@ public class BookingService
     private boolean validateBookingStatus(String status)
     {
         String bStatus = status.toLowerCase();
-        if (!bStatus.matches("[a-zA-Z ]*$"))
-            return false;
-
-        return true;
+        return bStatus.matches("[a-zA-Z ]*$");
     }
 }

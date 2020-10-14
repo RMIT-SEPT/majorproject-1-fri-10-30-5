@@ -63,7 +63,7 @@ public class ServiceControllerTest
         Service service = new Service(1L, "Simple Cut",
                 null, 100);
         String invalidService = "Invalid Service Object";
-        when(serviceService.addService(any(Service.class))).
+        when(serviceService.addService(service)).
                 thenReturn(null);
 
         mvc.perform(post("/api/service/add")

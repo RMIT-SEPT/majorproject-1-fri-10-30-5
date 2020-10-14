@@ -21,9 +21,6 @@ public class PersonService
     @Autowired
     private PersonRepository personRepository;
 
-    //Length of valid phone number
-    private final int PHONE_LENGTH = 10;
-
     //This method adds a person if they do not already exist
     public Person addPerson(Person person)
     {
@@ -82,13 +79,13 @@ public class PersonService
             return false;
         if (person.getAddress().isEmpty())
             return false;
+        //Length of valid phone number
+        int PHONE_LENGTH = 10;
         if (person.getPhone().length() != PHONE_LENGTH ||
                 !Pattern.matches("^[0-9 ]*$", person.getPhone()))
             return false;
-        if (!person.getUserType().matches("admin") || !person.getUserType().matches("employee")
-                || !person.getUserType().matches("customer"))
-            return false;
-
-        return true;
+        return person.getUserType().matches("admin")
+                && person.getUserType().matches("employee")
+                && person.getUserType().matches("customer");
     }
 }

@@ -161,8 +161,6 @@ public class BookingControllerTest
                 "2010-09-09","complete");
         Booking booking2 = new Booking(2L, "cust1", "emp2", 1700,
                 "2019-09-09","complete");
-        Booking booking3 = new Booking(3L, "cust1", "emp3", 1800,
-                "2029-09-09","Booked");
 
         List<Booking> pastBookings = Arrays.asList(booking1, booking2);
         given(bs.findAllPastOrUpcomingBookingsByCustID("cust1", true)).willReturn(pastBookings);
@@ -197,8 +195,7 @@ public class BookingControllerTest
                 "2029-09-09","Booked");
         Booking booking2 = new Booking(2L, "cust1", "emp2", 1700,
                 "2025-09-09","Booked");
-        Booking booking3 = new Booking(3L, "cust1", "emp3", 1800,
-                "2019-09-09","complete");
+
         List<Booking> upcomingBookings = Arrays.asList(booking1, booking2);
         given(bs.findAllPastOrUpcomingBookingsByCustID("cust1", false))
                 .willReturn(upcomingBookings);

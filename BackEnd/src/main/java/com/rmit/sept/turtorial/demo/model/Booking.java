@@ -11,8 +11,8 @@ import java.util.Date;
     admin makes a valid booking.
  */
 @Entity
-public class Booking {
-
+public class Booking
+{
     //Booking's ID number
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +49,7 @@ public class Booking {
     private String bookingStatus;
 
     //No argument constructor for instantiating booking object
-    public Booking() {
-    }
+    public Booking() {}
 
     /*
         6 Argument constructor for instantiating booking object

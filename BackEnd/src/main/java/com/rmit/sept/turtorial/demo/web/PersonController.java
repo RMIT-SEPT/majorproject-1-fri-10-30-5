@@ -78,9 +78,9 @@ public class PersonController {
 
         Person user = personService.getPersonByUserName(userName);
         if (user != null) {
-            return new ResponseEntity<Person>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<String>("No Person Found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No Person Found", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -90,9 +90,9 @@ public class PersonController {
 
         Person user = personService.getPersonByUserName(userName);
         if (user != null && user.getUserType().matches("admin")) {
-            return new ResponseEntity<Person>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<String>("No Admin Found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No Admin Found", HttpStatus.NOT_FOUND);
         }
     }
 

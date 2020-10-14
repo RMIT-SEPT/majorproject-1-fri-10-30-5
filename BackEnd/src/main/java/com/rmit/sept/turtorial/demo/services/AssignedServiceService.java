@@ -14,8 +14,6 @@ import java.util.List;
     This class is the service which will be used by the Assigned Service
     Controller to retrieve data stored in the database through the use of the
     Assigned Service Repository. This class also contains the majority of the business logic.
-
-    TO DO: Update assigned service method?
  */
 @Service
 public class AssignedServiceService

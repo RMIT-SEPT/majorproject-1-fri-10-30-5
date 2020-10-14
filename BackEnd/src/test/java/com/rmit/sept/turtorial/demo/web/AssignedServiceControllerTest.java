@@ -69,7 +69,6 @@ public class AssignedServiceControllerTest
     @Test
     public void givenDuplicateAssignedService_whenPost_thenConflict() throws Exception
     {
-        AssignedService assignedService = new AssignedService(1L, 1L, "emp1");
         AssignedService assignedService1 = new AssignedService(1L, 1L, "emp1");
 
         String noCreate = "Assigned Service Object Could Not Be Created";
