@@ -78,7 +78,7 @@ export default class AddWorkHours extends Component {
                         <div className="form-group">
 
                             <label htmlFor="empID">Employee</label>
-                            <select name="empID" className="form-control"
+                            <select name="empID" className="form-control" required
                                 onChange={this.myChangeHandler}>
                                 {
                                     this.state.employees.map((employee, index) => <option key={index} value={employee.userName} >{employee.userName}  </option>)

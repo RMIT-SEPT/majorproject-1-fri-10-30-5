@@ -56,10 +56,11 @@ export default class AddService extends Component {
             <label htmlFor="serviceId">Service ID</label>
             <input
               name="serviceId"
-              type="text"
+              type="number"
               className="form-control"
               onChange={this.myChangeHandler}
               placeholder="Service Id"
+              required
             />
           </div>
             <div className="form-group">
@@ -70,6 +71,7 @@ export default class AddService extends Component {
                 className="form-control"
                 onChange={this.myChangeHandler}
                 placeholder="Service name"
+                required
               />
             </div>
             <div className="form-group">
@@ -81,6 +83,7 @@ export default class AddService extends Component {
                 rows="3"
                 onChange={this.myChangeHandler}
                 placeholder="Description"
+                required
               />
             </div>
             <div className="form-group">
@@ -91,6 +94,7 @@ export default class AddService extends Component {
                 type="number"
                 onChange={this.myChangeHandler}
                 placeholder="Duration"
+                required
               />
             </div>
             <button

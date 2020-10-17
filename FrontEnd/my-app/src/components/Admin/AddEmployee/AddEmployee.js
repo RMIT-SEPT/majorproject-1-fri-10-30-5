@@ -66,6 +66,7 @@ export default class AddEmployee extends Component {
                 className="form-control"
                 onChange={this.myChangeHandler}
                 placeholder="First name"
+                required
               />
             </div>
             <div className="form-group">
@@ -76,6 +77,7 @@ export default class AddEmployee extends Component {
                 type="text"
                 onChange={this.myChangeHandler}
                 placeholder="Last name"
+                required
               />
             </div>
             <div className="form-group">
@@ -86,6 +88,7 @@ export default class AddEmployee extends Component {
                 type="text"
                 onChange={this.myChangeHandler}
                 placeholder="Username"
+                required
               />
             </div>
             <div className="form-group">
@@ -96,6 +99,7 @@ export default class AddEmployee extends Component {
                 type="text"
                 onChange={this.myChangeHandler}
                 placeholder="Address"
+                required
               />
             </div>
             <div className="form-group">
@@ -106,6 +110,7 @@ export default class AddEmployee extends Component {
                 type="Phone"
                 onChange={this.myChangeHandler}
                 placeholder="Phone number"
+                required
               />
             </div>
             <div className="form-group">
@@ -116,6 +121,7 @@ export default class AddEmployee extends Component {
                 type="password"
                 onChange={this.myChangeHandler}
                 placeholder="Password"
+                required
               />
             </div>
             <button
