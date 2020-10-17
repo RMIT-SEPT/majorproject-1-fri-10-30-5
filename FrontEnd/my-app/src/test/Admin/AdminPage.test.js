@@ -52,13 +52,13 @@ describe('Admin Page testing', () => {
     it("should render button as View Past Bookings", ()=>{
         const wrapper = shallow(<AdminPastButton/>);
         const buttonName = wrapper.find('Link').first().text();
-        expect(buttonName).toEqual('View Past Bookings');
+        expect(buttonName).toEqual('View All Past Bookings');
     });
 
     it("should render button as View Upcoming Bookings", ()=>{
         const wrapper = shallow(<AdminUpcomingButton/>);
         const buttonName = wrapper.find('Link').first().text();
-        expect(buttonName).toEqual('View Upcoming Bookings');
+        expect(buttonName).toEqual('View All Upcoming Bookings');
     });
 
     it("should render button as Assign Service", ()=>{

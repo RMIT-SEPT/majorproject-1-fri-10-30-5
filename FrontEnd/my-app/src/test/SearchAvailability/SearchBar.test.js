@@ -3,7 +3,7 @@ import {shallow} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import Searchbar from '../../components/SearchAvailability/Searchbar'
+import Searchbar from '../../components/Search/Searchbar'
 
 Enzyme.configure({adapter: new Adapter()});
 

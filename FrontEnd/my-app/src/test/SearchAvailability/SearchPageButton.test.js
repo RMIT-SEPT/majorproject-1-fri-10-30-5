@@ -4,7 +4,7 @@ import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Sinon from 'sinon';
 
-import SearchPageButton from '../../components/SearchAvailability/SearchPageButton'
+import SearchPageButton from '../../components/Search/SearchPageButton'
 
 Enzyme.configure({adapter: new Adapter()});
 

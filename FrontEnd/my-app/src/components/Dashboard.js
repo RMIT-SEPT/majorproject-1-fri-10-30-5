@@ -9,8 +9,8 @@ import { authenticate } from './../actions/auth'
 
 class Dashboard extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
 
     this.state = {
       user: authenticate()

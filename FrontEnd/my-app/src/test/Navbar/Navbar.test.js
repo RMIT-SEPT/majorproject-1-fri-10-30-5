@@ -11,13 +11,8 @@ Enzyme.configure({adapter: new Adapter()});
 describe('Navbar testing when customer logged in', () => {
     let wrapper;
     beforeEach(() => {
-        const props = {
-            user: {
-                username: 'cus6',
-                userType: 'customer'
-            }
-        }
-        wrapper = shallow(<Navbar {...props} />);
+        wrapper = shallow(<Navbar />);
+        wrapper.setState({user: {username: "cus6", userType: "customer"}});
     });
 
     it("Should render a single <Navbar /> component", ()=>{
@@ -53,13 +48,8 @@ describe('Navbar testing when customer logged in', () => {
 describe('Navbar testing when admin logged in', () => {
     let wrapper;
     beforeEach(() => {
-        const props = {
-            user: {
-                username: 'admin1',
-                userType: 'admin'
-            }
-        }
-        wrapper = shallow(<Navbar {...props} />);
+        wrapper = shallow(<Navbar />);
+        wrapper.setState({user: {username: "admin6", userType: "admin"}});
     });
 
 
@@ -72,13 +62,8 @@ describe('Navbar testing when admin logged in', () => {
 describe('Navbar testing when employee logged in', () => {
     let wrapper;
     beforeEach(() => {
-        const props = {
-            user: {
-                username: 'admin1',
-                userType: 'employee'
-            }
-        }
-        wrapper = shallow(<Navbar {...props} />);
+        wrapper = shallow(<Navbar />);
+        wrapper.setState({user: {username: "emp6", userType: "employee"}});
     });
 
 
@@ -91,13 +76,8 @@ describe('Navbar testing when employee logged in', () => {
 describe('Navbar testing when logged out', () => {
     let wrapper;
     beforeEach(() => {
-        const props = {
-            user: {
-                username: null,
-                userType: null
-            }
-        }
-        wrapper = shallow(<Navbar {...props} />);
+        wrapper = shallow(<Navbar />);
+        wrapper.setState({user: {username: "guest", userType: "guest"}});
     });
 
     it("Should render About Us tab", ()=>{
