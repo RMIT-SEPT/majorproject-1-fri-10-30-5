@@ -29,3 +29,5 @@ yarn-error.log*
 
 /BackEnd/.idea/
 BackEnd/.idea/
+Backend/target/
+/Backend/target/

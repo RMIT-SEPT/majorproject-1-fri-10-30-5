@@ -7,7 +7,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,39 +27,45 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+//This class contains all tests for the Booking Controller class.
 @RunWith(SpringRunner.class)
-@WebMvcTest(BookingController.class)
-public class BookingControllerTest {
-
-    //Testing needed: for each method in controller class
-    //testing null inputs (separate test required for each input where validation occurs)
-    //testing null input (single test for null object passed to resource)
-    //valid request (all checked inputs are of valid state)
-    //invalid request (each input is tested at boundaries -eg: (> vs <=) or (25 char vs 26 char) and case for each invalid character(@, &, % etc.))
-
+@SpringBootTest
+@AutoConfigureMockMvc
+public class BookingControllerTest
+{
+    //Instance of the MockMvc Object
     @Autowired
     private MockMvc mvc;
+
+    //Instance of ObjectMapper Object
     @Autowired
     private ObjectMapper objectMap;
+
+    //Instance of Booking Service Object
     @MockBean
     private BookingService bs;
 
+    //Error message for No Booking Objects
+    private final String noObjs = "No Booking Objects";
+
+    //Before each method to reset each object after each test
     @BeforeEach
-    void init() {
+    void init()
+    {
         reset(mvc);
         reset(objectMap);
         reset(bs);
     }
 
-    //Test booking is created when booking object is valid
+    //Tests that booking is created when booking object is valid
     @Test
-    public void givenValidBooking_whenBookingPost_thenResourceCreated() throws Exception {
-
-//        String str = "{\"custID\":\"custTest\",\"empID\":\"empTest\",\"bookingTime\":\"1900\",\"bookingDate\":\"2020-09-22\"}";
-        Booking booking = new Booking(1L, "newCust", "newEmp", 1600, "2020-09-22", "booked");
-        Booking booking1 = new Booking("newCust", "newEmp", 1600, "2020-09-22");
+    public void givenValidBooking_whenBookingPost_thenCreated() throws Exception
+    {
+        Booking booking = new Booking(1L, "newCust", "newEmp",
+                1600, "2020-09-22", "booked");
+        Booking booking1 = new Booking("newCust", "newEmp",
+                1600, "2020-09-22");
         when(bs.addBooking(any(Booking.class))).thenReturn(booking);
-//        when(br.save(any(Booking.class))).thenReturn(booking);
 
         mvc.perform(post("/api/booking/add")
             .content(objectMap.writeValueAsString(booking1))
@@ -73,10 +80,12 @@ public class BookingControllerTest {
             .andExpect(MockMvcResultMatchers.jsonPath("$.bookingStatus", is("booked")));
     }
 
-    //Test bad request returned and error message returned when invalid booking is made
+    //Tests that when invalid booking is made, a bad request and error message are returned
     @Test
-    public void givenNullEmpID_whenBookingPost_thenReturnError() throws Exception {
-        Booking booking = new Booking(1, "cust1", null, 1600, "2020-09-09","Booked");
+    public void givenNullEmpID_whenBookingPost_thenBadRequest() throws Exception
+    {
+        Booking booking = new Booking(1, "cust1", null, 1600,
+                "2020-09-09","Booked");
         String nullBooking = "Invalid Booking Object";
         mvc.perform(post("/api/booking/add")
             .contentType(MediaType.APPLICATION_JSON)
@@ -85,10 +94,12 @@ public class BookingControllerTest {
             .andExpect(status().isBadRequest());
     }
 
-    //Test get booking using custID and bID if resource is valid
+    //Tests that get booking using a custID and bID works when a valid object exists
     @Test
-    public void givenBookingExists_whenGetSingleBooking_thenReturnSingleBooking() throws Exception {
-        Booking booking1 = new Booking(1L, "cust1", "emp1", 1600, "2020-09-09","Booked");
+    public void givenBookingExists_whenGetSingleBooking_thenOk() throws Exception
+    {
+        Booking booking1 = new Booking(1L, "cust1", "emp1", 1600,
+                "2020-09-09","Booked");
 
         given(bs.findBookingByCustIDAndBID("cust1", 1L)).willReturn(booking1);
 
@@ -100,20 +111,28 @@ public class BookingControllerTest {
             .andExpect(status().isOk());
     }
 
-    //Test get booking using custID and bID if resource is not present
+    /*
+        Tests that get booking returns not found request
+        and error message when the object doesn't exist
+     */
     @Test
-    public void givenBookingNotExists_whenGetSingleBooking_thenReturnError() throws Exception {
+    public void givenBookingNotExists_whenGetSingleBooking_thenNotFound() throws Exception
+    {
         mvc.perform(get("/api/booking/{custID}/{bID}","noCust", 1L)
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$", is("No Booking Object")))
             .andExpect(status().isNotFound());
     }
 
-    //Test get all bookings using custID if resource is valid
+    //Tests that all bookings are returned if resource is valid
     @Test
-    public void givenTwoBookings_whenGetAllBookingsForCust_thenReturnAllCustBookings() throws Exception {
-        Booking booking1 = new Booking(1L, "cust1", "emp1", 1600, "2020-09-09","Booked");
-        Booking booking2 = new Booking(2L, "cust1", "emp2", 1700, "2020-09-09","Booked");
+    public void givenTwoBookings_whenGetAllBookingsForCust_thenOk() throws Exception
+    {
+        Booking booking1 = new Booking(1L, "cust1", "emp1",
+                1600, "2020-09-09","Booked");
+        Booking booking2 = new Booking(2L, "cust1", "emp2",
+                1700, "2020-09-09","Booked");
+
         List<Booking> allbookings = Arrays.asList(booking1, booking2);
         given(bs.findAllBookingsByCustID("cust1")).willReturn(allbookings);
 
@@ -129,21 +148,28 @@ public class BookingControllerTest {
             .andExpect(status().isOk());
     }
 
-    //Test get all bookings using custID if resource doesn't exist
+    /*
+        Tests that get all bookings for a customer returns a not found
+        request and an error message if resource doesn't exist
+     */
     @Test
-    public void givenNoBookings_whenGetAllBookingsForCust_thenReturnAllCustBookings() throws Exception {
+    public void givenNoBookings_whenGetAllBookingsForCust_thenNotFound() throws Exception
+    {
         mvc.perform(get("/api/booking/list/{custID}","noCust")
             .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$", is("No Booking Objects")))
+            .andExpect(jsonPath("$", is(noObjs)))
             .andExpect(status().isNotFound());
     }
 
-    //Test get all past booking resources using custID if resource is valid
+    //Tests that get all past booking resources works if resource is valid
     @Test
-    public void givenTwoPastBookings_whenGetAllPastBookingsForCust_thenReturnAllPastCustBookings() throws Exception {
-        Booking booking1 = new Booking(1L, "cust1", "emp1", 1600, "2010-09-09","complete");
-        Booking booking2 = new Booking(2L, "cust1", "emp2", 1700, "2019-09-09","complete");
-        Booking booking3 = new Booking(3L, "cust1", "emp3", 1800, "2029-09-09","Booked");
+    public void givenTwoPastBookings_whenGetAllPastBookingsForCust_thenOk() throws Exception
+    {
+        Booking booking1 = new Booking(1L, "cust1", "emp1", 1600,
+                "2010-09-09","complete");
+        Booking booking2 = new Booking(2L, "cust1", "emp2", 1700,
+                "2019-09-09","complete");
+
         List<Booking> pastBookings = Arrays.asList(booking1, booking2);
         given(bs.findAllPastOrUpcomingBookingsByCustID("cust1", true)).willReturn(pastBookings);
 
@@ -159,23 +185,31 @@ public class BookingControllerTest {
                 .andExpect(status().isOk());
     }
 
-    //Test get error message when requesting all past booking resources using custID if resource do not exist
+    /*
+        Tests that when requesting all past booking resources and none
+        exist, an error message and a not found request is returned
+     */
     @Test
-    public void givenNoPastBookings_whenGetAllPastBookingsForCust_thenReturnPastCustBookingsMessage() throws Exception {
+    public void givenNoPastBookings_whenGetAllPastBookingsForCust_thenNootFound() throws Exception
+    {
         mvc.perform(get("/api/booking/pastBookings/list/{custID}","cust1")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", is("No Booking Objects")))
+                .andExpect(jsonPath("$", is(noObjs)))
                 .andExpect(status().isNotFound());
     }
 
     //Test get all upcoming booking resources using custID if resource is valid
     @Test
-    public void givenTwoFutureBookings_whenGetAllFutureBookingsForCust_thenReturnAllFutureCustBookings() throws Exception {
-        Booking booking1 = new Booking(1L, "cust1", "emp1", 1600, "2029-09-09","Booked");
-        Booking booking2 = new Booking(2L, "cust1", "emp2", 1700, "2025-09-09","Booked");
-        Booking booking3 = new Booking(3L, "cust1", "emp3", 1800, "2019-09-09","complete");
+    public void givenTwoFutureBookings_whenGetAllFutureBookingsForCust_thenOk() throws Exception
+    {
+        Booking booking1 = new Booking(1L, "cust1", "emp1", 1600,
+                "2029-09-09","Booked");
+        Booking booking2 = new Booking(2L, "cust1", "emp2", 1700,
+                "2025-09-09","Booked");
+
         List<Booking> upcomingBookings = Arrays.asList(booking1, booking2);
-        given(bs.findAllPastOrUpcomingBookingsByCustID("cust1", false)).willReturn(upcomingBookings);
+        given(bs.findAllPastOrUpcomingBookingsByCustID("cust1", false))
+                .willReturn(upcomingBookings);
 
         mvc.perform(get("/api/booking/upcomingBookings/list/{custID}","cust1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -189,12 +223,16 @@ public class BookingControllerTest {
                 .andExpect(status().isOk());
     }
 
-    //Test get error message when requesting all upcoming booking resources using custID if resource do not exist
+    /*
+        Tests that if no upcoming booking resources exist
+        a not found request and an error message is returned
+     */
     @Test
-    public void givenNoFutureBookings_whenGetAllFutureBookingsForCust_thenReturnFutureCustBookingsMessage() throws Exception {
+    public void givenNoFutureBookings_whenGetAllFutureBookingsForCust_thenNotFound() throws Exception
+    {
         mvc.perform(get("/api/booking/upcomingBookings/list/{custID}","cust1")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", is("No Booking Objects")))
+                .andExpect(jsonPath("$", is(noObjs)))
                 .andExpect(status().isNotFound());
     }
 }

@@ -1,0 +1,31 @@
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+}
+
+.page-inner {
+    width: 50%;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+    padding: 40px 45px 45px 45px;
+    border-radius: 15px;
+    transition: all .3s;
+}
+
+.checkmark {
+    background-image: url(../images/iconfinder_Tick_Mark_Dark_1398912.svg);
+    width: 7%;
+    height: 7%;
+    padding-right: 10px;
+    background-repeat: no-repeat;
+}
+
+.page-wrapper h4 {
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+    font-weight: bold;
+}

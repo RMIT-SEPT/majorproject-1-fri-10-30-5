@@ -1,6 +1,5 @@
 package com.rmit.sept.turtorial.demo.web;
 
-import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
@@ -10,7 +9,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import com.rmit.sept.turtorial.demo.model.Booking;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,83 +16,106 @@ import com.rmit.sept.turtorial.demo.model.WorkingHours;
 import com.rmit.sept.turtorial.demo.services.WorkingHoursService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
+//This class contains tests for each method in the Working Hours Controller class.
 @RunWith(SpringRunner.class)
-@WebMvcTest(WorkingHoursController.class)
-public class WorkingHoursControllerTest {
-
+@SpringBootTest
+@AutoConfigureMockMvc
+public class WorkingHoursControllerTest
+{
+    //An instance of the MockMvc Object
     @Autowired
     private MockMvc mvc;
 
+    //An instance of the Object Mapper Object
     @Autowired
     private ObjectMapper objectMap;
 
+    //An instance of the Working Hours Service
     @MockBean
-    private  WorkingHoursService whs;
+    private WorkingHoursService whs;
 
+    //Error message string for an Invalid Working Hours Object
+    private final String invalidObj = "Invalid Working Hours Object";
 
+    //This method tests that valid Working Hours can be posted correctly
     @Test
-    public void givenValidWorkingHours_whenPostWorkingHours_thenSuccessfullyCreated() throws Exception {
-        WorkingHours workHour = new WorkingHours(0L, "1",1200,1600,"2020-12-12","Hair");
+    public void givenValidWorkingHours_whenPostWorkingHours_thenCreated() throws Exception
+    {
+        WorkingHours workHour = new WorkingHours(0L, "1",1200,
+                1600,"2020-12-12");
+        List <WorkingHours> workingHours = new ArrayList<>();
+        workingHours.add(new WorkingHours(1L, "1", 1200,
+                1300, "2020-12-12"));
+        workingHours.add(new WorkingHours(2L, "1", 1300,
+                1400, "2020-12-12"));
+        workingHours.add(new WorkingHours(3L, "1", 1400,
+                1500, "2020-12-12"));
+        workingHours.add(new WorkingHours(4L, "1", 1500,
+                1600, "2020-12-12"));
 
-        when(whs.addWH(any(WorkingHours.class))).thenReturn(workHour);
+        when(whs.addWH(any(WorkingHours.class))).thenReturn(workingHours);
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$").exists())
-                .andExpect(jsonPath("$.empID",is("1")))
-                .andExpect(jsonPath("$.startTime",is(1200)))
-                .andExpect(jsonPath("$.workDate",is("2020-12-12")))
-                .andExpect(jsonPath("$.service",is("Hair")));
+                .andExpect(status().isCreated());
     }
 
+    //This method tests that posting a null working hours object returns a bad request
     @Test
-    public void givenNullWorkingHours_whenPostWorkingHours_thenBadRequest() throws Exception {
-        WorkingHours workHour = new WorkingHours(null, null,1200,1600,"2020-12-12","Hair Cut");
-        String nullWork = "Invalid Working_Hours Object";
+    public void givenNullWorkingHours_whenPostWorkingHours_thenBadRequest() throws Exception
+    {
+        WorkingHours workHour = new WorkingHours(1L, null,1200,
+                1600,"2020-12-12");
 
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
-                .andExpect(jsonPath("$",is(nullWork)))
+                .andExpect(jsonPath("$",is(invalidObj)))
                 .andExpect(status().isBadRequest());
     }
 
+    //This method tests that posting an invalid end time returns a bad request
     @Test
-    public void givenEndTimeOutOfBounds_whenPostWorkingHours_thenBadRequest() throws Exception {
-        WorkingHours workHour = new WorkingHours(0L, "1",1200,2500,"2020-12-12","Hair");
-        String nullWork = "Invalid Working_Hours Object";
+    public void givenEndTimeOutOfBounds_whenPostWorkingHours_thenBadRequest() throws Exception
+    {
+        WorkingHours workHour = new WorkingHours(0L, "1",1200,
+                2500,"2020-12-12");
 
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
-                .andExpect(jsonPath("$",is(nullWork)))
+                .andExpect(jsonPath("$",is(invalidObj)))
                 .andExpect(status().isBadRequest());
     }
 
-
-
+    //This method tests that updating a working hours object with invalid values returns a bad request
     @Test
-    public void givenInvalidWorkingHours_whenUpdateWorkingHour_thenBadRequest() throws Exception {
-        WorkingHours workHour = new WorkingHours(0L, null,1200,1600,"2020-12-12","Hair Cut");
-        String message = "Invalid Working_Hours Object";
+    public void givenInvalidWorkingHours_whenUpdateWorkingHour_thenBadRequest() throws Exception
+    {
+        WorkingHours workHour = new WorkingHours(0L, null,1200,
+                1600,"2020-12-12");
 
         mvc.perform(put("/api/workinghours/update").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
-                .andExpect(jsonPath("$",is(message)))
+                .andExpect(jsonPath("$",is(invalidObj)))
                 .andExpect(status().isBadRequest());
     }
 
+    //Tests that all working hours for an employee can be retrieved
     @Test
-    public void givenEmployee_whenGetWorkingHours_thenReturnArray() throws Exception {
-        WorkingHours workHour = new WorkingHours(0L, "1",1200,1600,"2020-12-12","Hair Cut");
-        List<WorkingHours> allWorkingHours = Arrays.asList(workHour);
+    public void givenEmployee_whenGetWorkingHours_thenOk() throws Exception
+    {
+        WorkingHours workHour = new WorkingHours(0L, "1",1200,
+                1600,"2020-12-12");
+        List<WorkingHours> allWorkingHours = new ArrayList<>();
+        allWorkingHours.add(workHour);
 
         given(whs.findAllByEmpIDEquals("1")).willReturn(allWorkingHours);
 
@@ -104,91 +125,27 @@ public class WorkingHoursControllerTest {
                 .andExpect(jsonPath("$[0].empID",is(workHour.getEmpID())))
                 .andExpect(jsonPath("$[0].startTime",is(workHour.getStartTime())))
                 .andExpect(jsonPath("$[0].workDate",is(workHour.getWorkDate())))
-                .andExpect(jsonPath("$[0].service",is(workHour.getService())))
                 .andExpect(status().isOk());
     }
 
-
+    //Tests that the correct error message is displayed
     @Test
-    public void givenEmployeeNotExists_whenGetWorkingHours_thenNotFound() throws Exception {
-        mvc.perform(get("/api/workingHours/list/{empID}","emp30")
-                .contentType(MediaType.APPLICATION_JSON))
-             //   .andExpect(jsonPath("$", is("No Working Hours Objects")))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    public void givenEmployeesAndService_whenGetWorkingHours_thenReturnArray() throws Exception {
-        WorkingHours workHour1 = new WorkingHours(0L, "1",1200,1600,"2020-12-12","Hair Cut");
-        WorkingHours workHour2 = new WorkingHours(1L, "1",1000,1700,"2020-12-12","Hair Cut");
-        List<WorkingHours> allWorkingHours = Arrays.asList(workHour1,workHour2);
-
-        when(whs.getWHByEmpIDandService("1","Hair Cut")).thenReturn(allWorkingHours);
-        mvc.perform(get("/api/workinghours/list/{empID}/{service}","1","Hair Cut")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$",hasSize(2)))
-                .andExpect(jsonPath("$[0].empID",is(workHour1.getEmpID())))
-                .andExpect(jsonPath("$[0].startTime",is(workHour1.getStartTime())))
-                .andExpect(jsonPath("$[0].workDate",is(workHour1.getWorkDate())))
-                .andExpect(jsonPath("$[0].service",is(workHour1.getService())))
-                .andExpect(jsonPath("$[1].empID",is(workHour2.getEmpID())))
-                .andExpect(jsonPath("$[1].startTime",is(workHour2.getStartTime())))
-                .andExpect(jsonPath("$[1].workDate",is(workHour2.getWorkDate())))
-                .andExpect(jsonPath("$[1].service",is(workHour2.getService())))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void givenInvalidEmployeesAndService_whenGetWorkingHours_thenNotFound() throws Exception {
+    public void givenInvalidEmployees_whenGetWorkingHours_thenNotFound() throws Exception
+    {
         String message = "No Working Hours Objects";
-        mvc.perform(get("/api/workinghours/list/{empID}/{service}","30","Hair Cut")
+        mvc.perform(get("/api/workinghours/list/{empID}","30","Hair Cut")
                 .contentType(MediaType.APPLICATION_JSON))
                    .andExpect(jsonPath("$", is(message)))
                 .andExpect(status().isNotFound());
     }
 
-
-
+    //Tests that a bad request is returned when inputting invalid employees and dates
     @Test
-    public void givenEmployeesAndServiceAndDate_whenGetWorkingHours_thenReturnArray() throws Exception {
-        WorkingHours workHour = new WorkingHours(0L, "1",1200,1600,"2020-12-12","Hair Cut");
-        List<WorkingHours> allWorkingHours = Arrays.asList(workHour);
-
-        given(whs.getWHByEIDServiceDateTime("1","Hair Cut","2020-12-12",1200,1600)).willReturn(allWorkingHours);
-
-        mvc.perform(get("/api/workinghours/list/{empID}/{service}/{date}/{startTime}/{endTime}","1","Hair Cut","2020-12-12",1200,1600)
+    public void givenInvalidEmployeesAndDate_whenGetWorkingHours_thenBadRequest() throws Exception
+    {
+        mvc.perform(get("/api/workinghours/list/{empID}/{date}/{startTime}/{endTime}",
+                "1","Hair Cut","2020-12-12",1200,1600)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$",hasSize(1)))
-                .andExpect(jsonPath("$[0].empID",is(workHour.getEmpID())))
-                .andExpect(jsonPath("$[0].startTime",is(workHour.getStartTime())))
-                .andExpect(jsonPath("$[0].workDate",is(workHour.getWorkDate())))
-                .andExpect(jsonPath("$[0].service",is(workHour.getService())))
-                .andExpect(status().isOk());
+                .andExpect(status().isBadRequest());
     }
-
-    @Test
-    public void givenInvalidEmployeesAndServiceAndDate_whenGetWorkingHours_thenNotFound() throws Exception {
-        String message = "No Working Hours Objects";
-        mvc.perform(get("/api/workinghours/list/{empID}/{service}/{date}/{startTime}/{endTime}","1","Hair Cut","2020-12-12",1200,1600)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", is(message)))
-                .andExpect(status().isNotFound());
-    }
-
-
 }
-
-
-//    @Test
-//    public void givenWorkingHours_whenUpdateEmployees_thenBadRequest() throws Exception {
-//        WorkingHours workHour = new WorkingHours(0L, "1",1200,1600,"2020-12-12","Hair Cut");
-//
-//        when(whs.updateWH(workHour)).thenReturn(workHour);
-//        mvc.perform(put("/api/workinghours/update")
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(jsonPath("$.empID",is(workHour.getEmpID())))
-//                .andExpect(jsonPath("$.startTime",is(workHour.getStartTime())))
-//                .andExpect(jsonPath("$.workDate",is(workHour.getWorkDate())))
-//                .andExpect(jsonPath("$.service",is(workHour.getService())))
-//                .andExpect(status().isOk());
-//    }

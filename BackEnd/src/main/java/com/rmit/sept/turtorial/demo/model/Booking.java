@@ -1,40 +1,69 @@
 package com.rmit.sept.turtorial.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
 
+/*
+    This class represents a booking object that is created when a customer or
+    admin makes a valid booking.
+ */
 @Entity
-public class Booking {
-    //
+public class Booking
+{
+    //Booking's ID number
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    //Customer ID of customer that is booked
     @NotBlank(message = "custID is required")
     @Size(min=1,max =25, message = "Please enter 1 to 25 characters")
     private String custID;
+
+    //Employee ID of employee that is booked
     @NotBlank(message = "empID is required")
     @Size(min=1,max =25, message = "Please enter 1 to 25 characters")
     private String empID;
+
+    //The Booking start time
     @Min(value=0, message="must be at least 0000")
     @Max(value=2359, message="must be less than 2400")
     private int bookingTime;
-   // @Future
+
+    //The date the booking has been made for
     @JsonFormat(pattern ="yyyy-MM-dd")
     private String bookingDate;
+
+    //The date this object was created at
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date created_At;
+
+    //The date this object was last updated at
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
+
+    //The status of the booking to be updated by admin
     private String bookingStatus;
 
-    public Booking() {
-    }
+    //No argument constructor for instantiating a Booking object
+    public Booking() {}
 
-    public Booking(long id, String custID, String empID, int time, String date, String status) {
+    /*
+        6 argument constructor for instantiating a Booking object
+        Arguments:
+        long id - ID number of booking
+        String custID - Customer ID of customer that is being booked in
+        String empID - Employee ID of employee that is being booked in
+        int time - Time that the booking is being made
+        String bookingDate - Date that the booking is being made
+        String bookingDtatus - Current status of the booking
+     */
+    public Booking(long id, String custID, String empID, int time,
+                   String date, String status)
+    {
         this.id = id;
         this.custID = custID;
         this.empID = empID;
@@ -43,85 +72,75 @@ public class Booking {
         this.bookingStatus= status;
     }
 
-    public Booking(String custID, String empID, int time, String date) {
+    /*
+        4 argument constructor for instantiating a Booking object
+        Arguments:
+        String custID - Customer ID of customer that is being booked in
+        String empID - Employee ID of employee that is being booked in
+        int bookingTime - Time that the booking is being made
+        String bookingDate - Date that the booking is being made
+    */
+    public Booking(String custID, String empID, int time, String date)
+    {
         this.custID = custID;
         this.empID = empID;
         this.bookingTime = time;
         this.bookingDate = date;
     }
 
-    public Long getId() {
-        return id;
-    }
+    //Getter for ID
+    public Long getId() { return id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    //Setter for ID
+    public void setId(Long id) { this.id = id; }
 
-    public void setCustID(String custID) {
-        this.custID = custID;
-    }
+    ////Getter for custID
+    public void setCustID(String custID) { this.custID = custID; }
 
-    public String getCustID() {
-        return custID;
-    }
+    //Setter for custID
+    public String getCustID() { return custID; }
 
-    public void setEmpID(String empID) {
-        this.empID = empID;
-    }
+    //Getter for empID
+    public void setEmpID(String empID) { this.empID = empID; }
 
-    public String getEmpID() {
-        return empID;
-    }
+    //Setter for empID
+    public String getEmpID() { return empID; }
 
-    public int getBookingTime() {
-        return bookingTime;
-    }
+    //Getter for bookingTime
+    public int getBookingTime() { return bookingTime; }
 
-    public void setBookingTime(int bookingTime) {
-        this.bookingTime = bookingTime;
-    }
+    //Setter for bookingTime
+    public void setBookingTime(int bookingTime) { this.bookingTime = bookingTime; }
 
-    public String getBookingDate() {
-        return bookingDate;
-    }
+    //Getter for bookingDate
+    public String getBookingDate() { return bookingDate; }
 
-    public void setBookingDate(String bookingDate) {
-        this.bookingDate = bookingDate;
-    }
+    //Setter for bookingDate
+    public void setBookingDate(String bookingDate) { this.bookingDate = bookingDate; }
 
-    public Date getCreated_At() {
-        return created_At;
-    }
+    //Getter for created_At
+    public Date getCreated_At() { return created_At; }
 
-    public void setCreated_At(Date created_At) {
-        this.created_At = created_At;
-    }
+    //Setter for created_At
+    public void setCreated_At(Date created_At) { this.created_At = created_At; }
 
-    public Date getUpdated_At() {
-        return updated_At;
-    }
+    //Getter for updated_At
+    public Date getUpdated_At() { return updated_At; }
 
-    public void setUpdated_At(Date updated_At) {
-        this.updated_At = updated_At;
-    }
+    //Setter for updated_At
+    public void setUpdated_At(Date updated_At) { this.updated_At = updated_At; }
 
-    public void setBookingStatus(String bookingStatus) {
-        this.bookingStatus = bookingStatus;
-    }
+    //Getter for bookingStatus
+    public String getBookingStatus() { return bookingStatus; }
 
-    public String getBookingStatus() {
-        return bookingStatus;
-    }
+    //Setter for bookingStatus
+    public void setBookingStatus(String bookingStatus) { this.bookingStatus = bookingStatus; }
 
+    //Creates and sets current date object when booking object is created
     @PrePersist
-    protected void onCreate() {
-        this.created_At = new Date();
-    }
+    protected void onCreate() { this.created_At = new Date(); }
 
+    //Creates and sets current date object when booking object is updated
     @PreUpdate
-    protected void onUpdate() {
-        this.updated_At = new Date();
-    }
-
+    protected void onUpdate() { this.updated_At = new Date(); }
 }
