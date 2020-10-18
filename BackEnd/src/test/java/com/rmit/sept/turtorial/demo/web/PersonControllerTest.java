@@ -23,9 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-/*
-    This class contains all tests for the Person Controller class.
- */
+//This class contains all tests for the Person Controller class.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -44,7 +42,7 @@ public class PersonControllerTest
     private PersonService personService;
 
     //Error message strings
-    final String invalidPerson = "Invalid Person Object";
+    private final String invalidPerson = "Invalid Person Object";
 
 
     //Tests that a valid person object can be posted
@@ -91,8 +89,9 @@ public class PersonControllerTest
     public void given25CharPassword_whenPostPerson_thenCreated() throws Exception
     {
         //Mock person object to mock correct user entry
-        Person mockPerson = new Person( 1L,"cust1", "passwordpasswordpasswordp",
-                "Cust", "Omer", "123 Joke Street", "0412345678");
+        Person mockPerson = new Person( 1L,"cust1",
+                "passwordpasswordpasswordp", "Cust", "Omer",
+                "123 Joke Street", "0412345678");
         mockPerson.setUserType("customer");
         when(personService.addPerson(any(Person.class))).thenReturn(mockPerson);
 
@@ -120,20 +119,6 @@ public class PersonControllerTest
                 .andExpect(status().isBadRequest());
     }
 
-    //Tests that a person with a NULL lastName cannot be posted
-    @Test
-    public void givenNullPersonLastName_whenPostPerson_thenBadRequest() throws Exception {
-        Person person1 = new Person(1L,"admin304", "password", "Admin", null, "13 Fitz Street", "0123456789");
-        String invalidPerson = "Invalid Person Object";
-        person1.setUserType("admin");
-
-        when(personService.addPerson(person1)).thenReturn(null);
-        mvc.perform(post("/api/person/add").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMap.writeValueAsString(person1)))
-                .andExpect(jsonPath("$",is(invalidPerson)))
-                .andExpect(status().isBadRequest());
-    }
-
     //Tests that a person with a NULL first name cannot be posted
     @Test
     public void givenNULLFirstName_whenPostPerson_thenBadRequest() throws Exception
@@ -148,6 +133,21 @@ public class PersonControllerTest
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockPerson)))
                 .andExpect(jsonPath("$", is(invalidPerson)))
+                .andExpect(status().isBadRequest());
+    }
+
+    //Tests that a person with a NULL lastName cannot be posted
+    @Test
+    public void givenNullPersonLastName_whenPostPerson_thenBadRequest() throws Exception
+    {
+        Person person1 = new Person(1L,"admin304", "password",
+                "Admin", null, "13 Fitz Street", "0123456789");
+        person1.setUserType("admin");
+
+        when(personService.addPerson(person1)).thenReturn(null);
+        mvc.perform(post("/api/person/add").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMap.writeValueAsString(person1)))
+                .andExpect(jsonPath("$",is(invalidPerson)))
                 .andExpect(status().isBadRequest());
     }
 
@@ -292,8 +292,8 @@ public class PersonControllerTest
     public void givenInvalidPersonPassword_whenPostPerson_thenBadRequest() throws Exception
     {
         Person person1 = new Person(1L,"admin304", "pas",
-                "Admin", "AdminLast", "13 Fitz Street", "0123456789");
-        String invalidPerson = "Invalid Person Object";
+                "Admin", "AdminLast", "13 Fitz Street",
+                "0123456789");
         person1.setUserType("admin");
 
         when(personService.addPerson(person1)).thenReturn(null);
@@ -439,7 +439,6 @@ public class PersonControllerTest
                 "AdminLast", "13 Fitz Street", "0123456789");
         Person newAdmin = new Person(1L,"admin304", null, "Admin",
                 "AdminLast", "13 Fitz Street", "0123456789");
-        String invalidPerson = "Invalid Person Object";
         newAdmin.setUserType("admin");
 
         when(personService.updatePerson(admin1)).thenReturn(newAdmin);
@@ -447,27 +446,6 @@ public class PersonControllerTest
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(newAdmin)))
-                .andExpect(jsonPath("$",is(invalidPerson)))
-                .andExpect(status().isBadRequest());
-    }
-
-    //Tests that a customer that exists can't be updated with inappropriate data
-    @Test
-    public void givenInvalidCustomer_whenUpdateCustomer_thenBadRequest() throws Exception
-    {
-        //Mock customer objects, one with invalid parameters
-        Person mockCustomer = new Person(1L, "cust1", "password",
-                "Cust", "Omer", "123 Joke Street", "0412345678");
-        Person updMockCustomer = new Person(1L, "cust1", "password",
-                "Cust", "Omer", null, "0412345678");
-
-        when(personService.updatePerson(updMockCustomer)).thenReturn(updMockCustomer);
-
-        //Mock request for invalid customer
-        mvc.perform(put("/api/person/update", mockCustomer.getUserName())
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(objectMap.writeValueAsString(updMockCustomer)))
                 .andExpect(jsonPath("$",is(invalidPerson)))
                 .andExpect(status().isBadRequest());
     }
@@ -485,43 +463,6 @@ public class PersonControllerTest
         mvc.perform(get("/api/person/customer/{userName}", "cust1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(mockPerson)))
-                .andExpect(status().isOk());
-    }
-
-    //Tests that an employee that exists can't be updated with inappropriate data
-    @Test
-    public void givenInvalidEmployee_whenUpdateEmployee_thenBadRequest() throws Exception
-    {
-        //Mock Employee object with null
-        Person mockEmployee = new Person(1L, "emp", "password",
-                "Emp", "Loyee", "45 Joke Street", "0412345678");
-        Person updMockEmployee = new Person(1L, "emp", "password",
-                "Emp", "Loyee", null, "0412345678");
-
-        when(personService.updatePerson(updMockEmployee)).thenReturn(updMockEmployee);
-
-        //Mock request for invalid employee
-        mvc.perform(put("/api/person/update", mockEmployee.getUserName())
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(objectMap.writeValueAsString(updMockEmployee)))
-                .andExpect(jsonPath("$",is(invalidPerson)))
-                .andExpect(status().isBadRequest());
-    }
-
-    //Tests that an employee that exists can be retrieved using the GET method
-    @Test
-    public void givenValidUserName_whenGetEmp_thenOk() throws Exception
-    {
-        Person mockEmployee = new Person(1L,"emp", "password",
-                "Emp", "Loyee", "123 Joke Street", "0412345678");
-        mockEmployee.setUserType("employee");
-
-        given(personService.getPersonByUserName("emp")).willReturn(mockEmployee);
-
-        mvc.perform(get("/api/person/employee/{userName}", "emp")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMap.writeValueAsString(mockEmployee)))
                 .andExpect(status().isOk());
     }
 }

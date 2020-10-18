@@ -26,9 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-    This class contains tests for each method in the Working Hours Controller class.
- */
+//This class contains tests for each method in the Working Hours Controller class.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,6 +43,9 @@ public class WorkingHoursControllerTest
     //An instance of the Working Hours Service
     @MockBean
     private WorkingHoursService whs;
+
+    //Error message string for an Invalid Working Hours Object
+    private final String invalidObj = "Invalid Working Hours Object";
 
     //This method tests that valid Working Hours can be posted correctly
     @Test
@@ -72,13 +73,12 @@ public class WorkingHoursControllerTest
     @Test
     public void givenNullWorkingHours_whenPostWorkingHours_thenBadRequest() throws Exception
     {
-        WorkingHours workHour = new WorkingHours(null, null,1200,
+        WorkingHours workHour = new WorkingHours(1L, null,1200,
                 1600,"2020-12-12");
-        String nullWork = "Invalid Working Hours Object";
 
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
-                .andExpect(jsonPath("$",is(nullWork)))
+                .andExpect(jsonPath("$",is(invalidObj)))
                 .andExpect(status().isBadRequest());
     }
 
@@ -88,11 +88,10 @@ public class WorkingHoursControllerTest
     {
         WorkingHours workHour = new WorkingHours(0L, "1",1200,
                 2500,"2020-12-12");
-        String nullWork = "Invalid Working Hours Object";
 
         mvc.perform(post("/api/workinghours/add").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
-                .andExpect(jsonPath("$",is(nullWork)))
+                .andExpect(jsonPath("$",is(invalidObj)))
                 .andExpect(status().isBadRequest());
     }
 
@@ -102,15 +101,14 @@ public class WorkingHoursControllerTest
     {
         WorkingHours workHour = new WorkingHours(0L, null,1200,
                 1600,"2020-12-12");
-        String message = "Invalid Working Hours Object";
 
         mvc.perform(put("/api/workinghours/update").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMap.writeValueAsString(workHour)))
-                .andExpect(jsonPath("$",is(message)))
+                .andExpect(jsonPath("$",is(invalidObj)))
                 .andExpect(status().isBadRequest());
     }
 
-    //This method tests that all working hours for an employee can be retrieved
+    //Tests that all working hours for an employee can be retrieved
     @Test
     public void givenEmployee_whenGetWorkingHours_thenOk() throws Exception
     {
@@ -130,16 +128,7 @@ public class WorkingHoursControllerTest
                 .andExpect(status().isOk());
     }
 
-    //This method tests that a bad request is returned when getting for a non-existent employee
-    @Test
-    public void givenEmployeeNotExists_whenGetWorkingHours_thenNotFound() throws Exception
-    {
-        mvc.perform(get("/api/workingHours/list/{empID}","emp30")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-    }
-
-    //This method tests that the correct error message is displayed
+    //Tests that the correct error message is displayed
     @Test
     public void givenInvalidEmployees_whenGetWorkingHours_thenNotFound() throws Exception
     {
@@ -150,7 +139,7 @@ public class WorkingHoursControllerTest
                 .andExpect(status().isNotFound());
     }
 
-    //This method tests that a bad request is returned when inputting invalid employees and dates
+    //Tests that a bad request is returned when inputting invalid employees and dates
     @Test
     public void givenInvalidEmployeesAndDate_whenGetWorkingHours_thenBadRequest() throws Exception
     {

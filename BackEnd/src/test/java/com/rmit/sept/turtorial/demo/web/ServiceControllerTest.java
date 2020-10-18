@@ -21,15 +21,13 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/*
-    This class contains tests for the Service Controller class
- */
+//This class contains tests for the Service Controller class
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ServiceControllerTest
 {
-    //An instance of the MockMvc Object
+    //Instance of the MockMvc Object
     @Autowired
     private MockMvc mvc;
 
@@ -40,6 +38,9 @@ public class ServiceControllerTest
     //Mock Instance of Service Service Object
     @MockBean
     private ServiceService serviceService;
+
+    //Error message for Invalid Service Object
+    private final String invalidService = "Invalid Service Object";
 
     //Tests that a valid Service can be added
     @Test
@@ -62,7 +63,6 @@ public class ServiceControllerTest
     {
         Service service = new Service(1L, "Simple Cut",
                 null, 100);
-        String invalidService = "Invalid Service Object";
         when(serviceService.addService(service)).
                 thenReturn(null);
 
@@ -109,11 +109,10 @@ public class ServiceControllerTest
                 "A simple hair cut for male or female", 100);
         Service service1 = new Service(1L, "Simple Cut - Male",
                 null, 100);
-        String invalidObj = "Invalid Service Object";
         when(serviceService.updateService(service)).thenReturn(service1);
 
         mvc.perform(put("/api/service/update")
-                .content(objectMap.writeValueAsString(invalidObj))
+                .content(objectMap.writeValueAsString(invalidService))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }

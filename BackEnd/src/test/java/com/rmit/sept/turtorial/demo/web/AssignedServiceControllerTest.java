@@ -27,15 +27,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/*
-    This class contains tests for the Assigned Service Controller class
- */
+//This class contains tests for the Assigned Service Controller class
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AssignedServiceControllerTest
 {
-    //An instance of the MockMvc Object
+    //Instance of the MockMvc Object
     @Autowired
     private MockMvc mvc;
 
@@ -51,7 +49,10 @@ public class AssignedServiceControllerTest
     @MockBean
     PersonService personService;
 
-    //Tests an Assigned Service object is created when assigned service object is valid
+    //Error message string for no Assigned Service
+    private final String noAssigned = "No Assigned Service Objects";
+
+    //Tests that an Assigned Service object is created when assigned service object is valid
     @Test
     public void givenValidAssignedService_whenPost_thenCreated() throws Exception
     {
@@ -65,7 +66,7 @@ public class AssignedServiceControllerTest
                 .andExpect(status().isCreated());
     }
 
-    //This tests that a duplicate assigned service cannot be added again
+    //Tests that a duplicate assigned service cannot be added again
     @Test
     public void givenDuplicateAssignedService_whenPost_thenConflict() throws Exception
     {
@@ -95,7 +96,7 @@ public class AssignedServiceControllerTest
                 .andExpect(status().isBadRequest());
     }
 
-    //This tests that a list with at least one Assigned Service is returned successfully
+    //Tests that a list with at least one Assigned Service is returned successfully
     @Test
     public void givenAssignedServiceList_whenGet_thenOk() throws Exception
     {
@@ -114,11 +115,9 @@ public class AssignedServiceControllerTest
     @Test
     public void givenEmptyList_whenGet_thenNotFound() throws Exception
     {
-        String noObjects = "No Assigned Service Objects";
-
         mvc.perform(get("/api/assignService/list")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$",is(noObjects)))
+                .andExpect(jsonPath("$",is(noAssigned)))
                 .andExpect(status().isNotFound());
 
     }
@@ -143,10 +142,9 @@ public class AssignedServiceControllerTest
     @Test
     public void givenInvalidEmployee_whenGet_thenNotFound() throws Exception
     {
-        String noObjects = "No Assigned Service Objects";
         mvc.perform(get("/api/assignService/service-list/{userName}", "emp1")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$",is(noObjects)))
+                .andExpect(jsonPath("$",is(noAssigned)))
                 .andExpect(status().isNotFound());
     }
 
