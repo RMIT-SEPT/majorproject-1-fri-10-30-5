@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 
 /*
     This class is the service which will be used by the Person Controller
-    to retrieve data stored in the database through the use of the Assigned
-    Service Repository. This class also contains the majority of the business logic.
+    to retrieve data stored in the database through the use of the Person Repository.
+    This class also contains the majority of the business logic.
  */
 @Service
 public class PersonService
@@ -21,7 +21,7 @@ public class PersonService
     @Autowired
     private PersonRepository personRepository;
 
-    //This method adds a person if they do not already exist
+    //Adds a person if they do not already exist
     public Person addPerson(Person person)
     {
         if(validateFields(person))
@@ -30,7 +30,7 @@ public class PersonService
         return personRepository.save(person);
     }
 
-    //This method gets a person based on the userName passed in
+    //Gets a person based on the userName passed in
     public Person getPersonByUserName(String userName)
     {
         if (userName == null || !personRepository.existsByUserNameEquals(userName))
@@ -39,7 +39,7 @@ public class PersonService
         return personRepository.findPersonByUserName(userName);
     }
 
-    //This method updates a pre-existing person object
+    //Updates a pre-existing person object
     public Person updatePerson(Person person)
     {
         if (!personRepository.existsByUserNameEquals(person.getUserName()))
@@ -61,24 +61,27 @@ public class PersonService
         return null;
     }
 
-    //This method gets a list of employees
+    //Gets a list of employees
     public List<Person> getEmployees()
     {
         return personRepository.findAllByUserTypeEquals("employee");
     }
 
-    //This method gets a list of customers
+    //Gets a list of customers
     public List<Person> getCustomers() { return personRepository.findAllByUserTypeEquals("customer"); }
 
-    //This method validates each field when updating
+    //Validates each field when updating
     private boolean validateFields(Person person)
     {
-        if (person.getFirstName().isEmpty() || !person.getFirstName().matches("^[a-zA-Z ]*$"))
+        if (person.getFirstName().isEmpty() || !person.getFirstName().matches
+                ("^[a-zA-Z ]*$"))
             return false;
-        if (person.getLastName().isEmpty() || !person.getLastName().matches("^[a-zA-Z ]*$"))
+        if (person.getLastName().isEmpty() || !person.getLastName().matches
+                ("^[a-zA-Z ]*$"))
             return false;
         if (person.getAddress().isEmpty())
             return false;
+
         //Length of valid phone number
         int PHONE_LENGTH = 10;
         if (person.getPhone().length() != PHONE_LENGTH ||

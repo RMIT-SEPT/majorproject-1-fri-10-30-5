@@ -21,7 +21,7 @@ public class WorkingHoursService
     @Autowired
     private WorkingHoursRepository workingHoursRepository;
 
-    //This method adds a Working Hours object if it doesn't already exist
+    //Adds Working Hours if it doesn't already exist
     public List<WorkingHours> addWH(WorkingHours workingHours)
     {
         if (workingHours.getStartTime() >= workingHours.getEndTime())
@@ -56,7 +56,7 @@ public class WorkingHoursService
         }
     }
 
-    //This method returns all Working Hours an employee has
+    //Get all Working Hours an employee has
     public List<WorkingHours> findAllByEmpIDEquals(String empID)
     {
         if (!workingHoursRepository.existsByEmpIDEquals(empID))
@@ -65,13 +65,13 @@ public class WorkingHoursService
         return workingHoursRepository.findAllByEmpIDEquals(empID);
     }
 
-    //This method gets a list of Working Hours after a specified start time
+    //Gets a list of Working Hours after a specified start time
     public List<WorkingHours> getWHByEIDServiceDate(String empID, String date, int startTime) {
 
         return workingHoursRepository.findAllByEmpIDEqualsAndWorkDateEqualsAndStartTimeIsGreaterThanEqual(empID, date, startTime);
     }
 
-    //This method gets a Working Hours by the specified start and end time
+    //Gets a Working Hours by the specified start and end time
     public WorkingHours getWHByEIDDateTime(String empID, String date, int start, int end)
     {
         if (empID == null || date == null)
@@ -103,7 +103,8 @@ public class WorkingHoursService
             workingHours1.setStartTime(workingHours.getStartTime());
             workingHours1.setEndTime(workingHours.getEndTime());
             workingHours1.setUpdated_At(new Date());
+            return workingHoursRepository.save(workingHours1);
         }
-        return workingHoursRepository.save(workingHours1);
+        return null;
     }
 }

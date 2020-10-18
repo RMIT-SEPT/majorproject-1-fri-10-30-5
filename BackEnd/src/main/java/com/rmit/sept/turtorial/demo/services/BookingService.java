@@ -27,7 +27,7 @@ public class BookingService
     @Autowired
     private WorkingHoursRepository workingHoursRepository;
 
-    //This methods adds a booking if it doesn't already exist, restrict to 7 days
+    //Adds a booking if it doesn't already exist
     public Booking addBooking(Booking booking) throws ParseException
     {
         WorkingHours workingHours = workingHoursRepository.findWorkingHoursByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals
@@ -57,7 +57,7 @@ public class BookingService
         return bookingRepository.save(booking);
     }
 
-    //This method gets all bookings by customer ID
+    //Gets all bookings by customer ID
     public List<Booking> findAllBookingsByCustID(String custID)
     {
         if (custID != null)
@@ -76,7 +76,7 @@ public class BookingService
     }
 
 
-    //This method updates a pre-existing booking based
+    //Updates a pre-existing booking based
     public Booking updateBooking(Booking booking)
     {
         Booking booking1 = bookingRepository.findBookingById(booking.getId());
@@ -95,10 +95,7 @@ public class BookingService
         }
     }
 
-    /*
-        This method returns a list of all past/upcoming bookings in
-        the database associated with a customer
-     */
+    //Gets a list of all past/upcoming bookings in the database associated with a customer
     public List<Booking> findAllPastOrUpcomingBookingsByCustID(String custID, boolean past)
     {
         //All lists to that will be used
@@ -114,13 +111,17 @@ public class BookingService
 
         //Sorts bookings based on whether the date is in the past or future
         if(!allBookings.isEmpty()) {
-            for (Booking booking : allBookings) {
+            for (Booking booking : allBookings)
+            {
                 int getDateInt = dateToInt(booking.getBookingDate());
-                if(getDateInt < dateInt){
+                if(getDateInt < dateInt)
+                {
                     pastBookings.add(booking);
                 }
-                else if (getDateInt == dateInt) {
-                    if(booking.getBookingTime() <= timeInt) {
+                else if (getDateInt == dateInt)
+                {
+                    if(booking.getBookingTime() <= timeInt)
+                    {
                         pastBookings.add(booking);
                     }else{
                         upcomingBookings.add(booking);
@@ -132,7 +133,8 @@ public class BookingService
         }
 
         //Returns the appropriate list based on boolean passed in
-        if(past){
+        if(past)
+        {
             return pastBookings;
         }else{
             return upcomingBookings;
@@ -140,7 +142,8 @@ public class BookingService
     }
 
     // Converts date "yyyy-MM-dd" to int yyyyMMdd
-    private int dateToInt(String dateString){
+    private int dateToInt(String dateString)
+    {
         String year = dateString.substring(0,4);
         String month = dateString.substring(5,7);
         String day = dateString.substring(8,10);
@@ -183,14 +186,15 @@ public class BookingService
         }
 
         //Returns the appropriate list based on boolean passed in
-        if(past){
+        if(past)
+        {
             return pastBookings;
         }else{
             return upcomingBookings;
         }
     }
 
-    //This method validates the booking status to make sure it has an appropriate value
+    //Validates the booking status to make sure it has an appropriate value
     private boolean validateBookingStatus(String status)
     {
         String bStatus = status.toLowerCase();

@@ -26,7 +26,7 @@ public class AssignedServiceService
     @Autowired
     PersonRepository personRepository;
 
-    //This method adds an assigned service if it doesn't already exist
+    //Adds an assigned service if it doesn't already exist
     public AssignedService addAssignedService(AssignedService assignedService)
     {
         if(assignedServiceRepository.existsByServiceIDEqualsAndUserNameEquals
@@ -36,25 +36,26 @@ public class AssignedServiceService
         return assignedServiceRepository.save(assignedService);
     }
 
-    //This method gets a list of all assigned services from the database
+    //Gets a list of all assigned services from the database
     public List<AssignedService> getAllAssignedServices() { return assignedServiceRepository.findAll(); }
 
-    //This method gets a list of assigned services for an employee
+    //Gets a list of assigned services for an employee
     public List<AssignedService> getAssignedServicesByUserName(String userName) { return assignedServiceRepository.findAllByUserNameEquals(userName); }
 
-    //This method gets a list of employees assigned to a particular service
+    //Gets a list of employees assigned to a particular service
     public List<Person> getAllEmployeesByAssignedService(long serviceId)
     {
         List<AssignedService> services = assignedServiceRepository.findAllByServiceIDEquals(serviceId);
         List<String> employeeUserNames = new ArrayList<>();
+        List<Person> employees = new ArrayList<>();
 
+        //Find all employee username who have been assigned a service
         for (AssignedService service: services)
         {
             employeeUserNames.add(service.getUserName());
         }
 
-        List<Person> employees = new ArrayList<>();
-
+        //Use usernames to find all employees
         for (String userName: employeeUserNames)
         {
             employees.add(personRepository.findPersonByUserNameAndUserTypeEquals
