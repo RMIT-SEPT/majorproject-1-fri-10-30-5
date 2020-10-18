@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-/*
-    This controller allows for operations to be performed on Service objects.
-    Operations include: Adding a service object, updating a service object and
-    getting a list of all service objects
- */
+//This class allows for operations to be performed on Service objects.
 @CrossOrigin
 @RestController
 @RequestMapping("/api/service")
@@ -25,37 +21,43 @@ public class ServiceController
     @Autowired
     ServiceService serviceService;
 
-    //This method adds a new Service object
+    //Adds a new Service using a POST request
     @PostMapping("/add")
-    public ResponseEntity<?> createService(@Valid @RequestBody Service service, BindingResult result) {
+    public ResponseEntity<?> createService(@Valid @RequestBody Service service, BindingResult result)
+    {
         if (result.hasErrors())
         {
             return new ResponseEntity<>("Invalid Service Object", HttpStatus.BAD_REQUEST);
         }
         Service service1 = serviceService.addService(service);
-        if (service1 != null) {
+
+        if (service1 != null)
+        {
             return new ResponseEntity<>(service1, HttpStatus.CREATED);
         }else{
             return new ResponseEntity<>("Service Object Could Not Be Created", HttpStatus.CONFLICT);
         }
     }
 
-    //This method updates a service object
+    //Updates a service object using a PUT request
     @PutMapping("/update")
-    public ResponseEntity<?> updateService(@Valid @RequestBody Service service, BindingResult result) {
+    public ResponseEntity<?> updateService(@Valid @RequestBody Service service, BindingResult result)
+    {
         if (result.hasErrors())
         {
             return new ResponseEntity<>("Invalid Service Object", HttpStatus.BAD_REQUEST);
         }
         Service service1 = serviceService.updateService(service);
-        if (service1 != null){
+
+        if (service1 != null)
+        {
             return new ResponseEntity<>(service1, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Service Object Could Not Be Updated", HttpStatus.CONFLICT);
         }
     }
 
-    //This method gets a list of all services
+    //Gets a list of all services using a GET request
     @GetMapping("/list")
     public ResponseEntity<?> findAllServices()
     {

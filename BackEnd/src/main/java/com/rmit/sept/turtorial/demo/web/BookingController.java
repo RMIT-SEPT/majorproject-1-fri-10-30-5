@@ -12,13 +12,7 @@ import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
 
-/*
-    This controller allows for operations to be performed on Booking objects.
-    Operations include: Adding a booking object, updating a booking object,
-    getting a booking object, getting a booking by the booking ID and customer
-     ID, getting a list of bookings for a customer, getting a list of past and
-     upcoming booking for customer and admin use
- */
+//This class allows for operations to be performed on Booking objects.
 @CrossOrigin
 @RestController
 @RequestMapping("/api/booking")
@@ -28,17 +22,16 @@ public class BookingController
     @Autowired
     private BookingService bookingService;
 
-    //This method posts a booking object, if it is valid
+    //Adds a booking object using a POST request
     @PostMapping("/add")
     public ResponseEntity<?> createNewBooking(@Valid @RequestBody Booking booking, BindingResult result) throws ParseException {
         if (result.hasErrors())
         {
             return new ResponseEntity<>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
         }
-
         booking.setBookingStatus("booked");
-
         Booking booking1 = bookingService.addBooking(booking);
+
         if (booking1 != null)
         {
             return new ResponseEntity<>(booking1, HttpStatus.CREATED);
@@ -47,7 +40,7 @@ public class BookingController
         }
     }
 
-    //This method updates the booking status
+    //Updates the booking status using a PUT request
     @PutMapping("/update")
     public ResponseEntity<?> updateBooking(@Valid @RequestBody Booking booking, BindingResult result)
     {
@@ -63,72 +56,78 @@ public class BookingController
         }
     }
 
-    //This method gets a booking by customer ID and booking ID
+    //Returns a booking for a customer using a GET request
     @GetMapping("/{custID}/{bID}")
     public ResponseEntity<?> findBookingByCustIDAndBID(@Valid @PathVariable String custID, @PathVariable Long bID)
     {
         Booking booking1 = bookingService.findBookingByCustIDAndBID(custID, bID);
-        if (booking1 != null){
+        if (booking1 != null)
+        {
             return new ResponseEntity<>(booking1, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("No Booking Object", HttpStatus.NOT_FOUND);
         }
     }
 
-    //This method gets a list of all bookings by customer ID
+    //Returns a list of bookings for a customer using a GET request
     @GetMapping("/list/{custID}")
     public ResponseEntity<?> findAllBookingsByCustID(@Valid @PathVariable String custID)
     {
         List<Booking> bookings = bookingService.findAllBookingsByCustID(custID);
-        if (bookings.size() != 0){
+        if (bookings.size() != 0)
+        {
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("No Booking Objects", HttpStatus.NOT_FOUND);
         }
     }
 
-    //This method gets a list of all past bookings for a customer
+    //Returns a list of all past bookings for a customer using a GET request
     @GetMapping("/pastBookings/list/{custID}")
     public ResponseEntity<?> findAllPastBookingsByCustID(@Valid @PathVariable String custID)
     {
         List<Booking> bookings = bookingService.findAllPastOrUpcomingBookingsByCustID(custID, true);
-        if (bookings.size() != 0){
+        if (bookings.size() != 0)
+        {
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("No Booking Objects", HttpStatus.NOT_FOUND);
         }
     }
 
-    //This method gets a list of all upcoming bookings for a customer
+    //Returns a list of all upcoming bookings for a customer using a GET request
     @GetMapping("/upcomingBookings/list/{custID}")
     public ResponseEntity<?> findAllUpcomingBookingsByCustID(@Valid @PathVariable String custID)
     {
         List<Booking> bookings = bookingService.findAllPastOrUpcomingBookingsByCustID(custID, false);
-        if (bookings.size() != 0){
+        if (bookings.size() != 0)
+        {
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("No Booking Objects", HttpStatus.NOT_FOUND);
         }
     }
 
-    //This method gets a list of all past bookings
+    //Returns a list of all past bookings using a GET request
     @GetMapping("admin/past-Bookings")
     public ResponseEntity<?> getPastBookings()
     {
         List<Booking> bookings = bookingService.findAllPastOrUpcomingBookings(true);
-        if (bookings.size() != 0){
+        if (bookings.size() != 0)
+        {
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("No Booking Objects", HttpStatus.NOT_FOUND);
         }
     }
 
-    //This method gets a list of all upcoming bookings
+    //Returns a list of all upcoming bookings using a GET request
     @GetMapping("admin/upcoming-Bookings")
     public ResponseEntity<?> getUpcomingBookings()
     {
         List<Booking> bookings = bookingService.findAllPastOrUpcomingBookings(false);
-        if (bookings.size() != 0){
+        if (bookings.size() != 0)
+        {
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }else{
             return new ResponseEntity<>("No Booking Objects", HttpStatus.NOT_FOUND);
