@@ -48,20 +48,22 @@ public class Booking
     //The status of the booking to be updated by admin
     private String bookingStatus;
 
-    //No argument constructor for instantiating booking object
+    //No argument constructor for instantiating a Booking object
     public Booking() {}
 
     /*
-        6 Argument constructor for instantiating booking object
-        Parameters:
+        6 argument constructor for instantiating a Booking object
+        Arguments:
         long id - ID number of booking
         String custID - Customer ID of customer that is being booked in
         String empID - Employee ID of employee that is being booked in
         int time - Time that the booking is being made
-        String date - Date that the booking is being made
-        String status - Current status of the booking
+        String bookingDate - Date that the booking is being made
+        String bookingDtatus - Current status of the booking
      */
-    public Booking(long id, String custID, String empID, int time, String date, String status) {
+    public Booking(long id, String custID, String empID, int time,
+                   String date, String status)
+    {
         this.id = id;
         this.custID = custID;
         this.empID = empID;
@@ -71,14 +73,15 @@ public class Booking
     }
 
     /*
-        4 Argument constructor for instantiating booking object
-        Parameters:
+        4 argument constructor for instantiating a Booking object
+        Arguments:
         String custID - Customer ID of customer that is being booked in
         String empID - Employee ID of employee that is being booked in
-        int time - Time that the booking is being made
-        String date - Date that the booking is being made
+        int bookingTime - Time that the booking is being made
+        String bookingDate - Date that the booking is being made
     */
-    public Booking(String custID, String empID, int time, String date) {
+    public Booking(String custID, String empID, int time, String date)
+    {
         this.custID = custID;
         this.empID = empID;
         this.bookingTime = time;
@@ -140,5 +143,4 @@ public class Booking
     //Creates and sets current date object when booking object is updated
     @PreUpdate
     protected void onUpdate() { this.updated_At = new Date(); }
-
 }

@@ -26,7 +26,6 @@ public class WorkingHours
     @Size(min=1,max =25, message = "Please enter 1 to 25 characters")
     private String empID;
 
-
     //The shift's start time
     @Min(value= 0, message="must be at least 0000")
     @Max(value=2359, message="must be 2359 or less")
@@ -41,6 +40,7 @@ public class WorkingHours
     @JsonFormat(pattern ="yyyy-MM-dd")
     private String workDate;
 
+    //Determines whether or not this time is available
     private boolean available = true;
 
     //The date this object was created
@@ -51,22 +51,26 @@ public class WorkingHours
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
 
-    //No argument constructor for instantiating Working Hours Object
+    //No argument constructor for instantiating a Working Hours object
     public WorkingHours(){}
 
     /*
-        6 argument constructor for instantiating Working Hours Object
-        Parameters:
-        Long shiftNo - the shift's number
+        5 argument constructor for instantiating a Working Hours object
+        Arguments:
+        Long id - the Working Hours ID number
         String empID - the employee that will be assigned this shift
         int startTime - the start time for this shift
         int endTime - the end time for this shift
         String workDate - the date that this shift is being allocated for
-        String service - the service being offered by the employee during the shift
      */
-    public WorkingHours(Long id, @NotBlank(message = "empID is required") @Size(min = 1, max = 25, message = "Please enter 1 to 25 characters") String empID,
-                        @Min(value = 0, message = "must be at least 0000") @Max(value = 2359, message = "must be 2359 or less") int startTime, @Min(value = 0, message = "must be at least 0000")
-                        @Max(value = 2359, message = "must be 2359 or less") int endTime, String workDate) {
+    public WorkingHours(Long id, @NotBlank(message = "empID is required")
+    @Size(min = 1, max = 25, message = "Please enter 1 to 25 characters") String empID,
+                        @Min(value = 0, message = "must be at least 0000")
+                        @Max(value = 2359, message = "must be 2359 or less") int startTime,
+                        @Min(value = 0, message = "must be at least 0000")
+                        @Max(value = 2359, message = "must be 2359 or less") int endTime,
+                        String workDate)
+    {
         this.id = id;
         this.empID = empID;
         this.startTime = startTime;
@@ -74,10 +78,10 @@ public class WorkingHours
         this.workDate = workDate;
     }
 
-    //Getter for shiftNo
+    //Getter for ID
     public Long getId() { return id;}
 
-    //Setter for shiftNo
+    //Setter for ID
     public void setId(Long shift_No) { this.id = shift_No;}
 
     //Getter for empID

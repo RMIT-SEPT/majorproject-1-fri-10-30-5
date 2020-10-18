@@ -64,14 +64,12 @@ public class Person
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
 
-    //No argument constructor for instantiating a person
-    public Person() {
-    }
-
+    //No argument constructor for instantiating a Person object
+    public Person() {}
 
     /*
-        7 argument constructor for instantiating a person
-        Parameters:
+        7 argument constructor for instantiating a Person object
+        Arguments:
         Long id - The person's ID
         String userName - The person's userName
         String password - The person's password
@@ -80,11 +78,19 @@ public class Person
         String address - The person's residential address
         String phone - The person's phone number
      */
-    public Person(Long id, @NotBlank(message = "Username is required") String userName, @NotBlank(message = "Password is required")
-    @Size(min = 4, max = 25, message = "Please enter 4 to 25 characters") String password, @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
-                @NotBlank(message = "First name is required") String firstName, @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
-                @NotBlank(message = "Last name is required") String lastName, @NotBlank(message = "Address is required") String address, @NotBlank(message = "Phone is required")
-                @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters") @Size(min = 10, max = 10, message = "Please enter a 10 digit number") String phone) {
+    public Person(Long id,
+                  @NotBlank(message = "Username is required") String userName,
+                  @NotBlank(message = "Password is required")
+                  @Size(min = 4, max = 25, message = "Please enter 4 to 25 characters") String password,
+                  @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+                  @NotBlank(message = "First name is required") String firstName,
+                  @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+                  @NotBlank(message = "Last name is required") String lastName,
+                  @NotBlank(message = "Address is required") String address,
+                  @NotBlank(message = "Phone is required")
+                  @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters")
+                  @Size(min = 10, max = 10, message = "Please enter a 10 digit number") String phone)
+    {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -94,11 +100,28 @@ public class Person
         this.phone = phone;
     }
 
-    public Person(@NotBlank(message = "Username is required") String userName, @NotBlank(message = "Password is required")
-    @Size(min = 4, max = 25, message = "Please enter 4 to 25 characters") String password, @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
-                  @NotBlank(message = "First name is required") String firstName, @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
-                  @NotBlank(message = "Last name is required") String lastName, @NotBlank(message = "Address is required") String address, @NotBlank(message = "Phone is required")
-                  @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters") @Size(min = 10, max = 10, message = "Please enter a 10 digit number") String phone) {
+    /*
+        6 argument constructor for instantiating a Person Object
+        Argument:
+        String userName - The person's userName
+        String password - The person's password
+        String firstName - The person's first name
+        String lastName - The person's last name
+        String address - The person's residential address
+        String phone - The person's phone number
+     */
+    public Person(@NotBlank(message = "Username is required") String userName,
+                  @NotBlank(message = "Password is required")
+                  @Size(min = 4, max = 25, message = "Please enter 4 to 25 characters") String password,
+                  @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+                  @NotBlank(message = "First name is required") String firstName,
+                  @Pattern(regexp = "^[a-zA-Z ]*$", message = "Please enter only alphabetical characters")
+                  @NotBlank(message = "Last name is required") String lastName,
+                  @NotBlank(message = "Address is required") String address,
+                  @NotBlank(message = "Phone is required")
+                  @Pattern(regexp = "^[0-9 ]*$", message = "Please enter only numerical characters")
+                  @Size(min = 10, max = 10, message = "Please enter a 10 digit number") String phone)
+    {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;

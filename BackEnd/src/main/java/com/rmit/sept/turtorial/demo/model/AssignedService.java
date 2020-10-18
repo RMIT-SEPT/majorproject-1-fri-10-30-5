@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-
 //This class represents a service that an employee has been assigned by their admin
 @Entity
 public class AssignedService
@@ -17,7 +16,6 @@ public class AssignedService
     private long id;
 
     //The Service ID of service being assigned
-//    @Min(value = 1, message = "Enter at least one character")
     private long serviceID;
 
     //The employee's username of employee being assigned service
@@ -32,11 +30,11 @@ public class AssignedService
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
 
-    //No argument constructor for instantiating an Assigned Service Object
+    //No argument constructor for instantiating an Assigned Service object
     public AssignedService(){}
 
     /*
-        3 argument constructor for instantiating an Assigned Service Object
+        3 argument constructor for instantiating an Assigned Service object
         Arguments:
         long id : The ID number for the object
         long serviceID: The Service ID for the service being assigned

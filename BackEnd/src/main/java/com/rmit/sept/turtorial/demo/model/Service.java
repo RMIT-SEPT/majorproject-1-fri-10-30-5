@@ -15,7 +15,6 @@ import java.util.Date;
 @Entity
 public class Service
 {
-
     //Service's ID number
     @Id
     private long serviceId;
@@ -42,12 +41,12 @@ public class Service
     private Date updated_At;
 
     /*
-        No argument constructor for instantiating Service object
+        No argument constructor for instantiating a Service object
      */
     public Service(){}
 
     /*
-        Four Argument Constructor for Service
+        Four argument constructor for instantiating a Service object
         Arguments:
         long serviceId: ID number for the Service
         String name: Name of the Service
