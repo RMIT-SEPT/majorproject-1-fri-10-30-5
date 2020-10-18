@@ -10,7 +10,8 @@ class AssignService extends Component {
     serviceId: '',
     userName: '',
 
-    user: authenticate()
+    user: authenticate(),
+    errorDisplay: false
   }
 
   componentDidMount() {
@@ -38,6 +39,7 @@ class AssignService extends Component {
   }
 
   mySubmitHandler = event => {
+
     const assignService = {
       serviceId: this.state.serviceId,
       userName: this.state.userName
@@ -49,10 +51,14 @@ class AssignService extends Component {
       .then(res => {
         console.log(res.data);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err)
+        this.setState({ errorDisplay: true })
+    });
   }
 
   myChangeHandler = event => {
+    console.log(event.target.name, event.target.value)
     this.setState({ [event.target.name]: event.target.value })
   };
 
@@ -84,7 +90,7 @@ class AssignService extends Component {
 </button>
 
           </form>
-
+          <p className="error" style={{display: this.state.errorDisplay ? 'block' : 'none', color:'red', textAlign:'center' }}>Service assignment failed.</p>
         </div>
       </div>
 

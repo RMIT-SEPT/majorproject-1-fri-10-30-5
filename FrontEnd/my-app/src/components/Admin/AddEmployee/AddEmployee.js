@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { authenticate } from "../../../actions/auth";
+const createHistory = require("history").createBrowserHistory;
 
 export default class AddEmployee extends Component {
   constructor(props) {
@@ -14,13 +15,42 @@ export default class AddEmployee extends Component {
       userName: "",
       pw: "",
 
-      user: authenticate()
+      user: authenticate(),
+      errorDisplay: false
     };
   }
 
   myChangeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
+  addUser() {
+
+    const newUser = {
+        userName: this.state.userName,
+        userType: "employee",
+        password: this.state.pw,
+        confirmPassword: this.state.pw
+    }
+    console.log(newUser);
+
+    // const baseurl = 'http://ec2-52-203-27-92.compute-1.amazonaws.com:8080'
+    const baseurl = 'http://localhost:8080'
+    axios.post(baseurl + '/api/user/register',
+        newUser
+    )
+        .then(res => //showOutput(res))
+        {
+            let history = createHistory();
+            history.push("/workerSuccess");
+            let pathUrl = window.location.href;
+            window.location.href = pathUrl; 
+        })
+        .catch(err => {
+          console.error(err)
+          this.setState({ errorDisplay: true })
+      });
+  }
 
   mySubmitHandler = (event) => {
     event.preventDefault();
@@ -45,10 +75,14 @@ export default class AddEmployee extends Component {
         ) => {
           console.log(res);
           console.log(res.data);
+
+          this.addUser()
         }
       )
       .catch((err) => console.error(err));
   };
+
+  
 
   render() {
     // admin validation
@@ -135,6 +169,7 @@ export default class AddEmployee extends Component {
               Add Employee
             </button>
           </form>
+          <p className="error" style={{display: this.state.errorDisplay ? 'block' : 'none', color:'red', textAlign:'center' }}>Employee registration failed.</p>
         </div>
       </div>
     );

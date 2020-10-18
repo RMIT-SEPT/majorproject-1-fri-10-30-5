@@ -16,6 +16,7 @@ class LoginForm extends Component {
             //customerDetails: []
             uname:'',
             pw:'',
+            errorDisplay: false
         };
         this.myChangeHandler = this.myChangeHandler.bind(this);
     }
@@ -82,7 +83,9 @@ class LoginForm extends Component {
             
     })
     .catch(err => {
-        console.error(err);});
+        console.error(err)
+        this.setState({ errorDisplay: true })
+    });
         
         // this.props.createNewUser(newUser, this.props.history);
     }
@@ -115,6 +118,7 @@ class LoginForm extends Component {
                             }}>Log in
                         </button>
                     </form>
+                    <p className="error" style={{display: this.state.errorDisplay ? 'block' : 'none', color:'red', textAlign:'center' }}>Login failed.</p>
                 </div>
             </div>
             </div>

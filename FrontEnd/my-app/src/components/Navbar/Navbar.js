@@ -74,7 +74,11 @@ class Navbar extends Component {
                     <a className="navbar-logo" href={logoLink()}></a>
                     <ul className = "navbar-items">
                             {
+<<<<<<< Updated upstream
                                 this.state.user.userType !== 'guest' && <li><Link to={{pathname: `/profile`}} className = "nav-link">Profile </Link></li>
+=======
+                                this.state.user.username !== 'guest' && <li><Link to={{pathname: `/profile`}} className = "nav-link">Profile </Link></li>
+>>>>>>> Stashed changes
                             }
 
                                 {user().map((item, index) => {

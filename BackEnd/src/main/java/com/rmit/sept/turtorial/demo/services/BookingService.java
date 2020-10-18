@@ -83,7 +83,7 @@ public class BookingService
         WorkingHours workingHours = workingHoursRepository.findWorkingHoursByEmpIDEqualsAndWorkDateEqualsAndStartTimeEquals
                 (booking.getEmpID(), booking.getBookingDate(), booking.getBookingTime());
 
-        if (booking1 != null && validateBookingStatus(booking.getBookingStatus()))
+        if (booking1 != null && validateBookingTimeLimit(booking) && validateBookingStatus(booking.getBookingStatus()))
         {
             booking1.setBookingStatus(booking.getBookingStatus());
             booking1.setUpdated_At(new Date());
@@ -95,7 +95,16 @@ public class BookingService
         }
     }
 
+<<<<<<< Updated upstream
     //Gets a list of all past/upcoming bookings in the database associated with a customer
+=======
+
+
+    /*
+        This method returns a list of all past/upcoming bookings in
+        the database associated with a customer
+     */
+>>>>>>> Stashed changes
     public List<Booking> findAllPastOrUpcomingBookingsByCustID(String custID, boolean past)
     {
         //All lists to that will be used
@@ -200,4 +209,18 @@ public class BookingService
         String bStatus = status.toLowerCase();
         return bStatus.matches("[a-zA-Z ]*$");
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    private boolean validateBookingTimeLimit(Booking booking) {
+
+        boolean res = true;
+
+        // TODO
+        // validate 48hr time limit
+
+        return res;
+    }
+}
+>>>>>>> Stashed changes

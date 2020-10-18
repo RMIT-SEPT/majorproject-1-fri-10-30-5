@@ -63,14 +63,24 @@ public class WorkingHours
         int endTime - the end time for this shift
         String workDate - the date that this shift is being allocated for
      */
+<<<<<<< Updated upstream
     public WorkingHours(Long id, @NotBlank(message = "empID is required")
     @Size(min = 1, max = 25, message = "Please enter 1 to 25 characters") String empID,
+=======
+    public WorkingHours(Long id,
+                        @NotBlank(message = "empID is required")
+                        @Size(min = 1, max = 25, message = "Please enter 1 to 25 characters") String empID,
+>>>>>>> Stashed changes
                         @Min(value = 0, message = "must be at least 0000")
                         @Max(value = 2359, message = "must be 2359 or less") int startTime,
                         @Min(value = 0, message = "must be at least 0000")
                         @Max(value = 2359, message = "must be 2359 or less") int endTime,
+<<<<<<< Updated upstream
                         String workDate)
     {
+=======
+                        String workDate) {
+>>>>>>> Stashed changes
         this.id = id;
         this.empID = empID;
         this.startTime = startTime;

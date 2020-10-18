@@ -25,8 +25,13 @@ public class WorkingHoursController
     @PostMapping("/add")
     public ResponseEntity<?> addNewWH(@Valid @RequestBody WorkingHours workingHours, BindingResult result)
     {
+<<<<<<< Updated upstream
         if (result.hasErrors())
         {
+=======
+        if (result.hasErrors()){
+            System.out.println(result);
+>>>>>>> Stashed changes
             return new ResponseEntity<>("Invalid Working Hours Object", HttpStatus.BAD_REQUEST);
         }
         List<WorkingHours> workingHours1 = wHService.addWH(workingHours);

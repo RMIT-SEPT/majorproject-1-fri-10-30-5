@@ -30,8 +30,8 @@ class ProfileEditPage extends Component {
 
   componentDidMount() {
     // const authorization = "Some Name" + cookie.load('token').replace("JWT","")
-    const uname = this.state.uname
-    const url = 'http://localhost:8080/api/customer/' + uname
+    const uname = this.state.user.username
+    const url = 'http://localhost:8080/api/person/' + uname
     axios.get(url, {
 
       // headers: { 'Authorization': authorization }
@@ -60,11 +60,12 @@ class ProfileEditPage extends Component {
       address: this.state.profile.address,
       phone: this.state.profile.phone,
       userName: this.state.profile.userName,
-      password: this.state.profile.password
+      password: this.state.profile.password,
+      userType: this.state.user.userType
     }
     console.log(customer);
 
-    axios.put('http://localhost:8080/api/customer/update',
+    axios.put('http://localhost:8080/api/person/update',
       customer
     )
       .then(res => //showOutput(res))

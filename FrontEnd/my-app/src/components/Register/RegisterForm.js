@@ -23,7 +23,10 @@ const addPerson = (props) => {
             console.log(res);
             console.log(res.data);
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err)
+            this.setState({ errorDisplay: true })
+        });
 };
 
 class RegisterForm extends Component {
@@ -38,7 +41,7 @@ class RegisterForm extends Component {
             lname: '',
             address: '',
             phone: '',
-
+            errorDisplay: false
 
         };
         this.myChangeHandler = this.myChangeHandler.bind(this);
@@ -77,7 +80,12 @@ class RegisterForm extends Component {
                 let pathUrl = window.location.href;
                 window.location.href = pathUrl; 
             })
-            .catch(err => console.error(err));
+            .catch(
+                err => {
+                    console.error(err)
+                    this.setState({errorDisplay: true})
+                }
+            );
 
         // this.props.createNewUser(newUser, this.props.history);
     }
@@ -144,6 +152,7 @@ class RegisterForm extends Component {
                             Already registered <a href="/login">sign in?</a>
                         </p>
                     </form>
+                    <p className="error" style={{display: this.state.errorDisplay ? 'block' : 'none', color:'red', textAlign:'center' }}>Registration failed.</p>
                 </div>
             </div>
             </div>

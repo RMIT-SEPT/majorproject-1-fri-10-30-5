@@ -29,6 +29,7 @@ import AdminUpcoming from './components/Admin/AdminBookings/AdminUpcoming';
 import AdminPast from './components/Admin/AdminBookings/AdminPast';
 import BookingSuccess from './components/Search/BookingLanding/BookingSuccess';
 import BookingFailure from './components/Search/BookingLanding/BookingFailure';
+import WorkerSuccess from './components/Admin/AddEmployee/WorkerSuccess';
 
 class App extends Component {
 
@@ -64,6 +65,7 @@ render() {
               <Route exact path="/admin/past" component = {AdminPast} /> 
               <Route exact path="/bookingSuccess" component = {BookingSuccess} /> 
               <Route exact path="/bookingFailed" component = {BookingFailure} />
+              <Route exact path="/workerSuccess" component = {WorkerSuccess} />
             </div>  
         </div>
       </Router>

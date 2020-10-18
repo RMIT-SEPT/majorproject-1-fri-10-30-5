@@ -45,6 +45,7 @@ export default class AddWorkHours extends Component {
     }
 
     myChangeHandler = (event) => {
+        console.log("Target: ", [event.target.name])
         this.setState({ [event.target.name]: event.target.value });
     };
 
@@ -57,6 +58,7 @@ export default class AddWorkHours extends Component {
             endTime: this.state.endTime.replace(/:/g, ""),
             workDate: this.state.workDate,
             service: this.state.service,
+            available: true
         };
 
         console.log(workHours);

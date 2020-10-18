@@ -45,6 +45,7 @@ public class PersonController
     {
         if (result.hasErrors())
         {
+            System.out.println(result);
             return new ResponseEntity<>("Invalid Person Object", HttpStatus.BAD_REQUEST);
         }
         Person person1 = personService.updatePerson(person);
