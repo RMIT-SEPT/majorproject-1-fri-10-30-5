@@ -8,21 +8,20 @@ import java.util.List;
 
 /*
     This interface contains all queries that will be executed
-    on the Person table in the database
+    on the Person database
  */
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long>
 {
-
-    //This query finds a person based on the userName passed in
+    //Finds a person in the database
     Person findPersonByUserName(String userName);
 
-    //This query finds an employee based on the username and userType passed in
+    //Finds a person of a certain userType
     Person findPersonByUserNameAndUserTypeEquals(String userName, String userType);
 
-    //This query finds all employees stored in the database
+    //Finds all people of a certain userType
     List<Person> findAllByUserTypeEquals(String userType);
 
-    //This query determines if person exists by the username passed in
+    //Determines if a person exists in the database
     Boolean existsByUserNameEquals(String userName);
 }

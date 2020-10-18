@@ -7,24 +7,24 @@ import java.util.List;
 
 /*
     This interface contains all queries to be executed
-    on the Booking table in the database
+    on the Booking database
  */
 @Repository
 public interface BookingRepository extends CrudRepository<Booking, Long>
 {
-    //This query finds a collection of all Bookings based on ID
+    //Returns an iterable collection of all Bookings based on ID
     @Override
     Iterable<Booking> findAllById(Iterable<Long> iterable);
 
-    //This query finds a booking based on the customer ID and booking ID passed in
+    //Finds a booking for a customer through an ID
     Booking findBookingByCustIDEqualsAndIdEquals(String custID, Long bID);
 
-    //This query finds a booking by the booking ID passed in
+    //Finds a booking through an ID
     Booking findBookingById(Long bID);
 
-    //This query finds a list of all queries the customer ID passed in
+    //Finds all bookings for a customer
     List<Booking> findAllByCustIDEquals(String custID);
 
-    //This query finds all Bookings in the database
+    //Finds all bookings in the database
     List<Booking> findAll();
 }

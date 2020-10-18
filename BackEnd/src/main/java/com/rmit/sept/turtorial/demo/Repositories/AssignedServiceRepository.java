@@ -8,20 +8,20 @@ import java.util.List;
 
 /*
     This interface contains all queries to be executed
-    on the Assigned Services table in the database
+    on the Assigned Services database
  */
 @Repository
 public interface AssignedServiceRepository extends CrudRepository<AssignedService, Long>
 {
-    //This query gives a list of assigned services based on the userName passed in
+    //Find all assigned services for a user
     List<AssignedService> findAllByUserNameEquals(String userName);
 
-    //This query gives a list of assigned services based on the serviceId passed in
+    //Finds all assigned services for a service
     List<AssignedService> findAllByServiceIDEquals(long serviceID);
 
-    //This query gives a list of all assigned services in the database
+    //Finds all assigned services in the database
     List<AssignedService> findAll();
 
-    //This query determines whether an employee has been assigned a service
+    //Determines whether an employee has been assigned a service
     Boolean existsByServiceIDEqualsAndUserNameEquals(long serviceID, String userName);
 }

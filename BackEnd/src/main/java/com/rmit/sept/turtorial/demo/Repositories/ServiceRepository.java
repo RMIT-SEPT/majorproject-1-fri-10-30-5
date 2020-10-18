@@ -8,14 +8,14 @@ import java.util.List;
 
 /*
     This interface contains all queries that will be executed
-    upon the Service table in the database
+    upon the Service database
  */
 @Repository
 public interface ServiceRepository extends CrudRepository<Service, Long>
 {
-    //This query finds a service based on the service ID passed in
+    //Finds a service by an ID
     Service findByServiceId(long serviceID);
 
-    //This query finds all services stored in the database
+    //Finds all services stored in the database
     List<Service> findAll();
 }
